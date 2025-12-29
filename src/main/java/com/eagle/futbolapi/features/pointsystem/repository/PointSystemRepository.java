@@ -12,4 +12,8 @@ public interface PointSystemRepository extends JpaRepository<PointSystem, Long> 
 
     Optional<PointSystem> findByDisplayName(String displayName);
 
+    boolean existsByName(String name);
+
+    boolean isActive();
+
 }

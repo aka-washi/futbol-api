@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,28 +12,17 @@ import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.country.repository.CountryRepository;
 import com.eagle.futbolapi.features.shared.exception.DuplicateResourceException;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
-
-import lombok.RequiredArgsConstructor;
+import com.eagle.futbolapi.features.shared.service.BaseCrudService;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-public class CountryService {
+public class CountryService extends BaseCrudService<Country, Long> {
 
     private final CountryRepository countryRepository;
 
-    public Page<Country> getAllCountries(Pageable pageable) {
-        if (pageable == null) {
-            pageable = Pageable.unpaged();
-        }
-        return countryRepository.findAll(pageable);
-    }
-
-    public Optional<Country> getCountryById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("ID cannot be null");
-        }
-        return countryRepository.findById(id);
+    public CountryService(CountryRepository countryRepository) {
+        super(countryRepository);
+        this.countryRepository = countryRepository;
     }
 
     public Optional<Country> getCountryByCode(String code) {
@@ -120,23 +107,20 @@ public class CountryService {
         );
     }
 
-    public void deleteCountry(@NotNull Long id) {
+    @Override
+    protected boolean isDuplicate(Long id, @NotNull Country country) {
         Objects.requireNonNull(id, "ID cannot be null");
+        Objects.requireNonNull(country, "Country details cannot be null");
 
-        Country country = countryRepository.findById(id)
+        Country existingCountry = getById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Country", "id", id));
 
-        if (country == null) {
-            throw new IllegalStateException("Country repository returned null after successful findById - data integrity issue");
+        // Check for duplicate code
+        if (country.getCode() != null && country.getCode().equals(existingCountry.getCode())) {
+            return true;
         }
 
-        countryRepository.delete(country);
-    }
-
-    public boolean existsById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("ID cannot be null");
-        }
-        return countryRepository.existsById(id);
+        // Check for duplicate ISO code
+        return country.getIsoCode() != null && !country.getIsoCode().equals(existingCountry.getIsoCode());
     }
 }

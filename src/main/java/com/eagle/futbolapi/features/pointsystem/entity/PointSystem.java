@@ -18,10 +18,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
-/**
- * PointSystem Entity
- * Represents the point system used in a competition format
- */
 
 @Getter
 @Setter
