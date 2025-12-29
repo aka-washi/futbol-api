@@ -1,13 +1,14 @@
 package com.eagle.futbolapi.features.country.entity;
 
-import com.eagle.futbolapi.features.shared.BaseEntity;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+
+import com.eagle.futbolapi.features.shared.BaseEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

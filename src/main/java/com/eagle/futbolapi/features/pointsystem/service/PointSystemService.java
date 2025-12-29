@@ -2,6 +2,8 @@ package com.eagle.futbolapi.features.pointsystem.service;
 
 import java.util.Optional;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.eagle.futbolapi.features.pointsystem.entity.PointSystem;
 import com.eagle.futbolapi.features.pointsystem.repository.PointSystemRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
