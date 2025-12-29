@@ -1,0 +1,520 @@
+[
+  {
+    "name": "BaseEntity",
+    "label": "Base Entity",
+    "type": "base",
+    "package": "com.eagle.futbolapi.features.shared",
+    "fields": [
+      { "name": "id", "type": "long", "label": "ID", "required": true, "unique": true },
+      { "name": "createdAt", "type": "localDateTime", "label": "Created At", "required": true },
+      { "name": "createdBy", "type": "string", "label": "Created By", "required": false, "length": 100, "default": "admin" },
+      { "name": "updatedAt", "type": "localDateTime", "label": "Updated At", "required": false },
+      { "name": "updatedBy", "type": "string", "label": "Updated By", "required": false, "length": 100, "default": "admin" }
+    ]
+  },
+  {
+    "name": "country",
+    "label": "Country",
+    "type": "entity",
+    "package": "com.eagle.futbolapi.features.country.entity",
+    "extends": "BaseEntity",
+    "dependsOn": [],
+    "badgeFields": [
+      { "field": "name", "label": "Name" },
+      { "field": "code", "label": "Code" }
+    ],
+    "fields": [
+      { "name": "name", "type": "string", "label": "Name", "required": true, "length": 100 },
+      { "name": "code", "type": "string", "label": "Code", "required": false, "unique": true, "length": 10 },
+      { "name": "isoCode", "type": "string", "label": "ISO Code", "required": true, "unique": true, "length": 3 },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true, "length": 100 },
+      { "name": "flagUrl", "type": "string", "label": "Flag URL", "required": false, "length": 500 }
+    ]
+  },
+  {
+    "name": "organization",
+    "label": "Organization",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["country"],
+    "badgeFields": [
+      { "field": "type", "label": "Type" },
+      { "field": "country.displayName", "label": "Display Name" }
+    ],
+    "fields": [
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "abbreviation", "type": "string", "label": "Abbreviation" },
+      { "name": "country", "type": "relation", "label": "Country", "relation": { "entity": "country", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "founded", "type": "date", "label": "Founded", "required": true },
+      { "name": "parentOrganization", "type": "relation", "label": "Parent Organization", "relation": { "entity": "organization", "field": "id", "display": "displayName" } },
+      { "name": "logo", "type": "string", "label": "Logo" },
+      { "name": "website", "type": "string", "label": "Website" },
+      { "name": "headquarters", "type": "string", "label": "Headquarters" },
+      { "name": "description", "type": "string", "label": "Description" },
+      { "name": "type", "type": "enum", "enum": ["CLUB", "FEDERATION", "CONFEDERATION", "GOVERNINGBODY"], "required": true, "label": "Type" }
+    ]
+  },
+  {
+    "name": "person",
+    "label": "Person",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["country"],
+    "badgeFields": [
+      { "field": "displayName", "label": "Name" },
+      { "field": "birthCountry.displayName", "label": "Birth Country" }
+    ],
+    "fields": [
+      { "name": "uniqueRegKey", "type": "string", "label": "Unique Registration Key", "required": true, "unique": true },
+      { "name": "firstName", "type": "string", "label": "First Name", "required": true },
+      { "name": "middleName", "type": "string", "label": "Middle Name" },
+      { "name": "lastName", "type": "string", "label": "Last Name", "required": true },
+      { "name": "secondLastName", "type": "string", "label": "Second Last Name" },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "gender", "type": "enum", "enum": ["MALE", "FEMALE"], "label": "Gender" },
+      { "name": "email", "type": "string", "label": "Email" },
+      { "name": "birthDate", "type": "localDate", "label": "Birth Date", "required": true },
+      { "name": "birthPlace", "type": "string", "label": "Birth Place", "required": true },
+      { "name": "birthCountry", "type": "relation", "label": "Birth Country", "relation": { "entity": "country", "field": "id", "display": "displayName" } },
+      { "name": "nationality", "type": "relation", "label": "Nationality", "relation": { "entity": "country", "field": "id", "display": "displayName" } },
+      { "name": "height", "type": "decimal", "label": "Height", "precision": 5, "scale": 2 },
+      { "name": "weight", "type": "decimal", "label": "Weight", "precision": 5, "scale": 2 },
+      { "name": "photoUrl", "type": "string", "label": "Photo URL" }
+    ]
+  },
+  {
+    "name": "player",
+    "label": "Player",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["person", "team"],
+    "mergeWith": {
+      "entity": "person",
+      "mode": "embedded",
+      "description": "Player form embeds person fields, maintaining separate backend entities"
+    },
+    "badgeFields": [
+      { "field": "person.displayName", "label": "Name" },
+      { "field": "position", "label": "Position" }
+    ],
+    "fields": [
+      { "name": "person", "type": "relation", "label": "Person", "required": true, "relation": { "entity": "person", "field": "id", "display": "displayName" } },
+      { "name": "position", "type": "enum", "enum": ["GOALKEEPER", "DEFENDER", "MIDFIELDER", "FORWARD"], "label": "Position", "required": true },
+      { "name": "preferredFoot", "type": "enum", "enum": ["LEFT", "RIGHT", "BOTH"], "label": "Preferred Foot" },
+      { "name": "currentTeam", "type": "relation", "label": "Current Team", "relation": { "entity": "team", "field": "id", "display": "name" } },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": true }
+    ]
+  },
+  {
+    "name": "staff",
+    "pluralName": "staff",
+    "label": "Staff",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["person"],
+    "mergeWith": {
+      "entity": "person",
+      "mode": "embedded",
+      "description": "Staff form embeds person fields, maintaining separate backend entities"
+    },
+    "badgeFields": [
+      { "field": "person.displayName", "label": "Name" },
+      { "field": "role", "label": "Role" }
+    ],
+    "fields": [
+      { "name": "person", "type": "relation", "label": "Person", "required": true, "relation": { "entity": "person", "field": "id", "display": "displayName" } },
+      { "name": "role", "type": "enum", "enum": ["HEAD_COACH", "ASSISTANT_COACH", "GOALKEEPER_COACH", "FITNESS_COACH", "PHYSIOTHERAPIST", "DOCTOR", "MANAGER", "SCOUT", "ANALYST"], "label": "Role", "required": true },
+      { "name": "currentTeam", "type": "relation", "label": "Current Team", "relation": { "entity": "team", "field": "id", "display": "displayName" } },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": true }
+    ]
+  },
+  {
+    "name": "venue",
+    "label": "Venue",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["country"],
+    "badgeFields": [
+      { "field": "name", "label": "Venue Name" },
+      { "field": "country.displayName", "label": "Country" }
+    ],
+    "fields": [
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "country", "type": "relation", "label": "Country", "relation": { "entity": "country", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "capacity", "type": "number", "label": "Capacity", "required": true },
+      { "name": "image", "type": "string", "label": "Image" },
+      { "name": "surface", "type": "string", "label": "Surface Type" },
+      { "name": "address", "type": "string", "label": "Address" },
+      { "name": "city", "type": "string", "label": "City" },
+      { "name": "opened", "type": "date", "label": "Opened Date" },
+      { "name": "isActive", "type": "boolean", "label": "Is Active" }
+    ]
+  },
+  {
+    "name": "team",
+    "label": "Team",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["country", "venue"],
+    "badgeFields": [
+      { "field": "displayName", "label": "Display Name" },
+      { "field": "code", "label": "Code" }
+    ],
+    "fields": [
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "code", "type": "string", "label": "Code", "required": true, "unique": true },
+      { "name": "founded", "type": "date", "label": "Founded", "required": true },
+      { "name": "country", "type": "relation", "label": "Country", "relation": { "entity": "country", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "homeVenue", "type": "relation", "label": "Home Venue", "relation": { "entity": "venue", "field": "id", "display": "displayName" } },
+      { "name": "logo", "type": "string", "label": "Logo" },
+      { "name": "primaryColor", "type": "string", "label": "Primary Color" },
+      { "name": "secondaryColor", "type": "string", "label": "Secondary Color" },
+      { "name": "website", "type": "string", "label": "Website" },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": true }
+    ]
+  },
+  {
+    "name": "tournament",
+    "label": "Tournament",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["organization"],
+    "badgeFields": [
+      { "field": "name", "label": "Name" },
+      { "field": "organization.displayName", "label": "Organization" },
+      { "field": "type", "label": "Type" }
+    ],
+    "fields": [
+      { "name": "organization", "type": "relation", "label": "Organization", "relation": { "entity": "organization", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "type", "type": "enum", "enum": ["LEAGUE", "CUP", "SUPER_CUP", "PLAYOFF"], "label": "Type", "required": true },
+      { "name": "category", "type": "enum", "enum": ["MEN", "WOMEN"], "label": "Category", "required": true },
+      { "name": "level", "type": "number", "label": "Level", "required": true },
+      { "name": "relegationTo", "type": "relation", "label": "Relegation To", "relation": { "entity": "tournament", "field": "id", "display": "displayName" } },
+      { "name": "description", "type": "string", "label": "Description" },
+      { "name": "logo", "type": "string", "label": "Logo" },
+      { "name": "foundedYear", "type": "number", "label": "Founded Year", "required": true },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": true }
+    ]
+  },
+  {
+    "name": "season",
+    "label": "Season",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["tournament"],
+    "badgeFields": [
+      { "field": "tournament.displayName", "label": "Tournament" },
+      { "field": "displayName", "label": "Display Name" }
+    ],
+    "fields": [
+      { "name": "tournament", "type": "relation", "label": "Tournament", "relation": { "entity": "tournament", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "startDate", "type": "date", "label": "Start Date", "required": true },
+      { "name": "endDate", "type": "date", "label": "End Date", "required": true },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": false },
+      { "name": "hasRelegation", "type": "boolean", "label": "Has Relegation", "default": true },
+      { "name": "description", "type": "string", "label": "Description" }
+    ]
+  },
+  {
+    "name": "competition",
+    "label": "Competition",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["season"],
+    "badgeFields": [
+      { "field": "displayName", "label": "Display Name" },
+      { "field": "type", "label": "Type" },
+      { "field": "season.displayName", "label": "Season" }
+    ],
+    "fields": [
+      {
+        "name": "season",
+        "type": "relation",
+        "label": "Season",
+        "relation": { "entity": "season", "field": "id", "display": "name" },
+        "required": true
+      },
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "type", "type": "enum", "enum": ["APERTURA", "CLAUSURA", "FULL_SEASON", "PLAYOFF", "CUP"], "label": "Type", "required": true },
+      { "name": "startDate", "type": "date", "label": "Start Date", "required": true },
+      { "name": "endDate", "type": "date", "label": "End Date", "required": true },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": false },
+      { "name": "totalMatchdays", "type": "number", "label": "Total Matchdays", "required": true },
+      { "name": "description", "type": "string", "label": "Description" }
+    ]
+  },
+  {
+    "name": "pointSystem",
+    "label": "Point System",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": [],
+    "badgeFields": [
+      { "field": "name", "label": "Name" },
+      { "field": "pointsForWin", "label": "Win Points" }
+    ],
+    "fields": [
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "description", "type": "string", "label": "Description" },
+      { "name": "pointsForWin", "type": "number", "label": "Points for Win", "required": true, "default": 3 },
+      { "name": "pointsForDraw", "type": "number", "label": "Points for Draw", "required": true, "default": 1 },
+      { "name": "pointsForLoss", "type": "number", "label": "Points for Loss", "required": true, "default": 0 },
+      { "name": "pointsForWinOnPenalties", "type": "number", "label": "Points for Win on Penalties" },
+      { "name": "pointsForLossOnPenalties", "type": "number", "label": "Points for Loss on Penalties" },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": true }
+    ]
+  },
+  {
+    "name": "structure",
+    "label": "Structure",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["pointSystem"],
+    "badgeFields": [
+      { "field": "displayName", "label": "Display Name" },
+      { "field": "type", "label": "Type" }
+    ],
+    "fields": [
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "type", "type": "enum", "enum": ["REGULAR_SEASON", "PLAYOFF", "PLAY_IN", "KNOCKOUT", "GROUP_STAGE", "ROUND_ROBIN"], "label": "Type", "required": true },
+      { "name": "description", "type": "string", "label": "Description" },
+      { "name": "rules", "type": "string", "label": "Rules" },
+      { "name": "pointSystem", "type": "relation", "label": "Point System", "relation": { "entity": "pointSystem", "field": "id", "display": "displayName" } },
+      { "name": "numberOfTeams", "type": "number", "label": "Number of Teams" },
+      { "name": "numberOfGroups", "type": "number", "label": "Number of Groups" },
+      { "name": "teamsPerGroup", "type": "number", "label": "Teams per Group" },
+      { "name": "hasHomeAndAway", "type": "boolean", "label": "Has Home and Away", "default": true },
+      { "name": "teamsQualifyingForNextStage", "type": "number", "label": "Teams Qualifying for Next Stage" }
+    ]
+  },
+  {
+    "name": "stage",
+    "label": "Stage",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["competition", "structure"],
+    "badgeFields": [
+      { "field": "displayName", "label": "Display Name" },
+      { "field": "competition.displayName", "label": "Competition" },
+      { "field": "order", "label": "Order" }
+    ],
+    "fields": [
+      { "name": "competition", "type": "relation", "label": "Competition", "relation": { "entity": "competition", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "structure", "type": "relation", "label": "Structure", "relation": { "entity": "structure", "field": "id", "display": "name" } },
+      { "name": "order", "type": "number", "label": "Order", "required": true },
+      { "name": "status", "type": "enum", "enum": ["NOT_STARTED", "IN_PROGRESS", "COMPLETED"], "label": "Status", "default": "NOT_STARTED" },
+      { "name": "startDate", "type": "date", "label": "Start Date" },
+      { "name": "endDate", "type": "date", "label": "End Date" }
+    ]
+  },
+  {
+    "name": "matchday",
+    "label": "Matchday",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["stage"],
+    "badgeFields": [
+      { "field": "name", "label": "Name" },
+      { "field": "round", "label": "Round" },
+      { "field": "stage.displayName", "label": "Stage" }
+    ],
+    "fields": [
+      { "name": "stage", "type": "relation", "label": "Stage", "relation": { "entity": "stage", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "name", "type": "string", "label": "Name", "required": true },
+      { "name": "displayName", "type": "string", "label": "Display Name", "required": true },
+      { "name": "number", "type": "number", "label": "Round", "required": true },
+      { "name": "startDate", "type": "date", "label": "Start Date" },
+      { "name": "endDate", "type": "date", "label": "End Date" },
+      { "name": "status", "type": "enum", "enum": ["NOT_STARTED", "SCHEDULED", "IN_PROGRESS", "COMPLETED", "POSTPONED"], "label": "Status", "default": "NOT_STARTED" }
+    ]
+  },
+  {
+    "name": "match",
+    "label": "Match",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["matchday", "venue", "team", "person"],
+    "badgeFields": [
+      { "field": "scheduledDate", "label": "Date" },
+      { "field": "homeTeam.name", "label": "Home Team" },
+      { "field": "awayTeam.name", "label": "Away Team" }
+    ],
+    "fields": [
+      { "name": "matchday", "type": "relation", "label": "Matchday", "relation": { "entity": "matchday", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "homeTeam", "type": "relation", "label": "Home Team", "relation": { "entity": "team", "field": "id", "display": "displayName" },"required": true },
+      { "name": "awayTeam", "type": "relation", "label": "Away Team", "relation": { "entity": "team", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "venue", "type": "relation", "label": "Venue", "relation": { "entity": "venue", "field": "id", "display": "displayName" } },
+      { "name": "scheduledDate", "type": "date", "label": "Scheduled Date", "required": true },
+      { "name": "kickoffTime", "type": "timestamp", "label": "Kickoff Time" },
+      { "name": "status", "type": "enum", "label": "Status", "enum": ["SCHEDULED", "IN_PROGRESS", "COMPLETED", "POSTPONED", "CANCELLED"], "default": "SCHEDULED" },
+      { "name": "homeScore", "type": "number", "label": "Home Score" },
+      { "name": "awayScore", "type": "number", "label": "Away Score" },
+      { "name": "homeHalfTimeScore", "type": "number", "label": "Home Half-time Score" },
+      { "name": "awayHalfTimeScore", "type": "number", "label": "Away Half-time Score" },
+      { "name": "extraTimeAllowed", "type": "boolean", "label": "Extra Time Allowed", "default": false },
+      { "name": "penaltyShootoutAllowed", "type": "boolean", "label": "Penalty Shootout Allowed", "default": false },
+      { "name": "homeExtraTimeScore", "type": "number", "label": "Home Extra Time Score" },
+      { "name": "awayExtraTimeScore", "type": "number", "label": "Away Extra Time Score" },
+      { "name": "homePenaltyScore", "type": "number", "label": "Home Penalty Score" },
+      { "name": "awayPenaltyScore", "type": "number", "label": "Away Penalty Score" },
+      { "name": "attendance", "type": "number", "label": "Attendance" },
+      { "name": "referee", "type": "relation", "label": "Referee", "relation": { "entity": "person", "field": "id", "display": "displayName" } },
+      { "name": "weatherConditions", "type": "string", "label": "Weather Conditions" },
+      { "name": "notes", "type": "string", "label": "Notes" }
+    ]
+  },
+  {
+    "name": "rosterEntry",
+    "label": "Roster Entry",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["season", "team", "player", "staff"],
+    "badgeFields": [
+      { "field": "team.displayName", "label": "Team" },
+      { "field": "season.displayName", "label": "Season" },
+      { "field": "player.person.displayName", "label": "Player" },
+      { "field": "staff.person.displayName", "label": "Staff" }
+    ],
+    "fields": [
+      { "name": "season", "type": "relation", "label": "Season", "relation": { "entity": "season", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "team", "type": "relation", "label": "Team", "relation": { "entity": "team", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "player", "type": "relation", "label": "Player", "relation": { "entity": "player", "field": "id", "display": "person.displayName" } },
+      { "name": "staff", "type": "relation", "label": "Staff", "relation": { "entity": "staff", "field": "id", "display": "person.displayName" } },
+      { "name": "jerseyNumber", "type": "number", "label": "Jersey Number" },
+      { "name": "joinedDate", "type": "date", "label": "Joined Date", "required": true },
+      { "name": "leftDate", "type": "date", "label": "Left Date" },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": true }
+    ]
+  },
+  {
+    "name": "lineup",
+    "label": "Lineup",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["match", "team", "player"],
+    "badgeFields": [
+      { "field": "match.homeTeam.name", "label": "Match" },
+      { "field": "player.person.displayName", "label": "Player" },
+      { "field": "type", "label": "Type" }
+    ],
+    "fields": [
+      { "name": "match", "type": "relation", "label": "Match", "relation": { "entity": "match", "field": "id", "display": "homeTeam.name" }, "required": true },
+      { "name": "team", "type": "relation", "label": "Team", "relation": { "entity": "team", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "player", "type": "relation", "label": "Player", "relation": { "entity": "player", "field": "id", "display": "person.displayName" }, "required": true },
+      { "name": "type", "type": "enum", "enum": ["STARTING", "SUBSTITUTE"], "label": "Type", "required": true },
+      { "name": "position", "type": "string", "label": "Position" },
+      { "name": "jerseyNumber", "type": "number", "label": "Jersey Number", "required": true },
+      { "name": "captain", "type": "boolean", "label": "Captain", "default": false },
+      { "name": "orderNum", "type": "number", "label": "Order" }
+    ]
+  },
+  {
+    "name": "matchEvent",
+    "label": "Match Event",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["match", "team", "player"],
+    "badgeFields": [
+      { "field": "type", "label": "Type" },
+      { "field": "player.person.displayName", "label": "Player" },
+      { "field": "minute", "label": "Minute" }
+    ],
+    "fields": [
+      { "name": "match", "type": "relation", "label": "Match", "relation": { "entity": "match", "field": "id", "display": "homeTeam.name" }, "required": true },
+      { "name": "team", "type": "relation", "label": "Team", "relation": { "entity": "team", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "player", "type": "relation", "label": "Player", "relation": { "entity": "player", "field": "id", "display": "person.displayName" }, "required": true },
+      { "name": "type", "type": "enum", "enum": ["GOAL", "YELLOW_CARD", "RED_CARD", "SUBSTITUTION", "PENALTY_SCORED", "PENALTY_MISSED", "OWN_GOAL", "VAR"], "label": "Type", "required": true },
+      { "name": "period", "type": "enum", "enum": ["FIRST_HALF", "SECOND_HALF", "EXTRA_TIME_FIRST_HALF", "EXTRA_TIME_SECOND_HALF", "PENALTY_SHOOTOUT"], "label": "Period", "required": true },
+      { "name": "minute", "type": "number", "label": "Minute", "required": true },
+      { "name": "extraMinute", "type": "number", "label": "Extra Minute" },
+      { "name": "assistPlayer", "type": "relation", "label": "Assist Player", "relation": { "entity": "player", "field": "id", "display": "person.displayName" } },
+      { "name": "substitutePlayer", "type": "relation", "label": "Substitute Player", "relation": { "entity": "player", "field": "id", "display": "person.displayName" } },
+      { "name": "description", "type": "string", "label": "Description" },
+      { "name": "videoUrl", "type": "string", "label": "Video URL" }
+    ]
+  },
+  {
+    "name": "outcome",
+    "label": "Outcome",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["competition", "team", "player", "staff"],
+    "badgeFields": [
+      { "field": "outcomeType", "label": "Outcome Type" },
+      { "field": "competition.displayName", "label": "Competition" },
+      { "field": "team.displayName", "label": "Team" }
+    ],
+    "fields": [
+      { "name": "competition", "type": "relation", "label": "Competition", "relation": { "entity": "competition", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "team", "type": "relation", "label": "Team", "relation": { "entity": "team", "field": "id", "display": "displayName" } },
+      { "name": "player", "type": "relation", "label": "Player", "relation": { "entity": "player", "field": "id", "display": "person.displayName" } },
+      { "name": "staff", "type": "relation", "label": "Staff", "relation": { "entity": "staff", "field": "id", "display": "person.displayName" } },
+      { "name": "outcomeType", "type": "enum", "enum": ["CHAMPION", "RUNNER_UP", "THIRD_PLACE", "TOP_SCORER", "BEST_PLAYER", "BEST_GOALKEEPER", "RELEGATED", "PROMOTED"], "label": "Outcome Type", "required": true },
+      { "name": "position", "type": "number", "label": "Position" },
+      { "name": "value", "type": "decimal", "label": "Value", "precision": 10, "scale": 2 },
+      { "name": "notes", "type": "string", "label": "Notes" }
+    ]
+  },
+  {
+    "name": "seasonTeam",
+    "label": "Season Team",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["season", "team"],
+    "badgeFields": [
+      { "field": "season.displayName", "label": "Season" },
+      { "field": "team.displayName", "label": "Team" }
+    ],
+    "fields": [
+      { "name": "season", "type": "relation", "label": "Season", "relation": { "entity": "season", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "team", "type": "relation", "label": "Team", "relation": { "entity": "team", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "joinedDate", "type": "date", "label": "Joined Date", "required": true },
+      { "name": "leftDate", "type": "date", "label": "Left Date" },
+      { "name": "isActive", "type": "boolean", "label": "Is Active", "default": true }
+    ]
+  },
+  {
+    "name": "standing",
+    "label": "Standing",
+    "type": "entity",
+    "extends": "BaseEntity",
+    "dependsOn": ["stage", "team"],
+    "badgeFields": [
+      { "field": "stage.displayName", "label": "Stage" },
+      { "field": "team.displayName", "label": "Team" },
+      { "field": "position", "label": "Position" }
+    ],
+    "fields": [
+      { "name": "stage", "type": "relation", "label": "Stage", "relation": { "entity": "stage", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "team", "type": "relation", "label": "Team", "relation": { "entity": "team", "field": "id", "display": "displayName" }, "required": true },
+      { "name": "position", "type": "number", "label": "Position", "required": true },
+      { "name": "played", "type": "number", "label": "Played", "default": 0 },
+      { "name": "won", "type": "number", "label": "Won", "default": 0 },
+      { "name": "drawn", "type": "number", "label": "Drawn", "default": 0 },
+      { "name": "lost", "type": "number", "label": "Lost", "default": 0 },
+      { "name": "goalsFor", "type": "number", "label": "Goals For", "default": 0 },
+      { "name": "goalsAgainst", "type": "number", "label": "Goals Against", "default": 0 },
+      { "name": "goalDifference", "type": "number", "label": "Goal Difference", "default": 0 },
+      { "name": "points", "type": "number", "label": "Points", "default": 0 },
+      { "name": "form", "type": "string", "label": "Form", "length": 10 },
+      { "name": "homeWon", "type": "number", "label": "Home Won", "default": 0 },
+      { "name": "homeDrawn", "type": "number", "label": "Home Drawn", "default": 0 },
+      { "name": "homeLost", "type": "number", "label": "Home Lost", "default": 0 },
+      { "name": "awayWon", "type": "number", "label": "Away Won", "default": 0 },
+      { "name": "awayDrawn", "type": "number", "label": "Away Drawn", "default": 0 },
+      { "name": "awayLost", "type": "number", "label": "Away Lost", "default": 0 }
+    ]
+  }
+]

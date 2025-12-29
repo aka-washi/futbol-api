@@ -1,0 +1,119 @@
+plugins {
+    id 'org.springframework.boot' version '3.5.9'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'jacoco'
+    id 'org.sonarqube' version '5.1.0.4882'
+    id 'com.diffplug.spotless' version '6.25.0'
+}
+
+group = 'com.eagle'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation 'net.bytebuddy:byte-buddy-agent:1.18.2'
+
+    // Database drivers
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    runtimeOnly 'com.h2database:h2'
+
+    // Additional utilities
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    // Development
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                '**/EagleApiApplication.class'
+            ])
+        }))
+    }
+}
+
+springBoot {
+    buildInfo()
+}
+
+bootRun {
+    // Enable externalized configuration from config/ directory
+    systemProperty 'spring.config.location', 'file:./config/'
+    // Optionally set the active profile
+    // systemProperty 'spring.profiles.active', 'h2'
+}
+
+spotless {
+    java {
+        target 'src/**/*.java'
+        importOrder('java', 'javax', 'jakarta', 'org', 'com')
+        removeUnusedImports()
+        indentWithSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+//         licenseHeader '''/*
+//  * Copyright (c) ${YEAR} Soccer Management
+//  */
+// '''
+    }
+    format 'misc', {
+        target '*.gradle', 'gradle/**/*.gradle', '*.md', '.gitignore'
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
+
+tasks.named('check') {
+    dependsOn 'spotlessCheck'
+}
+
+sonar {
+    properties {
+        property 'sonar.projectKey', 'futbol-api'
+        property 'sonar.projectName', 'Futbol API'
+        property 'sonar.host.url', 'http://localhost:9010'
+        property 'sonar.token', project.findProperty('sonar.token') ?: ''
+        property 'sonar.sources', 'src/main/java'
+        property 'sonar.tests', 'src/test/java'
+        property 'sonar.java.binaries', 'build/classes/java/main'
+        property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
+    }
+}
