@@ -14,12 +14,13 @@ import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.country.mapper.CountryMapper;
 import com.eagle.futbolapi.features.country.service.CountryService;
 import com.eagle.futbolapi.features.shared.ApiResponse;
+import com.eagle.futbolapi.features.shared.controller.BaseCrudController;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
 
 @RestController
 @RequestMapping("/countries")
 @Validated
-public class CountryController extends com.eagle.futbolapi.features.shared.controller.BaseCrudController<Country, CountryDTO, CountryService, CountryMapper> {
+public class CountryController extends BaseCrudController<Country, CountryDTO, CountryService, CountryMapper> {
 
     public CountryController(CountryService countryService, CountryMapper countryMapper) {
         super(

@@ -14,7 +14,7 @@ import com.eagle.futbolapi.features.pointsystem.service.PointSystemService;
 import com.eagle.futbolapi.features.shared.ApiResponse;
 
 @RestController
-@RequestMapping("/countries")
+@RequestMapping("/pointSystems")
 @Validated
 public class PointSystemController extends com.eagle.futbolapi.features.shared.controller.BaseCrudController<PointSystem, PointSystemDTO, PointSystemService, PointSystemMapper> {
 

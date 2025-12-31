@@ -37,9 +37,7 @@ public class CountryDTO {
     @Size(max = 500, message = "Flag URL cannot exceed 500 characters")
     private String flagUrl;
 
-    @NotNull(message = "Created at timestamp is required")
     private LocalDateTime createdAt;
-    @NotNull(message = "Created by is required")
     private String createdBy;
 
     private LocalDateTime updatedAt;

@@ -38,10 +38,6 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long> {
         return pointSystemRepository.findByDisplayName(displayName);
     }
 
-    public boolean isActive() {
-        return pointSystemRepository.isActive();
-    }
-
     public boolean existsByName(String name) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Point system name cannot be null or empty");
@@ -50,12 +46,23 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long> {
     }
 
     @Override
+    protected boolean isDuplicate(PointSystem pointSystem) {
+        Objects.requireNonNull(pointSystem, "Point System cannot be null");
+
+        PointSystem existingPointSystem = pointSystemRepository
+                .findByName(pointSystem.getName())
+                .orElse(null);
+
+        return pointSystem.equals(existingPointSystem);
+    }
+
+    @Override
     protected boolean isDuplicate(Long id, @NotNull PointSystem pointSystem) {
         Objects.requireNonNull(id, "ID cannot be null");
         Objects.requireNonNull(pointSystem, "Point system details cannot be null");
 
         PointSystem existingPointSystem = getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("PointSystem", "id", id));
+        .orElseThrow(() -> new ResourceNotFoundException("Point System", "id", id));
 
         return existingPointSystem.getName().equals(pointSystem.getName());
     }

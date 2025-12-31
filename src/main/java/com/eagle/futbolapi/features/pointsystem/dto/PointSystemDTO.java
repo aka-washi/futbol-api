@@ -30,24 +30,17 @@ public class PointSystemDTO {
     @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
 
-    @NotNull(message = "Points for win is required")
     private Integer pointsForWin;
-
-    @NotNull(message = "Points for draw is required")
     private Integer pointsForDraw;
-
-    @NotNull(message = "Points for loss is required")
     private Integer pointsForLoss;
 
     private Integer pointsForWinOnPenalties;
     private Integer pointsForLossOnPenalties;
 
-    @NotNull(message = "Active status is required")
     private Boolean isActive;
 
-    @NotNull(message = "Created at timestamp is required")
+
     private LocalDateTime createdAt;
-    @NotNull(message = "Created by is required")
     private String createdBy;
 
     private LocalDateTime updatedAt;

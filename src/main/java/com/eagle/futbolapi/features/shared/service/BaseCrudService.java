@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.shared.service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public abstract class BaseCrudService<T extends Identifiable<K>, K> {
+public abstract class BaseCrudService<T, K> {
     protected final JpaRepository<T, K> repository;
 
     protected BaseCrudService(JpaRepository<T, K> repository) {
@@ -34,17 +35,19 @@ public abstract class BaseCrudService<T extends Identifiable<K>, K> {
         if (entity == null) {
             throw new IllegalArgumentException("Entity cannot be null");
         }
-        K id = entity.getId();
 
-        if(!isDuplicate(id, entity)) {
+        if(isDuplicate(entity)) {
             throw new IllegalArgumentException("Duplicate entity");
         }
         return repository.save(entity);
     }
 
     public T update(K id, T entity) {
-        if (id == null || entity == null) {
-            throw new IllegalArgumentException("ID and entity cannot be null");
+        Objects.requireNonNull(id, "ID cannot be null");
+        Objects.requireNonNull(entity, "Entity details cannot be null");
+
+        if(isDuplicate(id, entity)) {
+            throw new IllegalArgumentException("Duplicate entity");
         }
         if (!repository.existsById(id)) {
             throw new IllegalArgumentException("Entity with given ID does not exist");
@@ -66,6 +69,7 @@ public abstract class BaseCrudService<T extends Identifiable<K>, K> {
         return repository.existsById(id);
     }
 
+    protected abstract boolean isDuplicate(@NotNull T entity);
     protected abstract boolean isDuplicate(K id, @NotNull T entity);
 
 }

@@ -14,6 +14,4 @@ public interface PointSystemRepository extends JpaRepository<PointSystem, Long> 
 
     boolean existsByName(String name);
 
-    boolean isActive();
-
 }

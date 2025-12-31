@@ -68,8 +68,7 @@ public class CountryService extends BaseCrudService<Country, Long> {
 
         return Objects.requireNonNull(
                 countryRepository.save(country),
-                "Country save operation returned null - this should never happen"
-        );
+                "Country save operation returned null - this should never happen");
     }
 
     public Country updateCountry(@NotNull Long id, @NotNull Country countryDetails) {
@@ -83,7 +82,8 @@ public class CountryService extends BaseCrudService<Country, Long> {
         if (countryDetails.getCode() != null && !countryDetails.getCode().equals(existingCountry.getCode())) {
             countryRepository.findByCode(countryDetails.getCode())
                     .ifPresent(country -> {
-                        throw new DuplicateResourceException("Country with code '" + countryDetails.getCode() + "' already exists");
+                        throw new DuplicateResourceException(
+                                "Country with code '" + countryDetails.getCode() + "' already exists");
                     });
         }
 
@@ -91,7 +91,8 @@ public class CountryService extends BaseCrudService<Country, Long> {
         if (countryDetails.getIsoCode() != null && !countryDetails.getIsoCode().equals(existingCountry.getIsoCode())) {
             countryRepository.findByIsoCode(countryDetails.getIsoCode())
                     .ifPresent(country -> {
-                        throw new DuplicateResourceException("Country with ISO code '" + countryDetails.getIsoCode() + "' already exists");
+                        throw new DuplicateResourceException(
+                                "Country with ISO code '" + countryDetails.getIsoCode() + "' already exists");
                     });
         }
 
@@ -103,8 +104,29 @@ public class CountryService extends BaseCrudService<Country, Long> {
 
         return Objects.requireNonNull(
                 countryRepository.save(existingCountry),
-                "Country update operation returned null - this should never happen"
-        );
+                "Country update operation returned null - this should never happen");
+    }
+
+    @Override
+    public Country update(Long id, Country country) {
+        Country existing = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
+        country.setCreatedAt(existing.getCreatedAt());
+        country.setId(id);
+        return super.update(id, country);
+    }
+
+    @Override
+    protected boolean isDuplicate(@NotNull Country country) {
+        Objects.requireNonNull(country, "Country cannot be null");
+
+        // Check for duplicate code
+        if (country.getCode() != null && countryRepository.existsByCode(country.getCode())) {
+            return true;
+        }
+
+        // Check for duplicate ISO code
+        return country.getIsoCode() != null && countryRepository.existsByIsoCode(country.getIsoCode());
     }
 
     @Override
@@ -116,7 +138,7 @@ public class CountryService extends BaseCrudService<Country, Long> {
                 .orElseThrow(() -> new ResourceNotFoundException("Country", "id", id));
 
         // Check for duplicate code
-        if (country.getCode() != null && country.getCode().equals(existingCountry.getCode())) {
+        if (country.getCode() != null && !country.getCode().equals(existingCountry.getCode())) {
             return true;
         }
 
