@@ -6,7 +6,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.shared.BaseEntity;
 
@@ -47,17 +46,14 @@ public class PointSystem extends BaseEntity {
     @Column(name = "pt_description", columnDefinition = "TEXT")
     private String description;
 
-    @NotNull
     @Column(name = "pt_points_for_win", nullable = false)
     @Builder.Default
     private Integer pointsForWin = 3;
 
-    @NotNull
     @Column(name = "pt_points_for_draw", nullable = false)
     @Builder.Default
     private Integer pointsForDraw = 1;
 
-    @NotNull
     @Column(name = "pt_points_for_loss", nullable = false)
     @Builder.Default
     private Integer pointsForLoss = 0;
@@ -75,15 +71,11 @@ public class PointSystem extends BaseEntity {
     @Override
         public int hashCode() {
             return java.util.Objects.hash(
-                name,
-                displayName,
-                description,
                 pointsForWin,
                 pointsForDraw,
                 pointsForLoss,
                 pointsForWinOnPenalties,
-                pointsForLossOnPenalties,
-                isActive
+                pointsForLossOnPenalties
             );
         }
 
@@ -94,15 +86,11 @@ public class PointSystem extends BaseEntity {
             if (!(obj instanceof PointSystem))
                 return false;
             PointSystem other = (PointSystem) obj;
-            return java.util.Objects.equals(name, other.name)
-                && java.util.Objects.equals(displayName, other.displayName)
-                && java.util.Objects.equals(description, other.description)
-                && java.util.Objects.equals(pointsForWin, other.pointsForWin)
+            return java.util.Objects.equals(pointsForWin, other.pointsForWin)
                 && java.util.Objects.equals(pointsForDraw, other.pointsForDraw)
                 && java.util.Objects.equals(pointsForLoss, other.pointsForLoss)
                 && java.util.Objects.equals(pointsForWinOnPenalties, other.pointsForWinOnPenalties)
-                && java.util.Objects.equals(pointsForLossOnPenalties, other.pointsForLossOnPenalties)
-                && java.util.Objects.equals(isActive, other.isActive);
+                && java.util.Objects.equals(pointsForLossOnPenalties, other.pointsForLossOnPenalties);
         }
 
 }

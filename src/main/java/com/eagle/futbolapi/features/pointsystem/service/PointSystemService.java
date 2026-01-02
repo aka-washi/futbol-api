@@ -17,6 +17,8 @@ import com.eagle.futbolapi.features.shared.service.BaseCrudService;
 @Transactional
 public class PointSystemService extends BaseCrudService<PointSystem, Long> {
 
+    private static final String CANNOT_BE_NULL = "Point System cannot be null";
+
     private final PointSystemRepository pointSystemRepository;
 
     public PointSystemService(PointSystemRepository pointSystemRepository) {
@@ -45,15 +47,36 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long> {
         return pointSystemRepository.existsByName(name);
     }
 
+    public boolean existsByPointValues(PointSystem pointSystem) {
+        Objects.requireNonNull(pointSystem, CANNOT_BE_NULL);
+
+        return pointSystemRepository.existsByPointValues(
+            pointSystem.getPointsForWin(),
+            pointSystem.getPointsForDraw(),
+            pointSystem.getPointsForLoss(),
+            pointSystem.getPointsForWinOnPenalties(),
+            pointSystem.getPointsForLossOnPenalties()
+        );
+    }
+
+    public Optional<PointSystem> findByPointValues(PointSystem pointSystem) {
+        Objects.requireNonNull(pointSystem, CANNOT_BE_NULL);
+
+        return pointSystemRepository.findByPointValues(
+            pointSystem.getPointsForWin(),
+            pointSystem.getPointsForDraw(),
+            pointSystem.getPointsForLoss(),
+            pointSystem.getPointsForWinOnPenalties(),
+            pointSystem.getPointsForLossOnPenalties()
+        );
+    }
+
     @Override
     protected boolean isDuplicate(PointSystem pointSystem) {
-        Objects.requireNonNull(pointSystem, "Point System cannot be null");
+        Objects.requireNonNull(pointSystem, CANNOT_BE_NULL);
 
-        PointSystem existingPointSystem = pointSystemRepository
-                .findByName(pointSystem.getName())
-                .orElse(null);
-
-        return pointSystem.equals(existingPointSystem);
+        // Check if a PointSystem with the same point values already exists
+        return existsByPointValues(pointSystem);
     }
 
     @Override
@@ -61,9 +84,30 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long> {
         Objects.requireNonNull(id, "ID cannot be null");
         Objects.requireNonNull(pointSystem, "Point system details cannot be null");
 
+        // Get the existing entity to compare values
         PointSystem existingPointSystem = getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Point System", "id", id));
+            .orElseThrow(() -> new ResourceNotFoundException("Point System", "id", id));
 
-        return existingPointSystem.getName().equals(pointSystem.getName());
+        // Check if any point values are being changed
+        boolean pointValuesChanged = !Objects.equals(existingPointSystem.getPointsForWin(), pointSystem.getPointsForWin()) ||
+                                   !Objects.equals(existingPointSystem.getPointsForDraw(), pointSystem.getPointsForDraw()) ||
+                                   !Objects.equals(existingPointSystem.getPointsForLoss(), pointSystem.getPointsForLoss()) ||
+                                   !Objects.equals(existingPointSystem.getPointsForWinOnPenalties(), pointSystem.getPointsForWinOnPenalties()) ||
+                                   !Objects.equals(existingPointSystem.getPointsForLossOnPenalties(), pointSystem.getPointsForLossOnPenalties());
+
+        // If point values are being changed, check if the new point values already exist in another entity
+        if (pointValuesChanged) {
+            Optional<PointSystem> duplicatePointSystem = findByPointValues(pointSystem);
+            return duplicatePointSystem.isPresent() && !duplicatePointSystem.get().getId().equals(id);
+        }
+
+        // If only non-point fields are being changed, check for name duplicates
+        boolean nameChanged = !Objects.equals(existingPointSystem.getName(), pointSystem.getName());
+        if (nameChanged) {
+            return pointSystemRepository.existsByName(pointSystem.getName());
+        }
+
+        // No relevant duplicates found
+        return false;
     }
 }

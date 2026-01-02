@@ -34,22 +34,33 @@ public class PointSystemMapper {
         if (dto == null) {
             return null;
         }
-        return PointSystem.builder()
+        var builder = PointSystem.builder()
                 .id(dto.getId())
                 .name(dto.getName())
                 .displayName(dto.getDisplayName())
                 .description(dto.getDescription())
-                .pointsForWin(dto.getPointsForWin())
-                .pointsForDraw(dto.getPointsForDraw())
-                .pointsForLoss(dto.getPointsForLoss())
                 .pointsForWinOnPenalties(dto.getPointsForWinOnPenalties())
                 .pointsForLossOnPenalties(dto.getPointsForLossOnPenalties())
-                .isActive(dto.getIsActive())
                 .createdAt(dto.getCreatedAt())
                 .createdBy(dto.getCreatedBy())
                 .updatedAt(dto.getUpdatedAt())
-                .updatedBy(dto.getUpdatedBy())
-                .build();
+                .updatedBy(dto.getUpdatedBy());
+
+        // Only set fields with default values if they're not null, allowing defaults to be used
+        if (dto.getPointsForWin() != null) {
+            builder.pointsForWin(dto.getPointsForWin());
+        }
+        if (dto.getPointsForDraw() != null) {
+            builder.pointsForDraw(dto.getPointsForDraw());
+        }
+        if (dto.getPointsForLoss() != null) {
+            builder.pointsForLoss(dto.getPointsForLoss());
+        }
+        if (dto.getIsActive() != null) {
+            builder.isActive(dto.getIsActive());
+        }
+
+        return builder.build();
     }
 
 }

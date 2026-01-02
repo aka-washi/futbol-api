@@ -9,8 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.eagle.futbolapi.features.shared.BaseEntity;
 
-public abstract class BaseCrudService<T, K> {
+
+public abstract class BaseCrudService<T extends BaseEntity, K> {
     protected final JpaRepository<T, K> repository;
 
     protected BaseCrudService(JpaRepository<T, K> repository) {
@@ -52,6 +54,9 @@ public abstract class BaseCrudService<T, K> {
         if (!repository.existsById(id)) {
             throw new IllegalArgumentException("Entity with given ID does not exist");
         }
+
+        entity.setId((Long) id);
+
         return repository.save(entity);
     }
 
