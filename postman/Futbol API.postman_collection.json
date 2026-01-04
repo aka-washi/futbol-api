@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "4dd0b188-d303-4cdc-9a9e-22d4176dfb85",
+		"name": "Futbol API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39773729"
+	},
+	"item": [
+		{
+			"name": "Countries",
+			"item": [
+				{
+					"name": "Get All Countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/countries?page=0&size=20&sortBy=name&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"countries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Page number (0-indexed)"
+								},
+								{
+									"key": "size",
+									"value": "20",
+									"description": "Page size (max 100)"
+								},
+								{
+									"key": "sortBy",
+									"value": "name",
+									"description": "Field to sort by"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc",
+									"description": "Sort direction (asc or desc)"
+								}
+							]
+						},
+						"description": "Retrieves all countries with pagination and sorting support"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Country",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Mexicanos\",\n  \"code\": \"MX\",\n  \"isoCode\": \"MEX\",\n  \"displayName\": \"Mexico\",\n  \"flagUrl\": \"https://flagcdn.com/mx.svg\",\n  \"createdBy\": \"redeagle\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/countries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"countries"
+							]
+						},
+						"description": "Creates a new country"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Country",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Estados Unidos Mexicanos\",\n  \"code\": \"MX\",\n  \"isoCode\": \"MEX\",\n  \"displayName\": \"Mexico\",\n  \"flagUrl\": \"https://flagcdn.com/mx.svg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/countries/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"countries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Country ID"
+								}
+							]
+						},
+						"description": "Updates an existing country"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Country",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/countries/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"countries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Country ID"
+								}
+							]
+						},
+						"description": "Deletes a country by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PointSystems",
+			"item": [
+				{
+					"name": "Get All Point Systems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pointSystems?page=0&size=20&sortBy=name&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pointSystems"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Page number (0-indexed)"
+								},
+								{
+									"key": "size",
+									"value": "20",
+									"description": "Page size (max 100)"
+								},
+								{
+									"key": "sortBy",
+									"value": "name",
+									"description": "Field to sort by"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc",
+									"description": "Sort direction (asc or desc)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Point System",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Default\",\n  \"displayName\": \"Default\",\n  \"description\": \"The Default point system\",\n  \"createdBy\": \"redeagle\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pointSystems",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pointSystems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Point System",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pointSystems/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pointSystems",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "34",
+									"description": "Country ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Point System",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Default\",\n  \"displayName\": \"Default\",\n  \"description\": \"The Default point system\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pointSystems/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pointSystems",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Country ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
