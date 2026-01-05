@@ -14,8 +14,11 @@ import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.country.mapper.CountryMapper;
 import com.eagle.futbolapi.features.country.service.CountryService;
 import com.eagle.futbolapi.features.shared.ApiResponse;
+import com.eagle.futbolapi.features.shared.ResponseUtil;
 import com.eagle.futbolapi.features.shared.controller.BaseCrudController;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
+
+import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/countries")
@@ -39,7 +42,7 @@ public class CountryController extends BaseCrudController<Country, CountryDTO, C
         Country country = service.getCountryByName(name)
                 .orElseThrow(() -> new ResourceNotFoundException(resourceName, "name", name));
         CountryDTO countryDTO = mapper.toCountryDTO(country);
-        return com.eagle.futbolapi.features.shared.ResponseUtil.success(countryDTO, successMessage);
+        return ResponseUtil.success(countryDTO, successMessage);
     }
 
     @GetMapping("/displayName/{displayName}")
@@ -47,7 +50,7 @@ public class CountryController extends BaseCrudController<Country, CountryDTO, C
         Country country = service.getCountryByDisplayName(displayName)
                 .orElseThrow(() -> new ResourceNotFoundException(resourceName, "displayName", displayName));
         CountryDTO countryDTO = mapper.toCountryDTO(country);
-        return com.eagle.futbolapi.features.shared.ResponseUtil.success(countryDTO, successMessage);
+        return ResponseUtil.success(countryDTO, successMessage);
     }
 
     @GetMapping("/code/{code}")
@@ -55,15 +58,15 @@ public class CountryController extends BaseCrudController<Country, CountryDTO, C
         Country country = service.getCountryByCode(code)
                 .orElseThrow(() -> new ResourceNotFoundException(resourceName, "code", code));
         CountryDTO countryDTO = mapper.toCountryDTO(country);
-        return com.eagle.futbolapi.features.shared.ResponseUtil.success(countryDTO, successMessage);
+        return ResponseUtil.success(countryDTO, successMessage);
     }
 
     @GetMapping("/iso/{isoCode}")
-    public ResponseEntity<ApiResponse<CountryDTO>> getCountryByIsoCode(@PathVariable @jakarta.validation.constraints.NotBlank String isoCode) {
+    public ResponseEntity<ApiResponse<CountryDTO>> getCountryByIsoCode(@PathVariable @NotBlank String isoCode) {
         Country country = service.getCountryByIsoCode(isoCode)
                 .orElseThrow(() -> new ResourceNotFoundException(resourceName, "isoCode", isoCode));
         CountryDTO countryDTO = mapper.toCountryDTO(country);
-        return com.eagle.futbolapi.features.shared.ResponseUtil.success(countryDTO, successMessage);
+        return ResponseUtil.success(countryDTO, successMessage);
     }
 
     // Implement abstract methods from BaseCrudController

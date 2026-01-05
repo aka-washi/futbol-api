@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.eagle.futbolapi.features.organization.entity.Organization;
@@ -15,15 +16,20 @@ import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 import com.eagle.futbolapi.features.organization.repository.OrganizationRepository;
 import com.eagle.futbolapi.features.shared.exception.DuplicateResourceException;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.shared.service.BaseCrudService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
-public class OrganizationService {
+public class OrganizationService extends BaseCrudService<Organization, Long> {
 
     private final OrganizationRepository organizationRepository;
+
+    protected OrganizationService(OrganizationRepository organizationRepository) {
+        super(organizationRepository);
+        this.organizationRepository = organizationRepository;
+    }
 
     public Page<Organization> getAllOrganizations(Pageable pageable) {
         if (pageable == null) {
@@ -198,6 +204,18 @@ public class OrganizationService {
     public boolean existsById(@NotNull Long id) {
         Objects.requireNonNull(id, "Organization ID cannot be null");
         return organizationRepository.existsById(id);
+    }
+
+    @Override
+    protected boolean isDuplicate(@NotNull Organization entity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isDuplicate'");
+    }
+
+    @Override
+    protected boolean isDuplicate(Long id, @NotNull Organization entity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isDuplicate'");
     }
 
 }
