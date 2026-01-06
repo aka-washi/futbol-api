@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.organization.controller;
 
+import jakarta.validation.constraints.Min;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +21,6 @@ import com.eagle.futbolapi.features.shared.ApiResponse;
 import com.eagle.futbolapi.features.shared.ResponseUtil;
 import com.eagle.futbolapi.features.shared.controller.BaseCrudController;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
-
-import jakarta.validation.constraints.Min;
 
 @RestController
 @RequestMapping("/organizations")
@@ -161,12 +161,12 @@ public class OrganizationController extends BaseCrudController<Organization, Org
 
     @Override
     protected Organization updateEntity(Long id, Organization entity) {
-        return service.updateOrganization(entity);
+        return service.update(id, entity);
     }
 
     @Override
     protected void deleteEntity(Long id) {
-        service.deleteOrganization(id);
+        service.delete(id);
     }
 
     @Override

@@ -48,14 +48,14 @@ public abstract class BaseCrudService<T extends BaseEntity, K> {
         Objects.requireNonNull(id, "ID cannot be null");
         Objects.requireNonNull(entity, "Entity details cannot be null");
 
+        entity.setId((Long) id);
+
         if(isDuplicate(id, entity)) {
             throw new IllegalArgumentException("Duplicate entity");
         }
         if (!repository.existsById(id)) {
             throw new IllegalArgumentException("Entity with given ID does not exist");
         }
-
-        entity.setId((Long) id);
 
         return repository.save(entity);
     }

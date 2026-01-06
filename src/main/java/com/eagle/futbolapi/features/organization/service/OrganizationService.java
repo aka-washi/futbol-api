@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.eagle.futbolapi.features.organization.entity.Organization;
@@ -17,8 +16,6 @@ import com.eagle.futbolapi.features.organization.repository.OrganizationReposito
 import com.eagle.futbolapi.features.shared.exception.DuplicateResourceException;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.shared.service.BaseCrudService;
-
-import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional
@@ -165,7 +162,8 @@ public class OrganizationService extends BaseCrudService<Organization, Long> {
         }
 
         // Check for duplicate abbreviation only if abbreviation is changing
-        if (organization.getAbbreviation() != null && !organization.getAbbreviation().trim().isEmpty() && !organization.getAbbreviation().equals(existingOrganization.getAbbreviation())) {
+        if (organization.getAbbreviation() != null && !organization.getAbbreviation().trim().isEmpty()
+                && !organization.getAbbreviation().equals(existingOrganization.getAbbreviation())) {
             organizationRepository.findByAbbreviation(organization.getAbbreviation())
                     .ifPresent(org -> {
                         if (!org.getId().equals(organization.getId())) {
@@ -207,15 +205,49 @@ public class OrganizationService extends BaseCrudService<Organization, Long> {
     }
 
     @Override
-    protected boolean isDuplicate(@NotNull Organization entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isDuplicate'");
+    protected boolean isDuplicate(@NotNull Organization organization) {
+        Objects.requireNonNull(organization, "Organization cannot be null");
+
+        // Check for duplicate name
+        if (organization.getName() != null && organizationRepository.existsByName(organization.getName())) {
+            return true;
+        }
+
+        // Check for duplicate display name
+        if (organization.getDisplayName() != null
+                && organizationRepository.existsByDisplayName(organization.getDisplayName())) {
+            return true;
+        }
+
+        // Check for duplicate abbreviation if provided
+        return organization.getAbbreviation() != null && !organization.getAbbreviation().trim().isEmpty()
+                && organizationRepository.existsByAbbreviation(organization.getAbbreviation());
+
     }
 
     @Override
-    protected boolean isDuplicate(Long id, @NotNull Organization entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isDuplicate'");
+    protected boolean isDuplicate(Long id, @NotNull Organization organization) {
+        Objects.requireNonNull(organization, "Organization cannot be null");
+        Objects.requireNonNull(organization.getId(), "Organization ID cannot be null for update operation");
+
+        Organization existingOrganization = organizationRepository.findById(organization.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organization.getId()));
+
+        // Check for duplicate name only if name is changing
+        if (organization.getName() != null && !organization.getName().equals(existingOrganization.getName())) {
+            return true;
+        }
+
+        // Check for duplicate display name only if display name is changing
+        if (organization.getDisplayName() != null
+                && !organization.getDisplayName().equals(existingOrganization.getDisplayName())) {
+            return true;
+        }
+
+        // Check for duplicate abbreviation only if abbreviation is changing
+        return organization.getAbbreviation() != null
+                && !organization.getAbbreviation().trim().isEmpty()
+                && !organization.getAbbreviation().equals(existingOrganization.getAbbreviation());
     }
 
 }
