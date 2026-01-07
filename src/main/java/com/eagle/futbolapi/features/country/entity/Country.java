@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Objects;
+
 import com.eagle.futbolapi.features.shared.BaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -53,7 +55,7 @@ public class Country extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(name, code, isoCode, displayName, flagUrl);
+        return Objects.hash(name, code, isoCode, displayName, flagUrl);
     }
 
     @Override
@@ -63,11 +65,11 @@ public class Country extends BaseEntity {
         if (!(obj instanceof Country))
             return false;
         Country other = (Country) obj;
-        return java.util.Objects.equals(name, other.name)
-            && java.util.Objects.equals(code, other.code)
-            && java.util.Objects.equals(isoCode, other.isoCode)
-            && java.util.Objects.equals(displayName, other.displayName)
-            && java.util.Objects.equals(flagUrl, other.flagUrl);
+        return Objects.equals(name, other.name)
+            && Objects.equals(code, other.code)
+            && Objects.equals(isoCode, other.isoCode)
+            && Objects.equals(displayName, other.displayName)
+            && Objects.equals(flagUrl, other.flagUrl);
     }
 
 }

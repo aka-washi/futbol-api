@@ -3,12 +3,12 @@ package com.eagle.futbolapi.features.organization.service;
 import java.util.Objects;
 import java.util.Optional;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.organization.entity.OrganizationType;

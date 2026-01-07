@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.organization.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -24,14 +25,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
-
-/**
- * Organization Entity
- * Represents a football federation/organization (e.g., FMF - Federación
- * Mexicana de Fútbol)
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "organization")
 @AttributeOverrides({
@@ -41,11 +40,9 @@ import lombok.experimental.SuperBuilder;
     @AttributeOverride(name = "updatedAt", column = @Column(name = "og_updated_at")),
     @AttributeOverride(name = "updatedBy", column = @Column(name = "og_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 public class Organization extends BaseEntity {
 
     @NotBlank
@@ -90,20 +87,20 @@ public class Organization extends BaseEntity {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
-        result = prime * result + ((abbreviation == null) ? 0 : abbreviation.hashCode());
-        result = prime * result + ((country == null) ? 0 : country.hashCode());
-        result = prime * result + ((founded == null) ? 0 : founded.hashCode());
-        result = prime * result + ((parentOrganization == null) ? 0 : parentOrganization.hashCode());
-        result = prime * result + ((logo == null) ? 0 : logo.hashCode());
-        result = prime * result + ((website == null) ? 0 : website.hashCode());
-        result = prime * result + ((headquarters == null) ? 0 : headquarters.hashCode());
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
-        return result;
+        return Objects.hash(
+            super.hashCode(),
+            name,
+            displayName,
+            abbreviation,
+            country,
+            founded,
+            parentOrganization,
+            logo,
+            website,
+            headquarters,
+            description,
+            type
+        );
     }
 
     @Override
@@ -115,57 +112,17 @@ public class Organization extends BaseEntity {
         if (getClass() != obj.getClass())
             return false;
         Organization other = (Organization) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (displayName == null) {
-            if (other.displayName != null)
-                return false;
-        } else if (!displayName.equals(other.displayName))
-            return false;
-        if (abbreviation == null) {
-            if (other.abbreviation != null)
-                return false;
-        } else if (!abbreviation.equals(other.abbreviation))
-            return false;
-        if (country == null) {
-            if (other.country != null)
-                return false;
-        } else if (!country.equals(other.country))
-            return false;
-        if (founded == null) {
-            if (other.founded != null)
-                return false;
-        } else if (!founded.equals(other.founded))
-            return false;
-        if (parentOrganization == null) {
-            if (other.parentOrganization != null)
-                return false;
-        } else if (!parentOrganization.equals(other.parentOrganization))
-            return false;
-        if (logo == null) {
-            if (other.logo != null)
-                return false;
-        } else if (!logo.equals(other.logo))
-            return false;
-        if (website == null) {
-            if (other.website != null)
-                return false;
-        } else if (!website.equals(other.website))
-            return false;
-        if (headquarters == null) {
-            if (other.headquarters != null)
-                return false;
-        } else if (!headquarters.equals(other.headquarters))
-            return false;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        return type == other.type;
+        return Objects.equals(name, other.name)
+            && Objects.equals(displayName, other.displayName)
+            && Objects.equals(abbreviation, other.abbreviation)
+            && Objects.equals(country, other.country)
+            && Objects.equals(founded, other.founded)
+            && Objects.equals(parentOrganization, other.parentOrganization)
+            && Objects.equals(logo, other.logo)
+            && Objects.equals(website, other.website)
+            && Objects.equals(headquarters, other.headquarters)
+            && Objects.equals(description, other.description)
+            && type == other.type;
     }
 
 }

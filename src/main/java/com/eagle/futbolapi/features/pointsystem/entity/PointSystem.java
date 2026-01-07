@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Objects;
+
 import com.eagle.futbolapi.features.shared.BaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -70,7 +72,7 @@ public class PointSystem extends BaseEntity {
 
     @Override
         public int hashCode() {
-            return java.util.Objects.hash(
+            return Objects.hash(
                 pointsForWin,
                 pointsForDraw,
                 pointsForLoss,
@@ -86,11 +88,11 @@ public class PointSystem extends BaseEntity {
             if (!(obj instanceof PointSystem))
                 return false;
             PointSystem other = (PointSystem) obj;
-            return java.util.Objects.equals(pointsForWin, other.pointsForWin)
-                && java.util.Objects.equals(pointsForDraw, other.pointsForDraw)
-                && java.util.Objects.equals(pointsForLoss, other.pointsForLoss)
-                && java.util.Objects.equals(pointsForWinOnPenalties, other.pointsForWinOnPenalties)
-                && java.util.Objects.equals(pointsForLossOnPenalties, other.pointsForLossOnPenalties);
+            return Objects.equals(pointsForWin, other.pointsForWin)
+                && Objects.equals(pointsForDraw, other.pointsForDraw)
+                && Objects.equals(pointsForLoss, other.pointsForLoss)
+                && Objects.equals(pointsForWinOnPenalties, other.pointsForWinOnPenalties)
+                && Objects.equals(pointsForLossOnPenalties, other.pointsForLossOnPenalties);
         }
 
 }

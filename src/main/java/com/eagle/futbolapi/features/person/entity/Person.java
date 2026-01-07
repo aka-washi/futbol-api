@@ -25,9 +25,15 @@ import com.eagle.futbolapi.features.shared.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "person")
 @AttributeOverrides({
@@ -37,8 +43,6 @@ import lombok.experimental.SuperBuilder;
     @AttributeOverride(name = "updatedAt", column = @Column(name = "ps_updated_at")),
     @AttributeOverride(name = "updatedBy", column = @Column(name = "ps_updated_by", length = 100))
 })
-@Data
-@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -85,7 +89,6 @@ public class Person extends BaseEntity {
     @Column(name = "ps_birth_date")
     private LocalDate birthDate;
 
-    @NotNull
     @Column(name = "ps_birth_place", length = 100)
     private String birthPlace;
 
