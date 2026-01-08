@@ -49,4 +49,3 @@ application-dev.yml
 *.log
 /logs/
 /data/
-/config/
