@@ -1,13 +1,13 @@
 package com.eagle.futbolapi.features.country.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-
-import java.util.Objects;
 
 import com.eagle.futbolapi.features.shared.BaseEntity;
 

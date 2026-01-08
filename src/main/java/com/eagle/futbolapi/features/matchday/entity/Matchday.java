@@ -25,25 +25,24 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-/**
- * Matchday Entity
- * Represents a matchday/round/jornada in a competition stage
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "matchday")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "md_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "md_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "md_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "md_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "md_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "md_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "md_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "md_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "md_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "md_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Matchday extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

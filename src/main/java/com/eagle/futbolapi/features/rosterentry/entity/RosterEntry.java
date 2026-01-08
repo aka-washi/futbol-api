@@ -27,27 +27,24 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-
-/**
- * Roster Entry Entity
- * Represents a single roster membership entry for a team in a specific season
- * Links individual players or staff to teams for specific seasons with join/leave tracking
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "roster_entry")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "re_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "re_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "re_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "re_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "re_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "re_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "re_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "re_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "re_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "re_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class RosterEntry extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -78,9 +75,9 @@ public class RosterEntry extends BaseEntity {
     @Column(name = "re_left_date")
     private LocalDate leftDate;
 
-    @Column(name = "re_is_active", nullable = false)
+    @Column(name = "re_active", nullable = false)
     @Builder.Default
-    private Boolean isActive = true;
+    private Boolean active = true;
 
     @PrePersist
     @PreUpdate

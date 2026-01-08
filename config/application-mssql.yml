@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:sqlserver://localhost:13163;databaseName=futbol;trustServerCertificate=true
     username: redeagle
-    password: ${DB_PASSWORD:default_password}
+    password: ${DB_PASSWORD:wefV!eX5oNO#4h6}
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   jpa:

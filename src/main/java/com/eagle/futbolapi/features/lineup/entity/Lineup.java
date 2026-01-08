@@ -24,26 +24,24 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-
-/**
- * Lineup Entity
- * Represents the starting lineup and substitutes for a match
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "lineup")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "lu_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "lu_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "lu_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "lu_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "lu_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "lu_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "lu_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "lu_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "lu_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "lu_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Lineup extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

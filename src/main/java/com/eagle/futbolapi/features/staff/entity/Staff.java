@@ -24,11 +24,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-/**
- * Staff Entity
- * Represents team staff (coaches, trainers, medical staff, etc.)
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "staff")
 @AttributeOverrides({
@@ -38,29 +39,27 @@ import lombok.Setter;
     @AttributeOverride(name = "updatedAt", column = @Column(name = "sf_updated_at")),
     @AttributeOverride(name = "updatedBy", column = @Column(name = "sf_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Staff extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "person_id", nullable = false, unique = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    @NotNull
-    private Person person;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "person_id", nullable = false, unique = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @NotNull
+  private Person person;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "st_role", nullable = false, length = 50)
-    @NotNull
-    private StaffRole role;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "st_role", nullable = false, length = 50)
+  @NotNull
+  private StaffRole role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Team currentTeam;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "team_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Team currentTeam;
 
-    @Column(name = "st_is_active", nullable = false)
-    @Builder.Default
-    private Boolean isActive = true;
+  @Column(name = "st_active", nullable = false)
+  @Builder.Default
+  private Boolean active = true;
 
 }

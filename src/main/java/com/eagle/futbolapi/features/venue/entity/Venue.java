@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.venue.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -19,15 +20,15 @@ import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.shared.BaseEntity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-/**
- * Venue Entity
- * Represents a football stadium/venue
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "venue")
 @AttributeOverrides({
@@ -37,45 +38,62 @@ import lombok.Setter;
     @AttributeOverride(name = "updatedAt", column = @Column(name = "vn_updated_at")),
     @AttributeOverride(name = "updatedBy", column = @Column(name = "vn_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Venue extends BaseEntity {
-    @Column(name = "vn_display_name", nullable = false, length = 100)
-    private String displayName;
+  @Column(name = "vn_display_name", nullable = false, length = 100)
+  private String displayName;
 
-    @NotBlank
-    @Column(name = "vn_name", nullable = false)
-    private String name;
+  @NotBlank
+  @Column(name = "vn_name", nullable = false)
+  private String name;
 
-    @NotBlank
-    @Column(name = "vn_city", nullable = false, length = 100)
-    private String city;
+  @NotBlank
+  @Column(name = "vn_city", nullable = false, length = 100)
+  private String city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    @NotNull
-    private Country country;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "country_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @NotNull
+  private Country country;
 
-    @NotNull
-    @Column(name = "vn_capacity", nullable = false)
-    private Integer capacity;
+  @NotNull
+  @Column(name = "vn_capacity", nullable = false)
+  private Integer capacity;
 
-    @Column(name = "vn_address", columnDefinition = "TEXT")
-    private String address;
+  @Column(name = "vn_address", columnDefinition = "TEXT")
+  private String address;
 
-    @Column(name = "vn_image")
-    private String image;
+  @Column(name = "vn_image")
+  private String image;
 
-    @Column(name = "vn_opened")
-    private LocalDate opened;
+  @Column(name = "vn_opened")
+  private LocalDate opened;
 
-    @Column(name = "vn_surface", length = 100)
-    private String surface; // e.g., "Grass", "Artificial turf"
+  @Column(name = "vn_surface", length = 100)
+  private String surface; // e.g., "Grass", "Artificial turf"
 
-    @Column(name = "vn_is_active", nullable = false)
-    private boolean isActive;
+  @Column(name = "vn_active", nullable = false)
+  private boolean active;
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, displayName, city, country, capacity);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Venue))
+      return false;
+    Venue other = (Venue) obj;
+    return Objects.equals(name, other.name)
+        && Objects.equals(displayName, other.displayName)
+        && Objects.equals(city, other.city)
+        && Objects.equals(country, other.country)
+        && Objects.equals(capacity, other.capacity);
+  }
 
 }

@@ -23,26 +23,24 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-
-/**
- * Season Entity
- * Represents a football season (e.g., 2025-2026)
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "season")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "sn_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "sn_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "sn_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "sn_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "sn_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "sn_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "sn_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "sn_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "sn_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "sn_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Season extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -66,9 +64,9 @@ public class Season extends BaseEntity {
     @Column(name = "sn_end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "sn_is_active", nullable = false)
+    @Column(name = "se_active", nullable = false)
     @Builder.Default
-    private Boolean isActive = false;
+    private Boolean active = false;
 
     @Column(name = "sn_has_relegation", nullable = false)
     @Builder.Default

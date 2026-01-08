@@ -24,25 +24,24 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-/**
- * Player Entity
- * Represents a football player (extends Person)
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "player")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "pl_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "pl_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "pl_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "pl_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "pl_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "pl_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "pl_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "pl_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "pl_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "pl_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Player extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -63,8 +62,8 @@ public class Player extends BaseEntity {
     @JoinColumn(name = "team_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Team currentTeam;
 
-    @Column(name = "pl_is_active", nullable = false)
+    @Column(name = "pl_active", nullable = false)
     @Builder.Default
-    private Boolean isActive = true;
+    private Boolean active = true;
 
 }

@@ -22,7 +22,7 @@ public class PointSystemMapper {
                 .pointsForLoss(pointSystem.getPointsForLoss())
                 .pointsForWinOnPenalties(pointSystem.getPointsForWinOnPenalties())
                 .pointsForLossOnPenalties(pointSystem.getPointsForLossOnPenalties())
-                .isActive(pointSystem.getIsActive())
+                .active(pointSystem.getActive())
                 .createdAt(pointSystem.getCreatedAt())
                 .createdBy(pointSystem.getCreatedBy())
                 .updatedAt(pointSystem.getUpdatedAt())
@@ -46,7 +46,8 @@ public class PointSystemMapper {
                 .updatedAt(dto.getUpdatedAt())
                 .updatedBy(dto.getUpdatedBy());
 
-        // Only set fields with default values if they're not null, allowing defaults to be used
+        // Only set fields with default values if they're not null, allowing defaults to
+        // be used
         if (dto.getPointsForWin() != null) {
             builder.pointsForWin(dto.getPointsForWin());
         }
@@ -56,8 +57,8 @@ public class PointSystemMapper {
         if (dto.getPointsForLoss() != null) {
             builder.pointsForLoss(dto.getPointsForLoss());
         }
-        if (dto.getIsActive() != null) {
-            builder.isActive(dto.getIsActive());
+        if (dto.getActive() != null) {
+            builder.active(dto.getActive());
         }
 
         return builder.build();

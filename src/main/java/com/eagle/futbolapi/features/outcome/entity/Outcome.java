@@ -23,31 +23,27 @@ import com.eagle.futbolapi.features.staff.entity.Staff;
 import com.eagle.futbolapi.features.team.entity.Team;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-
-/**
- * CompetitionOutcome Entity
- * Represents the final outcome/result of a competition
- * Records winners, runners-up, and other final placements
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "competition_outcome")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "oc_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "oc_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "oc_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "oc_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "oc_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "oc_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "oc_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "oc_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "oc_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "oc_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Outcome extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

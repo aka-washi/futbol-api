@@ -30,9 +30,14 @@ public class OrganizationMapper {
                 .displayName(organization.getDisplayName())
                 .abbreviation(organization.getAbbreviation())
                 .countryId(organization.getCountry() != null ? organization.getCountry().getId() : null)
-                .countryDisplayName(organization.getCountry() != null ? organization.getDisplayName() : null)
-                .parentOrganizationId(organization.getParentOrganization() != null ? organization.getParentOrganization().getId() : null)
-                .parentOrganizationDisplayName(organization.getParentOrganization() != null ? organization.getParentOrganization().getDisplayName() : null)
+                .countryDisplayName(
+                        organization.getCountry() != null ? organization.getCountry().getDisplayName() : null)
+                .parentOrganizationId(
+                        organization.getParentOrganization() != null ? organization.getParentOrganization().getId()
+                                : null)
+                .parentOrganizationDisplayName(organization.getParentOrganization() != null
+                        ? organization.getParentOrganization().getDisplayName()
+                        : null)
                 .founded(organization.getFounded())
                 .headquarters(organization.getHeadquarters())
                 .logo(organization.getLogo())
@@ -75,7 +80,8 @@ public class OrganizationMapper {
         }
         if (organizationDTO.getCountryId() != null) {
             var country = countryRepository.findById(organizationDTO.getCountryId())
-                    .orElseThrow(() -> new IllegalArgumentException("Country not found with id: " + organizationDTO.getCountryId()));
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Country not found with id: " + organizationDTO.getCountryId()));
             builder.country(country);
         }
         if (organizationDTO.getParentOrganizationId() != null) {

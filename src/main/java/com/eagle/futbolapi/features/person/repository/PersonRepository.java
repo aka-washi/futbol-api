@@ -7,16 +7,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.eagle.futbolapi.features.person.entity.Person;
 
+@Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
   Optional<Person> findByUniqueRegKey(String uniqueRegKey);
 
   Optional<Person> findByEmail(String email);
 
-  @Query("SELECT p FROM Person p WHERE p.country.id = :countryId")
+  @Query("SELECT p FROM Person p WHERE p.nationality.id = :countryId")
   Page<Person> findByCountryId(Long countryId, Pageable pageable);
 
   @Query("SELECT p FROM Person p WHERE p.displayName ILIKE %:searchTerm%")
@@ -26,7 +28,9 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
   boolean existsByEmail(String email);
 
-  boolean existsByUniqueRegKeyAndNotId(String uniqueRegKey, Long id);
+  @Query("SELECT COUNT(p) > 0 FROM Person p WHERE p.uniqueRegKey = :uniqueRegKey AND p.id != :id")
+  boolean existsByUniqueRegKeyAndNotId(@Param("uniqueRegKey") String uniqueRegKey, @Param("id") Long id);
 
-  boolean existsByEmailAndNotId(String email, Long id);
+  @Query("SELECT COUNT(p) > 0 FROM Person p WHERE p.email = :email AND p.id != :id")
+  boolean existsByEmailAndNotId(@Param("email") String email, @Param("id") Long id);
 }

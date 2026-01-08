@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.competition.dto;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -22,8 +21,8 @@ public class CompetitionDTO {
 
     private Long seasonId;
 
-    @NotBlank(message = "Country name is required")
-    @Size(min = 2, max = 100, message = "Country name must be between 2 and 100 characters")
+    @NotBlank(message = "Competition name is required")
+    @Size(min = 2, max = 100, message = "Competition name must be between 2 and 100 characters")
     private String name;
 
     @NotBlank(message = "Display name is required")
@@ -32,13 +31,12 @@ public class CompetitionDTO {
     private String type;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Boolean isActive;
+    private Boolean active;
     private Integer totalMatchdays;
-    private  String description;
+    private String description;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
-
 
 }

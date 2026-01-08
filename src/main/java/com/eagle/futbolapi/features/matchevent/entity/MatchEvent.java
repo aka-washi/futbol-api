@@ -20,29 +20,27 @@ import com.eagle.futbolapi.features.shared.BaseEntity;
 import com.eagle.futbolapi.features.team.entity.Team;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-/**
- * MatchEvent Entity
- * Represents events that occur during a match (goals, cards, substitutions, etc.)
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "match_event")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "me_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "me_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "me_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "me_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "me_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "me_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "me_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "me_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "me_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "me_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class MatchEvent extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

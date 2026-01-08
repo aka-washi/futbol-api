@@ -24,11 +24,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-/**
- * Tournament Entity
- * Represents a tournament within an organization (e.g., Liga MX, Liga MX Femenil)
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "tournament")
 @AttributeOverrides({
@@ -38,54 +39,52 @@ import lombok.Setter;
     @AttributeOverride(name = "updatedAt", column = @Column(name = "tn_updated_at")),
     @AttributeOverride(name = "updatedBy", column = @Column(name = "tn_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Tournament extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    @NotNull
-    private Organization organization;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @NotNull
+  private Organization organization;
 
-    @NotBlank
-    @Column(name = "tn_name", nullable = false)
-    private String name;
+  @NotBlank
+  @Column(name = "tn_name", nullable = false)
+  private String name;
 
-    @NotBlank
-    @Column(name = "tn_display_name", nullable = false, length = 150)
-    private String displayName;
+  @NotBlank
+  @Column(name = "tn_display_name", nullable = false, length = 150)
+  private String displayName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tn_type", nullable = false, length = 50)
-    @NotNull
-    private TournamentType type;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tn_type", nullable = false, length = 50)
+  @NotNull
+  private TournamentType type;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tn_category", nullable = false, length = 20)
-    @NotNull
-    private Category category;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tn_category", nullable = false, length = 20)
+  @NotNull
+  private Category category;
 
-    @Column(name = "tn_level", nullable = false)
-    private Integer level; // 1 = First Division, 2 = Second Division, etc.
+  @Column(name = "tn_level", nullable = false)
+  private Integer level; // 1 = First Division, 2 = Second Division, etc.
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "relegation_to_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Tournament relegationTo;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "relegation_to_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Tournament relegationTo;
 
-    @Column(name = "tn_description", columnDefinition = "TEXT")
-    private String description;
+  @Column(name = "tn_description", columnDefinition = "TEXT")
+  private String description;
 
-    @Column(name = "tn_logo")
-    private String logo;
+  @Column(name = "tn_logo")
+  private String logo;
 
-    @Column(name = "tn_founded_year", nullable = false)
-    private Integer foundedYear;
+  @Column(name = "tn_founded_year", nullable = false)
+  private Integer foundedYear;
 
-    @Column(name = "tn_is_active", nullable = false)
-    @Builder.Default
-    private Boolean isActive = true;
+  @Column(name = "to_active", nullable = false)
+  @Builder.Default
+  private Boolean active = true;
 
 }

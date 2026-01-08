@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.structure.entity;
 
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -24,13 +23,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-
-
-/**
- * Structure Entity
- * Represents the structure of a competition (regular season, playoffs, play-in, etc.)
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "structure")
 @AttributeOverrides({
@@ -40,50 +38,48 @@ import lombok.Setter;
     @AttributeOverride(name = "updatedAt", column = @Column(name = "st_updated_at")),
     @AttributeOverride(name = "updatedBy", column = @Column(name = "st_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Structure extends BaseEntity {
 
-    @NotBlank
-    @Column(name = "st_name", nullable = false)
-    private String name;
+  @NotBlank
+  @Column(name = "st_name", nullable = false)
+  private String name;
 
-    @NotBlank
-    @Column(name = "st_display_name", length = 100, nullable = false)
-    private String displayName;
+  @NotBlank
+  @Column(name = "st_display_name", length = 100, nullable = false)
+  private String displayName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "st_type", nullable = false, length = 50)
-    @NotNull
-    private StructureType type;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "st_type", nullable = false, length = 50)
+  @NotNull
+  private StructureType type;
 
-    @Column(name = "st_description", columnDefinition = "TEXT")
-    private String description;
+  @Column(name = "st_description", columnDefinition = "TEXT")
+  private String description;
 
-    @Column(name = "st_rules", columnDefinition = "TEXT")
-    private String rules; // JSON string with specific rules
+  @Column(name = "st_rules", columnDefinition = "TEXT")
+  private String rules; // JSON string with specific rules
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "point_system_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private PointSystem pointSystem;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "point_system_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private PointSystem pointSystem;
 
-    @Column(name = "st_number_of_teams")
-    private Integer numberOfTeams;
+  @Column(name = "st_number_of_teams")
+  private Integer numberOfTeams;
 
-    @Column(name = "st_number_of_groups")
-    private Integer numberOfGroups;
+  @Column(name = "st_number_of_groups")
+  private Integer numberOfGroups;
 
-    @Column(name = "st_teams_per_group")
-    private Integer teamsPerGroup;
+  @Column(name = "st_teams_per_group")
+  private Integer teamsPerGroup;
 
-    @Column(name = "st_has_home_and_away", nullable = false)
-    @Builder.Default
-    private Boolean hasHomeAndAway = true;
+  @Column(name = "st_has_home_and_away", nullable = false)
+  @Builder.Default
+  private Boolean hasHomeAndAway = true;
 
-    @Column(name = "st_teams_qualifying_for_next_stage")
-    private Integer teamsQualifyingForNextStage;
+  @Column(name = "st_teams_qualifying_for_next_stage")
+  private Integer teamsQualifyingForNextStage;
 
 }

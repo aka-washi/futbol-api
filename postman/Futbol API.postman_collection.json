@@ -50,6 +50,31 @@
 					"response": []
 				},
 				{
+					"name": "Get Country by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/countries/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"countries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Country ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Country",
 					"request": {
 						"method": "POST",
@@ -61,7 +86,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Mexicanos\",\n  \"code\": \"MX\",\n  \"isoCode\": \"MEX\",\n  \"displayName\": \"Mexico\",\n  \"flagUrl\": \"https://flagcdn.com/mx.svg\",\n  \"createdBy\": \"redeagle\"\n}"
+							"raw": "{\n  \"name\": \"Mexico\",\n  \"code\": \"MX\",\n  \"isoCode\": \"MEX\",\n  \"displayName\": \"Mexico\",\n  \"flagUrl\": \"https://flagcdn.com/mx.svg\",\n  \"createdBy\": \"admin\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/countries",
@@ -140,6 +165,153 @@
 			]
 		},
 		{
+			"name": "Organizations",
+			"item": [
+				{
+					"name": "Get All Organizations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations?page=0&size=20&sortBy=name&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Organization by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Organization",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"FIFA\",\n  \"displayName\": \"FIFA\",\n  \"description\": \"Fédération Internationale de Football Association\",\n  \"type\": \"INTERNATIONAL\",\n  \"countryId\": 1,\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/organizations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Organization",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"FIFA\",\n  \"displayName\": \"FIFA\",\n  \"description\": \"Fédération Internationale de Football Association\",\n  \"type\": \"INTERNATIONAL\",\n  \"countryId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/organizations/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Organization",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "PointSystems",
 			"item": [
 				{
@@ -182,6 +354,30 @@
 					"response": []
 				},
 				{
+					"name": "Get Point System by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pointSystems/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pointSystems",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Point System",
 					"request": {
 						"method": "POST",
@@ -193,7 +389,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Default\",\n  \"displayName\": \"Default\",\n  \"description\": \"The Default point system\",\n  \"createdBy\": \"redeagle\"\n}"
+							"raw": "{\n  \"name\": \"Default\",\n  \"displayName\": \"Default\",\n  \"description\": \"The Default point system\",\n  \"winPoints\": 3,\n  \"drawPoints\": 1,\n  \"lossPoints\": 0,\n  \"active\": true,\n  \"createdBy\": \"admin\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/pointSystems",
@@ -202,6 +398,40 @@
 							],
 							"path": [
 								"pointSystems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Point System",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Default\",\n  \"displayName\": \"Default\",\n  \"description\": \"The Default point system\",\n  \"winPoints\": 3,\n  \"drawPoints\": 1,\n  \"lossPoints\": 0,\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pointSystems/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pointSystems",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Point System ID"
+								}
 							]
 						}
 					},
@@ -224,8 +454,48 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "34",
-									"description": "Country ID"
+									"value": "1",
+									"description": "Point System ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Venues",
+			"item": [
+				{
+					"name": "Get All Venues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/venues?page=0&size=20&sortBy=name&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"venues"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
 								}
 							]
 						}
@@ -233,7 +503,57 @@
 					"response": []
 				},
 				{
-					"name": "Update Point System",
+					"name": "Get Venue by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/venues/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"venues",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Venue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Estadio Azteca\",\n  \"displayName\": \"Estadio Azteca\",\n  \"city\": \"Mexico City\",\n  \"countryId\": 1,\n  \"capacity\": 87523,\n  \"latitude\": 19.3029,\n  \"longitude\": -99.1506,\n  \"address\": \"Calz. de Tlalpan 3465, Santa Úrsula Coapa\",\n  \"surface\": \"Grass\",\n  \"active\": true,\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/venues",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"venues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Venue",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -244,22 +564,45 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Default\",\n  \"displayName\": \"Default\",\n  \"description\": \"The Default point system\"\n}"
+							"raw": "{\n  \"name\": \"Estadio Azteca\",\n  \"displayName\": \"Estadio Azteca\",\n  \"city\": \"Mexico City\",\n  \"countryId\": 1,\n  \"capacity\": 87523,\n  \"latitude\": 19.3029,\n  \"longitude\": -99.1506,\n  \"address\": \"Calz. de Tlalpan 3465, Santa Úrsula Coapa\",\n  \"surface\": \"Grass\",\n  \"active\": true\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pointSystems/:id",
+							"raw": "{{baseUrl}}/venues/:id",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"pointSystems",
+								"venues",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "1",
-									"description": "Country ID"
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Venue",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/venues/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"venues",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
 								}
 							]
 						}
@@ -267,6 +610,2504 @@
 					"response": []
 				}
 			]
-		}
-	]
-}
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Get All Teams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/teams?page=0&size=20&sortBy=name&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Team by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Club América\",\n  \"displayName\": \"América\",\n  \"code\": \"AME\",\n  \"founded\": \"1916-10-12\",\n  \"countryId\": 1,\n  \"homeVenueId\": 1,\n  \"logo\": \"https://example.com/america-logo.png\",\n  \"primaryColor\": \"#FFFF00\",\n  \"secondaryColor\": \"#0000FF\",\n  \"description\": \"Club de Fútbol América\",\n  \"website\": \"https://clubamerica.com.mx\",\n  \"active\": true,\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/teams",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Team",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Club América\",\n  \"displayName\": \"América\",\n  \"code\": \"AME\",\n  \"founded\": \"1916-10-12\",\n  \"countryId\": 1,\n  \"homeVenueId\": 1,\n  \"logo\": \"https://example.com/america-logo.png\",\n  \"primaryColor\": \"#FFFF00\",\n  \"secondaryColor\": \"#0000FF\",\n  \"description\": \"Club de Fútbol América\",\n  \"website\": \"https://clubamerica.com.mx\",\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Team",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Persons",
+			"item": [
+				{
+					"name": "Get All Persons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/persons?page=0&size=20&sortBy=displayName&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"persons"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "displayName"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Person by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/persons/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"persons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Person",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Lionel\",\n  \"lastName\": \"Messi\",\n  \"displayName\": \"L. Messi\",\n  \"dateOfBirth\": \"1987-06-24\",\n  \"nationalityId\": 1,\n  \"uniqueRegKey\": \"LEO_MESSI_1987\",\n  \"email\": \"leo.messi@example.com\",\n  \"phone\": \"+1234567890\",\n  \"photo\": \"https://example.com/messi-photo.jpg\",\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/persons",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Person",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Lionel\",\n  \"lastName\": \"Messi\",\n  \"displayName\": \"L. Messi\",\n  \"dateOfBirth\": \"1987-06-24\",\n  \"nationalityId\": 1,\n  \"uniqueRegKey\": \"LEO_MESSI_1987\",\n  \"email\": \"leo.messi@example.com\",\n  \"phone\": \"+1234567890\",\n  \"photo\": \"https://example.com/messi-photo.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/persons/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"persons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Person",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/persons/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"persons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "Get All Players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/players?page=0&size=20&sortBy=id&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"players"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Player by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/players/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"players",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Player",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"personId\": 1,\n  \"position\": \"FORWARD\",\n  \"preferredFoot\": \"LEFT\",\n  \"height\": 170,\n  \"weight\": 67,\n  \"active\": true,\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/players",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Player",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"personId\": 1,\n  \"position\": \"FORWARD\",\n  \"preferredFoot\": \"LEFT\",\n  \"height\": 170,\n  \"weight\": 67,\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/players/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"players",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Player",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/players/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"players",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "Get All Staff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/staff?page=0&size=20&sortBy=id&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"staff"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Staff by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/staff/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"staff",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Staff",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"personId\": 1,\n  \"role\": \"HEAD_COACH\",\n  \"active\": true,\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/staff",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Staff",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"personId\": 1,\n  \"role\": \"HEAD_COACH\",\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/staff/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"staff",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Staff",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/staff/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"staff",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tournaments",
+			"item": [
+				{
+					"name": "Get All Tournaments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tournaments?page=0&size=20&sortBy=name&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tournament by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tournament",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Liga MX\",\n  \"displayName\": \"Liga MX\",\n  \"description\": \"Primera División de México\",\n  \"type\": \"LEAGUE\",\n  \"organizationId\": 1,\n  \"active\": true,\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tournament",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Liga MX\",\n  \"displayName\": \"Liga MX\",\n  \"description\": \"Primera División de México\",\n  \"type\": \"LEAGUE\",\n  \"organizationId\": 1,\n  \"active\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tournament",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Structures",
+			"item": [
+				{
+					"name": "Get All Structures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/structures?page=0&size=20&sortBy=name&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"structures"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Structure by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/structures/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"structures",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Structure",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Round Robin\",\n  \"displayName\": \"Round Robin\",\n  \"type\": \"LEAGUE\",\n  \"description\": \"All teams play each other\",\n  \"pointSystemId\": 1,\n  \"numberOfTeams\": 18,\n  \"hasHomeAndAway\": true,\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/structures",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"structures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Structure",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Round Robin\",\n  \"displayName\": \"Round Robin\",\n  \"type\": \"LEAGUE\",\n  \"description\": \"All teams play each other\",\n  \"pointSystemId\": 1,\n  \"numberOfTeams\": 18,\n  \"hasHomeAndAway\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/structures/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"structures",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Structure",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/structures/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"structures",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Seasons",
+			"item": [
+				{
+					"name": "Get All Seasons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/seasons?page=0&size=20&sortBy=name&sortDir=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"seasons"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Season by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/seasons/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"seasons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Season",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"2024-Clausura\",\n  \"displayName\": \"Clausura 2024\",\n  \"year\": 2024,\n  \"tournamentId\": 1,\n  \"structureId\": 1,\n  \"startDate\": \"2024-01-15\",\n  \"endDate\": \"2024-05-30\",\n  \"active\": false,\n  \"createdBy\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/seasons",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"seasons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Season",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"2024-Clausura\",\n  \"displayName\": \"Clausura 2024\",\n  \"year\": 2024,\n  \"tournamentId\": 1,\n  \"structureId\": 1,\n  \"startDate\": \"2024-01-15\",\n  \"endDate\": \"2024-05-30\",\n  \"active\": false\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/seasons/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"seasons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Season",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/seasons/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"seasons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		{
+				"name": "Matches",
+				"item": [
+					{
+						"name": "Get All Matches",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matches?page=0&size=20&sortBy=matchDate&sortDir=desc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matches"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "matchDate"
+									},
+									{
+										"key": "sortDir",
+										"value": "desc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Match by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matches/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matches",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Match",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"homeTeamId\": 1,\n  \"awayTeamId\": 2,\n  \"stageId\": 1,\n  \"matchdayId\": 1,\n  \"matchDate\": \"2024-03-15T20:00:00\",\n  \"venueId\": 1,\n  \"refereeId\": 1,\n  \"status\": \"SCHEDULED\",\n  \"homeScore\": 0,\n  \"awayScore\": 0,\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/matches",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matches"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Match",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"homeTeamId\": 1,\n  \"awayTeamId\": 2,\n  \"stageId\": 1,\n  \"matchdayId\": 1,\n  \"matchDate\": \"2024-03-15T20:00:00\",\n  \"venueId\": 1,\n  \"refereeId\": 1,\n  \"status\": \"FINISHED\",\n  \"homeScore\": 2,\n  \"awayScore\": 1\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/matches/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matches",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Match",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matches/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matches",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "Stages",
+				"item": [
+					{
+						"name": "Get All Stages",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/stages?page=0&size=20&sortBy=order&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"stages"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "order"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Stage by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/stages/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"stages",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Stage",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"name\": \"Regular Season\",\n  \"displayName\": \"Regular Season\",\n  \"seasonId\": 1,\n  \"structureId\": 1,\n  \"order\": 1,\n  \"startDate\": \"2024-01-15\",\n  \"endDate\": \"2024-05-15\",\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/stages",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"stages"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Stage",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"name\": \"Regular Season\",\n  \"displayName\": \"Regular Season\",\n  \"seasonId\": 1,\n  \"structureId\": 1,\n  \"order\": 1,\n  \"startDate\": \"2024-01-15\",\n  \"endDate\": \"2024-05-15\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/stages/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"stages",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Stage",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/stages/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"stages",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "MatchEvents",
+				"item": [
+					{
+						"name": "Get All Match Events",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matchEvents?page=0&size=20&sortBy=minute&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchEvents"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "minute"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Match Event by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matchEvents/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchEvents",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Match Event",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"matchId\": 1,\n  \"playerId\": 1,\n  \"type\": \"GOAL\",\n  \"minute\": 25,\n  \"additionalTime\": 0,\n  \"description\": \"Header from corner kick\",\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/matchEvents",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchEvents"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Match Event",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"matchId\": 1,\n  \"playerId\": 1,\n  \"type\": \"GOAL\",\n  \"minute\": 25,\n  \"additionalTime\": 0,\n  \"description\": \"Header from corner kick\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/matchEvents/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchEvents",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Match Event",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matchEvents/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchEvents",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "Lineups",
+				"item": [
+					{
+						"name": "Get All Lineups",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/lineups?page=0&size=20&sortBy=id&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"lineups"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "id"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Lineup by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/lineups/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"lineups",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Lineup",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"matchId\": 1,\n  \"teamId\": 1,\n  \"playerId\": 1,\n  \"position\": \"GOALKEEPER\",\n  \"starting\": true,\n  \"captain\": false,\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/lineups",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"lineups"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Lineup",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"matchId\": 1,\n  \"teamId\": 1,\n  \"playerId\": 1,\n  \"position\": \"GOALKEEPER\",\n  \"starting\": true,\n  \"captain\": false\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/lineups/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"lineups",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Lineup",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/lineups/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"lineups",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "Matchdays",
+				"item": [
+					{
+						"name": "Get All Matchdays",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matchdays?page=0&size=20&sortBy=number&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchdays"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "number"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Matchday by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matchdays/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchdays",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Matchday",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"name\": \"Jornada 1\",\n  \"displayName\": \"Jornada 1\",\n  \"number\": 1,\n  \"stageId\": 1,\n  \"startDate\": \"2024-01-15\",\n  \"endDate\": \"2024-01-17\",\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/matchdays",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchdays"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Matchday",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"name\": \"Jornada 1\",\n  \"displayName\": \"Jornada 1\",\n  \"number\": 1,\n  \"stageId\": 1,\n  \"startDate\": \"2024-01-15\",\n  \"endDate\": \"2024-01-17\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/matchdays/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchdays",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Matchday",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/matchdays/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"matchdays",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "SeasonTeams",
+				"item": [
+					{
+						"name": "Get All Season Teams",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/seasonTeams?page=0&size=20&sortBy=id&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"seasonTeams"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "id"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Season Team by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/seasonTeams/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"seasonTeams",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Season Team",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"seasonId\": 1,\n  \"teamId\": 1,\n  \"active\": true,\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/seasonTeams",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"seasonTeams"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Season Team",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"seasonId\": 1,\n  \"teamId\": 1,\n  \"active\": true\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/seasonTeams/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"seasonTeams",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Season Team",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/seasonTeams/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"seasonTeams",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "Standings",
+				"item": [
+					{
+						"name": "Get All Standings",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/standings?page=0&size=20&sortBy=position&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"standings"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "position"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Standing by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/standings/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"standings",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Standing",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"stageId\": 1,\n  \"teamId\": 1,\n  \"position\": 1,\n  \"played\": 10,\n  \"won\": 7,\n  \"drawn\": 2,\n  \"lost\": 1,\n  \"goalsFor\": 21,\n  \"goalsAgainst\": 8,\n  \"goalDifference\": 13,\n  \"points\": 23,\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/standings",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"standings"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Standing",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"stageId\": 1,\n  \"teamId\": 1,\n  \"position\": 1,\n  \"played\": 11,\n  \"won\": 8,\n  \"drawn\": 2,\n  \"lost\": 1,\n  \"goalsFor\": 24,\n  \"goalsAgainst\": 8,\n  \"goalDifference\": 16,\n  \"points\": 26\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/standings/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"standings",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Standing",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/standings/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"standings",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "Outcomes",
+				"item": [
+					{
+						"name": "Get All Outcomes",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/outcomes?page=0&size=20&sortBy=id&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"outcomes"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "id"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Outcome by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/outcomes/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"outcomes",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Outcome",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"matchId\": 1,\n  \"teamId\": 1,\n  \"result\": \"WIN\",\n  \"points\": 3,\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/outcomes",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"outcomes"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Outcome",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"matchId\": 1,\n  \"teamId\": 1,\n  \"result\": \"WIN\",\n  \"points\": 3\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/outcomes/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"outcomes",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Outcome",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/outcomes/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"outcomes",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "RosterEntries",
+				"item": [
+					{
+						"name": "Get All Roster Entries",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/rosterEntries?page=0&size=20&sortBy=id&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"rosterEntries"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "id"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Roster Entry by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/rosterEntries/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"rosterEntries",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Roster Entry",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"seasonTeamId\": 1,\n  \"playerId\": 1,\n  \"jerseyNumber\": 10,\n  \"joinDate\": \"2024-01-01\",\n  \"active\": true,\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/rosterEntries",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"rosterEntries"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Roster Entry",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"seasonTeamId\": 1,\n  \"playerId\": 1,\n  \"jerseyNumber\": 10,\n  \"joinDate\": \"2024-01-01\",\n  \"leaveDate\": \"2024-06-30\",\n  \"active\": false\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/rosterEntries/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"rosterEntries",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Roster Entry",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/rosterEntries/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"rosterEntries",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			},
+			{
+				"name": "Competitions",
+				"item": [
+					{
+						"name": "Get All Competitions",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/competitions?page=0&size=20&sortBy=name&sortDir=asc",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"competitions"
+								],
+								"query": [
+									{
+										"key": "page",
+										"value": "0"
+									},
+									{
+										"key": "size",
+										"value": "20"
+									},
+									{
+										"key": "sortBy",
+										"value": "name"
+									},
+									{
+										"key": "sortDir",
+										"value": "asc"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Get Competition by ID",
+						"request": {
+							"method": "GET",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/competitions/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"competitions",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Create Competition",
+						"request": {
+							"method": "POST",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"name\": \"Liga MX Clausura 2024\",\n  \"displayName\": \"Clausura 2024\",\n  \"tournamentId\": 1,\n  \"startDate\": \"2024-01-15\",\n  \"endDate\": \"2024-05-30\",\n  \"active\": false,\n  \"createdBy\": \"admin\"\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/competitions",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"competitions"
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Update Competition",
+						"request": {
+							"method": "PUT",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"body": {
+								"mode": "raw",
+								"raw": "{\n  \"name\": \"Liga MX Clausura 2024\",\n  \"displayName\": \"Clausura 2024\",\n  \"tournamentId\": 1,\n  \"startDate\": \"2024-01-15\",\n  \"endDate\": \"2024-05-30\",\n  \"active\": false\n}"
+							},
+							"url": {
+								"raw": "{{baseUrl}}/competitions/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"competitions",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					},
+					{
+						"name": "Delete Competition",
+						"request": {
+							"method": "DELETE",
+							"header": [],
+							"url": {
+								"raw": "{{baseUrl}}/competitions/:id",
+								"host": [
+									"{{baseUrl}}"
+								],
+								"path": [
+									"competitions",
+									":id"
+								],
+								"variable": [
+									{
+										"key": "id",
+										"value": "1"
+									}
+								]
+							}
+						},
+						"response": []
+					}
+				]
+			}
+		]
+	}

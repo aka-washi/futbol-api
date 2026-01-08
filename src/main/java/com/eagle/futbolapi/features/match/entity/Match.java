@@ -24,25 +24,24 @@ import com.eagle.futbolapi.features.team.entity.Team;
 import com.eagle.futbolapi.features.venue.entity.Venue;
 
 import lombok.*;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-/**
- * Match Entity
- * Represents a single football match
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "[match]")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "mt_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "mt_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "mt_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "mt_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "mt_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "mt_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "mt_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "mt_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "mt_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "mt_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Match extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

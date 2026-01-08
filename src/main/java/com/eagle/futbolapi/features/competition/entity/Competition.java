@@ -25,27 +25,24 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
-/**
- * Competition Entity
- * Represents a specific competition within a season (e.g., Apertura 2025, Clausura 2026)
- * In Spain, there's only one competition per season (e.g., La Liga 2025-2026)
- * Each stage within the competition can have its own structure
- */
+@Getter
+@Setter
+@Accessors(chain = false)
 @Entity
 @Table(name = "competition")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "cp_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "cp_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "cp_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "cp_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "cp_updated_by", length = 100))
+        @AttributeOverride(name = "id", column = @Column(name = "cp_id")),
+        @AttributeOverride(name = "createdAt", column = @Column(name = "cp_created_at", nullable = false, updatable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "cp_created_by", length = 100, updatable = false)),
+        @AttributeOverride(name = "updatedAt", column = @Column(name = "cp_updated_at")),
+        @AttributeOverride(name = "updatedBy", column = @Column(name = "cp_updated_by", length = 100))
 })
-@Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Competition extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -74,9 +71,9 @@ public class Competition extends BaseEntity {
     @Column(name = "cp_end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "cp_is_active", nullable = false)
+    @Column(name = "co_active", nullable = false)
     @Builder.Default
-    private Boolean isActive = false;
+    private Boolean active = false;
 
     @Column(name = "cp_total_matchdays", nullable = false)
     private Integer totalMatchdays;

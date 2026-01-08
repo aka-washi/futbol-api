@@ -36,8 +36,7 @@ public class PointSystemDTO {
     private Integer pointsForWinOnPenalties;
     private Integer pointsForLossOnPenalties;
 
-    private Boolean isActive;
-
+    private Boolean active;
 
     private LocalDateTime createdAt;
     private String createdBy;
