@@ -78,10 +78,16 @@ public class OrganizationMapper {
                 throw new IllegalArgumentException("Invalid organization type: " + organizationDTO.getType());
             }
         }
+        // Handle country lookup - prioritize ID over displayName
         if (organizationDTO.getCountryId() != null) {
             var country = countryRepository.findById(organizationDTO.getCountryId())
                     .orElseThrow(() -> new IllegalArgumentException(
                             "Country not found with id: " + organizationDTO.getCountryId()));
+            builder.country(country);
+        } else if (organizationDTO.getCountryDisplayName() != null && !organizationDTO.getCountryDisplayName().trim().isEmpty()) {
+            var country = countryRepository.findByDisplayName(organizationDTO.getCountryDisplayName())
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Country not found with display name: " + organizationDTO.getCountryDisplayName()));
             builder.country(country);
         }
         if (organizationDTO.getParentOrganizationId() != null) {

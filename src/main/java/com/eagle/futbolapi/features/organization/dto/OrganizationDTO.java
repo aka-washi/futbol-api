@@ -37,7 +37,6 @@ public class OrganizationDTO {
     private Long parentOrganizationId;
     private String parentOrganizationDisplayName;
 
-    @NotNull(message = "Country is required")
     private Long countryId;
     private String countryDisplayName;
 
