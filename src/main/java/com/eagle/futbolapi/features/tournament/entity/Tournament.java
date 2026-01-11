@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.tournament.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -86,5 +88,42 @@ public class Tournament extends BaseEntity {
   @Column(name = "to_active", nullable = false)
   @Builder.Default
   private Boolean active = true;
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        organization,
+        name,
+        displayName,
+        type,
+        category,
+        level,
+        relegationTo,
+        description,
+        logo,
+        foundedYear,
+        active
+    );
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Tournament))
+      return false;
+    Tournament other = (Tournament) obj;
+    return Objects.equals(organization, other.organization)
+        && Objects.equals(name, other.name)
+        && Objects.equals(displayName, other.displayName)
+        && Objects.equals(type, other.type)
+        && Objects.equals(category, other.category)
+        && Objects.equals(level, other.level)
+        && Objects.equals(relegationTo, other.relegationTo)
+        && Objects.equals(description, other.description)
+        && Objects.equals(logo, other.logo)
+        && Objects.equals(foundedYear, other.foundedYear)
+        && Objects.equals(active, other.active);
+  }
 
 }

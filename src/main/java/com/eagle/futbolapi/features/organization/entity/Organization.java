@@ -87,7 +87,6 @@ public class Organization extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(
-            super.hashCode(),
             name,
             displayName,
             abbreviation,
@@ -106,9 +105,7 @@ public class Organization extends BaseEntity {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof Organization))
             return false;
         Organization other = (Organization) obj;
         return Objects.equals(name, other.name)
@@ -121,7 +118,7 @@ public class Organization extends BaseEntity {
             && Objects.equals(website, other.website)
             && Objects.equals(headquarters, other.headquarters)
             && Objects.equals(description, other.description)
-            && type == other.type;
+            && Objects.equals(type, other.type);
     }
 
 }

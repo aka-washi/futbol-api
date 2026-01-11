@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.competition.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -80,5 +81,38 @@ public class Competition extends BaseEntity {
 
     @Column(name = "cp_description", columnDefinition = "TEXT")
     private String description;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            season,
+            name,
+            displayName,
+            type,
+            startDate,
+            endDate,
+            active,
+            totalMatchdays,
+            description
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Competition))
+            return false;
+        Competition other = (Competition) obj;
+        return Objects.equals(season, other.season)
+            && Objects.equals(name, other.name)
+            && Objects.equals(displayName, other.displayName)
+            && Objects.equals(type, other.type)
+            && Objects.equals(startDate, other.startDate)
+            && Objects.equals(endDate, other.endDate)
+            && Objects.equals(active, other.active)
+            && Objects.equals(totalMatchdays, other.totalMatchdays)
+            && Objects.equals(description, other.description);
+    }
 
 }

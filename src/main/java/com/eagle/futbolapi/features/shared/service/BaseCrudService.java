@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.eagle.futbolapi.features.shared.BaseEntity;
+import com.eagle.futbolapi.features.shared.exception.NoChangesDetectedException;
 
 
 public abstract class BaseCrudService<T extends BaseEntity, K> {
@@ -48,13 +49,28 @@ public abstract class BaseCrudService<T extends BaseEntity, K> {
         Objects.requireNonNull(id, "ID cannot be null");
         Objects.requireNonNull(entity, "Entity details cannot be null");
 
-        entity.setId((Long) id);
-
-        if(isDuplicate(id, entity)) {
-            throw new IllegalArgumentException("Duplicate entity");
-        }
+        // Check if entity exists
         if (!repository.existsById(id)) {
             throw new IllegalArgumentException("Entity with given ID does not exist");
+        }
+
+        // Get the existing entity from database
+        T existingEntity = repository.findById(id).orElseThrow(
+            () -> new IllegalArgumentException("Entity with given ID does not exist")
+        );
+
+        // Set the ID to ensure we're updating the right entity
+        entity.setId((Long) id);
+
+        // Check if there are any actual changes by comparing entities
+        // We exclude audit fields (createdAt, createdBy, updatedAt, updatedBy) from comparison
+        if (entitiesEqual(existingEntity, entity)) {
+            throw new NoChangesDetectedException("No changes detected for entity", id);
+        }
+
+        // Check for duplicates
+        if(isDuplicate(id, entity)) {
+            throw new IllegalArgumentException("Duplicate entity");
         }
 
         return repository.save(entity);
@@ -76,5 +92,20 @@ public abstract class BaseCrudService<T extends BaseEntity, K> {
 
     protected abstract boolean isDuplicate(@NotNull T entity);
     protected abstract boolean isDuplicate(K id, @NotNull T entity);
+
+    /**
+     * Compares two entities to determine if they are equal, excluding audit fields.
+     * This method should compare business-relevant fields only.
+     * The default implementation returns false (meaning entities are different),
+     * which causes the update to proceed. Override this method in subclasses
+     * to provide proper entity comparison logic.
+     * @param existing the entity from the database
+     * @param updated the entity with potential updates
+     * @return true if entities are equal (no changes), false if they differ
+     */
+    protected boolean entitiesEqual(T existing, T updated) {
+        // Default implementation: assume entities are different (proceed with update)
+        return false;
+    }
 
 }

@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.lineup.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -76,4 +78,35 @@ public class Lineup extends BaseEntity {
 
     @Column(name = "lu_order_num")
     private Integer orderNum; // Position in the lineup
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            match,
+            team,
+            player,
+            type,
+            position,
+            jerseyNumber,
+            captain,
+            orderNum
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Lineup))
+            return false;
+        Lineup other = (Lineup) obj;
+        return Objects.equals(match, other.match)
+            && Objects.equals(team, other.team)
+            && Objects.equals(player, other.player)
+            && Objects.equals(type, other.type)
+            && Objects.equals(position, other.position)
+            && Objects.equals(jerseyNumber, other.jerseyNumber)
+            && Objects.equals(captain, other.captain)
+            && Objects.equals(orderNum, other.orderNum);
+    }
 }

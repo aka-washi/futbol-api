@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.matchevent.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -87,4 +89,41 @@ public class MatchEvent extends BaseEntity {
 
     @Column(name = "me_video_url")
     private String videoUrl;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            match,
+            team,
+            player,
+            type,
+            period,
+            minute,
+            extraMinute,
+            assistPlayer,
+            substitutePlayer,
+            description,
+            videoUrl
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof MatchEvent))
+            return false;
+        MatchEvent other = (MatchEvent) obj;
+        return Objects.equals(match, other.match)
+            && Objects.equals(team, other.team)
+            && Objects.equals(player, other.player)
+            && Objects.equals(type, other.type)
+            && Objects.equals(period, other.period)
+            && Objects.equals(minute, other.minute)
+            && Objects.equals(extraMinute, other.extraMinute)
+            && Objects.equals(assistPlayer, other.assistPlayer)
+            && Objects.equals(substitutePlayer, other.substitutePlayer)
+            && Objects.equals(description, other.description)
+            && Objects.equals(videoUrl, other.videoUrl);
+    }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import com.eagle.futbolapi.features.shared.ApiResponse;
 import com.eagle.futbolapi.features.shared.ResponseUtil;
 import com.eagle.futbolapi.features.shared.exception.DuplicateResourceException;
+import com.eagle.futbolapi.features.shared.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
 
 /**
@@ -90,6 +91,9 @@ public abstract class BaseCrudController<E, D, S, M> {
             E updatedEntity = updateEntity(id, entity);
             D updatedDto = toDTO(updatedEntity);
             return ResponseUtil.success(updatedDto, resourceName + " updated successfully");
+        } catch (NoChangesDetectedException e) {
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+                    .body(ApiResponse.error("NO_CHANGES", e.getMessage()));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(ApiResponse.error("NOT_FOUND", e.getMessage()));

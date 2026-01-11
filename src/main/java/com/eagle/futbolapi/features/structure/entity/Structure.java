@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.structure.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -81,5 +83,42 @@ public class Structure extends BaseEntity {
 
   @Column(name = "st_teams_qualifying_for_next_stage")
   private Integer teamsQualifyingForNextStage;
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        name,
+        displayName,
+        type,
+        description,
+        rules,
+        pointSystem,
+        numberOfTeams,
+        numberOfGroups,
+        teamsPerGroup,
+        hasHomeAndAway,
+        teamsQualifyingForNextStage
+    );
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Structure))
+      return false;
+    Structure other = (Structure) obj;
+    return Objects.equals(name, other.name)
+        && Objects.equals(displayName, other.displayName)
+        && Objects.equals(type, other.type)
+        && Objects.equals(description, other.description)
+        && Objects.equals(rules, other.rules)
+        && Objects.equals(pointSystem, other.pointSystem)
+        && Objects.equals(numberOfTeams, other.numberOfTeams)
+        && Objects.equals(numberOfGroups, other.numberOfGroups)
+        && Objects.equals(teamsPerGroup, other.teamsPerGroup)
+        && Objects.equals(hasHomeAndAway, other.hasHomeAndAway)
+        && Objects.equals(teamsQualifyingForNextStage, other.teamsQualifyingForNextStage);
+  }
 
 }

@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 import com.eagle.futbolapi.features.organization.repository.OrganizationRepository;
-import com.eagle.futbolapi.features.shared.exception.DuplicateResourceException;
-import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.shared.service.BaseCrudService;
 
 @Service
@@ -26,20 +24,6 @@ public class OrganizationService extends BaseCrudService<Organization, Long> {
     protected OrganizationService(OrganizationRepository organizationRepository) {
         super(organizationRepository);
         this.organizationRepository = organizationRepository;
-    }
-
-    public Page<Organization> getAllOrganizations(Pageable pageable) {
-        if (pageable == null) {
-            pageable = Pageable.unpaged();
-        }
-        return organizationRepository.findAll(pageable);
-    }
-
-    public Optional<Organization> getOrganizationById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Organization ID cannot be null");
-        }
-        return organizationRepository.findById(id);
     }
 
     public Optional<Organization> getOrganizationByName(String name) {
@@ -103,107 +87,6 @@ public class OrganizationService extends BaseCrudService<Organization, Long> {
         return organizationRepository.findByNameContainingIgnoreCase(searchTerm, pageable);
     }
 
-    public Organization createOrganization(@NotNull Organization organization) {
-        Objects.requireNonNull(organization, "Organization cannot be null");
-
-        // Check for duplicate name
-        if (organization.getName() != null && organizationRepository.existsByName(organization.getName())) {
-            throw new DuplicateResourceException(
-                    "Organization with name '" + organization.getName() + "' already exists");
-        }
-
-        // Check for duplicate display name
-        if (organization.getDisplayName() != null
-                && organizationRepository.existsByDisplayName(organization.getDisplayName())) {
-            throw new DuplicateResourceException(
-                    "Organization with display name '" + organization.getDisplayName() + "' already exists");
-        }
-
-        // Check for duplicate abbreviation if provided
-        if (organization.getAbbreviation() != null && !organization.getAbbreviation().trim().isEmpty()
-                && organizationRepository.existsByAbbreviation(organization.getAbbreviation())) {
-            throw new DuplicateResourceException(
-                    "Organization with abbreviation '" + organization.getAbbreviation() + "' already exists");
-        }
-
-        return Objects.requireNonNull(
-                organizationRepository.save(organization),
-                "Organization save operation returned null - this should never happen");
-    }
-
-    public Organization updateOrganization(@NotNull Organization organization) {
-        Objects.requireNonNull(organization, "Organization cannot be null");
-        Objects.requireNonNull(organization.getId(), "Organization ID cannot be null for update operation");
-
-        Organization existingOrganization = organizationRepository.findById(organization.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organization.getId()));
-
-        // Check for duplicate name only if name is changing
-        if (organization.getName() != null && !organization.getName().equals(existingOrganization.getName())) {
-            organizationRepository.findByName(organization.getName())
-                    .ifPresent(org -> {
-                        if (!org.getId().equals(organization.getId())) {
-                            throw new DuplicateResourceException(
-                                    "Organization with name '" + organization.getName() + "' already exists");
-                        }
-                    });
-        }
-
-        // Check for duplicate display name only if display name is changing
-        if (organization.getDisplayName() != null
-                && !organization.getDisplayName().equals(existingOrganization.getDisplayName())) {
-            organizationRepository.findByDisplayName(organization.getDisplayName())
-                    .ifPresent(org -> {
-                        if (!org.getId().equals(organization.getId())) {
-                            throw new DuplicateResourceException("Organization with display name '"
-                                    + organization.getDisplayName() + "' already exists");
-                        }
-                    });
-        }
-
-        // Check for duplicate abbreviation only if abbreviation is changing
-        if (organization.getAbbreviation() != null && !organization.getAbbreviation().trim().isEmpty()
-                && !organization.getAbbreviation().equals(existingOrganization.getAbbreviation())) {
-            organizationRepository.findByAbbreviation(organization.getAbbreviation())
-                    .ifPresent(org -> {
-                        if (!org.getId().equals(organization.getId())) {
-                            throw new DuplicateResourceException("Organization with abbreviation '"
-                                    + organization.getAbbreviation() + "' already exists");
-                        }
-                    });
-        }
-
-        existingOrganization.setName(organization.getName());
-        existingOrganization.setDisplayName(organization.getDisplayName());
-        existingOrganization.setAbbreviation(organization.getAbbreviation());
-        existingOrganization.setFounded(organization.getFounded());
-        existingOrganization.setParentOrganization(organization.getParentOrganization());
-        existingOrganization.setCountry(organization.getCountry());
-        existingOrganization.setHeadquarters(organization.getHeadquarters());
-        existingOrganization.setLogo(organization.getLogo());
-        existingOrganization.setWebsite(organization.getWebsite());
-        existingOrganization.setDescription(organization.getDescription());
-        existingOrganization.setType(organization.getType());
-
-        return Objects.requireNonNull(
-                organizationRepository.save(existingOrganization),
-                "Organization update operation returned null - this should never happen");
-    }
-
-    public void deleteOrganization(@NotNull Long id) {
-        Objects.requireNonNull(id, "Organization ID cannot be null");
-
-        if (!organizationRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Organization", "id", id);
-        }
-        organizationRepository.deleteById(id);
-    }
-
-    public boolean existsById(@NotNull Long id) {
-        Objects.requireNonNull(id, "Organization ID cannot be null");
-        return organizationRepository.existsById(id);
-    }
-
     @Override
     protected boolean isDuplicate(@NotNull Organization organization) {
         Objects.requireNonNull(organization, "Organization cannot be null");
@@ -228,26 +111,52 @@ public class OrganizationService extends BaseCrudService<Organization, Long> {
     @Override
     protected boolean isDuplicate(Long id, @NotNull Organization organization) {
         Objects.requireNonNull(organization, "Organization cannot be null");
-        Objects.requireNonNull(organization.getId(), "Organization ID cannot be null for update operation");
-
-        Organization existingOrganization = organizationRepository.findById(organization.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organization.getId()));
+        Objects.requireNonNull(id, "ID cannot be null for update operation");
 
         // Check for duplicate name only if name is changing
-        if (organization.getName() != null && !organization.getName().equals(existingOrganization.getName())) {
-            return true;
+        if (organization.getName() != null) {
+            Optional<Organization> existingByName = organizationRepository.findByName(organization.getName());
+            if (existingByName.isPresent() && !existingByName.get().getId().equals(id)) {
+                return true;
+            }
         }
 
         // Check for duplicate display name only if display name is changing
-        if (organization.getDisplayName() != null
-                && !organization.getDisplayName().equals(existingOrganization.getDisplayName())) {
-            return true;
+        if (organization.getDisplayName() != null) {
+            Optional<Organization> existingByDisplayName = organizationRepository.findByDisplayName(organization.getDisplayName());
+            if (existingByDisplayName.isPresent() && !existingByDisplayName.get().getId().equals(id)) {
+                return true;
+            }
         }
 
         // Check for duplicate abbreviation only if abbreviation is changing
-        return organization.getAbbreviation() != null
-                && !organization.getAbbreviation().trim().isEmpty()
-                && !organization.getAbbreviation().equals(existingOrganization.getAbbreviation());
+        if (organization.getAbbreviation() != null && !organization.getAbbreviation().trim().isEmpty()) {
+            Optional<Organization> existingByAbbreviation = organizationRepository.findByAbbreviation(organization.getAbbreviation());
+            if (existingByAbbreviation.isPresent() && !existingByAbbreviation.get().getId().equals(id)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    protected boolean entitiesEqual(Organization existing, Organization updated) {
+        if (existing == null || updated == null) {
+            return false;
+        }
+
+        return Objects.equals(existing.getName(), updated.getName()) &&
+               Objects.equals(existing.getDisplayName(), updated.getDisplayName()) &&
+               Objects.equals(existing.getAbbreviation(), updated.getAbbreviation()) &&
+               Objects.equals(existing.getFounded(), updated.getFounded()) &&
+               Objects.equals(existing.getCountry(), updated.getCountry()) &&
+               Objects.equals(existing.getParentOrganization(), updated.getParentOrganization()) &&
+               Objects.equals(existing.getHeadquarters(), updated.getHeadquarters()) &&
+               Objects.equals(existing.getLogo(), updated.getLogo()) &&
+               Objects.equals(existing.getWebsite(), updated.getWebsite()) &&
+               Objects.equals(existing.getDescription(), updated.getDescription()) &&
+               Objects.equals(existing.getType(), updated.getType());
     }
 
 }

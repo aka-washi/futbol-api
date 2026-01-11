@@ -201,4 +201,21 @@ public class CompetitionService extends BaseCrudService<Competition, Long> {
             throw new IllegalArgumentException("Competition season is required");
         }
     }
+
+    @Override
+    protected boolean entitiesEqual(Competition existing, Competition updated) {
+        if (existing == null || updated == null) {
+            return false;
+        }
+
+        return Objects.equals(existing.getName(), updated.getName()) &&
+               Objects.equals(existing.getDisplayName(), updated.getDisplayName()) &&
+               Objects.equals(existing.getType(), updated.getType()) &&
+               Objects.equals(existing.getStartDate(), updated.getStartDate()) &&
+               Objects.equals(existing.getEndDate(), updated.getEndDate()) &&
+               Objects.equals(existing.getActive(), updated.getActive()) &&
+               Objects.equals(existing.getTotalMatchdays(), updated.getTotalMatchdays()) &&
+               Objects.equals(existing.getDescription(), updated.getDescription()) &&
+               Objects.equals(existing.getSeason(), updated.getSeason());
+    }
 }

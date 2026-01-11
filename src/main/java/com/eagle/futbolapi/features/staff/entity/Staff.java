@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.staff.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -61,5 +63,28 @@ public class Staff extends BaseEntity {
   @Column(name = "st_active", nullable = false)
   @Builder.Default
   private Boolean active = true;
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        person,
+        role,
+        currentTeam,
+        active
+    );
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Staff))
+      return false;
+    Staff other = (Staff) obj;
+    return Objects.equals(person, other.person)
+        && Objects.equals(role, other.role)
+        && Objects.equals(currentTeam, other.currentTeam)
+        && Objects.equals(active, other.active);
+  }
 
 }

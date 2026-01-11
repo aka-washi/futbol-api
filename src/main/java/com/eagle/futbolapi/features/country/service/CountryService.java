@@ -145,4 +145,16 @@ public class CountryService extends BaseCrudService<Country, Long> {
         // Check for duplicate ISO code
         return country.getIsoCode() != null && !country.getIsoCode().equals(existingCountry.getIsoCode());
     }
+
+    @Override
+    protected boolean entitiesEqual(Country existing, Country updated) {
+        if (existing == null || updated == null) {
+            return false;
+        }
+
+        return Objects.equals(existing.getName(), updated.getName()) &&
+               Objects.equals(existing.getDisplayName(), updated.getDisplayName()) &&
+               Objects.equals(existing.getCode(), updated.getCode()) &&
+               Objects.equals(existing.getIsoCode(), updated.getIsoCode());
+    }
 }

@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.standing.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -115,4 +117,56 @@ public class Standing extends BaseEntity {
   @Column(name = "sd_away_lost")
   @Builder.Default
   private Integer awayLost = 0;
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        stage,
+        team,
+        position,
+        played,
+        won,
+        drawn,
+        lost,
+        goalsFor,
+        goalsAgainst,
+        goalDifference,
+        points,
+        form,
+        homeWon,
+        homeDrawn,
+        homeLost,
+        awayWon,
+        awayDrawn,
+        awayLost
+    );
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Standing))
+      return false;
+    Standing other = (Standing) obj;
+    return Objects.equals(stage, other.stage)
+        && Objects.equals(team, other.team)
+        && Objects.equals(position, other.position)
+        && Objects.equals(played, other.played)
+        && Objects.equals(won, other.won)
+        && Objects.equals(drawn, other.drawn)
+        && Objects.equals(lost, other.lost)
+        && Objects.equals(goalsFor, other.goalsFor)
+        && Objects.equals(goalsAgainst, other.goalsAgainst)
+        && Objects.equals(goalDifference, other.goalDifference)
+        && Objects.equals(points, other.points)
+        && Objects.equals(form, other.form)
+        && Objects.equals(homeWon, other.homeWon)
+        && Objects.equals(homeDrawn, other.homeDrawn)
+        && Objects.equals(homeLost, other.homeLost)
+        && Objects.equals(awayWon, other.awayWon)
+        && Objects.equals(awayDrawn, other.awayDrawn)
+        && Objects.equals(awayLost, other.awayLost);
+  }
+
 }

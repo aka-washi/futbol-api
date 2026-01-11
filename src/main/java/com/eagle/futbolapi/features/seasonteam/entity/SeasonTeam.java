@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.seasonteam.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -66,4 +67,29 @@ public class SeasonTeam extends BaseEntity {
         @Column(name = "set_active", nullable = false)
         @Builder.Default
         private Boolean active = true;
+
+        @Override
+        public int hashCode() {
+                return Objects.hash(
+                        season,
+                        team,
+                        joinedDate,
+                        leftDate,
+                        active
+                );
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+                if (this == obj)
+                        return true;
+                if (!(obj instanceof SeasonTeam))
+                        return false;
+                SeasonTeam other = (SeasonTeam) obj;
+                return Objects.equals(season, other.season)
+                        && Objects.equals(team, other.team)
+                        && Objects.equals(joinedDate, other.joinedDate)
+                        && Objects.equals(leftDate, other.leftDate)
+                        && Objects.equals(active, other.active);
+        }
 }

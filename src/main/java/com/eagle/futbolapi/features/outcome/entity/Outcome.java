@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.outcome.entity;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -76,4 +77,35 @@ public class Outcome extends BaseEntity {
 
     @Column(name = "oc_notes", columnDefinition = "TEXT")
     private String notes;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            competition,
+            team,
+            player,
+            staff,
+            outcomeType,
+            position,
+            value,
+            notes
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Outcome))
+            return false;
+        Outcome other = (Outcome) obj;
+        return Objects.equals(competition, other.competition)
+            && Objects.equals(team, other.team)
+            && Objects.equals(player, other.player)
+            && Objects.equals(staff, other.staff)
+            && Objects.equals(outcomeType, other.outcomeType)
+            && Objects.equals(position, other.position)
+            && Objects.equals(value, other.value)
+            && Objects.equals(notes, other.notes);
+    }
 }

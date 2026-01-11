@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.stage.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -79,5 +80,36 @@ public class Stage extends BaseEntity {
   @Column(name = "sg_status", nullable = false, length = 50)
   @Builder.Default
   private StageStatus status = StageStatus.NOT_STARTED;
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        competition,
+        structure,
+        name,
+        displayName,
+        order,
+        startDate,
+        endDate,
+        status
+    );
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Stage))
+      return false;
+    Stage other = (Stage) obj;
+    return Objects.equals(competition, other.competition)
+        && Objects.equals(structure, other.structure)
+        && Objects.equals(name, other.name)
+        && Objects.equals(displayName, other.displayName)
+        && Objects.equals(order, other.order)
+        && Objects.equals(startDate, other.startDate)
+        && Objects.equals(endDate, other.endDate)
+        && Objects.equals(status, other.status);
+  }
 
 }

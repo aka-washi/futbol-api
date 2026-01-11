@@ -2,6 +2,7 @@ package com.eagle.futbolapi.features.match.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -119,5 +120,62 @@ public class Match extends BaseEntity {
 
     @Column(name = "mt_notes", columnDefinition = "TEXT")
     private String notes;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            matchday,
+            homeTeam,
+            awayTeam,
+            venue,
+            scheduledDate,
+            kickoffTime,
+            status,
+            homeScore,
+            awayScore,
+            homeHalfTimeScore,
+            awayHalfTimeScore,
+            extraTimeAllowed,
+            penaltyShootoutAllowed,
+            homeExtraTimeScore,
+            awayExtraTimeScore,
+            homePenaltyScore,
+            awayPenaltyScore,
+            attendance,
+            referee,
+            weatherConditions,
+            notes
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Match))
+            return false;
+        Match other = (Match) obj;
+        return Objects.equals(matchday, other.matchday)
+            && Objects.equals(homeTeam, other.homeTeam)
+            && Objects.equals(awayTeam, other.awayTeam)
+            && Objects.equals(venue, other.venue)
+            && Objects.equals(scheduledDate, other.scheduledDate)
+            && Objects.equals(kickoffTime, other.kickoffTime)
+            && Objects.equals(status, other.status)
+            && Objects.equals(homeScore, other.homeScore)
+            && Objects.equals(awayScore, other.awayScore)
+            && Objects.equals(homeHalfTimeScore, other.homeHalfTimeScore)
+            && Objects.equals(awayHalfTimeScore, other.awayHalfTimeScore)
+            && Objects.equals(extraTimeAllowed, other.extraTimeAllowed)
+            && Objects.equals(penaltyShootoutAllowed, other.penaltyShootoutAllowed)
+            && Objects.equals(homeExtraTimeScore, other.homeExtraTimeScore)
+            && Objects.equals(awayExtraTimeScore, other.awayExtraTimeScore)
+            && Objects.equals(homePenaltyScore, other.homePenaltyScore)
+            && Objects.equals(awayPenaltyScore, other.awayPenaltyScore)
+            && Objects.equals(attendance, other.attendance)
+            && Objects.equals(referee, other.referee)
+            && Objects.equals(weatherConditions, other.weatherConditions)
+            && Objects.equals(notes, other.notes);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.matchday.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -73,5 +74,34 @@ public class Matchday extends BaseEntity {
     @Column(name = "md_status", nullable = false, length = 50)
     @Builder.Default
     private MatchdayStatus status = MatchdayStatus.NOT_STARTED;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            stage,
+            number,
+            name,
+            displayName,
+            startDate,
+            endDate,
+            status
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Matchday))
+            return false;
+        Matchday other = (Matchday) obj;
+        return Objects.equals(stage, other.stage)
+            && Objects.equals(number, other.number)
+            && Objects.equals(name, other.name)
+            && Objects.equals(displayName, other.displayName)
+            && Objects.equals(startDate, other.startDate)
+            && Objects.equals(endDate, other.endDate)
+            && Objects.equals(status, other.status);
+    }
 
 }

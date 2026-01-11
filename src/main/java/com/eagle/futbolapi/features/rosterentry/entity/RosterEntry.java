@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.rosterentry.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -85,5 +86,36 @@ public class RosterEntry extends BaseEntity {
         if ((player == null && staff == null) || (player != null && staff != null)) {
             throw new IllegalStateException("RosterEntry must have either a player or staff, but not both");
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            season,
+            team,
+            player,
+            staff,
+            jerseyNumber,
+            joinedDate,
+            leftDate,
+            active
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof RosterEntry))
+            return false;
+        RosterEntry other = (RosterEntry) obj;
+        return Objects.equals(season, other.season)
+            && Objects.equals(team, other.team)
+            && Objects.equals(player, other.player)
+            && Objects.equals(staff, other.staff)
+            && Objects.equals(jerseyNumber, other.jerseyNumber)
+            && Objects.equals(joinedDate, other.joinedDate)
+            && Objects.equals(leftDate, other.leftDate)
+            && Objects.equals(active, other.active);
     }
 }

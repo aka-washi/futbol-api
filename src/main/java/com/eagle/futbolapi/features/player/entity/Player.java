@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.player.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -65,5 +67,30 @@ public class Player extends BaseEntity {
     @Column(name = "pl_active", nullable = false)
     @Builder.Default
     private Boolean active = true;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            person,
+            position,
+            preferredFoot,
+            currentTeam,
+            active
+        );
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Player))
+            return false;
+        Player other = (Player) obj;
+        return Objects.equals(person, other.person)
+            && Objects.equals(position, other.position)
+            && Objects.equals(preferredFoot, other.preferredFoot)
+            && Objects.equals(currentTeam, other.currentTeam)
+            && Objects.equals(active, other.active);
+    }
 
 }
