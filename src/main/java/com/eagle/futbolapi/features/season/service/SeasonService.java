@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.season.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -21,6 +22,20 @@ public class SeasonService extends BaseCrudService<Season, Long> {
     public SeasonService(SeasonRepository seasonRepository) {
         super(seasonRepository);
         this.seasonRepository = seasonRepository;
+    }
+
+    public Optional<Season> getSeasonByName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Season name cannot be null or empty");
+        }
+        return seasonRepository.findByName(name);
+    }
+
+    public Optional<Season> getSeasonByDisplayName(String displayName) {
+        if (displayName == null || displayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Season display name cannot be null or empty");
+        }
+        return seasonRepository.findByDisplayName(displayName);
     }
 
     @Override

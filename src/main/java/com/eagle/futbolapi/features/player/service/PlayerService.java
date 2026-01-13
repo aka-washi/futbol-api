@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.player.service;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.constraints.NotNull;
@@ -7,10 +8,12 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.person.entity.Person;
 import com.eagle.futbolapi.features.player.entity.Player;
 import com.eagle.futbolapi.features.player.repository.PlayerRepository;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.shared.service.BaseCrudService;
+import com.eagle.futbolapi.features.team.entity.Team;
 
 @Service
 @Transactional
@@ -21,6 +24,41 @@ public class PlayerService extends BaseCrudService<Player, Long> {
     public PlayerService(PlayerRepository playerRepository) {
         super(playerRepository);
         this.playerRepository = playerRepository;
+    }
+
+    public List<Player> searchPlayersByDisplayName(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            throw new IllegalArgumentException("Search term cannot be null or empty");
+        }
+        return playerRepository.findByDisplayNameContainingIgnoreCase(searchTerm);
+    }
+
+    public List<Player> getPlayersByDisplayName(String displayName) {
+        if (displayName == null || displayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Display name cannot be null or empty");
+        }
+        return playerRepository.findByDisplayName(displayName);
+    }
+
+    public List<Player> getPlayersByPerson(Person person) {
+        if (person == null) {
+            throw new IllegalArgumentException("Person cannot be null");
+        }
+        return playerRepository.findByPerson(person);
+    }
+
+    public List<Player> getPlayersByCurrentTeam(Team currentTeam) {
+        if (currentTeam == null) {
+            throw new IllegalArgumentException("Current team cannot be null");
+        }
+        return playerRepository.findByCurrentTeam(currentTeam);
+    }
+
+    public List<Player> getPlayersByCurrentTeamId(Long currentTeamId) {
+        if (currentTeamId == null) {
+            throw new IllegalArgumentException("Current team ID cannot be null");
+        }
+        return playerRepository.findByCurrentTeamId(currentTeamId);
     }
 
     @Override

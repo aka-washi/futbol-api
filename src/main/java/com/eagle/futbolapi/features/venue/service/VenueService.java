@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.venue.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -21,6 +22,20 @@ public class VenueService extends BaseCrudService<Venue, Long> {
     public VenueService(VenueRepository venueRepository) {
         super(venueRepository);
         this.venueRepository = venueRepository;
+    }
+
+    public Optional<Venue> getVenueByName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Venue name cannot be null or empty");
+        }
+        return venueRepository.findByName(name);
+    }
+
+    public Optional<Venue> getVenueByDisplayName(String displayName) {
+        if (displayName == null || displayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Venue display name cannot be null or empty");
+        }
+        return venueRepository.findByDisplayName(displayName);
     }
 
     @Override

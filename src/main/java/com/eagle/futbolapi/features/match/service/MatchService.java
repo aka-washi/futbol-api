@@ -2,6 +2,7 @@ package com.eagle.futbolapi.features.match.service;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -14,21 +15,92 @@ import com.eagle.futbolapi.features.match.entity.Match;
 import com.eagle.futbolapi.features.match.entity.MatchStatus;
 import com.eagle.futbolapi.features.match.repository.MatchRepository;
 import com.eagle.futbolapi.features.matchday.entity.Matchday;
+import com.eagle.futbolapi.features.matchday.service.MatchdayService;
 import com.eagle.futbolapi.features.person.entity.Person;
+import com.eagle.futbolapi.features.person.service.PersonService;
 import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.shared.service.BaseCrudService;
 import com.eagle.futbolapi.features.team.entity.Team;
+import com.eagle.futbolapi.features.team.service.TeamService;
 import com.eagle.futbolapi.features.venue.entity.Venue;
+import com.eagle.futbolapi.features.venue.service.VenueService;
 
 @Service
 @Transactional
 public class MatchService extends BaseCrudService<Match, Long> {
 
     private final MatchRepository matchRepository;
+    private final MatchdayService matchdayService;
+    private final TeamService teamService;
+    private final VenueService venueService;
+    private final PersonService personService;
 
-    public MatchService(MatchRepository matchRepository) {
+    public MatchService(MatchRepository matchRepository, MatchdayService matchdayService,
+                       TeamService teamService, VenueService venueService, PersonService personService) {
         super(matchRepository);
         this.matchRepository = matchRepository;
+        this.matchdayService = matchdayService;
+        this.teamService = teamService;
+        this.venueService = venueService;
+        this.personService = personService;
+    }
+
+    // Helper methods to resolve dependencies by name/displayName
+    public Optional<Matchday> resolveMatchdayByName(String matchdayName) {
+        if (matchdayName == null || matchdayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Matchday name cannot be null or empty");
+        }
+        return matchdayService.getMatchdayByName(matchdayName);
+    }
+
+    public Optional<Matchday> resolveMatchdayByDisplayName(String displayName) {
+        if (displayName == null || displayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Matchday display name cannot be null or empty");
+        }
+        return matchdayService.getMatchdayByDisplayName(displayName);
+    }
+
+    public Optional<Team> resolveTeamByName(String teamName) {
+        if (teamName == null || teamName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Team name cannot be null or empty");
+        }
+        return teamService.getTeamByName(teamName);
+    }
+
+    public Optional<Team> resolveTeamByDisplayName(String displayName) {
+        if (displayName == null || displayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Team display name cannot be null or empty");
+        }
+        return teamService.getTeamByDisplayName(displayName);
+    }
+
+    public Optional<Team> resolveTeamByCode(String teamCode) {
+        if (teamCode == null || teamCode.trim().isEmpty()) {
+            throw new IllegalArgumentException("Team code cannot be null or empty");
+        }
+        return teamService.getTeamByCode(teamCode);
+    }
+
+    public Optional<Venue> resolveVenueByName(String venueName) {
+        if (venueName == null || venueName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Venue name cannot be null or empty");
+        }
+        return venueService.getVenueByName(venueName);
+    }
+
+    public Optional<Venue> resolveVenueByDisplayName(String displayName) {
+        if (displayName == null || displayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Venue display name cannot be null or empty");
+        }
+        return venueService.getVenueByDisplayName(displayName);
+    }
+
+    public Optional<Person> resolveRefereeByDisplayName(String displayName) {
+        if (displayName == null || displayName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Referee display name cannot be null or empty");
+        }
+        return personService.searchPersonsByDisplayName(displayName, null)
+                .getContent().stream().findFirst();
     }
 
     public Page<Match> getMatchesByMatchday(Matchday matchday, Pageable pageable) {
