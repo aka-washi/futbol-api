@@ -23,35 +23,35 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public abstract class BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+  @Column(name = "created_at", nullable = false, updatable = false)
+  private LocalDateTime createdAt;
 
-    @Column(name = "created_by", length = 100, updatable = false)
-    private String createdBy;
+  @Column(name = "created_by", length = 100, updatable = false)
+  private String createdBy;
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+  @Column(name = "updated_at")
+  private LocalDateTime updatedAt;
 
-    @Column(name = "updated_by", length = 100)
-    private String updatedBy;
+  @Column(name = "updated_by", length = 100)
+  private String updatedBy;
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        if (createdBy == null) {
-            createdBy = "admin";
-        }
+  @PrePersist
+  protected void onCreate() {
+    createdAt = LocalDateTime.now();
+    if (createdBy == null) {
+      createdBy = "admin";
     }
+  }
 
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-        if (updatedBy == null) {
-            updatedBy = "admin";
-        }
+  @PreUpdate
+  protected void onUpdate() {
+    updatedAt = LocalDateTime.now();
+    if (updatedBy == null) {
+      updatedBy = "admin";
     }
+  }
 }

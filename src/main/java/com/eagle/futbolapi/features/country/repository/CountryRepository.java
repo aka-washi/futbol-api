@@ -11,13 +11,13 @@ import com.eagle.futbolapi.features.country.entity.Country;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
-    Optional<Country> findByCode(String code);
-
-    Optional<Country> findByIsoCode(String isoCode);
-
     Optional<Country> findByName(String name);
 
     Optional<Country> findByDisplayName(String displayName);
+
+    Optional<Country> findByCode(String code);
+
+    Optional<Country> findByIsoCode(String isoCode);
 
     boolean existsByCode(String code);
 

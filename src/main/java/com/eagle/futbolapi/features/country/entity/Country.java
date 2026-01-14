@@ -35,41 +35,41 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Country extends BaseEntity {
 
-    @NotBlank
-    @Column(name = "co_name", nullable = false, length = 100)
-    private String name;
+  @NotBlank
+  @Column(name = "co_name", nullable = false, length = 100)
+  private String name;
 
-    @Column(name = "co_code", unique = true, length = 10)
-    private String code;
+  @Column(name = "co_code", unique = true, length = 10)
+  private String code;
 
-    @NotBlank
-    @Column(name = "co_iso_code", unique = true, length = 3)
-    private String isoCode; // ISO 3166-1 alpha-3
+  @NotBlank
+  @Column(name = "co_iso_code", unique = true, length = 3)
+  private String isoCode; // ISO 3166-1 alpha-3
 
-    @NotBlank
-    @Column(name = "co_display_name", length = 100, nullable = false)
-    private String displayName;
+  @NotBlank
+  @Column(name = "co_display_name", length = 100, nullable = false)
+  private String displayName;
 
-    @Column(name = "co_flag_url", length = 500)
-    private String flagUrl;
+  @Column(name = "co_flag_url", length = 500)
+  private String flagUrl;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, code, isoCode, displayName, flagUrl);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, code, isoCode, displayName, flagUrl);
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Country))
-            return false;
-        Country other = (Country) obj;
-        return Objects.equals(name, other.name)
-            && Objects.equals(code, other.code)
-            && Objects.equals(isoCode, other.isoCode)
-            && Objects.equals(displayName, other.displayName)
-            && Objects.equals(flagUrl, other.flagUrl);
-    }
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Country))
+      return false;
+    Country other = (Country) obj;
+    return Objects.equals(name, other.name)
+        && Objects.equals(code, other.code)
+        && Objects.equals(isoCode, other.isoCode)
+        && Objects.equals(displayName, other.displayName)
+        && Objects.equals(flagUrl, other.flagUrl);
+  }
 
 }

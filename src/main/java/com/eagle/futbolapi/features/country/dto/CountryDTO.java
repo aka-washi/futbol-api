@@ -16,29 +16,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CountryDTO {
 
-    private Long id;
+  private Long id;
 
-    @NotBlank(message = "Country name is required")
-    @Size(min = 2, max = 100, message = "Country name must be between 2 and 100 characters")
-    private String name;
+  @NotBlank(message = "Country name is required")
+  @Size(min = 2, max = 100, message = "Country name must be between 2 and 100 characters")
+  private String name;
 
-    @Size(max = 2, message = "Country code cannot exceed 2 characters")
-    private String code;
+  @Size(max = 2, message = "Country code cannot exceed 2 characters")
+  private String code;
 
-    @Size(max = 3, message = "ISO code cannot exceed 3 characters")
-    private String isoCode;
+  @Size(max = 3, message = "ISO code cannot exceed 3 characters")
+  private String isoCode;
 
-    @NotBlank(message = "Display name is required")
-    @Size(min = 2, max = 100, message = "Display name must be between 2 and 100 characters")
-    private String displayName;
+  @NotBlank(message = "Display name is required")
+  @Size(min = 2, max = 100, message = "Display name must be between 2 and 100 characters")
+  private String displayName;
 
-    @Size(max = 500, message = "Flag URL cannot exceed 500 characters")
-    private String flagUrl;
+  @Size(max = 500, message = "Flag URL cannot exceed 500 characters")
+  private String flagUrl;
 
-    private LocalDateTime createdAt;
-    private String createdBy;
+  private LocalDateTime createdAt;
+  private String createdBy;
 
-    private LocalDateTime updatedAt;
-    private String updatedBy;
+  private LocalDateTime updatedAt;
+  private String updatedBy;
 
 }

@@ -9,7 +9,7 @@ import com.eagle.futbolapi.features.country.entity.Country;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CountryMapper {
 
-    CountryDTO toDTO(Country country);
+  CountryDTO toCountryDTO(Country country);
 
-    Country toEntity(CountryDTO countryDTO);
+  Country toCountry(CountryDTO countryDTO);
 }
