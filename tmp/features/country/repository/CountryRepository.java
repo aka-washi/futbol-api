@@ -24,10 +24,4 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
     boolean existsByIsoCode(String isoCode);
 
     boolean existsByDisplayName(String displayName);
-
-    boolean existsByCodeAndIdNot(String code, Long id);
-
-    boolean existsByIsoCodeAndIdNot(String isoCode, Long id);
-
-    boolean existsByDisplayNameAndIdNot(String displayName, Long id);
 }

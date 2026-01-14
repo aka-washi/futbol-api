@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.shared.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
