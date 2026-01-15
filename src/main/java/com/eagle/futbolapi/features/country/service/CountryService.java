@@ -3,10 +3,10 @@ package com.eagle.futbolapi.features.country.service;
 import java.util.Objects;
 import java.util.Optional;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.country.entity.Country;
