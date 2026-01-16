@@ -84,13 +84,13 @@ public class CountryController extends BaseCrudController<Country, CountryDTO, C
   }
 
   @Override
-  protected Country createEntity(Country entity) {
-    return service.create(entity);
+  protected Country createEntity(CountryDTO dto) {
+    return service.create(dto);
   }
 
   @Override
-  protected Country updateEntity(Long id, Country entity) {
-    return service.update(id, entity);
+  protected Country updateEntity(Long id, CountryDTO dto) {
+    return service.update(id, dto);
   }
 
   @Override

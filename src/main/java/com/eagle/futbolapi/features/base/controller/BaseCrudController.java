@@ -85,8 +85,7 @@ public abstract class BaseCrudController<E, D, S, M> {
   @PostMapping
   public ResponseEntity<ApiResponse<D>> create(@Valid @RequestBody D dto) {
     try {
-      E entity = toEntity(dto);
-      E savedEntity = createEntity(entity);
+      E savedEntity = createEntity(dto);
       D savedDto = toDTO(savedEntity);
       return ResponseUtil.created(savedDto, resourceName + " created successfully");
     } catch (DuplicateResourceException e) {
@@ -101,8 +100,7 @@ public abstract class BaseCrudController<E, D, S, M> {
   @PutMapping("/{id}")
   public ResponseEntity<ApiResponse<D>> update(@PathVariable Long id, @Valid @RequestBody D dto) {
     try {
-      E entity = toEntity(dto);
-      E updatedEntity = updateEntity(id, entity);
+      E updatedEntity = updateEntity(id, dto);
       D updatedDto = toDTO(updatedEntity);
       return ResponseUtil.success(updatedDto, resourceName + " updated successfully");
     } catch (NoChangesDetectedException e) {
@@ -142,9 +140,9 @@ public abstract class BaseCrudController<E, D, S, M> {
 
   protected abstract E getEntityById(Long id);
 
-  protected abstract E createEntity(E entity);
+  protected abstract E createEntity(D dto);
 
-  protected abstract E updateEntity(Long id, E entity);
+  protected abstract E updateEntity(Long id, D dto);
 
   protected abstract void deleteEntity(Long id);
 

@@ -9,18 +9,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
+import com.eagle.futbolapi.features.country.dto.CountryDTO;
 import com.eagle.futbolapi.features.country.entity.Country;
+import com.eagle.futbolapi.features.country.mapper.CountryMapper;
 import com.eagle.futbolapi.features.country.repository.CountryRepository;
 
 @Service
 @Transactional
-public class CountryService extends BaseCrudService<Country, Long> {
+public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
 
   private final CountryRepository countryRepository;
+  private final CountryMapper countryMapper;
 
-  public CountryService(CountryRepository countryRepository) {
+  public CountryService(CountryRepository countryRepository, CountryMapper countryMapper) {
     super(countryRepository);
     this.countryRepository = countryRepository;
+    this.countryMapper = countryMapper;
   }
 
   public Optional<Country> getCountryByName(String name) {
@@ -52,12 +56,36 @@ public class CountryService extends BaseCrudService<Country, Long> {
   }
 
   @Override
-  public Country update(Long id, Country country) {
+  protected Country convertToEntity(CountryDTO dto) {
+    return countryMapper.toCountry(dto);
+  }
+
+  // No relationships to resolve for Country
+
+  @Override
+  public Country update(Long id, CountryDTO dto) {
+    // Get existing entity to preserve audit fields
     Country existing = repository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-    country.setCreatedAt(existing.getCreatedAt());
+    
+    // Convert DTO to entity
+    Country country = convertToEntity(dto);
+    
+    // Preserve audit fields from existing entity
     country.setId(id);
-    return super.update(id, country);
+    country.setCreatedAt(existing.getCreatedAt());
+    country.setCreatedBy(existing.getCreatedBy());
+    
+    // Validate and save
+    if (existing.equals(country)) {
+      throw new com.eagle.futbolapi.features.base.exception.NoChangesDetectedException("No changes detected for entity", id);
+    }
+    
+    if (isDuplicate(id, country)) {
+      throw new IllegalArgumentException("Duplicate entity");
+    }
+    
+    return repository.save(country);
   }
 
   @Override

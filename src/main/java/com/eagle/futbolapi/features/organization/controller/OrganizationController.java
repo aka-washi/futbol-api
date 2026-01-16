@@ -35,7 +35,6 @@ public class OrganizationController
   private static final String DEFAULT_SORT_FIELD = "name";
   private static final String DEFAULT_SORT_DIRECTION = "asc";
 
-  private static final String NOT_FOUND_SUFFIX = " not found";
   private static final String RESOURCE_NAME = "Organization";
   private static final String SUCCESS_MESSAGE = "Organization(s) retrieved successfully";
   private static final String DUPLICATE_MESSAGE = "Organization already exists";
@@ -110,13 +109,13 @@ public class OrganizationController
   }
 
   @Override
-  protected Organization createEntity(Organization entity) {
-    return service.create(entity);
+  protected Organization createEntity(OrganizationDTO dto) {
+    return service.create(dto);
   }
 
   @Override
-  protected Organization updateEntity(Long id, Organization entity) {
-    return service.update(id, entity);
+  protected Organization updateEntity(Long id, OrganizationDTO dto) {
+    return service.update(id, dto);
   }
 
   @Override
@@ -136,6 +135,7 @@ public class OrganizationController
 
   @Override
   protected Organization toEntity(OrganizationDTO dto) {
+    // Basic mapping - related entities will be resolved in service layer
     return mapper.toOrganization(dto);
   }
 

@@ -8,7 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
+import com.eagle.futbolapi.features.country.service.CountryService;
+import com.eagle.futbolapi.features.organization.dto.OrganizationDTO;
 import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 import com.eagle.futbolapi.features.organization.repository.OrganizationRepository;
@@ -17,13 +20,20 @@ import jakarta.validation.constraints.NotNull;
 
 @Service
 @Transactional
-public class OrganizationService extends BaseCrudService<Organization, Long> {
+public class OrganizationService extends BaseCrudService<Organization, Long, OrganizationDTO> {
 
   private final OrganizationRepository organizationRepository;
+  private final CountryService countryService;
+  private final com.eagle.futbolapi.features.organization.mapper.OrganizationMapper organizationMapper;
 
-  protected OrganizationService(OrganizationRepository organizationRepository) {
+  protected OrganizationService(
+      OrganizationRepository organizationRepository,
+      CountryService countryService,
+      com.eagle.futbolapi.features.organization.mapper.OrganizationMapper organizationMapper) {
     super(organizationRepository);
     this.organizationRepository = organizationRepository;
+    this.countryService = countryService;
+    this.organizationMapper = organizationMapper;
   }
 
   public Optional<Organization> getOrganizationByName(String name) {
@@ -59,12 +69,63 @@ public class OrganizationService extends BaseCrudService<Organization, Long> {
   }
 
   @Override
-  public Organization update(Long id, Organization organization) {
+  protected Organization convertToEntity(OrganizationDTO dto) {
+    return organizationMapper.toOrganization(dto);
+  }
+
+  /**
+   * Resolves related entities (Country, Parent Organization) from DTO.
+   */
+  @Override
+  protected void resolveRelationships(OrganizationDTO dto, Organization organization) {
+    // Map country from display name or ID
+    if (dto.getCountryDisplayName() != null) {
+      var country = countryService.getCountryByDisplayName(dto.getCountryDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Country", "displayName", dto.getCountryDisplayName()));
+      organization.setCountry(country);
+    } else if (dto.getCountryId() != null) {
+      var country = countryService.getById(dto.getCountryId())
+          .orElseThrow(() -> new ResourceNotFoundException("Country", "id", dto.getCountryId()));
+      organization.setCountry(country);
+    }
+
+    // Map parent organization from display name or ID
+    if (dto.getParentOrganizationDisplayName() != null) {
+      var parent = getOrganizationByDisplayName(dto.getParentOrganizationDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Organization", "displayName", dto.getParentOrganizationDisplayName()));
+      organization.setParentOrganization(parent);
+    } else if (dto.getParentOrganizationId() != null) {
+      var parent = getById(dto.getParentOrganizationId())
+          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", dto.getParentOrganizationId()));
+      organization.setParentOrganization(parent);
+    }
+  }
+
+  @Override
+  public Organization update(Long id, OrganizationDTO dto) {
+    // Get existing entity to preserve audit fields
     Organization existing = repository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-    organization.setCreatedAt(existing.getCreatedAt());
+    
+    // Convert DTO to entity and resolve relationships
+    Organization organization = convertToEntity(dto);
+    resolveRelationships(dto, organization);
+    
+    // Preserve audit fields from existing entity
     organization.setId(id);
-    return super.update(id, organization);
+    organization.setCreatedAt(existing.getCreatedAt());
+    organization.setCreatedBy(existing.getCreatedBy());
+    
+    // Validate and save
+    if (existing.equals(organization)) {
+      throw new com.eagle.futbolapi.features.base.exception.NoChangesDetectedException("No changes detected for entity", id);
+    }
+    
+    if (isDuplicate(id, organization)) {
+      throw new IllegalArgumentException("Duplicate entity");
+    }
+    
+    return repository.save(organization);
   }
 
   @Override
