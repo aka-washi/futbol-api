@@ -617,8 +617,9 @@
         "name": "ageCategory",
         "type": "enum",
         "enum": [
-          "SENIOR",
+          "PROFESSIONAL",
           "RESERVE",
+          "AMATEUR",
           "U23",
           "U21",
           "U20",
@@ -635,6 +636,7 @@
           "U9",
           "U8",
           "U7",
+          "U6",
           "VETERANS"
         ],
         "label": "Age Category",

@@ -19,4 +19,5 @@ public interface OrganizationMapper {
   @Mapping(target = "country", ignore = true)
   @Mapping(target = "parentOrganization", ignore = true)
   Organization toOrganization(OrganizationDTO organizationDTO);
+
 }

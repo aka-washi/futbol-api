@@ -59,8 +59,7 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     return organizationRepository.findByAbbreviation(abbreviation);
   }
 
-  public Page<Organization> getOrganizationsByType(OrganizationType type,
-      org.springframework.data.domain.Pageable pageable) {
+  public Page<Organization> getOrganizationsByType(OrganizationType type, Pageable pageable) {
     if (pageable == null) {
       pageable = Pageable.unpaged();
     }
@@ -108,7 +107,7 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
   public Organization update(Long id, OrganizationDTO dto) {
     // Get existing entity to preserve audit fields
     Organization existing = repository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
+        .orElseThrow(() -> new ResourceNotFoundException("Entity with given ID does not exist"));
 
     // Convert DTO to entity and resolve relationships
     Organization organization = convertToEntity(dto);

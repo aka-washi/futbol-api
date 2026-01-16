@@ -3,6 +3,9 @@ package com.eagle.futbolapi.features.venue.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.country.entity.Country;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -15,10 +18,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
-import com.eagle.futbolapi.features.country.entity.Country;
-import com.eagle.futbolapi.features.shared.BaseEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,12 +41,14 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Venue extends BaseEntity {
-  @Column(name = "vn_display_name", nullable = false, length = 100)
-  private String displayName;
 
   @NotBlank
   @Column(name = "vn_name", nullable = false)
   private String name;
+
+  @NotBlank
+  @Column(name = "vn_display_name", nullable = false, length = 100)
+  private String displayName;
 
   @NotBlank
   @Column(name = "vn_city", nullable = false, length = 100)
@@ -79,7 +80,7 @@ public class Venue extends BaseEntity {
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, displayName, city, country, capacity);
+    return Objects.hash(name, displayName, city, country);
   }
 
   @Override
@@ -92,8 +93,7 @@ public class Venue extends BaseEntity {
     return Objects.equals(name, other.name)
         && Objects.equals(displayName, other.displayName)
         && Objects.equals(city, other.city)
-        && Objects.equals(country, other.country)
-        && Objects.equals(capacity, other.capacity);
+        && Objects.equals(country, other.country);
   }
 
 }
