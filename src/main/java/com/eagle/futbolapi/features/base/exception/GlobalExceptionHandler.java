@@ -4,6 +4,9 @@ package com.eagle.futbolapi.features.base.exception;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -14,8 +17,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.eagle.futbolapi.features.base.dto.ApiResponse;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

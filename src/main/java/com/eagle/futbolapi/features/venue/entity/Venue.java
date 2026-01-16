@@ -3,9 +3,6 @@ package com.eagle.futbolapi.features.venue.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.eagle.futbolapi.features.base.entity.BaseEntity;
-import com.eagle.futbolapi.features.country.entity.Country;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -18,6 +15,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.country.entity.Country;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

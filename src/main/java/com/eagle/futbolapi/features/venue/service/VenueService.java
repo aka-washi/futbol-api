@@ -3,7 +3,8 @@ package com.eagle.futbolapi.features.venue.service;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.apache.tomcat.util.file.ConfigurationSource.Resource;
+import jakarta.validation.constraints.NotNull;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
-import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.country.service.CountryService;
 import com.eagle.futbolapi.features.venue.dto.VenueDTO;
 import com.eagle.futbolapi.features.venue.entity.Venue;
 import com.eagle.futbolapi.features.venue.mapper.VenueMapper;
 import com.eagle.futbolapi.features.venue.repository.VenueRepository;
-
-import jakarta.validation.constraints.NotNull;
 
 @Service
 @Transactional
