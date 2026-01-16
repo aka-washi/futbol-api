@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.country.dto.CountryDTO;
 import com.eagle.futbolapi.features.country.entity.Country;
@@ -67,24 +68,24 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
     // Get existing entity to preserve audit fields
     Country existing = repository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-    
+
     // Convert DTO to entity
     Country country = convertToEntity(dto);
-    
+
     // Preserve audit fields from existing entity
     country.setId(id);
     country.setCreatedAt(existing.getCreatedAt());
     country.setCreatedBy(existing.getCreatedBy());
-    
+
     // Validate and save
     if (existing.equals(country)) {
-      throw new com.eagle.futbolapi.features.base.exception.NoChangesDetectedException("No changes detected for entity", id);
+      throw new NoChangesDetectedException("No changes detected for entity", id);
     }
-    
+
     if (isDuplicate(id, country)) {
       throw new IllegalArgumentException("Duplicate entity");
     }
-    
+
     return repository.save(country);
   }
 

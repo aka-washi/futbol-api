@@ -13,24 +13,24 @@ import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 @Repository
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
 
-    Optional<Organization> findByName(String name);
+  Optional<Organization> findByName(String name);
 
-    Optional<Organization> findByDisplayName(String displayName);
+  Optional<Organization> findByDisplayName(String displayName);
 
-    Optional<Organization> findByAbbreviation(String abbreviation);
+  Optional<Organization> findByAbbreviation(String abbreviation);
 
-    Page<Organization> findByType(OrganizationType type, Pageable pageable);
+  Page<Organization> findByType(OrganizationType type, Pageable pageable);
 
-    boolean existsByName(String name);
+  boolean existsByName(String name);
 
-    boolean existsByDisplayName(String displayName);
+  boolean existsByDisplayName(String displayName);
 
-    boolean existsByAbbreviation(String abbreviation);
+  boolean existsByAbbreviation(String abbreviation);
 
-    boolean existsByNameAndIdNot(String name, Long id);
+  boolean existsByNameAndIdNot(String name, Long id);
 
-    boolean existsByDisplayNameAndIdNot(String displayName, Long id);
+  boolean existsByDisplayNameAndIdNot(String displayName, Long id);
 
-    boolean existsByAbbreviationAndIdNot(String abbreviation, Long id);
+  boolean existsByAbbreviationAndIdNot(String abbreviation, Long id);
 
 }

@@ -22,12 +22,6 @@ import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.util.ResponseUtil;
 
-///import com.eagle.futbolapi.features.shared.ApiResponse;
-//import com.eagle.futbolapi.features.shared.ResponseUtil;
-//import com.eagle.futbolapi.features.shared.exception.DuplicateResourceException;
-//import com.eagle.futbolapi.features.shared.exception.NoChangesDetectedException;
-//import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
-
 /**
  * Generic base controller for CRUD operations.
  *

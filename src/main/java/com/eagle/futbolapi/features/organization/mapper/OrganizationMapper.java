@@ -10,13 +10,13 @@ import com.eagle.futbolapi.features.organization.entity.Organization;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface OrganizationMapper {
 
-    @Mapping(target = "countryId", source = "country.id")
-    @Mapping(target = "countryDisplayName", source = "country.displayName")
-    @Mapping(target = "parentOrganizationId", source = "parentOrganization.id")
-    @Mapping(target = "parentOrganizationDisplayName", source = "parentOrganization.displayName")
-    OrganizationDTO toOrganizationDTO(Organization organization);
+  @Mapping(target = "countryId", source = "country.id")
+  @Mapping(target = "countryDisplayName", source = "country.displayName")
+  @Mapping(target = "parentOrganizationId", source = "parentOrganization.id")
+  @Mapping(target = "parentOrganizationDisplayName", source = "parentOrganization.displayName")
+  OrganizationDTO toOrganizationDTO(Organization organization);
 
-    @Mapping(target = "country", ignore = true)
-    @Mapping(target = "parentOrganization", ignore = true)
-    Organization toOrganization(OrganizationDTO organizationDTO);
+  @Mapping(target = "country", ignore = true)
+  @Mapping(target = "parentOrganization", ignore = true)
+  Organization toOrganization(OrganizationDTO organizationDTO);
 }

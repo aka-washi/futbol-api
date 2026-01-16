@@ -25,10 +25,11 @@ import com.eagle.futbolapi.features.country.service.CountryService;
 @RequestMapping("/countries")
 public class CountryController extends BaseCrudController<Country, CountryDTO, CountryService, CountryMapper> {
 
-      private static final String RESOURCE_NAME = "Country";
-    private static final String SUCCESS_MESSAGE = "Country retrieved successfully";
-    private static final String DUPLICATE_MESSAGE = "Country already exists";
-    private static final String SERVER_ERROR = "SERVER_ERROR";
+  private static final String RESOURCE_NAME = "Country";
+  private static final String SUCCESS_MESSAGE = "Country retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Country already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
   public CountryController(CountryService countryService, CountryMapper countryMapper) {
     super(
         countryService,

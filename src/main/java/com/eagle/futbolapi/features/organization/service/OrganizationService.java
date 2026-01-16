@@ -15,6 +15,8 @@ import com.eagle.futbolapi.features.organization.dto.OrganizationDTO;
 import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 import com.eagle.futbolapi.features.organization.repository.OrganizationRepository;
+import com.eagle.futbolapi.features.organization.mapper.OrganizationMapper;
+import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -24,12 +26,12 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
 
   private final OrganizationRepository organizationRepository;
   private final CountryService countryService;
-  private final com.eagle.futbolapi.features.organization.mapper.OrganizationMapper organizationMapper;
+  private final OrganizationMapper organizationMapper;
 
   protected OrganizationService(
       OrganizationRepository organizationRepository,
       CountryService countryService,
-      com.eagle.futbolapi.features.organization.mapper.OrganizationMapper organizationMapper) {
+      OrganizationMapper organizationMapper) {
     super(organizationRepository);
     this.organizationRepository = organizationRepository;
     this.countryService = countryService;
@@ -92,7 +94,8 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     // Map parent organization from display name or ID
     if (dto.getParentOrganizationDisplayName() != null) {
       var parent = getOrganizationByDisplayName(dto.getParentOrganizationDisplayName())
-          .orElseThrow(() -> new ResourceNotFoundException("Organization", "displayName", dto.getParentOrganizationDisplayName()));
+          .orElseThrow(() -> new ResourceNotFoundException("Organization", "displayName",
+              dto.getParentOrganizationDisplayName()));
       organization.setParentOrganization(parent);
     } else if (dto.getParentOrganizationId() != null) {
       var parent = getById(dto.getParentOrganizationId())
@@ -106,25 +109,25 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     // Get existing entity to preserve audit fields
     Organization existing = repository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-    
+
     // Convert DTO to entity and resolve relationships
     Organization organization = convertToEntity(dto);
     resolveRelationships(dto, organization);
-    
+
     // Preserve audit fields from existing entity
     organization.setId(id);
     organization.setCreatedAt(existing.getCreatedAt());
     organization.setCreatedBy(existing.getCreatedBy());
-    
+
     // Validate and save
     if (existing.equals(organization)) {
-      throw new com.eagle.futbolapi.features.base.exception.NoChangesDetectedException("No changes detected for entity", id);
+      throw new NoChangesDetectedException("No changes detected for entity", id);
     }
-    
+
     if (isDuplicate(id, organization)) {
       throw new IllegalArgumentException("Duplicate entity");
     }
-    
+
     return repository.save(organization);
   }
 

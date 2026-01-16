@@ -77,10 +77,10 @@ public class OrganizationController
   @GetMapping("/type/{type}")
   public ResponseEntity<ApiResponse<Page<OrganizationDTO>>> getOrganizationsByType(
       @PathVariable String type,
-      @RequestParam(value = "page", defaultValue = DEFAULT_PAGE) @Min(MIN_DEFAULT_PAGE) int page,
-      @RequestParam(value = "size", defaultValue = DEFAULT_PAGE_SIZE) @Min(MIN_PAGE_SIZE) int size,
-      @RequestParam(value = "sortField", defaultValue = DEFAULT_SORT_FIELD) String sortField,
-      @RequestParam(value = "sortDirection", defaultValue = DEFAULT_SORT_DIRECTION) String sortDirection) {
+      @RequestParam(defaultValue = DEFAULT_PAGE) @Min(MIN_DEFAULT_PAGE) int page,
+      @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) @Min(MIN_PAGE_SIZE) int size,
+      @RequestParam(defaultValue = DEFAULT_SORT_FIELD) String sortField,
+      @RequestParam(defaultValue = DEFAULT_SORT_DIRECTION) String sortDirection) {
 
     Pageable pageable = ResponseUtil.buildPageable(page, size, sortField, sortDirection);
 
@@ -135,7 +135,6 @@ public class OrganizationController
 
   @Override
   protected Organization toEntity(OrganizationDTO dto) {
-    // Basic mapping - related entities will be resolved in service layer
     return mapper.toOrganization(dto);
   }
 
