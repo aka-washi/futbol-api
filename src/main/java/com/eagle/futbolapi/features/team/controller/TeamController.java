@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.team.controller;
 
+import jakarta.validation.constraints.Min;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +17,11 @@ import com.eagle.futbolapi.features.base.dto.ApiResponse;
 import com.eagle.futbolapi.features.base.entity.Gender;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.util.ResponseUtil;
-import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 import com.eagle.futbolapi.features.team.dto.TeamDTO;
 import com.eagle.futbolapi.features.team.entity.AgeCategory;
 import com.eagle.futbolapi.features.team.entity.Team;
 import com.eagle.futbolapi.features.team.mapper.TeamMapper;
 import com.eagle.futbolapi.features.team.service.TeamService;
-
-import jakarta.validation.constraints.Min;
 
 @Validated
 @RestController
@@ -139,51 +138,74 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
     return ResponseUtil.success(teams, SUCCESS_MESSAGE);
   }
 
+  @GetMapping("/teamsByGenderAgeCategoryAndCountryId")
+  public ResponseEntity<ApiResponse<Page<TeamDTO>>> getTeamsByGenderAgeCategoryAndCountryId(
+      @RequestParam String gender,
+      @RequestParam String ageCategory,
+      @RequestParam Long countryId,
+      @RequestParam(defaultValue = DEFAULT_PAGE) @Min(MIN_DEFAULT_PAGE) int page,
+      @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) @Min(MIN_PAGE_SIZE) int size,
+      @RequestParam(defaultValue = DEFAULT_SORT_FIELD) String sortField,
+      @RequestParam(defaultValue = DEFAULT_SORT_DIRECTION) String sortDirection) {
+    Pageable pageable = ResponseUtil.buildPageable(page, size, sortField, sortDirection);
+
+    Gender genderEnum;
+    try {
+      genderEnum = Gender.valueOf(gender.toUpperCase());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.badRequest().body(ApiResponse.error("INVALID_GENDER", "Invalid gender: " + gender));
+    }
+    AgeCategory ageCategoryEnum;
+    try {
+      ageCategoryEnum = AgeCategory.valueOf(ageCategory.toUpperCase());
+    } catch (IllegalArgumentException e) {
+      return ResponseEntity.badRequest()
+          .body(ApiResponse.error("INVALID_AGE_CATEGORY", "Invalid age category: " + ageCategory));
+    }
+    Page<Team> teamPage = service.getTeamsByGenderAndAgeCategoryAndCountryId(genderEnum, ageCategoryEnum,
+        countryId, pageable);
+    Page<TeamDTO> teams = teamPage.map(mapper::toTeamDTO);
+    return ResponseUtil.success(teams, SUCCESS_MESSAGE);
+  }
+
   @Override
   protected Page<Team> getAllEntities(Pageable pageable) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getAllEntities'");
+    return service.getAll(pageable);
   }
 
   @Override
   protected Team getEntityById(Long id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getEntityById'");
+    return service.getById(id)
+        .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "id", id));
   }
 
   @Override
   protected Team createEntity(TeamDTO dto) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'createEntity'");
+    return service.create(dto);
   }
 
   @Override
   protected Team updateEntity(Long id, TeamDTO dto) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateEntity'");
+    return service.update(id, dto);
   }
 
   @Override
   protected void deleteEntity(Long id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'deleteEntity'");
+    service.delete(id);
   }
 
   @Override
   protected boolean existsById(Long id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'existsById'");
+    return service.existsById(id);
   }
 
   @Override
   protected TeamDTO toDTO(Team entity) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'toDTO'");
+    return mapper.toTeamDTO(entity);
   }
 
   @Override
   protected Team toEntity(TeamDTO dto) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
+    return mapper.toTeam(dto);
   }
 }

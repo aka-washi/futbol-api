@@ -1,0 +1,2128 @@
+openapi: 3.1.0
+info:
+  title: Futbol API
+  description: |
+    A comprehensive REST API for managing football (soccer) data including teams, countries, organizations, venues, and more.
+    
+    This API provides endpoints for managing football-related entities with full CRUD operations, advanced filtering, and pagination support.
+  version: 0.0.1-SNAPSHOT
+  contact:
+    name: Eagle Team
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local development server
+  - url: https://api.example.com/api/v1
+    description: Production server
+
+tags:
+  - name: Countries
+    description: Operations related to countries
+  - name: Organizations
+    description: Operations related to football organizations (clubs, federations, confederations)
+  - name: Teams
+    description: Operations related to football teams
+  - name: Venues
+    description: Operations related to stadiums and venues
+
+paths:
+  # Countries Endpoints
+  /countries:
+    get:
+      tags:
+        - Countries
+      summary: Get all countries
+      description: Retrieve a paginated list of all countries
+      operationId: getAllCountries
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Countries retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageCountryDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Countries
+      summary: Create a new country
+      description: Create a new country entry
+      operationId: createCountry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CountryDTO'
+      responses:
+        '201':
+          description: Country created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CountryDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /countries/{id}:
+    get:
+      tags:
+        - Countries
+      summary: Get country by ID
+      description: Retrieve a specific country by its ID
+      operationId: getCountryById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Country ID
+      responses:
+        '200':
+          description: Country retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CountryDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Countries
+      summary: Update country
+      description: Update an existing country
+      operationId: updateCountry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Country ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CountryDTO'
+      responses:
+        '200':
+          description: Country updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CountryDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Countries
+      summary: Delete country
+      description: Delete a country by ID
+      operationId: deleteCountry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Country ID
+      responses:
+        '200':
+          description: Country deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /countries/{id}/exists:
+    get:
+      tags:
+        - Countries
+      summary: Check if country exists
+      description: Check if a country exists by ID
+      operationId: countryExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Country ID
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /countries/name/{name}:
+    get:
+      tags:
+        - Countries
+      summary: Get country by name
+      description: Retrieve a country by its name
+      operationId: getCountryByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Country name
+      responses:
+        '200':
+          description: Country retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CountryDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /countries/displayName/{displayName}:
+    get:
+      tags:
+        - Countries
+      summary: Get country by display name
+      description: Retrieve a country by its display name
+      operationId: getCountryByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Country display name
+      responses:
+        '200':
+          description: Country retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CountryDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /countries/code/{code}:
+    get:
+      tags:
+        - Countries
+      summary: Get country by code
+      description: Retrieve a country by its 2-letter code
+      operationId: getCountryByCode
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 2
+          description: Country code (2 characters)
+      responses:
+        '200':
+          description: Country retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CountryDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /countries/iso/{isoCode}:
+    get:
+      tags:
+        - Countries
+      summary: Get country by ISO code
+      description: Retrieve a country by its ISO code
+      operationId: getCountryByIsoCode
+      parameters:
+        - name: isoCode
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 3
+          description: Country ISO code (3 characters)
+      responses:
+        '200':
+          description: Country retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CountryDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Organizations Endpoints
+  /organizations:
+    get:
+      tags:
+        - Organizations
+      summary: Get all organizations
+      description: Retrieve a paginated list of all organizations
+      operationId: getAllOrganizations
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Organizations retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageOrganizationDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Organizations
+      summary: Create a new organization
+      description: Create a new organization entry
+      operationId: createOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationDTO'
+      responses:
+        '201':
+          description: Organization created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OrganizationDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organizations/{id}:
+    get:
+      tags:
+        - Organizations
+      summary: Get organization by ID
+      description: Retrieve a specific organization by its ID
+      operationId: getOrganizationById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Organization ID
+      responses:
+        '200':
+          description: Organization retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OrganizationDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Organizations
+      summary: Update organization
+      description: Update an existing organization
+      operationId: updateOrganization
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Organization ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationDTO'
+      responses:
+        '200':
+          description: Organization updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OrganizationDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Organizations
+      summary: Delete organization
+      description: Delete an organization by ID
+      operationId: deleteOrganization
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Organization ID
+      responses:
+        '200':
+          description: Organization deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organizations/{id}/exists:
+    get:
+      tags:
+        - Organizations
+      summary: Check if organization exists
+      description: Check if an organization exists by ID
+      operationId: organizationExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Organization ID
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organizations/name/{name}:
+    get:
+      tags:
+        - Organizations
+      summary: Get organization by name
+      description: Retrieve an organization by its name
+      operationId: getOrganizationByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Organization name
+      responses:
+        '200':
+          description: Organization retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OrganizationDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organizations/displayName/{displayName}:
+    get:
+      tags:
+        - Organizations
+      summary: Get organization by display name
+      description: Retrieve an organization by its display name
+      operationId: getOrganizationByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Organization display name
+      responses:
+        '200':
+          description: Organization retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OrganizationDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organizations/abbreviation/{abbreviation}:
+    get:
+      tags:
+        - Organizations
+      summary: Get organization by abbreviation
+      description: Retrieve an organization by its abbreviation
+      operationId: getOrganizationByAbbreviation
+      parameters:
+        - name: abbreviation
+          in: path
+          required: true
+          schema:
+            type: string
+            maxLength: 20
+          description: Organization abbreviation
+      responses:
+        '200':
+          description: Organization retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OrganizationDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organizations/type/{type}:
+    get:
+      tags:
+        - Organizations
+      summary: Get organizations by type
+      description: Retrieve paginated organizations filtered by type
+      operationId: getOrganizationsByType
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/OrganizationType'
+          description: Organization type
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - name: sortField
+          in: query
+          schema:
+            type: string
+            default: name
+          description: Field to sort by
+        - name: sortDirection
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+          description: Sort direction
+      responses:
+        '200':
+          description: Organizations retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageOrganizationDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Teams Endpoints
+  /teams:
+    get:
+      tags:
+        - Teams
+      summary: Get all teams
+      description: Retrieve a paginated list of all teams
+      operationId: getAllTeams
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Teams retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageTeamDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Teams
+      summary: Create a new team
+      description: Create a new team entry
+      operationId: createTeam
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamDTO'
+      responses:
+        '201':
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TeamDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /teams/{id}:
+    get:
+      tags:
+        - Teams
+      summary: Get team by ID
+      description: Retrieve a specific team by its ID
+      operationId: getTeamById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Team ID
+      responses:
+        '200':
+          description: Team retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TeamDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Teams
+      summary: Update team
+      description: Update an existing team
+      operationId: updateTeam
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Team ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamDTO'
+      responses:
+        '200':
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TeamDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Teams
+      summary: Delete team
+      description: Delete a team by ID
+      operationId: deleteTeam
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Team ID
+      responses:
+        '200':
+          description: Team deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /teams/{id}/exists:
+    get:
+      tags:
+        - Teams
+      summary: Check if team exists
+      description: Check if a team exists by ID
+      operationId: teamExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Team ID
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /teams/displayName/{displayName}:
+    get:
+      tags:
+        - Teams
+      summary: Get team by display name
+      description: Retrieve a team by its display name
+      operationId: getTeamByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Team display name
+      responses:
+        '200':
+          description: Team retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TeamDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /teams/teamsByNameGenderAndCategory:
+    get:
+      tags:
+        - Teams
+      summary: Get team by display name, gender, and age category
+      description: Retrieve a team by its display name, gender, and age category
+      operationId: getTeamByDisplayNameGenderAgeCategory
+      parameters:
+        - name: displayName
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Team display name
+        - name: gender
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Gender'
+          description: Team gender
+        - name: ageCategory
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/AgeCategory'
+          description: Age category
+      responses:
+        '200':
+          description: Team retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TeamDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /teams/teamsByGender/{gender}:
+    get:
+      tags:
+        - Teams
+      summary: Get teams by gender
+      description: Retrieve paginated teams filtered by gender
+      operationId: getTeamsByGender
+      parameters:
+        - name: gender
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Gender'
+          description: Team gender
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - name: sortField
+          in: query
+          schema:
+            type: string
+            default: name
+          description: Field to sort by
+        - name: sortDirection
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+          description: Sort direction
+      responses:
+        '200':
+          description: Teams retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageTeamDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /teams/teamsByGenderAgeCategoryAndOrganizationId:
+    get:
+      tags:
+        - Teams
+      summary: Get teams by gender, age category, and organization
+      description: Retrieve paginated teams filtered by gender, age category, and organization ID
+      operationId: getTeamsByGenderAgeCategoryAndOrganizationId
+      parameters:
+        - name: gender
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Gender'
+          description: Team gender
+        - name: ageCategory
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/AgeCategory'
+          description: Age category
+        - name: organizationId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Organization ID
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - name: sortField
+          in: query
+          schema:
+            type: string
+            default: name
+          description: Field to sort by
+        - name: sortDirection
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+          description: Sort direction
+      responses:
+        '200':
+          description: Teams retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageTeamDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /teams/teamsByGenderAgeCategoryAndCountryId:
+    get:
+      tags:
+        - Teams
+      summary: Get teams by gender, age category, and country
+      description: Retrieve paginated teams filtered by gender, age category, and country ID
+      operationId: getTeamsByGenderAgeCategoryAndCountryId
+      parameters:
+        - name: gender
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/Gender'
+          description: Team gender
+        - name: ageCategory
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/AgeCategory'
+          description: Age category
+        - name: countryId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Country ID
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - name: sortField
+          in: query
+          schema:
+            type: string
+            default: name
+          description: Field to sort by
+        - name: sortDirection
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+          description: Sort direction
+      responses:
+        '200':
+          description: Teams retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageTeamDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Venues Endpoints
+  /venues:
+    get:
+      tags:
+        - Venues
+      summary: Get all venues
+      description: Retrieve a paginated list of all venues
+      operationId: getAllVenues
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Venues retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageVenueDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Venues
+      summary: Create a new venue
+      description: Create a new venue entry
+      operationId: createVenue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueDTO'
+      responses:
+        '201':
+          description: Venue created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/VenueDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /venues/{id}:
+    get:
+      tags:
+        - Venues
+      summary: Get venue by ID
+      description: Retrieve a specific venue by its ID
+      operationId: getVenueById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Venue ID
+      responses:
+        '200':
+          description: Venue retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/VenueDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Venues
+      summary: Update venue
+      description: Update an existing venue
+      operationId: updateVenue
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Venue ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueDTO'
+      responses:
+        '200':
+          description: Venue updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/VenueDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Venues
+      summary: Delete venue
+      description: Delete a venue by ID
+      operationId: deleteVenue
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Venue ID
+      responses:
+        '200':
+          description: Venue deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /venues/{id}/exists:
+    get:
+      tags:
+        - Venues
+      summary: Check if venue exists
+      description: Check if a venue exists by ID
+      operationId: venueExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Venue ID
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /venues/name/{name}:
+    get:
+      tags:
+        - Venues
+      summary: Get venue by name
+      description: Retrieve a venue by its name
+      operationId: getVenueByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Venue name
+      responses:
+        '200':
+          description: Venue retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/VenueDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /venues/displayName/{displayName}:
+    get:
+      tags:
+        - Venues
+      summary: Get venue by display name
+      description: Retrieve a venue by its display name
+      operationId: getVenueByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Venue display name
+      responses:
+        '200':
+          description: Venue retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/VenueDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /venues/byCountry/{countryId}:
+    get:
+      tags:
+        - Venues
+      summary: Get venues by country
+      description: Retrieve paginated venues filtered by country ID
+      operationId: getVenuesByCountryId
+      parameters:
+        - name: countryId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Country ID
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - name: sortField
+          in: query
+          schema:
+            type: string
+            default: name
+          description: Field to sort by
+        - name: sortDir
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+          description: Sort direction
+      responses:
+        '200':
+          description: Venues retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageVenueDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      description: Page number (0-indexed)
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    
+    SizeParam:
+      name: size
+      in: query
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 20
+    
+    SortByParam:
+      name: sortBy
+      in: query
+      description: Field to sort by
+      required: false
+      schema:
+        type: string
+        default: name
+    
+    SortDirParam:
+      name: sortDir
+      in: query
+      description: Sort direction
+      required: false
+      schema:
+        type: string
+        enum: [asc, desc]
+        default: asc
+
+  schemas:
+    # Base Response Models
+    ApiResponse:
+      type: object
+      required:
+        - success
+        - message
+        - timestamp
+      properties:
+        success:
+          type: boolean
+          description: Indicates if the operation was successful
+        message:
+          type: string
+          description: Human-readable message about the operation
+        data:
+          description: The response data (type varies by endpoint)
+        error:
+          $ref: '#/components/schemas/ApiError'
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the response
+          example: '2026-01-17T10:30:00'
+        pagination:
+          $ref: '#/components/schemas/PaginationInfo'
+
+    ApiError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message
+          example: Resource not found
+
+    PaginationInfo:
+      type: object
+      required:
+        - page
+        - size
+        - totalElements
+        - totalPages
+        - first
+        - last
+        - hasNext
+        - hasPrevious
+      properties:
+        page:
+          type: integer
+          description: Current page number (0-indexed)
+          example: 0
+        size:
+          type: integer
+          description: Number of items per page
+          example: 20
+        totalElements:
+          type: integer
+          format: int64
+          description: Total number of elements
+          example: 100
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 5
+        first:
+          type: boolean
+          description: Whether this is the first page
+          example: true
+        last:
+          type: boolean
+          description: Whether this is the last page
+          example: false
+        hasNext:
+          type: boolean
+          description: Whether there is a next page
+          example: true
+        hasPrevious:
+          type: boolean
+          description: Whether there is a previous page
+          example: false
+
+    # Enums
+    Gender:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+      description: Gender classification
+
+    AgeCategory:
+      type: string
+      enum:
+        - PROFESSIONAL
+        - RESERVE
+        - AMATEUR
+        - U23
+        - U21
+        - U20
+        - U19
+        - U18
+        - U17
+        - U16
+        - U15
+        - U14
+        - U13
+        - U12
+        - U11
+        - U10
+        - U9
+        - U8
+        - U7
+        - U6
+        - VETERANS
+      description: Age category classification for teams
+
+    OrganizationType:
+      type: string
+      enum:
+        - CLUB
+        - FEDERATION
+        - CONFEDERATION
+        - GOVERNINGBODY
+      description: Type of football organization
+
+    # DTOs
+    CountryDTO:
+      type: object
+      required:
+        - name
+        - displayName
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Country ID
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Country name
+          example: Spain
+        code:
+          type: string
+          maxLength: 2
+          description: Country code (2 characters)
+          example: ES
+        isoCode:
+          type: string
+          maxLength: 3
+          description: ISO code (3 characters)
+          example: ESP
+        displayName:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Display name
+          example: Spain
+        flagUrl:
+          type: string
+          maxLength: 500
+          description: URL to the country flag image
+          example: https://example.com/flags/spain.png
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Creation timestamp
+        createdBy:
+          type: string
+          readOnly: true
+          description: User who created the record
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Last update timestamp
+        updatedBy:
+          type: string
+          readOnly: true
+          description: User who last updated the record
+
+    OrganizationDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - founded
+        - type
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Organization ID
+        name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Organization name
+          example: Real Madrid CF
+        displayName:
+          type: string
+          minLength: 2
+          maxLength: 150
+          description: Display name
+          example: Real Madrid
+        abbreviation:
+          type: string
+          maxLength: 20
+          description: Organization abbreviation
+          example: RMA
+        founded:
+          type: string
+          format: date
+          description: Foundation date
+          example: '1902-03-06'
+        parentOrganizationId:
+          type: integer
+          format: int64
+          description: Parent organization ID (if applicable)
+          nullable: true
+        parentOrganizationDisplayName:
+          type: string
+          readOnly: true
+          description: Parent organization display name
+        countryId:
+          type: integer
+          format: int64
+          description: Country ID where organization is based
+          nullable: true
+        countryDisplayName:
+          type: string
+          readOnly: true
+          description: Country display name
+        headquarters:
+          type: string
+          maxLength: 200
+          description: Headquarters location
+          example: Madrid, Spain
+        logo:
+          type: string
+          maxLength: 500
+          description: URL to organization logo
+          example: https://example.com/logos/real-madrid.png
+        website:
+          type: string
+          maxLength: 500
+          description: Official website URL
+          example: https://www.realmadrid.com
+        description:
+          type: string
+          description: Organization description
+        type:
+          $ref: '#/components/schemas/OrganizationType'
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Creation timestamp
+        createdBy:
+          type: string
+          readOnly: true
+          description: User who created the record
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Last update timestamp
+        updatedBy:
+          type: string
+          readOnly: true
+          description: User who last updated the record
+
+    TeamDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - code
+        - gender
+        - ageCategory
+        - founded
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Team ID
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Team name
+          example: FC Barcelona
+        displayName:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Display name
+          example: Barcelona
+        code:
+          type: string
+          minLength: 3
+          maxLength: 5
+          description: Team code
+          example: BAR
+        gender:
+          $ref: '#/components/schemas/Gender'
+        ageCategory:
+          $ref: '#/components/schemas/AgeCategory'
+        founded:
+          type: string
+          format: date
+          description: Foundation date
+          example: '1899-11-29'
+        organizationId:
+          type: integer
+          format: int64
+          description: Organization ID that owns the team
+          nullable: true
+        organizationDisplayName:
+          type: string
+          readOnly: true
+          description: Organization display name
+        countryId:
+          type: integer
+          format: int64
+          description: Country ID where team is based
+          nullable: true
+        countryDisplayName:
+          type: string
+          readOnly: true
+          description: Country display name
+        venueId:
+          type: integer
+          format: int64
+          description: Home venue ID
+          nullable: true
+        venueDisplayName:
+          type: string
+          readOnly: true
+          description: Venue display name
+        logo:
+          type: string
+          description: URL to team logo
+          example: https://example.com/logos/barcelona.png
+        primaryColor:
+          type: string
+          maxLength: 7
+          description: Primary color (hex format)
+          example: '#A50044'
+        secondaryColor:
+          type: string
+          maxLength: 7
+          description: Secondary color (hex format)
+          example: '#004D98'
+        website:
+          type: string
+          description: Official website URL
+          example: https://www.fcbarcelona.com
+        active:
+          type: boolean
+          description: Whether the team is currently active
+          default: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Creation timestamp
+        createdBy:
+          type: string
+          readOnly: true
+          description: User who created the record
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Last update timestamp
+        updatedBy:
+          type: string
+          readOnly: true
+          description: User who last updated the record
+
+    VenueDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - city
+        - capacity
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Venue ID
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Venue name
+          example: Camp Nou
+        displayName:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Display name
+          example: Camp Nou
+        city:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: City where venue is located
+          example: Barcelona
+        countryId:
+          type: integer
+          format: int64
+          description: Country ID where venue is located
+          nullable: true
+        countryDisplayName:
+          type: string
+          readOnly: true
+          description: Country display name
+        capacity:
+          type: integer
+          description: Venue capacity (number of seats)
+          example: 99354
+        address:
+          type: string
+          description: Full address
+          example: C. d'Arístides Maillol, 12, 08028 Barcelona, Spain
+        image:
+          type: string
+          description: URL to venue image
+          example: https://example.com/venues/camp-nou.jpg
+        opened:
+          type: string
+          format: date
+          description: Date when venue was opened
+          example: '1957-09-24'
+        surface:
+          type: string
+          maxLength: 100
+          description: Playing surface type
+          example: Natural grass
+        active:
+          type: boolean
+          description: Whether the venue is currently active
+          default: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Creation timestamp
+        createdBy:
+          type: string
+          readOnly: true
+          description: User who created the record
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Last update timestamp
+        updatedBy:
+          type: string
+          readOnly: true
+          description: User who last updated the record
+
+    # Paginated Response Models
+    PageCountryDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    PageOrganizationDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    PageTeamDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    PageVenueDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/VenueDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+  responses:
+    BadRequest:
+      description: Bad request - Invalid parameters
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    $ref: '#/components/schemas/ApiError'
+          example:
+            success: false
+            message: Validation failed
+            error:
+              code: INVALID_PARAMETER
+              message: Invalid parameter value
+            timestamp: '2026-01-17T10:30:00'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    $ref: '#/components/schemas/ApiError'
+          example:
+            success: false
+            message: Resource not found
+            error:
+              code: NOT_FOUND
+              message: Resource with specified identifier not found
+            timestamp: '2026-01-17T10:30:00'
+
+    Conflict:
+      description: Conflict - Resource already exists
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    $ref: '#/components/schemas/ApiError'
+          example:
+            success: false
+            message: Resource already exists
+            error:
+              code: DUPLICATE_ERROR
+              message: A resource with the same identifier already exists
+            timestamp: '2026-01-17T10:30:00'
+
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    $ref: '#/components/schemas/ApiError'
+          example:
+            success: false
+            message: An internal server error occurred
+            error:
+              code: SERVER_ERROR
+              message: An unexpected error occurred while processing the request
+            timestamp: '2026-01-17T10:30:00'
