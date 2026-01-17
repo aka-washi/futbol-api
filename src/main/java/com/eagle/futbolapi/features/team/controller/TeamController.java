@@ -138,4 +138,52 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
     Page<TeamDTO> teams = teamPage.map(mapper::toTeamDTO);
     return ResponseUtil.success(teams, SUCCESS_MESSAGE);
   }
+
+  @Override
+  protected Page<Team> getAllEntities(Pageable pageable) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getAllEntities'");
+  }
+
+  @Override
+  protected Team getEntityById(Long id) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getEntityById'");
+  }
+
+  @Override
+  protected Team createEntity(TeamDTO dto) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'createEntity'");
+  }
+
+  @Override
+  protected Team updateEntity(Long id, TeamDTO dto) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'updateEntity'");
+  }
+
+  @Override
+  protected void deleteEntity(Long id) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'deleteEntity'");
+  }
+
+  @Override
+  protected boolean existsById(Long id) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'existsById'");
+  }
+
+  @Override
+  protected TeamDTO toDTO(Team entity) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'toDTO'");
+  }
+
+  @Override
+  protected Team toEntity(TeamDTO dto) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
+  }
 }
