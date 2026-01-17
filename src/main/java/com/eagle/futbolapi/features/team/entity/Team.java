@@ -15,14 +15,15 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import com.eagle.futbolapi.features.country.entity.Country;
-import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.entity.Gender;
+import com.eagle.futbolapi.features.country.entity.Country;
+import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.venue.entity.Venue;
 
 import lombok.AllArgsConstructor;
@@ -37,7 +38,20 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @Accessors(chain = false)
 @Entity
-@Table(name = "team")
+@Table(
+    name = "team",
+    uniqueConstraints = {
+        @UniqueConstraint(
+            name = "uk_team_natural",
+            columnNames = {
+                "tm_name",
+                "tm_gender",
+                "tm_age_category",
+                "organization_id"
+            }
+        )
+    }
+)
 @AttributeOverrides({
     @AttributeOverride(name = "id", column = @Column(name = "tm_id")),
     @AttributeOverride(name = "createdAt", column = @Column(name = "tm_created_at", nullable = false, updatable = false)),
@@ -86,8 +100,8 @@ public class Team extends BaseEntity {
   private Country country;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "home_venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-  private Venue homeVenue;
+  @JoinColumn(name = "venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Venue venue;
 
   @Column(name = "tm_logo")
   private String logo;

@@ -80,7 +80,7 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
   @Override
   protected void resolveRelationships(OrganizationDTO dto, Organization organization) {
     // Map country from display name or ID
-    if (dto.getCountryDisplayName() != null) {
+    if (dto.getCountryDisplayName() != null && !dto.getCountryDisplayName().trim().isEmpty()) {
       var country = countryService.getCountryByDisplayName(dto.getCountryDisplayName())
           .orElseThrow(() -> new ResourceNotFoundException("Country", "displayName", dto.getCountryDisplayName()));
       organization.setCountry(country);

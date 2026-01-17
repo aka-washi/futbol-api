@@ -659,9 +659,9 @@
         "required": true
       },
       {
-        "name": "homeVenue",
+        "name": "venue",
         "type": "relation",
-        "label": "Home Venue",
+        "label": "Venue",
         "relation": {
           "entity": "venue",
           "field": "id",
