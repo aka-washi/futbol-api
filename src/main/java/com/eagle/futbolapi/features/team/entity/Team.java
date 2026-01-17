@@ -73,8 +73,8 @@ public class Team extends BaseEntity {
   private String displayName;
 
   @NotBlank
-  @Size(min = 3, max = 3)
-  @Column(name = "tm_code", nullable = false, unique = true, length = 3)
+  @Size(min = 3, max = 5)
+  @Column(name = "tm_code", nullable = false, length = 5)
   private String code; // 3-letter code (e.g., "AME" for América)
 
   @Enumerated(EnumType.STRING)

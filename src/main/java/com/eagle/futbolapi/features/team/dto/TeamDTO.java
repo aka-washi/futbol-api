@@ -29,7 +29,7 @@ public class TeamDTO {
   private String displayName;
 
   @NotBlank(message = "Team code is required")
-  @Size(min = 3, max = 3, message = "Team code must be exactly 3 characters")
+  @Size(min = 3, max = 5, message = "Team code must be between 3 and 5 characters")
   private String code;
 
   @NotNull(message = "Gender is required")
