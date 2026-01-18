@@ -64,7 +64,7 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
   // No relationships to resolve for Country
 
   @Override
-  public Country update(Long id, CountryDTO dto) {
+  public Country update(@NotNull Long id, @NotNull CountryDTO dto) {
     // Get existing entity to preserve audit fields
     Country existing = repository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
