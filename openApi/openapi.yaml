@@ -27,6 +27,10 @@ tags:
     description: Operations related to football teams
   - name: Venues
     description: Operations related to stadiums and venues
+  - name: Point Systems
+    description: Operations related to point systems for league standings
+  - name: Structures
+    description: Operations related to competition structures (leagues, tournaments, playoffs)
 
 paths:
   # Countries Endpoints
@@ -1450,6 +1454,573 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 
+  # Point Systems Endpoints
+  /pointSystems:
+    get:
+      tags:
+        - Point Systems
+      summary: Get all point systems
+      description: Retrieve a paginated list of all point systems
+      operationId: getAllPointSystems
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Point systems retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PagePointSystemDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Point Systems
+      summary: Create a new point system
+      description: Create a new point system entry
+      operationId: createPointSystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PointSystemDTO'
+      responses:
+        '201':
+          description: Point system created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PointSystemDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /pointSystems/{id}:
+    get:
+      tags:
+        - Point Systems
+      summary: Get point system by ID
+      description: Retrieve a specific point system by its ID
+      operationId: getPointSystemById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Point System ID
+          example: 1
+      responses:
+        '200':
+          description: Point system retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PointSystemDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Point Systems
+      summary: Update point system
+      description: Update an existing point system
+      operationId: updatePointSystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Point System ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PointSystemDTO'
+      responses:
+        '200':
+          description: Point system updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PointSystemDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Point Systems
+      summary: Delete point system
+      description: Delete a point system by ID
+      operationId: deletePointSystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Point System ID
+          example: 1
+      responses:
+        '200':
+          description: Point system deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /pointSystems/{id}/exists:
+    get:
+      tags:
+        - Point Systems
+      summary: Check if point system exists
+      description: Check if a point system exists by ID
+      operationId: pointSystemExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Point System ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /pointSystems/name/{name}:
+    get:
+      tags:
+        - Point Systems
+      summary: Get point system by name
+      description: Retrieve a point system by its name
+      operationId: getPointSystemByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Point system name
+          example: Standard 3-1-0
+      responses:
+        '200':
+          description: Point system retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PointSystemDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /pointSystems/displayName/{displayName}:
+    get:
+      tags:
+        - Point Systems
+      summary: Get point system by display name
+      description: Retrieve a point system by its display name
+      operationId: getPointSystemByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Point system display name
+          example: Standard Points
+      responses:
+        '200':
+          description: Point system retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PointSystemDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Structures Endpoints
+  /structures:
+    get:
+      tags:
+        - Structures
+      summary: Get all structures
+      description: Retrieve a paginated list of all structures
+      operationId: getAllStructures
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Structures retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageStructureDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Structures
+      summary: Create a new structure
+      description: Create a new structure entry
+      operationId: createStructure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StructureDTO'
+      responses:
+        '201':
+          description: Structure created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StructureDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /structures/{id}:
+    get:
+      tags:
+        - Structures
+      summary: Get structure by ID
+      description: Retrieve a specific structure by its ID
+      operationId: getStructureById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Structure ID
+          example: 1
+      responses:
+        '200':
+          description: Structure retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StructureDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Structures
+      summary: Update structure
+      description: Update an existing structure
+      operationId: updateStructure
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Structure ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StructureDTO'
+      responses:
+        '200':
+          description: Structure updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StructureDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Structures
+      summary: Delete structure
+      description: Delete a structure by ID
+      operationId: deleteStructure
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Structure ID
+          example: 1
+      responses:
+        '200':
+          description: Structure deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /structures/{id}/exists:
+    get:
+      tags:
+        - Structures
+      summary: Check if structure exists
+      description: Check if a structure exists by ID
+      operationId: structureExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Structure ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /structures/name/{name}:
+    get:
+      tags:
+        - Structures
+      summary: Get structure by name
+      description: Retrieve a structure by its name
+      operationId: getStructureByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Structure name
+          example: Liga MX Regular Season
+      responses:
+        '200':
+          description: Structure retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StructureDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /structures/displayName/{displayName}:
+    get:
+      tags:
+        - Structures
+      summary: Get structure by display name
+      description: Retrieve a structure by its display name
+      operationId: getStructureByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Structure display name
+          example: Regular Season
+      responses:
+        '200':
+          description: Structure retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StructureDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /structures/type/{type}:
+    get:
+      tags:
+        - Structures
+      summary: Get structures by type
+      description: Retrieve paginated structures filtered by type
+      operationId: getStructuresByType
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/StructureType'
+          description: Structure type
+          example: REGULAR_SEASON
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - name: sortField
+          in: query
+          schema:
+            type: string
+            default: name
+          description: Field to sort by
+        - name: sortDirection
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+          description: Sort direction
+      responses:
+        '200':
+          description: Structures retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageStructureDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
 components:
   parameters:
     PageParam:
@@ -1622,52 +2193,171 @@ components:
         - GOVERNINGBODY
       description: Type of football organization
 
-    # Point System
-    PointSystem:
+    StructureType:
+      type: string
+      enum:
+        - REGULAR_SEASON
+        - PLAYOFF
+        - PLAY_IN
+        - KNOCKOUT
+        - GROUP_STAGE
+        - ROUND_ROBIN
+      description: Type of competition structure
+
+    # Point System DTO
+    PointSystemDTO:
       type: object
-      description: Point system for league standings tracking
+      required:
+        - name
+        - displayName
       properties:
-        position:
+        id:
           type: integer
-          description: Current position in the standings
-          example: 1
-        played:
-          type: integer
-          description: Number of matches played
-          example: 17
-        won:
-          type: integer
-          description: Number of matches won
-          example: 14
-        drawn:
-          type: integer
-          description: Number of matches drawn
-          example: 2
-        lost:
-          type: integer
-          description: Number of matches lost
-          example: 1
-        goalsFor:
-          type: integer
-          description: Total goals scored
-          example: 42
-        goalsAgainst:
-          type: integer
-          description: Total goals conceded
-          example: 12
-        goalDifference:
-          type: integer
-          description: Goal difference (goalsFor - goalsAgainst)
-          example: 30
-        points:
-          type: integer
-          description: Total points earned
-          example: 44
-        form:
+          format: int64
+          readOnly: true
+          description: Point System ID
+        name:
           type: string
-          maxLength: 10
-          description: Recent form (e.g., W-W-D-W-L for last 5 matches)
-          example: W-W-W-D-W
+          minLength: 2
+          maxLength: 100
+          description: Point system name
+          example: Standard 3-1-0
+        displayName:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Display name
+          example: Standard Points
+        description:
+          type: string
+          maxLength: 500
+          description: Description of the point system
+          example: Standard football point system with 3 points for a win
+        pointsForWin:
+          type: integer
+          description: Points awarded for a win
+          example: 3
+        pointsForDraw:
+          type: integer
+          description: Points awarded for a draw
+          example: 1
+        pointsForLoss:
+          type: integer
+          description: Points awarded for a loss
+          example: 0
+        pointsForWinOnPenalties:
+          type: integer
+          description: Points awarded for a win on penalties (knockout stages)
+          example: 2
+        pointsForLossOnPenalties:
+          type: integer
+          description: Points awarded for a loss on penalties (knockout stages)
+          example: 1
+        active:
+          type: boolean
+          description: Whether the point system is currently active
+          default: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Creation timestamp
+        createdBy:
+          type: string
+          readOnly: true
+          description: User who created the record
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Last update timestamp
+        updatedBy:
+          type: string
+          readOnly: true
+          description: User who last updated the record
+
+    # Structure DTO
+    StructureDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - type
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Structure ID
+        name:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Structure name
+          example: Liga MX Apertura Regular Season
+        displayName:
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Display name
+          example: Apertura Regular Season
+        type:
+          $ref: '#/components/schemas/StructureType'
+        description:
+          type: string
+          maxLength: 500
+          description: Description of the structure
+          example: Regular season format with home and away matches
+        rules:
+          type: string
+          description: Rules specific to this structure
+        pointSystemId:
+          type: integer
+          format: int64
+          description: Associated point system ID
+          nullable: true
+        pointSystemDisplayName:
+          type: string
+          readOnly: true
+          description: Point system display name
+        numberOfTeams:
+          type: integer
+          description: Number of teams in this structure
+          example: 18
+        numberOfGroups:
+          type: integer
+          description: Number of groups (for group stage structures)
+          example: 1
+        teamsPerGroup:
+          type: integer
+          description: Number of teams per group
+          example: 18
+        hasHomeAndAway:
+          type: boolean
+          description: Whether teams play home and away matches
+          default: true
+        teamsQualifyingForNextStage:
+          type: integer
+          description: Number of teams qualifying for the next stage
+          example: 12
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Creation timestamp
+        createdBy:
+          type: string
+          readOnly: true
+          description: User who created the record
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Last update timestamp
+        updatedBy:
+          type: string
+          readOnly: true
+          description: User who last updated the record
 
     # DTOs
     CountryDTO:
@@ -2103,6 +2793,60 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VenueDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    PagePointSystemDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/PointSystemDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    PageStructureDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/StructureDTO'
         pageable:
           type: object
         totalElements:
