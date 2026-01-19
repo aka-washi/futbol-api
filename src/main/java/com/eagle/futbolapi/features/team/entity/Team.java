@@ -20,6 +20,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import com.eagle.futbolapi.features.base.entity.AgeCategory;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.entity.Gender;
 import com.eagle.futbolapi.features.country.entity.Country;

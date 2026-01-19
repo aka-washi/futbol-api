@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.eagle.futbolapi.features.base.entity.OrganizationType;
 import com.eagle.futbolapi.features.organization.entity.Organization;
-import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 
 @Repository
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {

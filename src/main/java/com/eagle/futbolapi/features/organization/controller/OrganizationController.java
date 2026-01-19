@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eagle.futbolapi.features.base.controller.BaseCrudController;
 import com.eagle.futbolapi.features.base.dto.ApiResponse;
+import com.eagle.futbolapi.features.base.entity.OrganizationType;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.util.ResponseUtil;
 import com.eagle.futbolapi.features.organization.dto.OrganizationDTO;
 import com.eagle.futbolapi.features.organization.entity.Organization;
-import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 import com.eagle.futbolapi.features.organization.mapper.OrganizationMapper;
 import com.eagle.futbolapi.features.organization.service.OrganizationService;
 

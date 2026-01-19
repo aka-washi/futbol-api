@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.eagle.futbolapi.features.base.entity.AgeCategory;
 import com.eagle.futbolapi.features.base.entity.Gender;
-import com.eagle.futbolapi.features.team.entity.AgeCategory;
 import com.eagle.futbolapi.features.team.entity.Team;
 
 @Repository

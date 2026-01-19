@@ -1,4 +1,4 @@
-package com.eagle.futbolapi.features.team.entity;
+package com.eagle.futbolapi.features.base.entity;
 
 public enum AgeCategory {
   PROFESSIONAL("Professional"),

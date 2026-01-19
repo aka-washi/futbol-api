@@ -10,13 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.entity.OrganizationType;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.country.service.CountryService;
 import com.eagle.futbolapi.features.organization.dto.OrganizationDTO;
 import com.eagle.futbolapi.features.organization.entity.Organization;
-import com.eagle.futbolapi.features.organization.entity.OrganizationType;
 import com.eagle.futbolapi.features.organization.mapper.OrganizationMapper;
 import com.eagle.futbolapi.features.organization.repository.OrganizationRepository;
 
