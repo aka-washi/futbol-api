@@ -1,4 +1,4 @@
-package com.eagle.futbolapi.features.tournament.entity;
+package com.eagle.futbolapi.features.base.entity;
 
 public enum TournamentType {
     LEAGUE("League"),

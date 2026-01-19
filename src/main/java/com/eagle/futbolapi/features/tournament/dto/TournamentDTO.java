@@ -33,7 +33,7 @@ public class TournamentDTO {
 
     private String type;
 
-    private String category;
+    private String ageCategory;
 
     private Integer level;
 

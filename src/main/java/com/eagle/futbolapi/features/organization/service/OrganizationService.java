@@ -78,7 +78,7 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
    * Resolves related entities (Country, Parent Organization) from DTO.
    */
   @Override
-  protected void resolveRelationships(OrganizationDTO dto, Organization organization) {
+  protected void resolveRelationships(@NotNull OrganizationDTO dto, @NotNull Organization organization) {
     // Map country from display name or ID
     if (dto.getCountryDisplayName() != null && !dto.getCountryDisplayName().trim().isEmpty()) {
       var country = countryService.getCountryByDisplayName(dto.getCountryDisplayName())

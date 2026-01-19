@@ -18,8 +18,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.entity.AgeCategory;
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.entity.TournamentType;
 import com.eagle.futbolapi.features.organization.entity.Organization;
-import com.eagle.futbolapi.features.shared.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -67,7 +69,7 @@ public class Tournament extends BaseEntity {
   @Enumerated(EnumType.STRING)
   @Column(name = "tn_category", nullable = false, length = 20)
   @NotNull
-  private Category category;
+  private AgeCategory ageCategory;
 
   @Column(name = "tn_level", nullable = false)
   private Integer level; // 1 = First Division, 2 = Second Division, etc.
@@ -96,13 +98,9 @@ public class Tournament extends BaseEntity {
         name,
         displayName,
         type,
-        category,
+        ageCategory,
         level,
-        relegationTo,
-        description,
-        logo,
-        foundedYear,
-        active
+        relegationTo
     );
   }
 
@@ -117,13 +115,9 @@ public class Tournament extends BaseEntity {
         && Objects.equals(name, other.name)
         && Objects.equals(displayName, other.displayName)
         && Objects.equals(type, other.type)
-        && Objects.equals(category, other.category)
+        && Objects.equals(ageCategory, other.ageCategory)
         && Objects.equals(level, other.level)
-        && Objects.equals(relegationTo, other.relegationTo)
-        && Objects.equals(description, other.description)
-        && Objects.equals(logo, other.logo)
-        && Objects.equals(foundedYear, other.foundedYear)
-        && Objects.equals(active, other.active);
+        && Objects.equals(relegationTo, other.relegationTo);
   }
 
 }
