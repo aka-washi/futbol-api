@@ -17,7 +17,7 @@ public class TournamentController extends BaseCrudController<Tournament, Tournam
   private static final String SUCCESS_MESSAGE = "Tournament retrieved successfully";
   private static final String DUPLICATE_MESSAGE = "Tournament already exists";
   private static final String SERVER_ERROR = "SERVER_ERROR";
-  
+
     public TournamentController(TournamentService tournamentService, TournamentMapper tournamentMapper) {
         super(
                 tournamentService,
@@ -41,7 +41,7 @@ public class TournamentController extends BaseCrudController<Tournament, Tournam
                 .orElseThrow(() -> new ResourceNotFoundException(resourceName, "displayName", displayName));
         return mapper.toTournamentDTO(tournament);
     }
-    
+
 
     // Implement abstract methods from BaseCrudController
     @Override

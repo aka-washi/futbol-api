@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.pointsystem.dto.PointSystemDTO;
 import com.eagle.futbolapi.features.pointsystem.entity.PointSystem;

@@ -96,7 +96,7 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
     }
     return seasonRepository.findByDateRange(date);
   }
-  
+
   @Override
   protected Season convertToEntity(SeasonDTO dto) {
     return seasonMapper.toSeason(dto);
