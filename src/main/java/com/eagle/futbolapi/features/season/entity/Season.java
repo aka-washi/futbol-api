@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.shared.BaseEntity;
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.tournament.entity.Tournament;
 
 import lombok.AllArgsConstructor;
@@ -65,7 +65,7 @@ public class Season extends BaseEntity {
     @Column(name = "sn_end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "se_active", nullable = false)
+    @Column(name = "sn_active", nullable = false)
     @Builder.Default
     private Boolean active = false;
 
@@ -85,8 +85,7 @@ public class Season extends BaseEntity {
             startDate,
             endDate,
             active,
-            hasRelegation,
-            description
+            hasRelegation
         );
     }
 
@@ -103,8 +102,7 @@ public class Season extends BaseEntity {
             && Objects.equals(startDate, other.startDate)
             && Objects.equals(endDate, other.endDate)
             && Objects.equals(active, other.active)
-            && Objects.equals(hasRelegation, other.hasRelegation)
-            && Objects.equals(description, other.description);
+            && Objects.equals(hasRelegation, other.hasRelegation);
     }
 
 }

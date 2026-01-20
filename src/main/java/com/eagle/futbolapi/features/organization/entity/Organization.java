@@ -94,10 +94,6 @@ public class Organization extends BaseEntity {
         country,
         founded,
         parentOrganization,
-        logo,
-        website,
-        headquarters,
-        description,
         type);
   }
 
@@ -114,10 +110,6 @@ public class Organization extends BaseEntity {
         && Objects.equals(country, other.country)
         && Objects.equals(founded, other.founded)
         && Objects.equals(parentOrganization, other.parentOrganization)
-        && Objects.equals(logo, other.logo)
-        && Objects.equals(website, other.website)
-        && Objects.equals(headquarters, other.headquarters)
-        && Objects.equals(description, other.description)
         && Objects.equals(type, other.type);
   }
 

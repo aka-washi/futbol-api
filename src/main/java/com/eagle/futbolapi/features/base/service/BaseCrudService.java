@@ -60,8 +60,26 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
    * Updates an entity from a DTO with relationship resolution.
    */
   public T update(K id, D dto) {
-    T entity = convertToEntity(dto);
+    // Get existing season to preserve audit fields
+    T existing = getById(id).orElseThrow(
+        () -> new IllegalArgumentException("Entity with given ID does not exist"));
+    // Convert DTO to entity and resolve relationships
+        T entity = convertToEntity(dto);
     resolveRelationships(dto, entity);
+
+    // Preserve audit fields from existing season
+    entity.setId((Long) id);
+    entity.setCreatedAt(existing.getCreatedAt());
+    entity.setCreatedBy(existing.getCreatedBy());
+
+    // Validate and save
+    if(Objects.equals(existing, entity)) {
+      return existing;
+    }
+    if (isDuplicate(id, entity)) {
+      throw new IllegalArgumentException("Duplicate entity");
+    }
+
     return saveExisting(id, entity);
   }
 

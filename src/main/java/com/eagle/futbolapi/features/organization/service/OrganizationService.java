@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eagle.futbolapi.features.base.entity.OrganizationType;
-import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.country.service.CountryService;
@@ -101,33 +100,6 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
           .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", dto.getParentOrganizationId()));
       organization.setParentOrganization(parent);
     }
-  }
-
-  @Override
-  public Organization update(Long id, OrganizationDTO dto) {
-    // Get existing entity to preserve audit fields
-    Organization existing = repository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Entity with given ID does not exist"));
-
-    // Convert DTO to entity and resolve relationships
-    Organization organization = convertToEntity(dto);
-    resolveRelationships(dto, organization);
-
-    // Preserve audit fields from existing entity
-    organization.setId(id);
-    organization.setCreatedAt(existing.getCreatedAt());
-    organization.setCreatedBy(existing.getCreatedBy());
-
-    // Validate and save
-    if (existing.equals(organization)) {
-      throw new NoChangesDetectedException("No changes detected for entity", id);
-    }
-
-    if (isDuplicate(id, organization)) {
-      throw new IllegalArgumentException("Duplicate entity");
-    }
-
-    return repository.save(organization);
   }
 
   @Override

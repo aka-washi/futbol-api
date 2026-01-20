@@ -24,7 +24,6 @@ import com.eagle.futbolapi.features.pointsystem.service.PointSystemService;
 public class PointSystemController
     extends BaseCrudController<PointSystem, PointSystemDTO, PointSystemService, PointSystemMapper> {
 
-  private static final String NOT_FOUND_SUFFIX = " not found";
   private static final String RESOURCE_NAME = "Point System";
   private static final String SUCCESS_MESSAGE = "Point System retrieved successfully";
   private static final String DUPLICATE_MESSAGE = "Point System already exists";
@@ -44,7 +43,7 @@ public class PointSystemController
   @GetMapping("/name/{name}")
   public ResponseEntity<ApiResponse<PointSystemDTO>> getPointSystemByName(@PathVariable String name) {
     PointSystem pointSystem = service.getPointSystemByName(name)
-        .orElseThrow(() -> new ResourceNotFoundException(resourceName + NOT_FOUND_SUFFIX, "name", name));
+        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "name", name));
     PointSystemDTO pointSystemDTO = mapper.toPointSystemDTO(pointSystem);
     return ResponseUtil.success(pointSystemDTO, successMessage);
   }
@@ -52,7 +51,7 @@ public class PointSystemController
   @GetMapping("/displayName/{displayName}")
   public ResponseEntity<ApiResponse<PointSystemDTO>> getPointSystemByDisplayName(@PathVariable String displayName) {
     PointSystem pointSystem = service.getPointSystemByDisplayName(displayName)
-        .orElseThrow(() -> new ResourceNotFoundException(resourceName + NOT_FOUND_SUFFIX, "displayName", displayName));
+        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "displayName", displayName));
     PointSystemDTO pointSystemDTO = mapper.toPointSystemDTO(pointSystem);
     return ResponseUtil.success(pointSystemDTO, successMessage);
   }
@@ -66,7 +65,7 @@ public class PointSystemController
   @Override
   protected PointSystem getEntityById(Long id) {
     return service.getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(resourceName + NOT_FOUND_SUFFIX, "id", id.toString()));
+        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id.toString()));
   }
 
   @Override

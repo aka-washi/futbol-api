@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.tournament.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.entity.TournamentType;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
@@ -34,43 +36,53 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
     this.tournamentMapper = tournamentMapper;
   }
 
-  public TournamentDTO getTournamentByName(String name) {
-    Tournament tournament = tournamentRepository.findByName(name)
-        .orElseThrow(() -> new IllegalArgumentException("Tournament with given name does not exist"));
-    return tournamentMapper.toTournamentDTO(tournament);
+  public Optional<Tournament> getTournamentByName(String name) {
+    if(name == null || name.trim().isEmpty()) {
+      throw new IllegalArgumentException("Tournament name cannot be null or empty");
+    }
+    return tournamentRepository.findByName(name);
   }
 
-  public TournamentDTO getTournamentByDisplayName(String displayName) {
-    Tournament tournament = tournamentRepository.findByDisplayName(displayName)
-        .orElseThrow(() -> new IllegalArgumentException("Tournament with given display name does not exist"));
-    return tournamentMapper.toTournamentDTO(tournament);
+  public Optional<Tournament> getTournamentByDisplayName(String displayName) {
+    if(displayName == null || displayName.trim().isEmpty()) {
+      throw new IllegalArgumentException("Tournament display name cannot be null or empty");
+    }
+    return tournamentRepository.findByDisplayName(displayName);
   }
 
-  public TournamentDTO getTournamentByUniqueValues(Long organizationId, String type, String ageCategory,
+  public Optional<Tournament> getTournamentByUniqueValues(Long organizationId, String type, String ageCategory,
       Integer level) {
-    Tournament tournament = tournamentRepository.findByUniqueValues(
-        null, // Fetch organization entity by ID if needed
-        null, // Convert type string to TournamentType enum if needed
+    return tournamentRepository.findByUniqueValues(
+        organizationService.getById(organizationId)
+        .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId)),
+        TournamentType.valueOf(type),
         ageCategory,
-        level).orElseThrow(() -> new IllegalArgumentException("Tournament with given unique values does not exist"));
-    return tournamentMapper.toTournamentDTO(tournament);
+        level);
   }
 
-  public Page<TournamentDTO> getTournamentsByOrganizationAndActive(Long organizationId, Boolean active,
+  public Page<Tournament> getTournamentsByOrganizationAndActive(Long organizationId, Boolean active,
       Pageable pageable) {
-    Page<Tournament> tournaments = tournamentRepository.findByOrganizationAndActive(
-        null, // Fetch organization entity by ID if needed
+        if(pageable == null) {
+          pageable = Pageable.unpaged();
+        }
+    return tournamentRepository.findByOrganizationAndActive(
+        organizationService.getById(organizationId)
+        .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId)),
         active,
         pageable);
-    return tournaments.map(tournamentMapper::toTournamentDTO);
   }
 
-  public Page<TournamentDTO> getTournamentsByTypeAndActive(String type, Boolean active, Pageable pageable) {
-    Page<Tournament> tournaments = tournamentRepository.findByTypeAndActive(
-        null, // Convert type string to TournamentType enum if needed
+  public Page<Tournament> getTournamentsByTypeAndActive(TournamentType type, Boolean active, Pageable pageable) {
+        if(pageable == null) {
+          pageable = Pageable.unpaged();
+        }
+        if(type == null ) {
+          throw new IllegalArgumentException("Tournament type cannot be null or empty");
+        }
+    return tournamentRepository.findByTypeAndActive(
+        type,
         active,
         pageable);
-    return tournaments.map(tournamentMapper::toTournamentDTO);
   }
 
   @Override
