@@ -37,14 +37,14 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
   }
 
   public Optional<Tournament> getTournamentByName(String name) {
-    if(name == null || name.trim().isEmpty()) {
+    if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException("Tournament name cannot be null or empty");
     }
     return tournamentRepository.findByName(name);
   }
 
   public Optional<Tournament> getTournamentByDisplayName(String displayName) {
-    if(displayName == null || displayName.trim().isEmpty()) {
+    if (displayName == null || displayName.trim().isEmpty()) {
       throw new IllegalArgumentException("Tournament display name cannot be null or empty");
     }
     return tournamentRepository.findByDisplayName(displayName);
@@ -54,7 +54,7 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
       Integer level) {
     return tournamentRepository.findByUniqueValues(
         organizationService.getById(organizationId)
-        .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId)),
+            .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId)),
         TournamentType.valueOf(type),
         ageCategory,
         level);
@@ -62,23 +62,23 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
 
   public Page<Tournament> getTournamentsByOrganizationAndActive(Long organizationId, Boolean active,
       Pageable pageable) {
-        if(pageable == null) {
-          pageable = Pageable.unpaged();
-        }
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
     return tournamentRepository.findByOrganizationAndActive(
         organizationService.getById(organizationId)
-        .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId)),
+            .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId)),
         active,
         pageable);
   }
 
   public Page<Tournament> getTournamentsByTypeAndActive(TournamentType type, Boolean active, Pageable pageable) {
-        if(pageable == null) {
-          pageable = Pageable.unpaged();
-        }
-        if(type == null ) {
-          throw new IllegalArgumentException("Tournament type cannot be null or empty");
-        }
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    if (type == null) {
+      throw new IllegalArgumentException("Tournament type cannot be null or empty");
+    }
     return tournamentRepository.findByTypeAndActive(
         type,
         active,
@@ -116,31 +116,6 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
           .orElseThrow(() -> new ResourceNotFoundException("Tournament", "id", dto.getRelegationToId()));
       tournament.setRelegationTo(relegationTo);
     }
-  }
-
-  @Override
-  public Tournament update(@NotNull Long id, @NotNull TournamentDTO dto) {
-    // Get existing entity to preserve audit fields
-    Tournament existing = repository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Entity with given ID does not exist"));
-
-    // Convert DTO to entity and resolve relationships
-    Tournament tournament = convertToEntity(dto);
-    resolveRelationships(dto, tournament);
-
-    // Preserve audit fields from existing entity
-    tournament.setId(id);
-    tournament.setCreatedAt(existing.getCreatedAt());
-    tournament.setCreatedBy(existing.getCreatedBy());
-
-    // Validate and save
-    if (existing.equals(tournament)) {
-      throw new NoChangesDetectedException("No changes detected for entity", id);
-    }
-    if (isDuplicate(id, tournament)) {
-      throw new IllegalArgumentException("Duplicate entity");
-    }
-    return repository.save(tournament);
   }
 
   @Override

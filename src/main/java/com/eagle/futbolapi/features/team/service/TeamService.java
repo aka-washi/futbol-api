@@ -33,7 +33,8 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
   private final VenueService venueService;
   private final TeamMapper teamMapper;
 
-  public TeamService(TeamRepository teamRepository, CountryService countryService, OrganizationService organizationService, VenueService venueService, TeamMapper teamMapper) {
+  public TeamService(TeamRepository teamRepository, CountryService countryService,
+      OrganizationService organizationService, VenueService venueService, TeamMapper teamMapper) {
     super(teamRepository);
     this.teamRepository = teamRepository;
     this.countryService = countryService;
@@ -73,7 +74,8 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
     return teamRepository.findByGender(gender, pageable);
   }
 
-  public Page<Team> getTeamsByGenderAndAgeCategoryAndOrganizationId(Gender gender, AgeCategory ageCategory, Long organizationId, Pageable pageable) {
+  public Page<Team> getTeamsByGenderAndAgeCategoryAndOrganizationId(Gender gender, AgeCategory ageCategory,
+      Long organizationId, Pageable pageable) {
     if (gender == null) {
       throw new IllegalArgumentException("Gender cannot be null");
     }
@@ -89,7 +91,8 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
     return teamRepository.findByGenderAndAgeCategoryAndOrganizationId(gender, ageCategory, organizationId, pageable);
   }
 
-  public Page<Team> getTeamsByGenderAndAgeCategoryAndCountryId(Gender gender, AgeCategory ageCategory, Long countryId, Pageable pageable) {
+  public Page<Team> getTeamsByGenderAndAgeCategoryAndCountryId(Gender gender, AgeCategory ageCategory, Long countryId,
+      Pageable pageable) {
     if (gender == null) {
       throw new IllegalArgumentException("Gender cannot be null");
     }
@@ -126,7 +129,8 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
     // Map organization from display name or ID
     if (dto.getOrganizationDisplayName() != null && !dto.getOrganizationDisplayName().trim().isEmpty()) {
       var organization = organizationService.getOrganizationByDisplayName(dto.getOrganizationDisplayName())
-          .orElseThrow(() -> new ResourceNotFoundException("Organization", "displayName", dto.getOrganizationDisplayName()));
+          .orElseThrow(
+              () -> new ResourceNotFoundException("Organization", "displayName", dto.getOrganizationDisplayName()));
       team.setOrganization(organization);
     } else if (dto.getOrganizationId() != null) {
       var organization = organizationService.getById(dto.getOrganizationId())
@@ -144,31 +148,6 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
           .orElseThrow(() -> new ResourceNotFoundException("Venue", "id", dto.getVenueId()));
       team.setVenue(venue);
     }
-  }
-
-  @Override
-  public Team update(Long id, TeamDTO dto) {
-    // Get existing entity to preserve audit fields
-    Team existing = repository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-
-    // Convert DTO to entity and resolve relationships
-    Team team = convertToEntity(dto);
-    resolveRelationships(dto, team);
-
-    // Preserve audit fields from existing entity
-    team.setId(id);
-    team.setCreatedAt(existing.getCreatedAt());
-    team.setCreatedBy(existing.getCreatedBy());
-
-    // Validate and save
-    if (existing.equals(team)) {
-      throw new NoChangesDetectedException("No changes detected for entity", id);
-    }
-    if (isDuplicate(id, team)) {
-      throw new IllegalArgumentException("Duplicate entity");
-    }
-    return repository.save(team);
   }
 
   @Override

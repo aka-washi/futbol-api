@@ -75,32 +75,6 @@ public class VenueService extends BaseCrudService<Venue, Long, VenueDTO> {
   }
 
   @Override
-  public Venue update(Long id, VenueDTO dto) {
-    Venue existing = repository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Entity with given ID does not exist"));
-
-    // Convert DTO to entity and resolve relationships
-    Venue venue = convertToEntity(dto);
-    resolveRelationships(dto, venue);
-
-    // Preserve audit fields from existing entity
-    venue.setId(id);
-    venue.setCreatedAt(existing.getCreatedAt());
-    venue.setCreatedBy(existing.getCreatedBy());
-
-    // Validate and save
-    if (existing.equals(venue)) {
-      throw new NoChangesDetectedException("No changes detected for entity", id);
-    }
-
-    if (isDuplicate(id, venue)) {
-      throw new IllegalArgumentException("Duplicate entity");
-    }
-
-    return repository.save(venue);
-  }
-
-  @Override
   protected boolean isDuplicate(@NotNull Venue venue) {
     Objects.requireNonNull(venue, "Venue cannot be null");
 

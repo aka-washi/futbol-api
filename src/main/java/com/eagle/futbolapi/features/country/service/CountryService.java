@@ -61,34 +61,6 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
     return countryMapper.toCountry(dto);
   }
 
-  // No relationships to resolve for Country
-
-  @Override
-  public Country update(@NotNull Long id, @NotNull CountryDTO dto) {
-    // Get existing entity to preserve audit fields
-    Country existing = repository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-
-    // Convert DTO to entity
-    Country country = convertToEntity(dto);
-
-    // Preserve audit fields from existing entity
-    country.setId(id);
-    country.setCreatedAt(existing.getCreatedAt());
-    country.setCreatedBy(existing.getCreatedBy());
-
-    // Validate and save
-    if (existing.equals(country)) {
-      throw new NoChangesDetectedException("No changes detected for entity", id);
-    }
-
-    if (isDuplicate(id, country)) {
-      throw new IllegalArgumentException("Duplicate entity");
-    }
-
-    return repository.save(country);
-  }
-
   @Override
   protected boolean isDuplicate(@NotNull Country country) {
     Objects.requireNonNull(country, "Country cannot be null");

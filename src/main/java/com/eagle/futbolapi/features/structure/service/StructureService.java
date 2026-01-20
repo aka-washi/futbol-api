@@ -82,34 +82,6 @@ public class StructureService extends BaseCrudService<Structure, Long, Structure
   }
 
   @Override
-  public Structure update(Long id, StructureDTO dto) {
-    // Get existing entity to preserve audit fields
-    Structure existing = repository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-
-    // Convert DTO to entity and resolve relationships
-    Structure structure = convertToEntity(dto);
-    resolveRelationships(dto, structure);
-
-    // preserve audit fields from existing entity
-    structure.setId(id);
-    structure.setCreatedAt(existing.getCreatedAt());
-    structure.setCreatedBy(existing.getCreatedBy());
-
-    // Validate and save
-    if (existing.equals(structure)) {
-      throw new NoChangesDetectedException("No changes detected for entity", id);
-    }
-
-    if (isDuplicate(structure)) {
-      throw new IllegalArgumentException("Duplicate entity detected");
-    }
-
-    return repository.save(structure);
-
-  }
-
-  @Override
   protected boolean isDuplicate(@NotNull Structure structure) {
     Objects.requireNonNull(structure, "Structure cannot be null");
 

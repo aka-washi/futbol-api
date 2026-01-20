@@ -47,33 +47,6 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long, Point
     return pointSystemMapper.toPointSystem(dto);
   }
 
-  // No relationships to resolve for PointSystem
-
-  @Override
-  public PointSystem update(@NotNull Long id, @NotNull PointSystemDTO dto) {
-    PointSystem existing = repository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-
-    // convert DTO to entity
-    PointSystem pointSystem = convertToEntity(dto);
-
-    // preserve audit fields from existing entity
-    pointSystem.setId(id);
-    pointSystem.setCreatedAt(existing.getCreatedAt());
-    pointSystem.setCreatedBy(existing.getCreatedBy());
-
-    // Validate and save
-    if (existing.equals(pointSystem)) {
-      throw new NoChangesDetectedException("No changes detected for entity", id);
-    }
-
-    if (isDuplicate(id, pointSystem)) {
-      throw new IllegalArgumentException("Duplicate entity");
-    }
-
-    return repository.save(pointSystem);
-  }
-
   @Override
   protected boolean isDuplicate(@NotNull PointSystem pointSystem) {
     Objects.requireNonNull(pointSystem, "Point System cannot be null");
