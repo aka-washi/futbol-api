@@ -83,14 +83,14 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
         active);
   }
 
-  Page<Season> getSeasonsByTournamentId(Long tournamentId) {
+  public Page<Season> getSeasonsByTournamentId(Long tournamentId) {
     if (tournamentId == null) {
       throw new IllegalArgumentException("Tournament ID cannot be null");
     }
     return seasonRepository.findByTournamentId(tournamentId);
   }
 
-  Page<Season> getSeasonsByDateRange(LocalDate date) {
+  public Page<Season> getSeasonsByDateRange(LocalDate date) {
     if (date == null) {
       throw new IllegalArgumentException("Date cannot be null");
     }

@@ -18,6 +18,10 @@ import com.eagle.futbolapi.features.base.dto.PaginationInfo;
  */
 public final class ResponseUtil {
 
+  private static final int DEFAULT_PAGE = 0;
+  private static final int DEFAULT_PAGE_SIZE = 20;
+  private static final String DEFAULT_SORT_FIELD = "name";
+  private static final String DEFAULT_SORT_DIRECTION = "asc";
   private static final String DESCENDING = "desc";
 
   private ResponseUtil() {
@@ -94,6 +98,14 @@ public final class ResponseUtil {
         ? Sort.by(sortBy).descending()
         : Sort.by(sortBy).ascending();
     return PageRequest.of(page, size, sort);
+  }
+
+  public static Pageable createPageableWithDefaults() {
+    int page = DEFAULT_PAGE;
+    int size = DEFAULT_PAGE_SIZE;
+    String sortBy = DEFAULT_SORT_FIELD;
+    String sortDir = DEFAULT_SORT_DIRECTION;
+    return buildPageable(page, size, sortBy, sortDir);
   }
 
 }

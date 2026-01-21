@@ -18,9 +18,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.competition.entity.Competition;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.StageStatus;
+import com.eagle.futbolapi.features.competition.entity.Competition;
 import com.eagle.futbolapi.features.structure.entity.Structure;
 
 import lombok.AllArgsConstructor;

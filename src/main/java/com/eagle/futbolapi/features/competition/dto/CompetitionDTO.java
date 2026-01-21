@@ -17,26 +17,27 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CompetitionDTO {
 
-    private Long id;
+  private Long id;
 
-    private Long seasonId;
+  private Long seasonId;
+  private String seasonDisplayName;
 
-    @NotBlank(message = "Competition name is required")
-    @Size(min = 2, max = 100, message = "Competition name must be between 2 and 100 characters")
-    private String name;
+  @NotBlank(message = "Competition name is required")
+  @Size(min = 2, max = 100, message = "Competition name must be between 2 and 100 characters")
+  private String name;
 
-    @NotBlank(message = "Display name is required")
-    @Size(min = 2, max = 100, message = "Display name must be between 2 and 100 characters")
-    private String displayName;
-    private String type;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private Boolean active;
-    private Integer totalMatchdays;
-    private String description;
-    private LocalDateTime createdAt;
-    private String createdBy;
-    private LocalDateTime updatedAt;
-    private String updatedBy;
+  @NotBlank(message = "Display name is required")
+  @Size(min = 2, max = 100, message = "Display name must be between 2 and 100 characters")
+  private String displayName;
+  private String type;
+  private LocalDate startDate;
+  private LocalDate endDate;
+  private Boolean active;
+  private Integer totalMatchdays;
+  private String description;
+  private LocalDateTime createdAt;
+  private String createdBy;
+  private LocalDateTime updatedAt;
+  private String updatedBy;
 
 }

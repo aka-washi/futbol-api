@@ -18,34 +18,34 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SeasonDTO {
 
-    private Long id;
+  private Long id;
 
-    @NotNull(message = "Tournament is required")
-    private Long tournamentId;
-    private String tournamentDisplayName;
+  @NotNull(message = "Tournament is required")
+  private Long tournamentId;
+  private String tournamentDisplayName;
 
-    @NotBlank(message = "Season name is required")
-    @Size(min = 2, max = 100, message = "Season name must be between 2 and 100 characters")
-    private String name;
+  @NotBlank(message = "Season name is required")
+  @Size(min = 2, max = 100, message = "Season name must be between 2 and 100 characters")
+  private String name;
 
-    @NotBlank(message = "Display name is required")
-    @Size(min = 2, max = 100, message = "Display name must be between 2 and 100 characters")
-    private String displayName;
+  @NotBlank(message = "Display name is required")
+  @Size(min = 2, max = 100, message = "Display name must be between 2 and 100 characters")
+  private String displayName;
 
-    @NotNull(message = "Start date is required")
-    private LocalDate startDate;
+  @NotNull(message = "Start date is required")
+  private LocalDate startDate;
 
-    @NotNull(message = "End date is required")
-    private LocalDate endDate;
+  @NotNull(message = "End date is required")
+  private LocalDate endDate;
 
-    private Boolean active;
-    private Boolean hasRelegation;
+  private Boolean active;
+  private Boolean hasRelegation;
 
-    @Size(max = 500, message = "Description cannot exceed 500 characters")
-    private String description;
+  @Size(max = 500, message = "Description cannot exceed 500 characters")
+  private String description;
 
-    private LocalDateTime createdAt;
-    private String createdBy;
-    private LocalDateTime updatedAt;
-    private String updatedBy;
+  private LocalDateTime createdAt;
+  private String createdBy;
+  private LocalDateTime updatedAt;
+  private String updatedBy;
 }

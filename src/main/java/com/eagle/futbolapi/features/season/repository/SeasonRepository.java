@@ -53,10 +53,10 @@ public interface SeasonRepository extends JpaRepository<Season, Long> {
   @Query("SELECT CASE WHEN COUNT(s) > 0 THEN true ELSE false END FROM Season s WHERE s.name = :name" +
       " AND s.tournament = :tournament AND s.startDate = :startDate AND s.endDate = :endDate AND s.active = :active AND s.id <> :id")
   boolean existsByUniqueValuesAndIdNot(
-      String name,
-      Tournament tournament,
-      LocalDate startDate,
-      LocalDate endDate,
-      boolean active,
-      Long id);
+      @Param("name") String name,
+      @Param("tournament") Tournament tournament,
+      @Param("startDate") LocalDate startDate,
+      @Param("endDate") LocalDate endDate,
+      @Param("active") boolean active,
+      @Param("id") Long id);
 }

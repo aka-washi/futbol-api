@@ -1,21 +1,187 @@
 package com.eagle.futbolapi.features.competition.service;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eagle.futbolapi.features.competition.entity.Competition;
-import com.eagle.futbolapi.features.competition.repository.CompetitionRepository;
 import com.eagle.futbolapi.features.base.enums.CompetitionType;
-import com.eagle.futbolapi.features.base.exception.DuplicateResourceException;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
+import com.eagle.futbolapi.features.competition.dto.CompetitionDTO;
+import com.eagle.futbolapi.features.competition.entity.Competition;
+import com.eagle.futbolapi.features.competition.mapper.CompetitionMapper;
+import com.eagle.futbolapi.features.competition.repository.CompetitionRepository;
+import com.eagle.futbolapi.features.season.entity.Season;
+import com.eagle.futbolapi.features.season.service.SeasonService;
+
+import jakarta.validation.constraints.NotNull;
 
 @Service
 @Transactional
-public class CompetitionService extends BaseCrudService<Competition, Long> {
+public class CompetitionService extends BaseCrudService<Competition, Long, CompetitionDTO> {
 
+  private final CompetitionRepository competitionRepository;
+  private final SeasonService seasonService;
+  private final CompetitionMapper competitionMapper;
+
+  protected CompetitionService(CompetitionRepository competitionRepository, SeasonService seasonService,
+      CompetitionMapper competitionMapper) {
+    super(competitionRepository);
+    this.competitionRepository = competitionRepository;
+    this.seasonService = seasonService;
+    this.competitionMapper = competitionMapper;
+  }
+
+  public Optional<Competition> getCompetitionByName(String name) {
+    if (name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("Competition name cannot be null or empty");
+    }
+    return competitionRepository.findByName(name);
+  }
+
+  public Optional<Competition> getCompetitionByDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Competition display name cannot be null or empty");
+    }
+    return competitionRepository.findByDisplayName(displayName);
+  }
+
+  // TODO: Rename method? getActiveCompetitionBySeasonId or
+  // getCompetitionBySeasonIdAndActiveStatus
+  public Optional<Competition> getCompetitionBySeasonIdAndActive(Long seasonId, Boolean active) {
+    if (seasonId == null) {
+      throw new IllegalArgumentException("Season ID cannot be null");
+    }
+    if (active == null) {
+      throw new IllegalArgumentException("Competition active status cannot be null");
+    }
+    return competitionRepository.findBySeasonIdAndActive(seasonId, active);
+  }
+
+  public Optional<Competition> getByTypeAndDate(CompetitionType type, LocalDate date) {
+    if (type == null) {
+      throw new IllegalArgumentException("Competition type cannot be null");
+    }
+    if (date == null) {
+      throw new IllegalArgumentException("Date cannot be null");
+    }
+    return competitionRepository.findByTypeAndDate(type, date);
+  }
+
+  public Optional<Competition> getByUniqueValues(
+      String name,
+      Long seasonId,
+      CompetitionType type,
+      LocalDate startDate,
+      LocalDate endDate) {
+    return competitionRepository.findByUniqueValues(
+        name,
+        seasonService.getById(seasonId)
+            .orElseThrow(() -> new ResourceNotFoundException("Season", "id", seasonId)),
+        type, startDate, endDate);
+  }
+
+  public boolean existsByUniqueValues(
+      String name,
+      Long seasonId,
+      CompetitionType type,
+      LocalDate startDate,
+      LocalDate endDate) {
+    return competitionRepository.existsByUniqueValues(
+        name,
+        seasonService.getById(seasonId)
+            .orElseThrow(() -> new ResourceNotFoundException("Season", "id", seasonId)),
+        type, startDate, endDate);
+  }
+
+  public boolean existsByUniqueValuesAndIdNot(
+      String name,
+      Long seasonId,
+      CompetitionType type,
+      LocalDate startDate,
+      LocalDate endDate,
+      Long id) {
+    return competitionRepository.existsByUniqueValuesAndIdNot(
+        name,
+        seasonService.getById(seasonId)
+            .orElseThrow(() -> new ResourceNotFoundException("Season", "id", seasonId)),
+        type, startDate, endDate, id);
+  }
+
+  public Page<Competition> getActiveCompetitions(Pageable pageable) {
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    return competitionRepository.findActiveCompetitions(pageable);
+  }
+
+  public Page<Competition> getCompetitionsBySeasonId(Long seasonId, Pageable pageable) {
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    if (seasonId == null) {
+      throw new IllegalArgumentException("Season ID cannot be null");
+    }
+    return competitionRepository.findBySeasonId(seasonId);
+  }
+
+  public Page<Competition> getCompetitionsByDateRange(LocalDate startDate, LocalDate endDate) {
+    if (startDate == null) {
+      throw new IllegalArgumentException("Start date cannot be null");
+    }
+    if (endDate == null) {
+      throw new IllegalArgumentException("End date cannot be null");
+    }
+    return competitionRepository.findByDateRange(startDate, endDate);
+  }
+
+  @Override
+  protected Competition convertToEntity(CompetitionDTO dto) {
+    return competitionMapper.toCompetition(dto);
+  }
+
+  @Override
+  protected void resolveRelationships(@NotNull CompetitionDTO dto, @NotNull Competition competition) {
+    // Map season from display name or ID
+    if (dto.getSeasonDisplayName() != null && !dto.getSeasonDisplayName().trim().isEmpty()) {
+      var season = seasonService.getSeasonByDisplayName(dto.getSeasonDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Season", "displayName", dto.getSeasonDisplayName()));
+      competition.setSeason(season);
+    } else if (dto.getSeasonId() != null) {
+      var season = seasonService.getById(dto.getSeasonId())
+          .orElseThrow(() -> new ResourceNotFoundException("Season", "id", dto.getSeasonId()));
+      competition.setSeason(season);
+    }
+  }
+
+  @Override
+  protected boolean isDuplicate(@NotNull Competition competition) {
+    Objects.requireNonNull(competition, "Competition cannot be null");
+
+    return existsByUniqueValues(
+        competition.getName(),
+        competition.getSeason().getId(),
+        competition.getType(),
+        competition.getStartDate(),
+        competition.getEndDate());
+  }
+
+  @Override
+  protected boolean isDuplicate(@NotNull Long id, @NotNull Competition competition) {
+    Objects.requireNonNull(id, "ID cannot be null");
+    Objects.requireNonNull(competition, "Competition cannot be null");
+
+    return existsByUniqueValuesAndIdNot(
+        competition.getName(),
+        competition.getSeason().getId(),
+        competition.getType(),
+        competition.getStartDate(),
+        competition.getEndDate(),
+        id);
+  }
 }

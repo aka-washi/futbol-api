@@ -1,8 +1,6 @@
 package com.eagle.futbolapi.features.rosterentry.repository;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,11 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.eagle.futbolapi.features.player.entity.Player;
 import com.eagle.futbolapi.features.rosterentry.entity.RosterEntry;
-import com.eagle.futbolapi.features.season.entity.Season;
-import com.eagle.futbolapi.features.staff.entity.Staff;
-import com.eagle.futbolapi.features.team.entity.Team;
 
 @Repository
 public interface RosterEntryRepository extends JpaRepository<RosterEntry, Long> {

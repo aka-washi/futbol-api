@@ -16,10 +16,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.match.entity.Match;
-import com.eagle.futbolapi.features.player.entity.Player;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.LineupType;
+import com.eagle.futbolapi.features.match.entity.Match;
+import com.eagle.futbolapi.features.player.entity.Player;
 import com.eagle.futbolapi.features.team.entity.Team;
 
 import lombok.AllArgsConstructor;

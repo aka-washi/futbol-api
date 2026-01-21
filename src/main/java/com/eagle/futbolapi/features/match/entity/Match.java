@@ -4,13 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.eagle.futbolapi.features.base.entity.BaseEntity;
-import com.eagle.futbolapi.features.base.enums.MatchStatus;
-import com.eagle.futbolapi.features.matchday.entity.Matchday;
-import com.eagle.futbolapi.features.person.entity.Person;
-import com.eagle.futbolapi.features.team.entity.Team;
-import com.eagle.futbolapi.features.venue.entity.Venue;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -24,6 +17,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.MatchStatus;
+import com.eagle.futbolapi.features.matchday.entity.Matchday;
+import com.eagle.futbolapi.features.person.entity.Person;
+import com.eagle.futbolapi.features.team.entity.Team;
+import com.eagle.futbolapi.features.venue.entity.Venue;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -11,9 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.eagle.futbolapi.features.base.enums.StageStatus;
-import com.eagle.futbolapi.features.competition.entity.Competition;
 import com.eagle.futbolapi.features.stage.entity.Stage;
-import com.eagle.futbolapi.features.structure.entity.Structure;
 
 @Repository
 public interface StageRepository extends JpaRepository<Stage, Long> {

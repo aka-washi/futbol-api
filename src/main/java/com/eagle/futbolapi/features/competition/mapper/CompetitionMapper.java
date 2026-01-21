@@ -1,18 +1,19 @@
 package com.eagle.futbolapi.features.competition.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
-import org.springframework.stereotype.Component;
 
-import com.eagle.futbolapi.features.base.enums.CompetitionType;
 import com.eagle.futbolapi.features.competition.dto.CompetitionDTO;
 import com.eagle.futbolapi.features.competition.entity.Competition;
-import com.eagle.futbolapi.features.season.repository.SeasonRepository;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CompetitionMapper {
 
-  Competition toEntity(CompetitionDTO dto);
+  @Mapping(target = "seasonId", source = "season.id")
+  @Mapping(target = "seasonDisplayName", source = "season.displayName")
+  CompetitionDTO toCompetitionDTO(Competition competition);
 
-  CompetitionDTO toDTO(Competition entity);
+  @Mapping(target = "season", ignore = true)
+  Competition toCompetition(CompetitionDTO competitionDTO);
 }

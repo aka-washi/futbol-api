@@ -16,8 +16,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.season.entity.Season;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.season.entity.Season;
 import com.eagle.futbolapi.features.team.entity.Team;
 
 import lombok.AllArgsConstructor;

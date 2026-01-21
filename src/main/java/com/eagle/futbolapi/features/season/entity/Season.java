@@ -33,76 +33,75 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "season")
 @AttributeOverrides({
-        @AttributeOverride(name = "id", column = @Column(name = "sn_id")),
-        @AttributeOverride(name = "createdAt", column = @Column(name = "sn_created_at", nullable = false, updatable = false)),
-        @AttributeOverride(name = "createdBy", column = @Column(name = "sn_created_by", length = 100, updatable = false)),
-        @AttributeOverride(name = "updatedAt", column = @Column(name = "sn_updated_at")),
-        @AttributeOverride(name = "updatedBy", column = @Column(name = "sn_updated_by", length = 100))
+    @AttributeOverride(name = "id", column = @Column(name = "sn_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "sn_created_at", nullable = false, updatable = false)),
+    @AttributeOverride(name = "createdBy", column = @Column(name = "sn_created_by", length = 100, updatable = false)),
+    @AttributeOverride(name = "updatedAt", column = @Column(name = "sn_updated_at")),
+    @AttributeOverride(name = "updatedBy", column = @Column(name = "sn_updated_by", length = 100))
 })
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Season extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tournament_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    @NotNull
-    private Tournament tournament;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "tournament_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @NotNull
+  private Tournament tournament;
 
-    @NotBlank
-    @Column(name = "sn_name", nullable = false, length = 100)
-    private String name; // e.g., "2025-2026"
+  @NotBlank
+  @Column(name = "sn_name", nullable = false, length = 100)
+  private String name; // e.g., "2025-2026"
 
-    @NotBlank
-    @Column(name = "sn_display_name", length = 100, nullable = false)
-    private String displayName;
+  @NotBlank
+  @Column(name = "sn_display_name", length = 100, nullable = false)
+  private String displayName;
 
-    @NotNull
-    @Column(name = "sn_start_date", nullable = false)
-    private LocalDate startDate;
+  @NotNull
+  @Column(name = "sn_start_date", nullable = false)
+  private LocalDate startDate;
 
-    @NotNull
-    @Column(name = "sn_end_date", nullable = false)
-    private LocalDate endDate;
+  @NotNull
+  @Column(name = "sn_end_date", nullable = false)
+  private LocalDate endDate;
 
-    @Column(name = "sn_active", nullable = false)
-    @Builder.Default
-    private Boolean active = false;
+  @Column(name = "sn_active", nullable = false)
+  @Builder.Default
+  private Boolean active = false;
 
-    @Column(name = "sn_has_relegation", nullable = false)
-    @Builder.Default
-    private Boolean hasRelegation = true;
+  @Column(name = "sn_has_relegation", nullable = false)
+  @Builder.Default
+  private Boolean hasRelegation = true;
 
-    @Column(name = "sn_description", columnDefinition = "TEXT")
-    private String description;
+  @Column(name = "sn_description", columnDefinition = "TEXT")
+  private String description;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-            tournament,
-            name,
-            displayName,
-            startDate,
-            endDate,
-            active,
-            hasRelegation
-        );
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        tournament,
+        name,
+        displayName,
+        startDate,
+        endDate,
+        active,
+        hasRelegation);
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Season))
-            return false;
-        Season other = (Season) obj;
-        return Objects.equals(tournament, other.tournament)
-            && Objects.equals(name, other.name)
-            && Objects.equals(displayName, other.displayName)
-            && Objects.equals(startDate, other.startDate)
-            && Objects.equals(endDate, other.endDate)
-            && Objects.equals(active, other.active)
-            && Objects.equals(hasRelegation, other.hasRelegation);
-    }
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Season))
+      return false;
+    Season other = (Season) obj;
+    return Objects.equals(tournament, other.tournament)
+        && Objects.equals(name, other.name)
+        && Objects.equals(displayName, other.displayName)
+        && Objects.equals(startDate, other.startDate)
+        && Objects.equals(endDate, other.endDate)
+        && Objects.equals(active, other.active)
+        && Objects.equals(hasRelegation, other.hasRelegation);
+  }
 
 }

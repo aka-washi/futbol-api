@@ -18,9 +18,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.season.entity.Season;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.CompetitionType;
+import com.eagle.futbolapi.features.season.entity.Season;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -73,6 +73,8 @@ public class Competition extends BaseEntity {
   @Column(name = "cp_end_date", nullable = false)
   private LocalDate endDate;
 
+  // TODO: Should this be a boolean or an enum for more states (e.g., ACTIVE,
+  // INACTIVE, COMPLETED)?
   @Column(name = "co_active", nullable = false)
   @Builder.Default
   private Boolean active = false;
@@ -93,8 +95,7 @@ public class Competition extends BaseEntity {
         startDate,
         endDate,
         active,
-        totalMatchdays,
-        description);
+        totalMatchdays);
   }
 
   @Override
@@ -111,8 +112,7 @@ public class Competition extends BaseEntity {
         && Objects.equals(startDate, other.startDate)
         && Objects.equals(endDate, other.endDate)
         && Objects.equals(active, other.active)
-        && Objects.equals(totalMatchdays, other.totalMatchdays)
-        && Objects.equals(description, other.description);
+        && Objects.equals(totalMatchdays, other.totalMatchdays);
   }
 
 }
