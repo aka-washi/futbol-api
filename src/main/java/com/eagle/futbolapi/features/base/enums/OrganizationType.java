@@ -1,4 +1,4 @@
-package com.eagle.futbolapi.features.base.entity;
+package com.eagle.futbolapi.features.base.enums;
 
 public enum OrganizationType {
   CLUB("Club"),

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.eagle.futbolapi.features.base.entity.StructureType;
+import com.eagle.futbolapi.features.base.enums.StructureType;
 import com.eagle.futbolapi.features.structure.entity.Structure;
 
 @Repository

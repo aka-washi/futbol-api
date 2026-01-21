@@ -18,9 +18,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.base.entity.AgeCategory;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
-import com.eagle.futbolapi.features.base.entity.TournamentType;
+import com.eagle.futbolapi.features.base.enums.AgeCategory;
+import com.eagle.futbolapi.features.base.enums.TournamentType;
 import com.eagle.futbolapi.features.organization.entity.Organization;
 
 import lombok.AllArgsConstructor;
@@ -100,8 +100,7 @@ public class Tournament extends BaseEntity {
         type,
         ageCategory,
         level,
-        relegationTo
-    );
+        relegationTo);
   }
 
   @Override

@@ -18,7 +18,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
-import com.eagle.futbolapi.features.base.entity.StructureType;
+import com.eagle.futbolapi.features.base.enums.StructureType;
 import com.eagle.futbolapi.features.pointsystem.entity.PointSystem;
 
 import lombok.AllArgsConstructor;
@@ -97,8 +97,7 @@ public class Structure extends BaseEntity {
         numberOfGroups,
         teamsPerGroup,
         hasHomeAndAway,
-        teamsQualifyingForNextStage
-    );
+        teamsQualifyingForNextStage);
   }
 
   @Override

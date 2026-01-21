@@ -1,5 +1,5 @@
 
-package com.eagle.futbolapi.features.base.entity;
+package com.eagle.futbolapi.features.base.enums;
 
 public enum Gender {
   MALE("M", "Male"), FEMALE("F", "Female");

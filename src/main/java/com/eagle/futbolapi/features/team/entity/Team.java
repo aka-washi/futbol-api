@@ -20,9 +20,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import com.eagle.futbolapi.features.base.entity.AgeCategory;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
-import com.eagle.futbolapi.features.base.entity.Gender;
+import com.eagle.futbolapi.features.base.enums.AgeCategory;
+import com.eagle.futbolapi.features.base.enums.Gender;
 import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.venue.entity.Venue;
@@ -39,20 +39,14 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @Accessors(chain = false)
 @Entity
-@Table(
-    name = "team",
-    uniqueConstraints = {
-        @UniqueConstraint(
-            name = "uk_team_natural",
-            columnNames = {
-                "tm_name",
-                "tm_gender",
-                "tm_age_category",
-                "organization_id"
-            }
-        )
-    }
-)
+@Table(name = "team", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_team_natural", columnNames = {
+        "tm_name",
+        "tm_gender",
+        "tm_age_category",
+        "organization_id"
+    })
+})
 @AttributeOverrides({
     @AttributeOverride(name = "id", column = @Column(name = "tm_id")),
     @AttributeOverride(name = "createdAt", column = @Column(name = "tm_created_at", nullable = false, updatable = false)),
