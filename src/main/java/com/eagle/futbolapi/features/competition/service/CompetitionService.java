@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
+import jakarta.validation.constraints.NotNull;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,7 @@ import com.eagle.futbolapi.features.competition.dto.CompetitionDTO;
 import com.eagle.futbolapi.features.competition.entity.Competition;
 import com.eagle.futbolapi.features.competition.mapper.CompetitionMapper;
 import com.eagle.futbolapi.features.competition.repository.CompetitionRepository;
-import com.eagle.futbolapi.features.season.entity.Season;
 import com.eagle.futbolapi.features.season.service.SeasonService;
-
-import jakarta.validation.constraints.NotNull;
 
 @Service
 @Transactional

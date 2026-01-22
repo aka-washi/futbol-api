@@ -15,7 +15,6 @@ import com.eagle.futbolapi.features.tournament.entity.Tournament;
 import com.eagle.futbolapi.features.tournament.mapper.TournamentMapper;
 import com.eagle.futbolapi.features.tournament.service.TournamentService;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
 
 public class TournamentController
     extends BaseCrudController<Tournament, TournamentDTO, TournamentService, TournamentMapper> {

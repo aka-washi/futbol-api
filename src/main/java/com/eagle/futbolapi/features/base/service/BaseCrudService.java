@@ -11,12 +11,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
+import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 
 public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   protected final JpaRepository<T, K> repository;
+  protected final BaseMapper<T, D> mapper;
 
-  protected BaseCrudService(JpaRepository<T, K> repository) {
+  protected BaseCrudService(JpaRepository<T, K> repository, BaseMapper<T, D> mapper) {
     this.repository = repository;
+    this.mapper = mapper;
   }
 
   public Page<T> getAll(Pageable pageable) {
@@ -120,14 +123,16 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return repository.save(entity);
   }
 
-  protected abstract boolean isDuplicate(@NotNull T entity);
-
-  protected abstract boolean isDuplicate(K id, @NotNull T entity);
-
-  protected abstract T convertToEntity(D dto);
+  protected T convertToEntity(@NotNull D dto) {
+    return mapper.toEntity(dto);
+  }
 
   protected void resolveRelationships(D dto, T entity) {
     // Default: no relationships to resolve
   }
+
+  protected abstract boolean isDuplicate(@NotNull T entity);
+
+  protected abstract boolean isDuplicate(@NotNull K id, @NotNull T entity);
 
 }

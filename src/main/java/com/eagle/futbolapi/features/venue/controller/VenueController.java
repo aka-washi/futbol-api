@@ -52,7 +52,7 @@ public class VenueController extends BaseCrudController<Venue, VenueDTO, VenueSe
   public ResponseEntity<ApiResponse<VenueDTO>> getVenueByName(@PathVariable String name) {
     var venue = service.getVenueByName(name)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "name", name));
-    VenueDTO venueDTO = mapper.toVenueDTO(venue);
+    VenueDTO venueDTO = mapper.toDTO(venue);
     return ResponseUtil.success(venueDTO, SUCCESS_MESSAGE);
   }
 
@@ -60,7 +60,7 @@ public class VenueController extends BaseCrudController<Venue, VenueDTO, VenueSe
   public ResponseEntity<ApiResponse<VenueDTO>> getVenueByDisplayName(@PathVariable String displayName) {
     var venue = service.getVenueByDisplayName(displayName)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "displayName", displayName));
-    VenueDTO venueDTO = mapper.toVenueDTO(venue);
+    VenueDTO venueDTO = mapper.toDTO(venue);
     return ResponseUtil.success(venueDTO, SUCCESS_MESSAGE);
   }
 
@@ -75,7 +75,7 @@ public class VenueController extends BaseCrudController<Venue, VenueDTO, VenueSe
     Pageable pageable = ResponseUtil.buildPageable(page, size, sortField, sortDir);
 
     Page<Venue> venuesPage = service.getVenuesByCountryId(countryId, pageable);
-    Page<VenueDTO> venueDTOs = venuesPage.map(mapper::toVenueDTO);
+    Page<VenueDTO> venueDTOs = venuesPage.map(mapper::toDTO);
     return ResponseUtil.success(venueDTOs, SUCCESS_MESSAGE);
   }
 
@@ -112,12 +112,12 @@ public class VenueController extends BaseCrudController<Venue, VenueDTO, VenueSe
 
   @Override
   protected VenueDTO toDTO(Venue entity) {
-    return mapper.toVenueDTO(entity);
+    return mapper.toDTO(entity);
   }
 
   @Override
   protected Venue toEntity(VenueDTO dto) {
-    return mapper.toVenue(dto);
+    return mapper.toEntity(dto);
   }
 
 }

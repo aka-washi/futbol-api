@@ -24,13 +24,12 @@ public class VenueService extends BaseCrudService<Venue, Long, VenueDTO> {
 
   private final VenueRepository venueRepository;
   private final CountryService countryService;
-  private final VenueMapper venueMapper;
 
-  public VenueService(VenueRepository venueRepository, CountryService countryService, VenueMapper venueMapper) {
-    super(venueRepository);
+  public VenueService(VenueRepository venueRepository, CountryService countryService, VenueMapper mapper) {
+    super(venueRepository, mapper);
     this.venueRepository = venueRepository;
     this.countryService = countryService;
-    this.venueMapper = venueMapper;
+
   }
 
   public Optional<Venue> getVenueByName(String name) {
@@ -52,11 +51,6 @@ public class VenueService extends BaseCrudService<Venue, Long, VenueDTO> {
       pageable = Pageable.unpaged();
     }
     return venueRepository.findByCountryId(countryId, pageable);
-  }
-
-  @Override
-  protected Venue convertToEntity(VenueDTO dto) {
-    return venueMapper.toVenue(dto);
   }
 
   @Override

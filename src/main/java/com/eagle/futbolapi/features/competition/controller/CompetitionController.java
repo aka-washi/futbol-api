@@ -6,7 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eagle.futbolapi.features.base.controller.BaseCrudController;
@@ -17,8 +19,6 @@ import com.eagle.futbolapi.features.competition.dto.CompetitionDTO;
 import com.eagle.futbolapi.features.competition.entity.Competition;
 import com.eagle.futbolapi.features.competition.mapper.CompetitionMapper;
 import com.eagle.futbolapi.features.competition.service.CompetitionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/competitions")

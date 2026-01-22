@@ -1,17 +1,100 @@
 package com.eagle.futbolapi.features.stage.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eagle.futbolapi.features.base.controller.BaseCrudController;
+import com.eagle.futbolapi.features.base.dto.ApiResponse;
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.util.ResponseUtil;
 import com.eagle.futbolapi.features.stage.dto.StageDTO;
 import com.eagle.futbolapi.features.stage.entity.Stage;
+import com.eagle.futbolapi.features.stage.mapper.StageMapper;
 import com.eagle.futbolapi.features.stage.service.StageService;
+
+import io.micrometer.core.ipc.http.HttpSender.Response;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/stages")
 @Validated
-public class StageController extends BaseCrudController<Stage, StageDTO, StageService, Object> {
+public class StageController extends BaseCrudController<Stage, StageDTO, StageService, StageMapper> {
+
+  private static final String RESOURCE_NAME = "Stage";
+  private static final String SUCCESS_MESSAGE = "Stage retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Stage already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
+  public StageController(StageService stageService, StageMapper stageMapper) {
+    super(
+        stageService,
+        stageMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
+  }
+
+  @GetMapping("/name/{name}")
+  public ResponseEntity<ApiResponse<StageDTO>> getStageByName(String name) {
+    Stage stage = service.getStageByName(name)
+        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "name", name));
+    StageDTO stageDTO = mapper.toStageDTO(stage);
+    return ResponseUtil.success(stageDTO, successMessage);
+  }
+
+  @GetMapping("/displayName/{displayName}")
+  public ResponseEntity<ApiResponse<StageDTO>> getStageByDisplayName(String displayName) {
+    Stage stage = service.getStageByDisplayName(displayName)
+        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "displayName", displayName));
+    StageDTO stageDTO = mapper.toStageDTO(stage);
+    return ResponseUtil.success(stageDTO, successMessage);
+  }
+
+  @Override
+  protected Page<Stage> getAllEntities(Pageable pageable) {
+    return service.getAll(pageable);
+  }
+
+  @Override
+  protected Stage getEntityById(Long id) {
+    return service.getById(id)
+        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id));
+  }
+
+  @Override
+  protected Stage createEntity(StageDTO dto) {
+    return service.create(dto);
+  }
+
+  @Override
+  protected Stage updateEntity(Long id, StageDTO dto) {
+    return service.update(id, dto);
+  }
+
+  @Override
+  protected void deleteEntity(Long id) {
+    service.delete(id);
+  }
+
+  @Override
+  protected boolean existsById(Long id) {
+    return service.existsById(id);
+  }
+
+  @Override
+  protected StageDTO toDTO(Stage entity) {
+    return mapper.toStageDTO(entity);
+  }
+
+  @Override
+  protected Stage toEntity(StageDTO dto) {
+    return mapper.toStage(dto);
+  }
 
 }

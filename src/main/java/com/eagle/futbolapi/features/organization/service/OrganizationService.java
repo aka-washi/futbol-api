@@ -23,39 +23,37 @@ import com.eagle.futbolapi.features.organization.repository.OrganizationReposito
 @Transactional
 public class OrganizationService extends BaseCrudService<Organization, Long, OrganizationDTO> {
 
-  private final OrganizationRepository organizationRepository;
+  private final OrganizationRepository repository;
   private final CountryService countryService;
-  private final OrganizationMapper organizationMapper;
 
   protected OrganizationService(
-      OrganizationRepository organizationRepository,
+      OrganizationRepository repository,
       CountryService countryService,
-      OrganizationMapper organizationMapper) {
-    super(organizationRepository);
-    this.organizationRepository = organizationRepository;
+      OrganizationMapper mapper) {
+    super(repository, mapper);
+    this.repository = repository;
     this.countryService = countryService;
-    this.organizationMapper = organizationMapper;
   }
 
   public Optional<Organization> getOrganizationByName(String name) {
     if (name == null || name.isEmpty()) {
       throw new IllegalArgumentException("Organization name cannot be null or empty");
     }
-    return organizationRepository.findByName(name);
+    return repository.findByName(name);
   }
 
   public Optional<Organization> getOrganizationByDisplayName(String displayName) {
     if (displayName == null || displayName.isEmpty()) {
       throw new IllegalArgumentException("Organization display name cannot be null or empty");
     }
-    return organizationRepository.findByDisplayName(displayName);
+    return repository.findByDisplayName(displayName);
   }
 
   public Optional<Organization> getOrganizationByAbbreviation(String abbreviation) {
     if (abbreviation == null || abbreviation.isEmpty()) {
       throw new IllegalArgumentException("Organization abbreviation cannot be null or empty");
     }
-    return organizationRepository.findByAbbreviation(abbreviation);
+    return repository.findByAbbreviation(abbreviation);
   }
 
   public Page<Organization> getOrganizationsByType(OrganizationType type, Pageable pageable) {
@@ -65,19 +63,14 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     if (type == null) {
       throw new IllegalArgumentException("Organization type cannot be null");
     }
-    return organizationRepository.findByType(type, pageable);
-  }
-
-  @Override
-  protected Organization convertToEntity(OrganizationDTO dto) {
-    return organizationMapper.toOrganization(dto);
+    return repository.findByType(type, pageable);
   }
 
   /**
    * Resolves related entities (Country, Parent Organization) from DTO.
    */
   @Override
-  protected void resolveRelationships(@NotNull OrganizationDTO dto, @NotNull Organization organization) {
+  protected void resolveRelationships(OrganizationDTO dto, Organization organization) {
     // Map country from display name or ID
     if (dto.getCountryDisplayName() != null && !dto.getCountryDisplayName().trim().isEmpty()) {
       var country = countryService.getCountryByDisplayName(dto.getCountryDisplayName())
@@ -107,10 +100,10 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     Objects.requireNonNull(organization, "Organization cannot be null");
 
     return (organization.getAbbreviation() != null
-        && organizationRepository.existsByAbbreviation(organization.getAbbreviation())
+        && repository.existsByAbbreviation(organization.getAbbreviation()))
         || (organization.getDisplayName() != null
-            && organizationRepository.existsByDisplayName(organization.getDisplayName()))
-        || (organization.getName() != null && organizationRepository.existsByName(organization.getName())));
+            && repository.existsByDisplayName(organization.getDisplayName()))
+        || (organization.getName() != null && repository.existsByName(organization.getName()));
   }
 
   @Override
@@ -119,11 +112,11 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     Objects.requireNonNull(organization, "Organization cannot be null");
 
     return (organization.getAbbreviation() != null
-        && organizationRepository.existsByAbbreviationAndIdNot(organization.getAbbreviation(), id))
+        && repository.existsByAbbreviationAndIdNot(organization.getAbbreviation(), id))
         || (organization.getDisplayName() != null
-            && organizationRepository.existsByDisplayNameAndIdNot(organization.getDisplayName(), id))
+            && repository.existsByDisplayNameAndIdNot(organization.getDisplayName(), id))
         || (organization.getName() != null
-            && organizationRepository.existsByNameAndIdNot(organization.getName(), id));
+            && repository.existsByNameAndIdNot(organization.getName(), id));
   }
 
 }

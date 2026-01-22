@@ -4,17 +4,18 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
+import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 import com.eagle.futbolapi.features.venue.dto.VenueDTO;
 import com.eagle.futbolapi.features.venue.entity.Venue;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public interface VenueMapper {
+public interface VenueMapper extends BaseMapper<Venue, VenueDTO> {
 
   @Mapping(target = "countryId", source = "country.id")
   @Mapping(target = "countryDisplayName", source = "country.displayName")
-  VenueDTO toVenueDTO(Venue venue);
+  VenueDTO toDTO(Venue venue);
 
   @Mapping(target = "country", ignore = true)
-  Venue toVenue(VenueDTO venueDTO);
+  Venue toEntity(VenueDTO venueDTO);
 
 }

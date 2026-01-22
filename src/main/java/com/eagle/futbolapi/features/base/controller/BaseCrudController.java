@@ -17,21 +17,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eagle.futbolapi.features.base.dto.ApiResponse;
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.exception.DuplicateResourceException;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.mapper.EntityMapper;
+import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.base.util.ResponseUtil;
 
 /**
  * Generic base controller for CRUD operations.
  *
- * @param <E> Entity type
+ * @param <E> Entity type (must extend BaseEntity)
  * @param <D> DTO type
- * @param <S> Service type
- * @param <M> Mapper type
+ * @param <S> Service type (must extend BaseCrudService)
+ * @param <M> Mapper type (must extend BaseMapper)
  */
 @Validated
-public abstract class BaseCrudController<E, D, S, M> {
+public abstract class BaseCrudController<E extends BaseEntity, D, S extends BaseCrudService<E, Long, D>, M extends BaseMapper<E, D>> {
 
   private static final String DEFAULT_PAGE = "0";
   private static final int MIN_DEFAULT_PAGE = 0;
@@ -64,23 +67,24 @@ public abstract class BaseCrudController<E, D, S, M> {
       @RequestParam(defaultValue = DEFAULT_SORT_FIELD) String sortBy,
       @RequestParam(defaultValue = DEFAULT_SORT_DIRECTION) String sortDir) {
     Pageable pageable = ResponseUtil.buildPageable(page, size, sortBy, sortDir);
-    Page<E> entityPage = getAllEntities(pageable);
-    Page<D> dtoPage = entityPage.map(this::toDTO);
+    Page<E> entityPage = service.getAll(pageable);
+    Page<D> dtoPage = entityPage.map(mapper::toDTO);
     return ResponseUtil.successWithPagination(dtoPage, successMessage);
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<ApiResponse<D>> getById(@PathVariable Long id) {
-    E entity = getEntityById(id);
-    D dto = toDTO(entity);
+    E entity = service.getById(id)
+        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id));
+    D dto = mapper.toDTO(entity);
     return ResponseUtil.success(dto, successMessage);
   }
 
   @PostMapping
   public ResponseEntity<ApiResponse<D>> create(@Valid @RequestBody D dto) {
     try {
-      E savedEntity = createEntity(dto);
-      D savedDto = toDTO(savedEntity);
+      E savedEntity = service.create(dto);
+      D savedDto = mapper.toDTO(savedEntity);
       return ResponseUtil.created(savedDto, resourceName + " created successfully");
     } catch (DuplicateResourceException e) {
       return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -94,8 +98,8 @@ public abstract class BaseCrudController<E, D, S, M> {
   @PutMapping("/{id}")
   public ResponseEntity<ApiResponse<D>> update(@PathVariable Long id, @Valid @RequestBody D dto) {
     try {
-      E updatedEntity = updateEntity(id, dto);
-      D updatedDto = toDTO(updatedEntity);
+      E updatedEntity = service.update(id, dto);
+      D updatedDto = mapper.toDTO(updatedEntity);
       return ResponseUtil.success(updatedDto, resourceName + " updated successfully");
     } catch (NoChangesDetectedException e) {
       return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
@@ -112,7 +116,7 @@ public abstract class BaseCrudController<E, D, S, M> {
   @DeleteMapping("/{id}")
   public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
     try {
-      deleteEntity(id);
+      service.delete(id);
       return ResponseUtil.success(null, resourceName + " deleted successfully");
     } catch (ResourceNotFoundException e) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -125,24 +129,7 @@ public abstract class BaseCrudController<E, D, S, M> {
 
   @GetMapping("/{id}/exists")
   public ResponseEntity<ApiResponse<Boolean>> exists(@PathVariable Long id) {
-    boolean exists = existsById(id);
+    boolean exists = service.existsById(id);
     return ResponseUtil.success(exists, resourceName + " existence check completed");
   }
-
-  // Abstract methods to be implemented by subclasses
-  protected abstract Page<E> getAllEntities(Pageable pageable);
-
-  protected abstract E getEntityById(Long id);
-
-  protected abstract E createEntity(D dto);
-
-  protected abstract E updateEntity(Long id, D dto);
-
-  protected abstract void deleteEntity(Long id);
-
-  protected abstract boolean existsById(Long id);
-
-  protected abstract D toDTO(E entity);
-
-  protected abstract E toEntity(D dto);
 }
