@@ -124,17 +124,20 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
     if (seasonId == null) {
       throw new IllegalArgumentException("Season ID cannot be null");
     }
-    return competitionRepository.findBySeasonId(seasonId);
+    return competitionRepository.findBySeasonId(seasonId, pageable);
   }
 
-  public Page<Competition> getCompetitionsByDateRange(LocalDate startDate, LocalDate endDate) {
+  public Page<Competition> getCompetitionsByDateRange(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
     if (startDate == null) {
       throw new IllegalArgumentException("Start date cannot be null");
     }
     if (endDate == null) {
       throw new IllegalArgumentException("End date cannot be null");
     }
-    return competitionRepository.findByDateRange(startDate, endDate);
+    return competitionRepository.findByDateRange(startDate, endDate, pageable);
   }
 
   @Override
