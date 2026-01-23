@@ -19,12 +19,10 @@ import com.eagle.futbolapi.features.pointsystem.repository.PointSystemRepository
 public class PointSystemService extends BaseCrudService<PointSystem, Long, PointSystemDTO> {
 
   private final PointSystemRepository pointSystemRepository;
-  private final PointSystemMapper pointSystemMapper;
 
-  public PointSystemService(PointSystemRepository repository, PointSystemMapper pointSystemMapper) {
-    super(repository);
+  public PointSystemService(PointSystemRepository repository, PointSystemMapper mapper) {
+    super(repository, mapper);
     this.pointSystemRepository = repository;
-    this.pointSystemMapper = pointSystemMapper;
   }
 
   public Optional<PointSystem> getPointSystemByName(String name) {
@@ -39,11 +37,6 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long, Point
       throw new IllegalArgumentException("Point system display name cannot be null or empty");
     }
     return pointSystemRepository.findByDisplayName(displayName);
-  }
-
-  @Override
-  protected PointSystem convertToEntity(PointSystemDTO dto) {
-    return pointSystemMapper.toPointSystem(dto);
   }
 
   @Override

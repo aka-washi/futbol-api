@@ -24,14 +24,12 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
 
   private final SeasonRepository seasonRepository;
   private final TournamentService tournamentService;
-  private final SeasonMapper seasonMapper;
 
   public SeasonService(SeasonRepository seasonRepository, TournamentService tournamentService,
-      SeasonMapper seasonMapper) {
-    super(seasonRepository);
+      SeasonMapper mapper) {
+    super(seasonRepository, mapper);
     this.seasonRepository = seasonRepository;
     this.tournamentService = tournamentService;
-    this.seasonMapper = seasonMapper;
   }
 
   public Optional<Season> getSeasonByName(String name) {
@@ -95,11 +93,6 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
       throw new IllegalArgumentException("Date cannot be null");
     }
     return seasonRepository.findByDateRange(date);
-  }
-
-  @Override
-  protected Season convertToEntity(SeasonDTO dto) {
-    return seasonMapper.toSeason(dto);
   }
 
   // Resolve related entities (Tournament) from DTO

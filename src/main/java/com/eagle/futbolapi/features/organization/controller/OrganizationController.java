@@ -54,7 +54,7 @@ public class OrganizationController
   public ResponseEntity<ApiResponse<OrganizationDTO>> getOrganizationByName(@PathVariable String name) {
     var organization = service.getOrganizationByName(name)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "name", name));
-    OrganizationDTO organizationDTO = mapper.toOrganizationDTO(organization);
+    OrganizationDTO organizationDTO = mapper.toDTO(organization);
     return ResponseUtil.success(organizationDTO, SUCCESS_MESSAGE);
   }
 
@@ -62,7 +62,7 @@ public class OrganizationController
   public ResponseEntity<ApiResponse<OrganizationDTO>> getOrganizationByDisplayName(@PathVariable String displayName) {
     var organization = service.getOrganizationByDisplayName(displayName)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "displayName", displayName));
-    OrganizationDTO organizationDTO = mapper.toOrganizationDTO(organization);
+    OrganizationDTO organizationDTO = mapper.toDTO(organization);
     return ResponseUtil.success(organizationDTO, SUCCESS_MESSAGE);
   }
 
@@ -70,7 +70,7 @@ public class OrganizationController
   public ResponseEntity<ApiResponse<OrganizationDTO>> getOrganizationByAbbreviation(@PathVariable String abbreviation) {
     var organization = service.getOrganizationByAbbreviation(abbreviation)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "abbreviation", abbreviation));
-    OrganizationDTO organizationDTO = mapper.toOrganizationDTO(organization);
+    OrganizationDTO organizationDTO = mapper.toDTO(organization);
     return ResponseUtil.success(organizationDTO, SUCCESS_MESSAGE);
   }
 
@@ -92,50 +92,9 @@ public class OrganizationController
     }
 
     Page<Organization> organizationPage = service.getOrganizationsByType(organizationType, pageable);
-    Page<OrganizationDTO> organizations = organizationPage.map(mapper::toOrganizationDTO);
+    Page<OrganizationDTO> organizations = organizationPage.map(mapper::toDTO);
 
     return ResponseUtil.successWithPagination(organizations, SUCCESS_MESSAGE);
-  }
-
-  @Override
-  protected Page<Organization> getAllEntities(Pageable pageable) {
-    return service.getAll(pageable);
-  }
-
-  @Override
-  protected Organization getEntityById(Long id) {
-    return service.getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "id", id));
-  }
-
-  @Override
-  protected Organization createEntity(OrganizationDTO dto) {
-    return service.create(dto);
-  }
-
-  @Override
-  protected Organization updateEntity(Long id, OrganizationDTO dto) {
-    return service.update(id, dto);
-  }
-
-  @Override
-  protected void deleteEntity(Long id) {
-    service.delete(id);
-  }
-
-  @Override
-  protected boolean existsById(Long id) {
-    return service.existsById(id);
-  }
-
-  @Override
-  protected OrganizationDTO toDTO(Organization entity) {
-    return mapper.toOrganizationDTO(entity);
-  }
-
-  @Override
-  protected Organization toEntity(OrganizationDTO dto) {
-    return mapper.toOrganization(dto);
   }
 
 }

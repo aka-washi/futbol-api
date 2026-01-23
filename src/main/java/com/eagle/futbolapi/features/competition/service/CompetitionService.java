@@ -26,14 +26,12 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
 
   private final CompetitionRepository competitionRepository;
   private final SeasonService seasonService;
-  private final CompetitionMapper competitionMapper;
 
   protected CompetitionService(CompetitionRepository competitionRepository, SeasonService seasonService,
-      CompetitionMapper competitionMapper) {
-    super(competitionRepository);
+      CompetitionMapper mapper) {
+    super(competitionRepository, mapper);
     this.competitionRepository = competitionRepository;
     this.seasonService = seasonService;
-    this.competitionMapper = competitionMapper;
   }
 
   public Optional<Competition> getCompetitionByName(String name) {
@@ -137,11 +135,6 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
       throw new IllegalArgumentException("End date cannot be null");
     }
     return competitionRepository.findByDateRange(startDate, endDate);
-  }
-
-  @Override
-  protected Competition convertToEntity(CompetitionDTO dto) {
-    return competitionMapper.toCompetition(dto);
   }
 
   @Override

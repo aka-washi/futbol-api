@@ -1,7 +1,5 @@
 package com.eagle.futbolapi.features.pointsystem.controller;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +42,7 @@ public class PointSystemController
   public ResponseEntity<ApiResponse<PointSystemDTO>> getPointSystemByName(@PathVariable String name) {
     PointSystem pointSystem = service.getPointSystemByName(name)
         .orElseThrow(() -> new ResourceNotFoundException(resourceName, "name", name));
-    PointSystemDTO pointSystemDTO = mapper.toPointSystemDTO(pointSystem);
+    PointSystemDTO pointSystemDTO = mapper.toDTO(pointSystem);
     return ResponseUtil.success(pointSystemDTO, successMessage);
   }
 
@@ -52,50 +50,8 @@ public class PointSystemController
   public ResponseEntity<ApiResponse<PointSystemDTO>> getPointSystemByDisplayName(@PathVariable String displayName) {
     PointSystem pointSystem = service.getPointSystemByDisplayName(displayName)
         .orElseThrow(() -> new ResourceNotFoundException(resourceName, "displayName", displayName));
-    PointSystemDTO pointSystemDTO = mapper.toPointSystemDTO(pointSystem);
+    PointSystemDTO pointSystemDTO = mapper.toDTO(pointSystem);
     return ResponseUtil.success(pointSystemDTO, successMessage);
-  }
-
-  // Implement abstract methods from BaseCrudController
-  @Override
-  protected Page<PointSystem> getAllEntities(Pageable pageable) {
-    return service.getAll(pageable);
-  }
-
-  @Override
-  protected PointSystem getEntityById(Long id) {
-    return service.getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id.toString()));
-  }
-
-  @Override
-  protected PointSystem createEntity(PointSystemDTO dto) {
-    return service.create(dto);
-  }
-
-  @Override
-  protected PointSystem updateEntity(Long id, PointSystemDTO dto) {
-    return service.update(id, dto);
-  }
-
-  @Override
-  protected void deleteEntity(Long id) {
-    service.delete(id);
-  }
-
-  @Override
-  protected boolean existsById(Long id) {
-    return service.existsById(id);
-  }
-
-  @Override
-  protected PointSystemDTO toDTO(PointSystem entity) {
-    return mapper.toPointSystemDTO(entity);
-  }
-
-  @Override
-  protected PointSystem toEntity(PointSystemDTO dto) {
-    return mapper.toPointSystem(dto);
   }
 
 }

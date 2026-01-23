@@ -20,6 +20,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.Gender;
 import com.eagle.futbolapi.features.country.entity.Country;
 
 import lombok.AllArgsConstructor;

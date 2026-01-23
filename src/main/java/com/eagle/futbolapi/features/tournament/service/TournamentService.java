@@ -25,14 +25,12 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
 
   private final TournamentRepository tournamentRepository;
   private final OrganizationService organizationService;
-  private final TournamentMapper tournamentMapper;
 
   public TournamentService(TournamentRepository tournamentRepository, OrganizationService organizationService,
-      TournamentMapper tournamentMapper) {
-    super(tournamentRepository);
+      TournamentMapper mapper) {
+    super(tournamentRepository, mapper);
     this.tournamentRepository = tournamentRepository;
     this.organizationService = organizationService;
-    this.tournamentMapper = tournamentMapper;
   }
 
   public Optional<Tournament> getTournamentByName(String name) {
@@ -82,11 +80,6 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
         type,
         active,
         pageable);
-  }
-
-  @Override
-  protected Tournament convertToEntity(TournamentDTO dto) {
-    return tournamentMapper.toTournament(dto);
   }
 
   // Relationships

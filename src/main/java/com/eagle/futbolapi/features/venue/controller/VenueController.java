@@ -79,45 +79,4 @@ public class VenueController extends BaseCrudController<Venue, VenueDTO, VenueSe
     return ResponseUtil.success(venueDTOs, SUCCESS_MESSAGE);
   }
 
-  @Override
-  protected Page<Venue> getAllEntities(Pageable pageable) {
-    return service.getAll(pageable);
-  }
-
-  @Override
-  protected Venue getEntityById(Long id) {
-    return service.getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "id", id));
-  }
-
-  @Override
-  protected Venue createEntity(VenueDTO dto) {
-    return service.create(dto);
-  }
-
-  @Override
-  protected Venue updateEntity(Long id, VenueDTO dto) {
-    return service.update(id, dto);
-  }
-
-  @Override
-  protected void deleteEntity(Long id) {
-    service.delete(id);
-  }
-
-  @Override
-  protected boolean existsById(Long id) {
-    return service.existsById(id);
-  }
-
-  @Override
-  protected VenueDTO toDTO(Venue entity) {
-    return mapper.toDTO(entity);
-  }
-
-  @Override
-  protected Venue toEntity(VenueDTO dto) {
-    return mapper.toEntity(dto);
-  }
-
 }

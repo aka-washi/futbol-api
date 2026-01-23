@@ -15,7 +15,6 @@ import com.eagle.futbolapi.features.tournament.entity.Tournament;
 import com.eagle.futbolapi.features.tournament.mapper.TournamentMapper;
 import com.eagle.futbolapi.features.tournament.service.TournamentService;
 
-
 public class TournamentController
     extends BaseCrudController<Tournament, TournamentDTO, TournamentService, TournamentMapper> {
 
@@ -38,7 +37,7 @@ public class TournamentController
   public ResponseEntity<ApiResponse<TournamentDTO>> getTournamentByName(String name) {
     Tournament tournament = service.getTournamentByName(name)
         .orElseThrow(() -> new ResourceNotFoundException(resourceName, "name", name));
-    TournamentDTO tournamentDTO = mapper.toTournamentDTO(tournament);
+    TournamentDTO tournamentDTO = mapper.toDTO(tournament);
     return ResponseUtil.success(tournamentDTO, successMessage);
   }
 
@@ -46,7 +45,7 @@ public class TournamentController
   public ResponseEntity<ApiResponse<TournamentDTO>> getTournamentByDisplayName(String displayName) {
     Tournament tournament = service.getTournamentByDisplayName(displayName)
         .orElseThrow(() -> new ResourceNotFoundException(resourceName, "displayName", displayName));
-    TournamentDTO tournamentDTO = mapper.toTournamentDTO(tournament);
+    TournamentDTO tournamentDTO = mapper.toDTO(tournament);
     return ResponseUtil.success(tournamentDTO, successMessage);
   }
 
@@ -58,7 +57,7 @@ public class TournamentController
         .orElseThrow(() -> new ResourceNotFoundException(resourceName, "unique values",
             String.format("organizationId: %d, type: %s, ageCategory: %s, level: %d",
                 organizationId, type, ageCategory, level)));
-    TournamentDTO tournamentDTO = mapper.toTournamentDTO(tournament);
+    TournamentDTO tournamentDTO = mapper.toDTO(tournament);
     return ResponseUtil.success(tournamentDTO, successMessage);
   }
 
@@ -69,7 +68,7 @@ public class TournamentController
     Pageable pageable = ResponseUtil.createPageableWithDefaults();
 
     Page<Tournament> tournaments = service.getTournamentsByOrganizationAndActive(organizationId, active, pageable);
-    Page<TournamentDTO> tournamentDTOs = tournaments.map(mapper::toTournamentDTO);
+    Page<TournamentDTO> tournamentDTOs = tournaments.map(mapper::toDTO);
     return ResponseUtil.successWithPagination(tournamentDTOs, successMessage);
   }
 
@@ -79,48 +78,8 @@ public class TournamentController
     Pageable pageable = ResponseUtil.createPageableWithDefaults();
 
     Page<Tournament> tournaments = service.getTournamentsByTypeAndActive(type, active, pageable);
-    Page<TournamentDTO> tournamentDTOs = tournaments.map(mapper::toTournamentDTO);
+    Page<TournamentDTO> tournamentDTOs = tournaments.map(mapper::toDTO);
     return ResponseUtil.successWithPagination(tournamentDTOs, successMessage);
   }
 
-  @Override
-  protected Page<Tournament> getAllEntities(Pageable pageable) {
-    return service.getAll(pageable);
-  }
-
-  @Override
-  protected Tournament getEntityById(Long id) {
-    return service.getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id));
-  }
-
-  @Override
-  protected Tournament createEntity(TournamentDTO dto) {
-    return service.create(dto);
-  }
-
-  @Override
-  protected Tournament updateEntity(Long id, TournamentDTO dto) {
-    return service.update(id, dto);
-  }
-
-  @Override
-  protected void deleteEntity(Long id) {
-    service.delete(id);
-  }
-
-  @Override
-  protected boolean existsById(Long id) {
-    return service.existsById(id);
-  }
-
-  @Override
-  protected TournamentDTO toDTO(Tournament entity) {
-    return mapper.toTournamentDTO(entity);
-  }
-
-  @Override
-  protected Tournament toEntity(TournamentDTO dto) {
-    return mapper.toTournament(dto);
-  }
 }

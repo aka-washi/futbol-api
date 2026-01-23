@@ -54,7 +54,7 @@ public class StructureController
   public ResponseEntity<ApiResponse<StructureDTO>> getStructureByName(@PathVariable String name) {
     var structure = service.getStructureByName(name)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "name", name));
-    StructureDTO structureDTO = mapper.toStructureDTO(structure);
+    StructureDTO structureDTO = mapper.toDTO(structure);
     return ResponseUtil.success(structureDTO, SUCCESS_MESSAGE);
   }
 
@@ -62,7 +62,7 @@ public class StructureController
   public ResponseEntity<ApiResponse<StructureDTO>> getStructureByDisplayName(@PathVariable String displayName) {
     var structure = service.getStructureByDisplayName(displayName)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "displayName", displayName));
-    StructureDTO structureDTO = mapper.toStructureDTO(structure);
+    StructureDTO structureDTO = mapper.toDTO(structure);
     return ResponseUtil.success(structureDTO, SUCCESS_MESSAGE);
   }
 
@@ -82,51 +82,9 @@ public class StructureController
     }
 
     Page<Structure> structuresPage = service.getStructuresByType(structureType, pageable);
-    Page<StructureDTO> structureDTOs = structuresPage.map(mapper::toStructureDTO);
+    Page<StructureDTO> structureDTOs = structuresPage.map(mapper::toDTO);
 
     return ResponseUtil.successWithPagination(structureDTOs, SUCCESS_MESSAGE);
-  }
-
-  // Implement abstract methods from BaseCrudController
-  @Override
-  protected Page<Structure> getAllEntities(Pageable pageable) {
-    return service.getAll(pageable);
-  }
-
-  @Override
-  protected Structure getEntityById(Long id) {
-    return service.getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id));
-  }
-
-  @Override
-  protected Structure createEntity(StructureDTO dto) {
-    return service.create(dto);
-  }
-
-  @Override
-  protected Structure updateEntity(Long id, StructureDTO dto) {
-    return service.update(id, dto);
-  }
-
-  @Override
-  protected void deleteEntity(Long id) {
-    service.delete(id);
-  }
-
-  @Override
-  protected boolean existsById(Long id) {
-    return service.existsById(id);
-  }
-
-  @Override
-  protected StructureDTO toDTO(Structure entity) {
-    return mapper.toStructureDTO(entity);
-  }
-
-  @Override
-  protected Structure toEntity(StructureDTO dto) {
-    return mapper.toStructure(dto);
   }
 
 }

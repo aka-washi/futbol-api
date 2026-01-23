@@ -24,16 +24,14 @@ import com.eagle.futbolapi.features.structure.repository.StructureRepository;
 public class StructureService extends BaseCrudService<Structure, Long, StructureDTO> {
 
   private final StructureRepository structureRepository;
-  private final StructureMapper structureMapper;
   private final PointSystemRepository pointSystemRepository;
 
   public StructureService(
       StructureRepository structureRepository,
-      StructureMapper structureMapper,
+      StructureMapper mapper,
       PointSystemRepository pointSystemRepository) {
-    super(structureRepository);
+    super(structureRepository, mapper);
     this.structureRepository = structureRepository;
-    this.structureMapper = structureMapper;
     this.pointSystemRepository = pointSystemRepository;
   }
 
@@ -59,11 +57,6 @@ public class StructureService extends BaseCrudService<Structure, Long, Structure
       throw new IllegalArgumentException("Structure type cannot be null");
     }
     return structureRepository.findByType(type, pageable);
-  }
-
-  @Override
-  protected Structure convertToEntity(StructureDTO dto) {
-    return structureMapper.toStructure(dto);
   }
 
   @Override

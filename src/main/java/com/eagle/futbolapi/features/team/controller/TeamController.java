@@ -54,7 +54,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
   public ResponseEntity<ApiResponse<TeamDTO>> getTeamByDisplayName(@PathVariable String displayName) {
     var team = service.getTeamByDisplayName(displayName)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "displayName", displayName));
-    TeamDTO teamDTO = mapper.toTeamDTO(team);
+    TeamDTO teamDTO = mapper.toDTO(team);
     return ResponseUtil.success(teamDTO, SUCCESS_MESSAGE);
   }
 
@@ -81,7 +81,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
     var team = service.getTeamByDisplayNameAndGenderAndAgeCategory(displayName, genderEnum, ageCategoryEnum)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "displayName, gender, ageCategory",
             displayName + ", " + gender + ", " + ageCategory));
-    TeamDTO teamDTO = mapper.toTeamDTO(team);
+    TeamDTO teamDTO = mapper.toDTO(team);
     return ResponseUtil.success(teamDTO, SUCCESS_MESSAGE);
   }
 
@@ -101,7 +101,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
       return ResponseEntity.badRequest().body(ApiResponse.error("INVALID_GENDER", "Invalid gender: " + gender));
     }
     Page<Team> teamPage = service.getTeamsByGender(genderEnum, pageable);
-    Page<TeamDTO> teams = teamPage.map(mapper::toTeamDTO);
+    Page<TeamDTO> teams = teamPage.map(mapper::toDTO);
     return ResponseUtil.success(teams, SUCCESS_MESSAGE);
   }
 
@@ -134,7 +134,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
 
     Page<Team> teamPage = service.getTeamsByGenderAndAgeCategoryAndOrganizationId(genderEnum, ageCategoryEnum,
         organizationId, pageable);
-    Page<TeamDTO> teams = teamPage.map(mapper::toTeamDTO);
+    Page<TeamDTO> teams = teamPage.map(mapper::toDTO);
     return ResponseUtil.success(teams, SUCCESS_MESSAGE);
   }
 
@@ -164,48 +164,8 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
     }
     Page<Team> teamPage = service.getTeamsByGenderAndAgeCategoryAndCountryId(genderEnum, ageCategoryEnum,
         countryId, pageable);
-    Page<TeamDTO> teams = teamPage.map(mapper::toTeamDTO);
+    Page<TeamDTO> teams = teamPage.map(mapper::toDTO);
     return ResponseUtil.success(teams, SUCCESS_MESSAGE);
   }
 
-  @Override
-  protected Page<Team> getAllEntities(Pageable pageable) {
-    return service.getAll(pageable);
-  }
-
-  @Override
-  protected Team getEntityById(Long id) {
-    return service.getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "id", id));
-  }
-
-  @Override
-  protected Team createEntity(TeamDTO dto) {
-    return service.create(dto);
-  }
-
-  @Override
-  protected Team updateEntity(Long id, TeamDTO dto) {
-    return service.update(id, dto);
-  }
-
-  @Override
-  protected void deleteEntity(Long id) {
-    service.delete(id);
-  }
-
-  @Override
-  protected boolean existsById(Long id) {
-    return service.existsById(id);
-  }
-
-  @Override
-  protected TeamDTO toDTO(Team entity) {
-    return mapper.toTeamDTO(entity);
-  }
-
-  @Override
-  protected Team toEntity(TeamDTO dto) {
-    return mapper.toTeam(dto);
-  }
 }

@@ -15,4 +15,10 @@ import com.eagle.futbolapi.features.person.service.PersonService;
 @Validated
 public class PersonController extends BaseCrudController<Person, PersonDTO, PersonService, PersonMapper> {
 
+  protected PersonController(PersonService service, PersonMapper mapper, String resourceName, String successMessage,
+      String duplicateMessage, String serverError) {
+    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
+    // TODO Auto-generated constructor stub
+  }
+
 }

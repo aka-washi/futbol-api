@@ -30,16 +30,14 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
   private final CountryService countryService;
   private final OrganizationService organizationService;
   private final VenueService venueService;
-  private final TeamMapper teamMapper;
 
   public TeamService(TeamRepository teamRepository, CountryService countryService,
-      OrganizationService organizationService, VenueService venueService, TeamMapper teamMapper) {
-    super(teamRepository);
+      OrganizationService organizationService, VenueService venueService, TeamMapper mapper) {
+    super(teamRepository, mapper);
     this.teamRepository = teamRepository;
     this.countryService = countryService;
     this.organizationService = organizationService;
     this.venueService = venueService;
-    this.teamMapper = teamMapper;
   }
 
   public Optional<Team> getTeamByDisplayName(String displayName) {
@@ -105,11 +103,6 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
       pageable = Pageable.unpaged();
     }
     return teamRepository.findByGenderAndAgeCategoryAndCountryId(gender, ageCategory, countryId, pageable);
-  }
-
-  @Override
-  protected Team convertToEntity(TeamDTO dto) {
-    return teamMapper.toTeam(dto);
   }
 
   @Override

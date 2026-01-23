@@ -21,7 +21,7 @@ import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.exception.DuplicateResourceException;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
-import com.eagle.futbolapi.features.base.mapper.EntityMapper;
+import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.base.util.ResponseUtil;
 

@@ -15,4 +15,10 @@ import com.eagle.futbolapi.features.staff.service.StaffService;
 @Validated
 public class StaffController extends BaseCrudController<Staff, StaffDTO, StaffService, StaffMapper> {
 
+  protected StaffController(StaffService service, StaffMapper mapper, String resourceName, String successMessage,
+      String duplicateMessage, String serverError) {
+    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
+    // TODO Auto-generated constructor stub
+  }
+
 }

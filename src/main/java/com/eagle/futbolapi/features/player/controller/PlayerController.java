@@ -15,4 +15,10 @@ import com.eagle.futbolapi.features.player.service.PlayerService;
 @Validated
 public class PlayerController extends BaseCrudController<Player, PlayerDTO, PlayerService, PlayerMapper> {
 
+  protected PlayerController(PlayerService service, PlayerMapper mapper, String resourceName, String successMessage,
+      String duplicateMessage, String serverError) {
+    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
+    // TODO Auto-generated constructor stub
+  }
+
 }

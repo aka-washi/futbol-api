@@ -45,7 +45,7 @@ public class CompetitionController
   public ResponseEntity<ApiResponse<CompetitionDTO>> getCompetitionByName(@RequestParam String name) {
     Competition competition = service.getCompetitionByName(name)
         .orElseThrow(() -> new RuntimeException("Competition not found with name: " + name));
-    CompetitionDTO competitionDTO = mapper.toCompetitionDTO(competition);
+    CompetitionDTO competitionDTO = mapper.toDTO(competition);
     return ResponseUtil.success(competitionDTO, successMessage);
   }
 
@@ -53,7 +53,7 @@ public class CompetitionController
   public ResponseEntity<ApiResponse<CompetitionDTO>> getCompetitionByDisplayName(@RequestParam String displayName) {
     Competition competition = service.getCompetitionByDisplayName(displayName)
         .orElseThrow(() -> new RuntimeException("Competition not found with display name: " + displayName));
-    CompetitionDTO competitionDTO = mapper.toCompetitionDTO(competition);
+    CompetitionDTO competitionDTO = mapper.toDTO(competition);
     return ResponseUtil.success(competitionDTO, successMessage);
   }
 
@@ -62,7 +62,7 @@ public class CompetitionController
   public ResponseEntity<ApiResponse<CompetitionDTO>> getCompetitionBySeasonIdAndActive(@RequestParam Long seasonId) {
     Competition competition = service.getCompetitionBySeasonIdAndActive(seasonId, true)
         .orElseThrow(() -> new RuntimeException("Active Competition not found for season id: " + seasonId));
-    CompetitionDTO competitionDTO = mapper.toCompetitionDTO(competition);
+    CompetitionDTO competitionDTO = mapper.toDTO(competition);
     return ResponseUtil.success(competitionDTO, successMessage);
   }
 
@@ -74,7 +74,7 @@ public class CompetitionController
         CompetitionType.valueOf(type),
         LocalDate.parse(date))
         .orElseThrow(() -> new RuntimeException("Competition not found with type: " + type + " and date: " + date));
-    CompetitionDTO competitionDTO = mapper.toCompetitionDTO(competition);
+    CompetitionDTO competitionDTO = mapper.toDTO(competition);
     return ResponseUtil.success(competitionDTO, successMessage);
   }
 
@@ -91,7 +91,7 @@ public class CompetitionController
         CompetitionType.valueOf(type),
         LocalDate.parse(startDate),
         LocalDate.parse(endDate));
-    CompetitionDTO competitionDTO = competition.map(mapper::toCompetitionDTO).orElse(null);
+    CompetitionDTO competitionDTO = competition.map(mapper::toDTO).orElse(null);
     return ResponseUtil.success(competitionDTO, successMessage);
   }
 
@@ -100,7 +100,7 @@ public class CompetitionController
     // TODO: test the Pageable functionality through API, if not working change to
     // default values for page and size
     Page<Competition> activeCompetitions = service.getActiveCompetitions(pageable);
-    Page<CompetitionDTO> activeCompetitionDTOs = activeCompetitions.map(mapper::toCompetitionDTO);
+    Page<CompetitionDTO> activeCompetitionDTOs = activeCompetitions.map(mapper::toDTO);
     return ResponseUtil.success(activeCompetitionDTOs, successMessage);
   }
 
@@ -110,48 +110,8 @@ public class CompetitionController
     Pageable pageable = ResponseUtil.createPageableWithDefaults();
 
     Page<Competition> competitions = service.getCompetitionsBySeasonId(seasonId, pageable);
-    Page<CompetitionDTO> competitionDTOs = competitions.map(mapper::toCompetitionDTO);
+    Page<CompetitionDTO> competitionDTOs = competitions.map(mapper::toDTO);
     return ResponseUtil.successWithPagination(competitionDTOs, successMessage);
   }
 
-  @Override
-  protected Page<Competition> getAllEntities(Pageable pageable) {
-    return service.getAll(pageable);
-  }
-
-  @Override
-  protected Competition getEntityById(Long id) {
-    return service.getById(id)
-        .orElseThrow(() -> new RuntimeException("Competition not found with id: " + id));
-  }
-
-  @Override
-  protected Competition createEntity(CompetitionDTO dto) {
-    return service.create(dto);
-  }
-
-  @Override
-  protected Competition updateEntity(Long id, CompetitionDTO dto) {
-    return service.update(id, dto);
-  }
-
-  @Override
-  protected void deleteEntity(Long id) {
-    service.delete(id);
-  }
-
-  @Override
-  protected boolean existsById(Long id) {
-    return service.existsById(id);
-  }
-
-  @Override
-  protected CompetitionDTO toDTO(Competition entity) {
-    return mapper.toCompetitionDTO(entity);
-  }
-
-  @Override
-  protected Competition toEntity(CompetitionDTO dto) {
-    return mapper.toCompetition(dto);
-  }
 }

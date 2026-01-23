@@ -3,8 +3,6 @@ package com.eagle.futbolapi.features.season.controller;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +43,7 @@ public class SeasonController extends BaseCrudController<Season, SeasonDTO, Seas
   public ResponseEntity<ApiResponse<SeasonDTO>> getSeasonByName(@PathVariable String name) {
     Season season = service.getSeasonByName(name)
         .orElseThrow(() -> new ResourceNotFoundException(resourceName, "name", name));
-    SeasonDTO seasonDTO = mapper.toSeasonDTO(season);
+    SeasonDTO seasonDTO = mapper.toDTO(season);
     return ResponseUtil.success(seasonDTO, successMessage);
   }
 
@@ -53,7 +51,7 @@ public class SeasonController extends BaseCrudController<Season, SeasonDTO, Seas
   public ResponseEntity<ApiResponse<SeasonDTO>> getSeasonByDisplayName(@PathVariable String displayName) {
     Season season = service.getSeasonByDisplayName(displayName)
         .orElseThrow(() -> new ResourceNotFoundException(resourceName, "displayName", displayName));
-    SeasonDTO seasonDTO = mapper.toSeasonDTO(season);
+    SeasonDTO seasonDTO = mapper.toDTO(season);
     return ResponseUtil.success(seasonDTO, successMessage);
   }
 
@@ -65,7 +63,7 @@ public class SeasonController extends BaseCrudController<Season, SeasonDTO, Seas
     Season season = service.getSeasonByTournamentAndActive(tournamentId, active)
         .orElseThrow(
             () -> new ResourceNotFoundException(resourceName, "tournamentId and active", tournamentId + ", " + active));
-    SeasonDTO seasonDTO = mapper.toSeasonDTO(season);
+    SeasonDTO seasonDTO = mapper.toDTO(season);
     return ResponseUtil.success(seasonDTO, successMessage);
   }
 
@@ -77,7 +75,7 @@ public class SeasonController extends BaseCrudController<Season, SeasonDTO, Seas
     Season season = service.getSeasonByTournamentAndDateRange(tournamentId, java.time.LocalDate.parse(date))
         .orElseThrow(
             () -> new ResourceNotFoundException(resourceName, "tournamentId and date", tournamentId + ", " + date));
-    SeasonDTO seasonDTO = mapper.toSeasonDTO(season);
+    SeasonDTO seasonDTO = mapper.toDTO(season);
     return ResponseUtil.success(seasonDTO, successMessage);
   }
 
@@ -96,47 +94,6 @@ public class SeasonController extends BaseCrudController<Season, SeasonDTO, Seas
         LocalDate.parse(endDate),
         active);
     return ResponseUtil.success(exists, successMessage);
-  }
-
-  @Override
-  protected Page<Season> getAllEntities(Pageable pageable) {
-    return service.getAll(pageable);
-  }
-
-  @Override
-  protected Season getEntityById(Long id) {
-    return service.getById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id));
-  }
-
-  @Override
-  protected Season createEntity(SeasonDTO dto) {
-    return service.create(dto);
-  }
-
-  @Override
-  protected Season updateEntity(Long id, SeasonDTO dto) {
-    return service.update(id, dto);
-  }
-
-  @Override
-  protected void deleteEntity(Long id) {
-    service.delete(id);
-  }
-
-  @Override
-  protected boolean existsById(Long id) {
-    return service.existsById(id);
-  }
-
-  @Override
-  protected SeasonDTO toDTO(Season entity) {
-    return mapper.toSeasonDTO(entity);
-  }
-
-  @Override
-  protected Season toEntity(SeasonDTO dto) {
-    return mapper.toSeason(dto);
   }
 
 }

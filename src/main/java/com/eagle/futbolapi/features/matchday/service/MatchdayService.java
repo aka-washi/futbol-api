@@ -2,20 +2,18 @@ package com.eagle.futbolapi.features.matchday.service;
 
 import java.util.Objects;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import jakarta.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
-import com.eagle.futbolapi.features.competition.controller.CompetitionController;
 import com.eagle.futbolapi.features.matchday.dto.MatchdayDTO;
 import com.eagle.futbolapi.features.matchday.entity.Matchday;
 import com.eagle.futbolapi.features.matchday.mapper.MatchdayMapper;
 import com.eagle.futbolapi.features.matchday.repository.MatchdayRepository;
 import com.eagle.futbolapi.features.stage.service.StageService;
-
-import jakarta.validation.constraints.NotNull;
 
 @Service
 @Transactional
