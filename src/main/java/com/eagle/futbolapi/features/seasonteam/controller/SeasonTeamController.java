@@ -10,16 +10,25 @@ import com.eagle.futbolapi.features.seasonteam.entity.SeasonTeam;
 import com.eagle.futbolapi.features.seasonteam.mapper.SeasonTeamMapper;
 import com.eagle.futbolapi.features.seasonteam.service.SeasonTeamService;
 
+@Validated
 @RestController
 @RequestMapping("/season-teams")
-@Validated
 public class SeasonTeamController
     extends BaseCrudController<SeasonTeam, SeasonTeamDTO, SeasonTeamService, SeasonTeamMapper> {
 
-  protected SeasonTeamController(SeasonTeamService service, SeasonTeamMapper mapper, String resourceName,
-      String successMessage, String duplicateMessage, String serverError) {
-    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
-    // TODO Auto-generated constructor stub
+  private static final String RESOURCE_NAME = "SeasonTeam";
+  private static final String SUCCESS_MESSAGE = "Season Team(s) retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Season Team already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
+  public SeasonTeamController(SeasonTeamService seasonTeamService, SeasonTeamMapper seasonTeamMapper) {
+    super(
+        seasonTeamService,
+        seasonTeamMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
   }
 
 }

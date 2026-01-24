@@ -10,15 +10,24 @@ import com.eagle.futbolapi.features.player.entity.Player;
 import com.eagle.futbolapi.features.player.mapper.PlayerMapper;
 import com.eagle.futbolapi.features.player.service.PlayerService;
 
+@Validated
 @RestController
 @RequestMapping("/players")
-@Validated
 public class PlayerController extends BaseCrudController<Player, PlayerDTO, PlayerService, PlayerMapper> {
 
-  protected PlayerController(PlayerService service, PlayerMapper mapper, String resourceName, String successMessage,
-      String duplicateMessage, String serverError) {
-    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
-    // TODO Auto-generated constructor stub
+  private static final String RESOURCE_NAME = "Player";
+  private static final String SUCCESS_MESSAGE = "Player(s) retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Player already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
+  public PlayerController(PlayerService playerService, PlayerMapper playerMapper) {
+    super(
+        playerService,
+        playerMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
   }
 
 }

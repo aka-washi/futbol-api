@@ -3,6 +3,7 @@ package com.eagle.futbolapi.features.rosterentry.repository;
 import java.time.LocalDate;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,12 +15,22 @@ import com.eagle.futbolapi.features.rosterentry.entity.RosterEntry;
 public interface RosterEntryRepository extends JpaRepository<RosterEntry, Long> {
 
   @Query("SELECT r FROM RosterEntry r WHERE r.season.id = :seasonId AND r.team.id = :teamId AND r.player IS NOT NULL AND r.active = true")
-  Page<RosterEntry> findActivePlayersBySeasonAndTeam(@Param("seasonId") Long seasonId, @Param("teamId") Long teamId);
+  Page<RosterEntry> findActivePlayersBySeasonAndTeam(@Param("seasonId") Long seasonId, @Param("teamId") Long teamId,
+      Pageable pageable);
 
   @Query("SELECT r FROM RosterEntry r WHERE r.season.id = :seasonId AND r.team.id = :teamId AND r.staff IS NOT NULL AND r.active = true")
-  Page<RosterEntry> findActiveStaffBySeasonAndTeam(@Param("seasonId") Long seasonId, @Param("teamId") Long teamId);
+  Page<RosterEntry> findActiveStaffBySeasonAndTeam(@Param("seasonId") Long seasonId, @Param("teamId") Long teamId,
+      Pageable pageable);
 
   @Query("SELECT r FROM RosterEntry r WHERE r.joinedDate <= :date AND (r.leftDate IS NULL OR r.leftDate >= :date)")
-  Page<RosterEntry> findActiveOnDate(@Param("date") LocalDate date);
+  Page<RosterEntry> findActiveOnDate(@Param("date") LocalDate date, Pageable pageable);
+
+  boolean existsBySeasonIdAndTeamIdAndPlayerId(Long seasonId, Long teamId, Long playerId);
+
+  boolean existsBySeasonIdAndTeamIdAndPlayerIdAndIdNot(Long seasonId, Long teamId, Long playerId, Long id);
+
+  boolean existsBySeasonIdAndTeamIdAndStaffId(Long seasonId, Long teamId, Long staffId);
+
+  boolean existsBySeasonIdAndTeamIdAndStaffIdAndIdNot(Long seasonId, Long teamId, Long staffId, Long id);
 
 }

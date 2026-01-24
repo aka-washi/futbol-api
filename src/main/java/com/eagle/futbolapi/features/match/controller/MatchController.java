@@ -10,15 +10,24 @@ import com.eagle.futbolapi.features.match.entity.Match;
 import com.eagle.futbolapi.features.match.mapper.MatchMapper;
 import com.eagle.futbolapi.features.match.service.MatchService;
 
+@Validated
 @RestController
 @RequestMapping("/matches")
-@Validated
 public class MatchController extends BaseCrudController<Match, MatchDTO, MatchService, MatchMapper> {
 
-  protected MatchController(MatchService service, MatchMapper mapper, String resourceName, String successMessage,
-      String duplicateMessage, String serverError) {
-    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
-    // TODO Auto-generated constructor stub
+  private static final String RESOURCE_NAME = "Match";
+  private static final String SUCCESS_MESSAGE = "Match(es) retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Match already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
+  public MatchController(MatchService matchService, MatchMapper matchMapper) {
+    super(
+        matchService,
+        matchMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
   }
 
 }

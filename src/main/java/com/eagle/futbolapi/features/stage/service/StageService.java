@@ -6,6 +6,7 @@ import java.util.Optional;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,11 +50,11 @@ public class StageService extends BaseCrudService<Stage, Long, StageDTO> {
     return stageRepository.findByDisplayName(displayName);
   }
 
-  public Optional<Stage> getStageByTournamentId(Long tournamentId) {
-    if (tournamentId == null) {
-      throw new IllegalArgumentException("Tournament ID cannot be null");
+  public Optional<Stage> getStageByCompetitionId(Long competitionId) {
+    if (competitionId == null) {
+      throw new IllegalArgumentException("Competition ID cannot be null");
     }
-    return stageRepository.findByTournamentId(tournamentId);
+    return stageRepository.findByCompetitionId(competitionId);
   }
 
   public Optional<Stage> getStageByCompetitionAndDateRange(Long competitionId) {
@@ -63,21 +64,27 @@ public class StageService extends BaseCrudService<Stage, Long, StageDTO> {
     return stageRepository.findByStagesByCompetitionIdAndDateRange(competitionId, java.time.LocalDate.now());
   }
 
-  public Page<Stage> getStagesByDateRange(LocalDate date) {
+  public Page<Stage> getStagesByDateRange(LocalDate date, Pageable pageable) {
     if (date == null) {
       throw new IllegalArgumentException("Date cannot be null");
     }
-    return stageRepository.findByDateRange(date);
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    return stageRepository.findByDateRange(date, pageable);
   }
 
-  public Page<Stage> getStagesByCompetitionAndStatus(Long competitionId, StageStatus status) {
+  public Page<Stage> getStagesByCompetitionAndStatus(Long competitionId, StageStatus status, Pageable pageable) {
     if (competitionId == null) {
       throw new IllegalArgumentException("Competition ID cannot be null");
     }
     if (status == null) {
       throw new IllegalArgumentException("Status cannot be null");
     }
-    return stageRepository.findByCompetitionIdAndStatus(competitionId, status);
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    return stageRepository.findByCompetitionIdAndStatus(competitionId, status, pageable);
   }
 
   @Override

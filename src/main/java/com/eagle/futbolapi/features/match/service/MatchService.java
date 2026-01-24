@@ -2,33 +2,118 @@ package com.eagle.futbolapi.features.match.service;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Objects;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.match.dto.MatchDTO;
 import com.eagle.futbolapi.features.match.entity.Match;
 import com.eagle.futbolapi.features.match.mapper.MatchMapper;
 import com.eagle.futbolapi.features.match.repository.MatchRepository;
+import com.eagle.futbolapi.features.matchday.service.MatchdayService;
+import com.eagle.futbolapi.features.team.service.TeamService;
+import com.eagle.futbolapi.features.venue.service.VenueService;
 
 @Service
 @Transactional
 public class MatchService extends BaseCrudService<Match, Long, MatchDTO> {
 
-  protected MatchService(MatchRepository repository, MatchMapper mapper) {
-    super(repository, mapper);
+  private final MatchRepository matchRepository;
+  private final MatchdayService matchdayService;
+  private final TeamService teamService;
+  private final VenueService venueService;
+
+  public MatchService(MatchRepository matchRepository, MatchMapper mapper, MatchdayService matchdayService,
+      TeamService teamService, VenueService venueService) {
+    super(matchRepository, mapper);
+    this.matchRepository = matchRepository;
+    this.matchdayService = matchdayService;
+    this.teamService = teamService;
+    this.venueService = venueService;
+  }
+
+  public Optional<Match> getMatchByName(String name) {
+    if (name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("Match name cannot be null or empty");
+    }
+    return matchRepository.findByName(name);
+  }
+
+  public Optional<Match> getMatchByDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Match display name cannot be null or empty");
+    }
+    return matchRepository.findByDisplayName(displayName);
+  }
+
+  /**
+   * Resolves related entities (Matchday, homeTeam, awayTeam, Venue, Referee) from
+   * DTO.
+   */
+  @Override
+  protected void resolveRelationships(@NotNull MatchDTO dto, @NotNull Match match) {
+    // Map Matchday from display name or ID
+    if (dto.getMatchdayDisplayName() != null && !dto.getMatchdayDisplayName().trim().isEmpty()) {
+      String displayName = dto.getMatchdayDisplayName();
+      var matchday = matchdayService.getByDisplayName(displayName)
+          .orElseThrow(() -> new ResourceNotFoundException(
+              "Matchday with display name " + displayName + " not found"));
+      match.setMatchday(matchday);
+    }
+
+    // Map home team from display name or ID
+    if (dto.getHomeTeamDisplayName() != null && !dto.getHomeTeamDisplayName().trim().isEmpty()) {
+      String homeTeamDisplayName = dto.getHomeTeamDisplayName();
+      var homeTeam = teamService.getByDisplayName(homeTeamDisplayName)
+          .orElseThrow(() -> new ResourceNotFoundException(
+              "Home team with display name " + homeTeamDisplayName + " not found"));
+      match.setHomeTeam(homeTeam);
+    }
+
+    // Map away team from display name or ID
+    if (dto.getAwayTeamDisplayName() != null && !dto.getAwayTeamDisplayName().trim().isEmpty()) {
+      String awayTeamDisplayName = dto.getAwayTeamDisplayName();
+      var awayTeam = teamService.getByDisplayName(awayTeamDisplayName)
+          .orElseThrow(() -> new ResourceNotFoundException(
+              "Away team with display name " + awayTeamDisplayName + " not found"));
+      match.setAwayTeam(awayTeam);
+    }
+
+    // Map venue from name
+    if (dto.getVenueName() != null && !dto.getVenueName().trim().isEmpty()) {
+      String venueName = dto.getVenueName();
+      var venue = venueService.getVenueByDisplayName(venueName)
+          .orElseThrow(() -> new ResourceNotFoundException(
+              "Venue with display name " + venueName + " not found"));
+      match.setVenue(venue);
+    }
   }
 
   @Override
-  protected boolean isDuplicate(@NotNull Match entity) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isDuplicate'");
+  protected boolean isDuplicate(@NotNull Match match) {
+    Objects.requireNonNull(match, "Match cannot be null");
+    // A match is unique by matchday, home team, away team, and scheduled date
+    return match.getMatchday() != null && match.getHomeTeam() != null && match.getAwayTeam() != null
+        && match.getScheduledDate() != null
+        && matchRepository.existsByMatchdayIdAndHomeTeamIdAndAwayTeamIdAndScheduledDate(
+            match.getMatchday().getId(), match.getHomeTeam().getId(), match.getAwayTeam().getId(),
+            match.getScheduledDate());
   }
 
   @Override
-  protected boolean isDuplicate(@NotNull Long id, @NotNull Match entity) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isDuplicate'");
+  protected boolean isDuplicate(@NotNull Long id, @NotNull Match match) {
+    Objects.requireNonNull(id, "ID cannot be null");
+    Objects.requireNonNull(match, "Match cannot be null");
+
+    return match.getMatchday() != null && match.getHomeTeam() != null && match.getAwayTeam() != null
+        && match.getScheduledDate() != null
+        && matchRepository.existsByMatchdayIdAndHomeTeamIdAndAwayTeamIdAndScheduledDateAndIdNot(
+            match.getMatchday().getId(), match.getHomeTeam().getId(), match.getAwayTeam().getId(),
+            match.getScheduledDate(), id);
   }
 
 }

@@ -10,15 +10,24 @@ import com.eagle.futbolapi.features.standing.entity.Standing;
 import com.eagle.futbolapi.features.standing.mapper.StandingMapper;
 import com.eagle.futbolapi.features.standing.service.StandingService;
 
+@Validated
 @RestController
 @RequestMapping("/standings")
-@Validated
 public class StandingController extends BaseCrudController<Standing, StandingDTO, StandingService, StandingMapper> {
 
-  protected StandingController(StandingService service, StandingMapper mapper, String resourceName,
-      String successMessage, String duplicateMessage, String serverError) {
-    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
-    // TODO Auto-generated constructor stub
+  private static final String RESOURCE_NAME = "Standing";
+  private static final String SUCCESS_MESSAGE = "Standing(s) retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Standing already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
+  public StandingController(StandingService standingService, StandingMapper standingMapper) {
+    super(
+        standingService,
+        standingMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
   }
 
 }

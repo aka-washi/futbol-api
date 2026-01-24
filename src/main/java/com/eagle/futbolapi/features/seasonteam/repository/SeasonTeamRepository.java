@@ -24,4 +24,8 @@ public interface SeasonTeamRepository extends JpaRepository<SeasonTeam, Long> {
   @Query("SELECT COUNT(st) FROM SeasonTeam st WHERE st.season.id = :seasonId")
   Long countTeamsInSeason(@Param("seasonId") Long seasonId);
 
+  boolean existsBySeasonIdAndTeamId(Long seasonId, Long teamId);
+
+  boolean existsBySeasonIdAndTeamIdAndIdNot(Long seasonId, Long teamId, Long id);
+
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,18 +82,24 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
         active);
   }
 
-  public Page<Season> getSeasonsByTournamentId(Long tournamentId) {
+  public Page<Season> getSeasonsByTournamentId(Long tournamentId, Pageable pageable) {
     if (tournamentId == null) {
       throw new IllegalArgumentException("Tournament ID cannot be null");
     }
-    return seasonRepository.findByTournamentId(tournamentId);
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    return seasonRepository.findByTournamentId(tournamentId, pageable);
   }
 
-  public Page<Season> getSeasonsByDateRange(LocalDate date) {
+  public Page<Season> getSeasonsByDateRange(LocalDate date, Pageable pageable) {
     if (date == null) {
       throw new IllegalArgumentException("Date cannot be null");
     }
-    return seasonRepository.findByDateRange(date);
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    return seasonRepository.findByDateRange(date, pageable);
   }
 
   // Resolve related entities (Tournament) from DTO

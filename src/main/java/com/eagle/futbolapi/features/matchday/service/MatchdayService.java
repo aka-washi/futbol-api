@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.matchday.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -29,6 +30,20 @@ public class MatchdayService extends BaseCrudService<Matchday, Long, MatchdayDTO
     super(repository, mapper);
     this.repository = repository;
     this.stageService = stageService;
+  }
+
+  public Optional<Matchday> getByName(String name) {
+    if (name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("Matchday name cannot be null or empty");
+    }
+    return repository.findByName(name);
+  }
+
+  public Optional<Matchday> getByDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Matchday display name cannot be null or empty");
+    }
+    return repository.findByDisplayName(displayName);
   }
 
   @Override

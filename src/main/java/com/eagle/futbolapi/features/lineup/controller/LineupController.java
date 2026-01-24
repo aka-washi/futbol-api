@@ -10,14 +10,24 @@ import com.eagle.futbolapi.features.lineup.entity.Lineup;
 import com.eagle.futbolapi.features.lineup.mapper.LineupMapper;
 import com.eagle.futbolapi.features.lineup.service.LineupService;
 
+@Validated
 @RestController
 @RequestMapping("/lineups")
-@Validated
 public class LineupController extends BaseCrudController<Lineup, LineupDTO, LineupService, LineupMapper> {
 
-  protected LineupController(LineupService service, LineupMapper mapper, String resourceName, String successMessage,
-      String duplicateMessage, String serverError) {
-    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
-    // TODO Auto-generated constructor stub
+  private static final String RESOURCE_NAME = "Lineup";
+  private static final String SUCCESS_MESSAGE = "Lineup(s) retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Lineup already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
+  public LineupController(LineupService lineupService, LineupMapper lineupMapper) {
+    super(
+        lineupService,
+        lineupMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
   }
+
 }

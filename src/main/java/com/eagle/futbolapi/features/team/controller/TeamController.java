@@ -52,7 +52,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
 
   @GetMapping("/displayName/{displayName}")
   public ResponseEntity<ApiResponse<TeamDTO>> getTeamByDisplayName(@PathVariable String displayName) {
-    var team = service.getTeamByDisplayName(displayName)
+    var team = service.getByDisplayName(displayName)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "displayName", displayName));
     TeamDTO teamDTO = mapper.toDTO(team);
     return ResponseUtil.success(teamDTO, SUCCESS_MESSAGE);
@@ -78,7 +78,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
       return ResponseEntity.badRequest()
           .body(ApiResponse.error("INVALID_AGE_CATEGORY", "Invalid age category: " + ageCategory));
     }
-    var team = service.getTeamByDisplayNameAndGenderAndAgeCategory(displayName, genderEnum, ageCategoryEnum)
+    var team = service.getByDisplayNameAndGenderAndAgeCategory(displayName, genderEnum, ageCategoryEnum)
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "displayName, gender, ageCategory",
             displayName + ", " + gender + ", " + ageCategory));
     TeamDTO teamDTO = mapper.toDTO(team);
@@ -100,7 +100,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
     } catch (IllegalArgumentException e) {
       return ResponseEntity.badRequest().body(ApiResponse.error("INVALID_GENDER", "Invalid gender: " + gender));
     }
-    Page<Team> teamPage = service.getTeamsByGender(genderEnum, pageable);
+    Page<Team> teamPage = service.getByGender(genderEnum, pageable);
     Page<TeamDTO> teams = teamPage.map(mapper::toDTO);
     return ResponseUtil.success(teams, SUCCESS_MESSAGE);
   }
@@ -132,7 +132,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
           .body(ApiResponse.error("INVALID_AGE_CATEGORY", "Invalid age category: " + ageCategory));
     }
 
-    Page<Team> teamPage = service.getTeamsByGenderAndAgeCategoryAndOrganizationId(genderEnum, ageCategoryEnum,
+    Page<Team> teamPage = service.getByGenderAndAgeCategoryAndOrganizationId(genderEnum, ageCategoryEnum,
         organizationId, pageable);
     Page<TeamDTO> teams = teamPage.map(mapper::toDTO);
     return ResponseUtil.success(teams, SUCCESS_MESSAGE);
@@ -162,7 +162,7 @@ public class TeamController extends BaseCrudController<Team, TeamDTO, TeamServic
       return ResponseEntity.badRequest()
           .body(ApiResponse.error("INVALID_AGE_CATEGORY", "Invalid age category: " + ageCategory));
     }
-    Page<Team> teamPage = service.getTeamsByGenderAndAgeCategoryAndCountryId(genderEnum, ageCategoryEnum,
+    Page<Team> teamPage = service.getByGenderAndAgeCategoryAndCountryId(genderEnum, ageCategoryEnum,
         countryId, pageable);
     Page<TeamDTO> teams = teamPage.map(mapper::toDTO);
     return ResponseUtil.success(teams, SUCCESS_MESSAGE);

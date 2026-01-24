@@ -10,16 +10,25 @@ import com.eagle.futbolapi.features.rosterentry.entity.RosterEntry;
 import com.eagle.futbolapi.features.rosterentry.mapper.RosterEntryMapper;
 import com.eagle.futbolapi.features.rosterentry.service.RosterEntryService;
 
+@Validated
 @RestController
 @RequestMapping("/roster-entries")
-@Validated
 public class RosterEntryController
     extends BaseCrudController<RosterEntry, RosterEntryDTO, RosterEntryService, RosterEntryMapper> {
 
-  protected RosterEntryController(RosterEntryService service, RosterEntryMapper mapper, String resourceName,
-      String successMessage, String duplicateMessage, String serverError) {
-    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
-    // TODO Auto-generated constructor stub
+  private static final String RESOURCE_NAME = "RosterEntry";
+  private static final String SUCCESS_MESSAGE = "Roster Entry(ies) retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Roster Entry already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
+  public RosterEntryController(RosterEntryService rosterEntryService, RosterEntryMapper rosterEntryMapper) {
+    super(
+        rosterEntryService,
+        rosterEntryMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
   }
 
 }

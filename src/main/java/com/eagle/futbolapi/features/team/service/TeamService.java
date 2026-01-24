@@ -40,14 +40,14 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
     this.venueService = venueService;
   }
 
-  public Optional<Team> getTeamByDisplayName(String displayName) {
+  public Optional<Team> getByDisplayName(String displayName) {
     if (displayName == null || displayName.trim().isEmpty()) {
-      throw new IllegalArgumentException("Team display name cannot be null or empty");
+      throw new ResourceNotFoundException("Team display name", "displayName", displayName);
     }
     return teamRepository.findByDisplayName(displayName);
   }
 
-  public Optional<Team> getTeamByDisplayNameAndGenderAndAgeCategory(
+  public Optional<Team> getByDisplayNameAndGenderAndAgeCategory(
       String displayName, Gender gender, AgeCategory ageCategory) {
     if (displayName == null || displayName.trim().isEmpty()) {
       throw new IllegalArgumentException("Team display name cannot be null or empty");
@@ -61,7 +61,7 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
     return teamRepository.findByDisplayNameAndGenderAndAgeCategory(displayName, gender, ageCategory);
   }
 
-  public Page<Team> getTeamsByGender(Gender gender, Pageable pageable) {
+  public Page<Team> getByGender(Gender gender, Pageable pageable) {
     if (gender == null) {
       throw new IllegalArgumentException("Gender cannot be null");
     }
@@ -71,7 +71,7 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
     return teamRepository.findByGender(gender, pageable);
   }
 
-  public Page<Team> getTeamsByGenderAndAgeCategoryAndOrganizationId(Gender gender, AgeCategory ageCategory,
+  public Page<Team> getByGenderAndAgeCategoryAndOrganizationId(Gender gender, AgeCategory ageCategory,
       Long organizationId, Pageable pageable) {
     if (gender == null) {
       throw new IllegalArgumentException("Gender cannot be null");
@@ -88,7 +88,7 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
     return teamRepository.findByGenderAndAgeCategoryAndOrganizationId(gender, ageCategory, organizationId, pageable);
   }
 
-  public Page<Team> getTeamsByGenderAndAgeCategoryAndCountryId(Gender gender, AgeCategory ageCategory, Long countryId,
+  public Page<Team> getByGenderAndAgeCategoryAndCountryId(Gender gender, AgeCategory ageCategory, Long countryId,
       Pageable pageable) {
     if (gender == null) {
       throw new IllegalArgumentException("Gender cannot be null");

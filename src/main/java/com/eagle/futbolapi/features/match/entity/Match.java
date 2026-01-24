@@ -16,6 +16,7 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
@@ -49,6 +50,14 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Match extends BaseEntity {
+
+  @NotBlank
+  @Column(name = "mt_name", nullable = false)
+  private String name;
+
+  @NotBlank
+  @Column(name = "mt_display_name", length = 100, nullable = false)
+  private String displayName;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "matchday_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
@@ -147,9 +156,7 @@ public class Match extends BaseEntity {
         homePenaltyScore,
         awayPenaltyScore,
         attendance,
-        referee,
-        weatherConditions,
-        notes);
+        referee);
   }
 
   @Override
@@ -177,9 +184,7 @@ public class Match extends BaseEntity {
         && Objects.equals(homePenaltyScore, other.homePenaltyScore)
         && Objects.equals(awayPenaltyScore, other.awayPenaltyScore)
         && Objects.equals(attendance, other.attendance)
-        && Objects.equals(referee, other.referee)
-        && Objects.equals(weatherConditions, other.weatherConditions)
-        && Objects.equals(notes, other.notes);
+        && Objects.equals(referee, other.referee);
   }
 
 }

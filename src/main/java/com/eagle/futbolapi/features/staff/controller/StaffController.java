@@ -10,15 +10,24 @@ import com.eagle.futbolapi.features.staff.entity.Staff;
 import com.eagle.futbolapi.features.staff.mapper.StaffMapper;
 import com.eagle.futbolapi.features.staff.service.StaffService;
 
+@Validated
 @RestController
 @RequestMapping("/staff")
-@Validated
 public class StaffController extends BaseCrudController<Staff, StaffDTO, StaffService, StaffMapper> {
 
-  protected StaffController(StaffService service, StaffMapper mapper, String resourceName, String successMessage,
-      String duplicateMessage, String serverError) {
-    super(service, mapper, resourceName, successMessage, duplicateMessage, serverError);
-    // TODO Auto-generated constructor stub
+  private static final String RESOURCE_NAME = "Staff";
+  private static final String SUCCESS_MESSAGE = "Staff member(s) retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Staff member already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
+
+  public StaffController(StaffService staffService, StaffMapper staffMapper) {
+    super(
+        staffService,
+        staffMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
   }
 
 }
