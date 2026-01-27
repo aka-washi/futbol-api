@@ -2,6 +2,7 @@
   "name": "Java",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "localhost:5000/rdg-java:1.0.0",
+    "runArgs": ["--name", "futbol-api"],
 
   // "features": {
   //   "ghcr.io/devcontainers/features/java:1": {
