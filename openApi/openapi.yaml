@@ -7189,11 +7189,16 @@ components:
     # Tournament Schemas
     TournamentDTO:
       type: object
+      description: |
+        Tournament data transfer object. Either organizationId or organizationDisplayName must be provided.
       required:
         - name
         - displayName
-        - organizationId
         - type
+      x-validation-rules:
+        - rule: atLeastOneRequired
+          fields: [organizationId, organizationDisplayName]
+          message: Either organizationId or organizationDisplayName must be provided
       properties:
         id:
           type: integer
@@ -7214,8 +7219,12 @@ components:
         organizationId:
           type: integer
           format: int64
-          description: Organization ID that owns this tournament
+          description: Organization ID that owns this tournament (either this or organizationDisplayName is required)
           example: 1
+        organizationDisplayName:
+          type: string
+          description: Organization display name (alternative to organizationId for lookup)
+          example: Liga MX
         type:
           $ref: '#/components/schemas/TournamentType'
         active:
@@ -7268,12 +7277,22 @@ components:
     # Season Schemas
     SeasonDTO:
       type: object
+      description: |
+        Season data transfer object. Either tournamentId or tournamentDisplayName must be provided.
+        End date is required only when active is false.
       required:
         - name
         - displayName
-        - tournamentId
         - startDate
-        - endDate
+      x-validation-rules:
+        - rule: atLeastOneRequired
+          fields: [tournamentId, tournamentDisplayName]
+          message: Either tournamentId or tournamentDisplayName must be provided
+        - rule: requiredIfFieldEquals
+          field: endDate
+          conditionField: active
+          conditionValue: 'false'
+          message: End date is required when season is inactive
       properties:
         id:
           type: integer
@@ -7294,8 +7313,12 @@ components:
         tournamentId:
           type: integer
           format: int64
-          description: Tournament ID this season belongs to
+          description: Tournament ID this season belongs to (either this or tournamentDisplayName is required)
           example: 1
+        tournamentDisplayName:
+          type: string
+          description: Tournament display name (alternative to tournamentId for lookup)
+          example: Liga MX
         startDate:
           type: string
           format: date
@@ -7304,13 +7327,23 @@ components:
         endDate:
           type: string
           format: date
-          description: Season end date
+          description: Season end date (required when active is false, optional when active is true)
           example: '2024-12-15'
         active:
           type: boolean
           description: Whether the season is currently active
           example: true
+          default: false
+        hasRelegation:
+          type: boolean
+          description: Whether this season has relegation
+          example: true
           default: true
+        description:
+          type: string
+          description: Season description
+          example: First half of the 2024-2025 season
+          maxLength: 500
 
     PageSeasonDTO:
       type: object

@@ -12,6 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -61,8 +62,7 @@ public class Season extends BaseEntity {
   @Column(name = "sn_start_date", nullable = false)
   private LocalDate startDate;
 
-  @NotNull
-  @Column(name = "sn_end_date", nullable = false)
+  @Column(name = "sn_end_date")
   private LocalDate endDate;
 
   @Column(name = "sn_active", nullable = false)
@@ -75,6 +75,16 @@ public class Season extends BaseEntity {
 
   @Column(name = "sn_description", columnDefinition = "TEXT")
   private String description;
+
+  @PrePersist
+  public void prePersist() {
+    if (active == null) {
+      active = false;
+    }
+    if (hasRelegation == null) {
+      hasRelegation = true;
+    }
+  }
 
   @Override
   public int hashCode() {

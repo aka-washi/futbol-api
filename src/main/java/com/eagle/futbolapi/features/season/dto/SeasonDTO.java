@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
+import com.eagle.futbolapi.features.base.validation.RequiredIfFieldEquals;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,11 +19,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@AtLeastOneNotNull(fields = { "tournamentId",
+    "tournamentDisplayName" }, message = "Either tournamentId or tournamentDisplayName must be provided")
+@RequiredIfFieldEquals(field = "endDate", conditionField = "active", conditionValue = "false", message = "End date is required when season is inactive")
 public class SeasonDTO {
 
   private Long id;
 
-  @NotNull(message = "Tournament is required")
   private Long tournamentId;
   private String tournamentDisplayName;
 
@@ -35,7 +40,6 @@ public class SeasonDTO {
   @NotNull(message = "Start date is required")
   private LocalDate startDate;
 
-  @NotNull(message = "End date is required")
   private LocalDate endDate;
 
   private Boolean active;
