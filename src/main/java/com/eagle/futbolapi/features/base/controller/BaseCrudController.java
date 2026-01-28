@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -110,6 +111,24 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
     } catch (RuntimeException e) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .body(ApiResponse.error(serverError, "Error updating " + resourceName.toLowerCase() + ": " + e.getMessage()));
+    }
+  }
+
+  @PatchMapping("/{id}")
+  public ResponseEntity<ApiResponse<D>> patch(@PathVariable Long id, @RequestBody D dto) {
+    try {
+      E patchedEntity = service.patch(id, dto);
+      D patchedDto = mapper.toDTO(patchedEntity);
+      return ResponseUtil.success(patchedDto, resourceName + " updated successfully");
+    } catch (NoChangesDetectedException e) {
+      return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+          .body(ApiResponse.error("NO_CHANGES", e.getMessage()));
+    } catch (ResourceNotFoundException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body(ApiResponse.error("NOT_FOUND", e.getMessage()));
+    } catch (RuntimeException e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body(ApiResponse.error(serverError, "Error patching " + resourceName.toLowerCase() + ": " + e.getMessage()));
     }
   }
 

@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.base.service;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,119 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     }
 
     return saveExisting(id, entity);
+  }
+
+  /**
+   * Partially update an entity with only the non-null fields from the DTO.
+   * This method uses reflection to copy only the non-null fields from the DTO to
+   * the existing entity.
+   *
+   * @param id  the ID of the entity to update
+   * @param dto the DTO containing the fields to update (null fields are ignored)
+   * @return the updated entity
+   */
+  public T patch(K id, D dto) {
+    // Get existing entity
+    T existing = getById(id).orElseThrow(
+        () -> new IllegalArgumentException("Entity with given ID does not exist"));
+
+    // Apply partial updates using reflection
+    applyPartialUpdate(dto, existing);
+
+    // Resolve relationships for any updated relationship fields
+    resolveRelationships(dto, existing);
+
+    // Check for duplicates
+    if (isDuplicate(id, existing)) {
+      throw new IllegalArgumentException("Duplicate entity");
+    }
+
+    return repository.save(existing);
+  }
+
+  /**
+   * Apply partial update from DTO to entity using reflection.
+   * Only non-null fields from the DTO are copied to the entity.
+   *
+   * @param dto    the source DTO
+   * @param entity the target entity
+   */
+  protected void applyPartialUpdate(D dto, T entity) {
+    if (dto == null || entity == null) {
+      return;
+    }
+
+    Class<?> dtoClass = dto.getClass();
+    Class<?> entityClass = entity.getClass();
+
+    for (Field dtoField : getAllFields(dtoClass)) {
+      try {
+        dtoField.setAccessible(true);
+        Object value = dtoField.get(dto);
+
+        // Skip null values and ID field (should not be updated)
+        if (value == null || "id".equals(dtoField.getName())) {
+          continue;
+        }
+
+        // Skip audit fields
+        if (isAuditField(dtoField.getName())) {
+          continue;
+        }
+
+        // Skip relationship ID fields (they will be handled by resolveRelationships)
+        if (dtoField.getName().endsWith("Id") && !dtoField.getName().equals("id")) {
+          continue;
+        }
+
+        // Try to find matching field in entity
+        Field entityField = findField(entityClass, dtoField.getName());
+        if (entityField != null) {
+          entityField.setAccessible(true);
+          entityField.set(entity, value);
+        }
+      } catch (IllegalAccessException e) {
+        // Skip fields that cannot be accessed
+      }
+    }
+  }
+
+  /**
+   * Get all fields from a class and its superclasses.
+   */
+  private List<Field> getAllFields(Class<?> clazz) {
+    List<Field> fields = new ArrayList<>();
+    while (clazz != null && clazz != Object.class) {
+      for (Field field : clazz.getDeclaredFields()) {
+        fields.add(field);
+      }
+      clazz = clazz.getSuperclass();
+    }
+    return fields;
+  }
+
+  /**
+   * Find a field by name in a class or its superclasses.
+   */
+  private Field findField(Class<?> clazz, String fieldName) {
+    while (clazz != null && clazz != Object.class) {
+      try {
+        return clazz.getDeclaredField(fieldName);
+      } catch (NoSuchFieldException e) {
+        clazz = clazz.getSuperclass();
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Check if a field is an audit field that should not be updated.
+   */
+  private boolean isAuditField(String fieldName) {
+    return "createdAt".equals(fieldName) ||
+        "createdBy".equals(fieldName) ||
+        "updatedAt".equals(fieldName) ||
+        "updatedBy".equals(fieldName);
   }
 
   public void delete(K id) {

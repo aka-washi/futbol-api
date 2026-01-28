@@ -31,6 +31,36 @@ tags:
     description: Operations related to point systems for league standings
   - name: Structures
     description: Operations related to competition structures (leagues, tournaments, playoffs)
+  - name: Tournaments
+    description: Operations related to football tournaments and leagues
+  - name: Seasons
+    description: Operations related to tournament seasons
+  - name: Season Teams
+    description: Operations related to teams participating in seasons
+  - name: Competitions
+    description: Operations related to competitions within seasons
+  - name: Stages
+    description: Operations related to competition stages
+  - name: Matchdays
+    description: Operations related to matchdays within stages
+  - name: Matches
+    description: Operations related to individual matches
+  - name: Match Events
+    description: Operations related to events during matches (goals, cards, etc.)
+  - name: Lineups
+    description: Operations related to match lineups
+  - name: Standings
+    description: Operations related to league standings
+  - name: Outcomes
+    description: Operations related to competition outcomes (champions, relegations, etc.)
+  - name: Persons
+    description: Operations related to persons (base data for players and staff)
+  - name: Players
+    description: Operations related to football players
+  - name: Staff
+    description: Operations related to team staff (coaches, managers, etc.)
+  - name: Roster Entries
+    description: Operations related to team roster entries
 
 paths:
   # Countries Endpoints
@@ -131,6 +161,47 @@ paths:
       summary: Update country
       description: Update an existing country
       operationId: updateCountry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Country ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CountryDTO'
+      responses:
+        '200':
+          description: Country updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CountryDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Countries
+      summary: Partially update country
+      description: Partially update an existing country
+      operationId: patchCountry
       parameters:
         - name: id
           in: path
@@ -492,6 +563,47 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Organizations
+      summary: Partially update organization
+      description: Partially update an existing organization
+      operationId: patchOrganization
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Organization ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationDTO'
+      responses:
+        '200':
+          description: Organization updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OrganizationDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Organizations
@@ -669,19 +781,8 @@ paths:
           example: CLUB
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/SizeParam'
-        - name: sortField
-          in: query
-          schema:
-            type: string
-            default: name
-          description: Field to sort by
-        - name: sortDirection
-          in: query
-          schema:
-            type: string
-            enum: [asc, desc]
-            default: asc
-          description: Sort direction
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
       responses:
         '200':
           description: Organizations retrieved successfully
@@ -797,6 +898,47 @@ paths:
       summary: Update team
       description: Update an existing team
       operationId: updateTeam
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Team ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamDTO'
+      responses:
+        '200':
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TeamDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Teams
+      summary: Partially update team
+      description: Partially update an existing team
+      operationId: patchTeam
       parameters:
         - name: id
           in: path
@@ -992,19 +1134,8 @@ paths:
           example: MALE
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/SizeParam'
-        - name: sortField
-          in: query
-          schema:
-            type: string
-            default: name
-          description: Field to sort by
-        - name: sortDirection
-          in: query
-          schema:
-            type: string
-            enum: [asc, desc]
-            default: asc
-          description: Sort direction
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
       responses:
         '200':
           description: Teams retrieved successfully
@@ -1054,19 +1185,8 @@ paths:
           example: 1
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/SizeParam'
-        - name: sortField
-          in: query
-          schema:
-            type: string
-            default: name
-          description: Field to sort by
-        - name: sortDirection
-          in: query
-          schema:
-            type: string
-            enum: [asc, desc]
-            default: asc
-          description: Sort direction
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
       responses:
         '200':
           description: Teams retrieved successfully
@@ -1116,19 +1236,8 @@ paths:
           example: 1
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/SizeParam'
-        - name: sortField
-          in: query
-          schema:
-            type: string
-            default: name
-          description: Field to sort by
-        - name: sortDirection
-          in: query
-          schema:
-            type: string
-            enum: [asc, desc]
-            default: asc
-          description: Sort direction
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
       responses:
         '200':
           description: Teams retrieved successfully
@@ -1244,6 +1353,47 @@ paths:
       summary: Update venue
       description: Update an existing venue
       operationId: updateVenue
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Venue ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueDTO'
+      responses:
+        '200':
+          description: Venue updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/VenueDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Venues
+      summary: Partially update venue
+      description: Partially update an existing venue
+      operationId: patchVenue
       parameters:
         - name: id
           in: path
@@ -1424,19 +1574,8 @@ paths:
           example: 1
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/SizeParam'
-        - name: sortField
-          in: query
-          schema:
-            type: string
-            default: name
-          description: Field to sort by
-        - name: sortDir
-          in: query
-          schema:
-            type: string
-            enum: [asc, desc]
-            default: asc
-          description: Sort direction
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
       responses:
         '200':
           description: Venues retrieved successfully
@@ -1552,6 +1691,47 @@ paths:
       summary: Update point system
       description: Update an existing point system
       operationId: updatePointSystem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Point System ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PointSystemDTO'
+      responses:
+        '200':
+          description: Point system updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PointSystemDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Point Systems
+      summary: Partially update point system
+      description: Partially update an existing point system
+      operationId: patchPointSystem
       parameters:
         - name: id
           in: path
@@ -1847,6 +2027,47 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Structures
+      summary: Partially update structure
+      description: Partially update an existing structure
+      operationId: patchStructure
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Structure ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StructureDTO'
+      responses:
+        '200':
+          description: Structure updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StructureDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Structures
@@ -1991,19 +2212,8 @@ paths:
           example: REGULAR_SEASON
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/SizeParam'
-        - name: sortField
-          in: query
-          schema:
-            type: string
-            default: name
-          description: Field to sort by
-        - name: sortDirection
-          in: query
-          schema:
-            type: string
-            enum: [asc, desc]
-            default: asc
-          description: Sort direction
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
       responses:
         '200':
           description: Structures retrieved successfully
@@ -2018,6 +2228,4078 @@ paths:
                         $ref: '#/components/schemas/PageStructureDTO'
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Tournaments Endpoints
+  /tournaments:
+    get:
+      tags:
+        - Tournaments
+      summary: Get all tournaments
+      description: Retrieve a paginated list of all tournaments
+      operationId: getAllTournaments
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Tournaments retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageTournamentDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Tournaments
+      summary: Create a new tournament
+      description: Create a new tournament entry
+      operationId: createTournament
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TournamentDTO'
+      responses:
+        '201':
+          description: Tournament created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TournamentDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /tournaments/{id}:
+    get:
+      tags:
+        - Tournaments
+      summary: Get tournament by ID
+      description: Retrieve a specific tournament by its ID
+      operationId: getTournamentById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Tournament ID
+          example: 1
+      responses:
+        '200':
+          description: Tournament retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TournamentDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Tournaments
+      summary: Update tournament
+      description: Update an existing tournament
+      operationId: updateTournament
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Tournament ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TournamentDTO'
+      responses:
+        '200':
+          description: Tournament updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TournamentDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Tournaments
+      summary: Partially update tournament
+      description: Partially update an existing tournament
+      operationId: patchTournament
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Tournament ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TournamentDTO'
+      responses:
+        '200':
+          description: Tournament updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TournamentDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Tournaments
+      summary: Delete tournament
+      description: Delete a tournament by ID
+      operationId: deleteTournament
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Tournament ID
+          example: 1
+      responses:
+        '200':
+          description: Tournament deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /tournaments/{id}/exists:
+    get:
+      tags:
+        - Tournaments
+      summary: Check if tournament exists
+      description: Check if a tournament exists by ID
+      operationId: tournamentExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Tournament ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /tournaments/name/{name}:
+    get:
+      tags:
+        - Tournaments
+      summary: Get tournament by name
+      description: Retrieve a tournament by its name
+      operationId: getTournamentByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Tournament name
+          example: Liga MX
+      responses:
+        '200':
+          description: Tournament retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TournamentDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /tournaments/displayName/{displayName}:
+    get:
+      tags:
+        - Tournaments
+      summary: Get tournament by display name
+      description: Retrieve a tournament by its display name
+      operationId: getTournamentByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Tournament display name
+          example: Liga MX
+      responses:
+        '200':
+          description: Tournament retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/TournamentDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /tournaments/byOrganizationAndActive:
+    get:
+      tags:
+        - Tournaments
+      summary: Get tournaments by organization and active status
+      description: Retrieve tournaments filtered by organization ID and active status
+      operationId: getTournamentsByOrganizationAndActive
+      parameters:
+        - name: organizationId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Organization ID
+          example: 1
+        - name: active
+          in: query
+          required: true
+          schema:
+            type: boolean
+          description: Active status
+          example: true
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Tournaments retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageTournamentDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /tournaments/byTypeAndActive:
+    get:
+      tags:
+        - Tournaments
+      summary: Get tournaments by type and active status
+      description: Retrieve tournaments filtered by type and active status
+      operationId: getTournamentsByTypeAndActive
+      parameters:
+        - name: type
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/TournamentType'
+          description: Tournament type
+          example: LEAGUE
+        - name: active
+          in: query
+          required: true
+          schema:
+            type: boolean
+          description: Active status
+          example: true
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Tournaments retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageTournamentDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Seasons Endpoints
+  /seasons:
+    get:
+      tags:
+        - Seasons
+      summary: Get all seasons
+      description: Retrieve a paginated list of all seasons
+      operationId: getAllSeasons
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Seasons retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageSeasonDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Seasons
+      summary: Create a new season
+      description: Create a new season entry
+      operationId: createSeason
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonDTO'
+      responses:
+        '201':
+          description: Season created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /seasons/{id}:
+    get:
+      tags:
+        - Seasons
+      summary: Get season by ID
+      description: Retrieve a specific season by its ID
+      operationId: getSeasonById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season ID
+          example: 1
+      responses:
+        '200':
+          description: Season retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Seasons
+      summary: Update season
+      description: Update an existing season
+      operationId: updateSeason
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonDTO'
+      responses:
+        '200':
+          description: Season updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Seasons
+      summary: Partially update season
+      description: Partially update an existing season
+      operationId: patchSeason
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonDTO'
+      responses:
+        '200':
+          description: Season updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Seasons
+      summary: Delete season
+      description: Delete a season by ID
+      operationId: deleteSeason
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season ID
+          example: 1
+      responses:
+        '200':
+          description: Season deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /seasons/{id}/exists:
+    get:
+      tags:
+        - Seasons
+      summary: Check if season exists
+      description: Check if a season exists by ID
+      operationId: seasonExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /seasons/name/{name}:
+    get:
+      tags:
+        - Seasons
+      summary: Get season by name
+      description: Retrieve a season by its name
+      operationId: getSeasonByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Season name
+          example: Apertura 2024
+      responses:
+        '200':
+          description: Season retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /seasons/displayName/{displayName}:
+    get:
+      tags:
+        - Seasons
+      summary: Get season by display name
+      description: Retrieve a season by its display name
+      operationId: getSeasonByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Season display name
+          example: Apertura 2024
+      responses:
+        '200':
+          description: Season retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /seasons/byTournamentAndActive/{tournamentId}/{active}:
+    get:
+      tags:
+        - Seasons
+      summary: Get seasons by tournament and active status
+      description: Retrieve seasons filtered by tournament ID and active status
+      operationId: getSeasonsByTournamentAndActive
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Tournament ID
+          example: 1
+        - name: active
+          in: path
+          required: true
+          schema:
+            type: boolean
+          description: Active status
+          example: true
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Seasons retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageSeasonDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Season Teams Endpoints
+  /season-teams:
+    get:
+      tags:
+        - Season Teams
+      summary: Get all season teams
+      description: Retrieve a paginated list of all season teams
+      operationId: getAllSeasonTeams
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Season teams retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageSeasonTeamDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Season Teams
+      summary: Create a new season team
+      description: Create a new season team entry
+      operationId: createSeasonTeam
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonTeamDTO'
+      responses:
+        '201':
+          description: Season team created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonTeamDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /season-teams/{id}:
+    get:
+      tags:
+        - Season Teams
+      summary: Get season team by ID
+      description: Retrieve a specific season team by its ID
+      operationId: getSeasonTeamById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season Team ID
+          example: 1
+      responses:
+        '200':
+          description: Season team retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonTeamDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Season Teams
+      summary: Update season team
+      description: Update an existing season team
+      operationId: updateSeasonTeam
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season Team ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonTeamDTO'
+      responses:
+        '200':
+          description: Season team updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonTeamDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Season Teams
+      summary: Partially update season team
+      description: Partially update an existing season team
+      operationId: patchSeasonTeam
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season Team ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeasonTeamDTO'
+      responses:
+        '200':
+          description: Season team updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SeasonTeamDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Season Teams
+      summary: Delete season team
+      description: Delete a season team by ID
+      operationId: deleteSeasonTeam
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season Team ID
+          example: 1
+      responses:
+        '200':
+          description: Season team deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /season-teams/{id}/exists:
+    get:
+      tags:
+        - Season Teams
+      summary: Check if season team exists
+      description: Check if a season team exists by ID
+      operationId: seasonTeamExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season Team ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Competitions Endpoints
+  /competitions:
+    get:
+      tags:
+        - Competitions
+      summary: Get all competitions
+      description: Retrieve a paginated list of all competitions
+      operationId: getAllCompetitions
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Competitions retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageCompetitionDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Competitions
+      summary: Create a new competition
+      description: Create a new competition entry
+      operationId: createCompetition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompetitionDTO'
+      responses:
+        '201':
+          description: Competition created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CompetitionDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /competitions/{id}:
+    get:
+      tags:
+        - Competitions
+      summary: Get competition by ID
+      description: Retrieve a specific competition by its ID
+      operationId: getCompetitionById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Competition ID
+          example: 1
+      responses:
+        '200':
+          description: Competition retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CompetitionDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Competitions
+      summary: Update competition
+      description: Update an existing competition
+      operationId: updateCompetition
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Competition ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompetitionDTO'
+      responses:
+        '200':
+          description: Competition updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CompetitionDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Competitions
+      summary: Partially update competition
+      description: Partially update an existing competition
+      operationId: patchCompetition
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Competition ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompetitionDTO'
+      responses:
+        '200':
+          description: Competition updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CompetitionDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Competitions
+      summary: Delete competition
+      description: Delete a competition by ID
+      operationId: deleteCompetition
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Competition ID
+          example: 1
+      responses:
+        '200':
+          description: Competition deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /competitions/{id}/exists:
+    get:
+      tags:
+        - Competitions
+      summary: Check if competition exists
+      description: Check if a competition exists by ID
+      operationId: competitionExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Competition ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /competitions/name/{name}:
+    get:
+      tags:
+        - Competitions
+      summary: Get competition by name
+      description: Retrieve a competition by its name
+      operationId: getCompetitionByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Competition name
+          example: Liga MX Apertura 2024
+      responses:
+        '200':
+          description: Competition retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CompetitionDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /competitions/displayName/{displayName}:
+    get:
+      tags:
+        - Competitions
+      summary: Get competition by display name
+      description: Retrieve a competition by its display name
+      operationId: getCompetitionByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Competition display name
+          example: Apertura 2024
+      responses:
+        '200':
+          description: Competition retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CompetitionDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /competitions/active:
+    get:
+      tags:
+        - Competitions
+      summary: Get all active competitions
+      description: Retrieve all active competitions
+      operationId: getActiveCompetitions
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Active competitions retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageCompetitionDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /competitions/bySeason/{seasonId}:
+    get:
+      tags:
+        - Competitions
+      summary: Get competitions by season
+      description: Retrieve competitions filtered by season ID
+      operationId: getCompetitionsBySeasonId
+      parameters:
+        - name: seasonId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Season ID
+          example: 1
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Competitions retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageCompetitionDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Stages Endpoints
+  /stages:
+    get:
+      tags:
+        - Stages
+      summary: Get all stages
+      description: Retrieve a paginated list of all stages
+      operationId: getAllStages
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Stages retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageStageDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Stages
+      summary: Create a new stage
+      description: Create a new stage entry
+      operationId: createStage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StageDTO'
+      responses:
+        '201':
+          description: Stage created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StageDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /stages/{id}:
+    get:
+      tags:
+        - Stages
+      summary: Get stage by ID
+      description: Retrieve a specific stage by its ID
+      operationId: getStageById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Stage ID
+          example: 1
+      responses:
+        '200':
+          description: Stage retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StageDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Stages
+      summary: Update stage
+      description: Update an existing stage
+      operationId: updateStage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Stage ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StageDTO'
+      responses:
+        '200':
+          description: Stage updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StageDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Stages
+      summary: Partially update stage
+      description: Partially update an existing stage
+      operationId: patchStage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Stage ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StageDTO'
+      responses:
+        '200':
+          description: Stage updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StageDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Stages
+      summary: Delete stage
+      description: Delete a stage by ID
+      operationId: deleteStage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Stage ID
+          example: 1
+      responses:
+        '200':
+          description: Stage deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /stages/{id}/exists:
+    get:
+      tags:
+        - Stages
+      summary: Check if stage exists
+      description: Check if a stage exists by ID
+      operationId: stageExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Stage ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /stages/name/{name}:
+    get:
+      tags:
+        - Stages
+      summary: Get stage by name
+      description: Retrieve a stage by its name
+      operationId: getStageByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Stage name
+          example: Regular Season
+      responses:
+        '200':
+          description: Stage retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StageDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /stages/displayName/{displayName}:
+    get:
+      tags:
+        - Stages
+      summary: Get stage by display name
+      description: Retrieve a stage by its display name
+      operationId: getStageByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Stage display name
+          example: Regular Season
+      responses:
+        '200':
+          description: Stage retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StageDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Matchdays Endpoints
+  /matchdays:
+    get:
+      tags:
+        - Matchdays
+      summary: Get all matchdays
+      description: Retrieve a paginated list of all matchdays
+      operationId: getAllMatchdays
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Matchdays retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageMatchdayDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Matchdays
+      summary: Create a new matchday
+      description: Create a new matchday entry
+      operationId: createMatchday
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchdayDTO'
+      responses:
+        '201':
+          description: Matchday created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchdayDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /matchdays/{id}:
+    get:
+      tags:
+        - Matchdays
+      summary: Get matchday by ID
+      description: Retrieve a specific matchday by its ID
+      operationId: getMatchdayById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Matchday ID
+          example: 1
+      responses:
+        '200':
+          description: Matchday retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchdayDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Matchdays
+      summary: Update matchday
+      description: Update an existing matchday
+      operationId: updateMatchday
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Matchday ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchdayDTO'
+      responses:
+        '200':
+          description: Matchday updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchdayDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Matchdays
+      summary: Partially update matchday
+      description: Partially update an existing matchday
+      operationId: patchMatchday
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Matchday ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchdayDTO'
+      responses:
+        '200':
+          description: Matchday updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchdayDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Matchdays
+      summary: Delete matchday
+      description: Delete a matchday by ID
+      operationId: deleteMatchday
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Matchday ID
+          example: 1
+      responses:
+        '200':
+          description: Matchday deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /matchdays/{id}/exists:
+    get:
+      tags:
+        - Matchdays
+      summary: Check if matchday exists
+      description: Check if a matchday exists by ID
+      operationId: matchdayExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Matchday ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /matchdays/name/{name}:
+    get:
+      tags:
+        - Matchdays
+      summary: Get matchday by name
+      description: Retrieve a matchday by its name
+      operationId: getMatchdayByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Matchday name
+          example: Jornada 1
+      responses:
+        '200':
+          description: Matchday retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchdayDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /matchdays/displayName/{displayName}:
+    get:
+      tags:
+        - Matchdays
+      summary: Get matchday by display name
+      description: Retrieve a matchday by its display name
+      operationId: getMatchdayByDisplayName
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Matchday display name
+          example: Jornada 1
+      responses:
+        '200':
+          description: Matchday retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchdayDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Matches Endpoints
+  /matches:
+    get:
+      tags:
+        - Matches
+      summary: Get all matches
+      description: Retrieve a paginated list of all matches
+      operationId: getAllMatches
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Matches retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageMatchDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Matches
+      summary: Create a new match
+      description: Create a new match entry
+      operationId: createMatch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchDTO'
+      responses:
+        '201':
+          description: Match created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /matches/{id}:
+    get:
+      tags:
+        - Matches
+      summary: Get match by ID
+      description: Retrieve a specific match by its ID
+      operationId: getMatchById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match ID
+          example: 1
+      responses:
+        '200':
+          description: Match retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Matches
+      summary: Update match
+      description: Update an existing match
+      operationId: updateMatch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchDTO'
+      responses:
+        '200':
+          description: Match updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Matches
+      summary: Partially update match
+      description: Partially update an existing match
+      operationId: patchMatch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchDTO'
+      responses:
+        '200':
+          description: Match updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Matches
+      summary: Delete match
+      description: Delete a match by ID
+      operationId: deleteMatch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match ID
+          example: 1
+      responses:
+        '200':
+          description: Match deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /matches/{id}/exists:
+    get:
+      tags:
+        - Matches
+      summary: Check if match exists
+      description: Check if a match exists by ID
+      operationId: matchExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Match Events Endpoints
+  /match-events:
+    get:
+      tags:
+        - Match Events
+      summary: Get all match events
+      description: Retrieve a paginated list of all match events
+      operationId: getAllMatchEvents
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Match events retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageMatchEventDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Match Events
+      summary: Create a new match event
+      description: Create a new match event entry
+      operationId: createMatchEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchEventDTO'
+      responses:
+        '201':
+          description: Match event created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchEventDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /match-events/{id}:
+    get:
+      tags:
+        - Match Events
+      summary: Get match event by ID
+      description: Retrieve a specific match event by its ID
+      operationId: getMatchEventById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match Event ID
+          example: 1
+      responses:
+        '200':
+          description: Match event retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchEventDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Match Events
+      summary: Update match event
+      description: Update an existing match event
+      operationId: updateMatchEvent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match Event ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchEventDTO'
+      responses:
+        '200':
+          description: Match event updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchEventDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Match Events
+      summary: Partially update match event
+      description: Partially update an existing match event
+      operationId: patchMatchEvent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match Event ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchEventDTO'
+      responses:
+        '200':
+          description: Match event updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MatchEventDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Match Events
+      summary: Delete match event
+      description: Delete a match event by ID
+      operationId: deleteMatchEvent
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match Event ID
+          example: 1
+      responses:
+        '200':
+          description: Match event deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /match-events/{id}/exists:
+    get:
+      tags:
+        - Match Events
+      summary: Check if match event exists
+      description: Check if a match event exists by ID
+      operationId: matchEventExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Match Event ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Lineups Endpoints
+  /lineups:
+    get:
+      tags:
+        - Lineups
+      summary: Get all lineups
+      description: Retrieve a paginated list of all lineups
+      operationId: getAllLineups
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Lineups retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageLineupDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Lineups
+      summary: Create a new lineup
+      description: Create a new lineup entry
+      operationId: createLineup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LineupDTO'
+      responses:
+        '201':
+          description: Lineup created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/LineupDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /lineups/{id}:
+    get:
+      tags:
+        - Lineups
+      summary: Get lineup by ID
+      description: Retrieve a specific lineup by its ID
+      operationId: getLineupById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Lineup ID
+          example: 1
+      responses:
+        '200':
+          description: Lineup retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/LineupDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Lineups
+      summary: Update lineup
+      description: Update an existing lineup
+      operationId: updateLineup
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Lineup ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LineupDTO'
+      responses:
+        '200':
+          description: Lineup updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/LineupDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Lineups
+      summary: Partially update lineup
+      description: Partially update an existing lineup
+      operationId: patchLineup
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Lineup ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LineupDTO'
+      responses:
+        '200':
+          description: Lineup updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/LineupDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Lineups
+      summary: Delete lineup
+      description: Delete a lineup by ID
+      operationId: deleteLineup
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Lineup ID
+          example: 1
+      responses:
+        '200':
+          description: Lineup deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /lineups/{id}/exists:
+    get:
+      tags:
+        - Lineups
+      summary: Check if lineup exists
+      description: Check if a lineup exists by ID
+      operationId: lineupExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Lineup ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Standings Endpoints
+  /standings:
+    get:
+      tags:
+        - Standings
+      summary: Get all standings
+      description: Retrieve a paginated list of all standings
+      operationId: getAllStandings
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Standings retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageStandingDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Standings
+      summary: Create a new standing
+      description: Create a new standing entry
+      operationId: createStanding
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandingDTO'
+      responses:
+        '201':
+          description: Standing created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StandingDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /standings/{id}:
+    get:
+      tags:
+        - Standings
+      summary: Get standing by ID
+      description: Retrieve a specific standing by its ID
+      operationId: getStandingById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Standing ID
+          example: 1
+      responses:
+        '200':
+          description: Standing retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StandingDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Standings
+      summary: Update standing
+      description: Update an existing standing
+      operationId: updateStanding
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Standing ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandingDTO'
+      responses:
+        '200':
+          description: Standing updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StandingDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Standings
+      summary: Partially update standing
+      description: Partially update an existing standing
+      operationId: patchStanding
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Standing ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StandingDTO'
+      responses:
+        '200':
+          description: Standing updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StandingDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Standings
+      summary: Delete standing
+      description: Delete a standing by ID
+      operationId: deleteStanding
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Standing ID
+          example: 1
+      responses:
+        '200':
+          description: Standing deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /standings/{id}/exists:
+    get:
+      tags:
+        - Standings
+      summary: Check if standing exists
+      description: Check if a standing exists by ID
+      operationId: standingExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Standing ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Outcomes Endpoints
+  /outcomes:
+    get:
+      tags:
+        - Outcomes
+      summary: Get all outcomes
+      description: Retrieve a paginated list of all outcomes
+      operationId: getAllOutcomes
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Outcomes retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageOutcomeDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Outcomes
+      summary: Create a new outcome
+      description: Create a new outcome entry
+      operationId: createOutcome
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutcomeDTO'
+      responses:
+        '201':
+          description: Outcome created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OutcomeDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /outcomes/{id}:
+    get:
+      tags:
+        - Outcomes
+      summary: Get outcome by ID
+      description: Retrieve a specific outcome by its ID
+      operationId: getOutcomeById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Outcome ID
+          example: 1
+      responses:
+        '200':
+          description: Outcome retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OutcomeDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Outcomes
+      summary: Update outcome
+      description: Update an existing outcome
+      operationId: updateOutcome
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Outcome ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutcomeDTO'
+      responses:
+        '200':
+          description: Outcome updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OutcomeDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Outcomes
+      summary: Partially update outcome
+      description: Partially update an existing outcome
+      operationId: patchOutcome
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Outcome ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutcomeDTO'
+      responses:
+        '200':
+          description: Outcome updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/OutcomeDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Outcomes
+      summary: Delete outcome
+      description: Delete an outcome by ID
+      operationId: deleteOutcome
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Outcome ID
+          example: 1
+      responses:
+        '200':
+          description: Outcome deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /outcomes/{id}/exists:
+    get:
+      tags:
+        - Outcomes
+      summary: Check if outcome exists
+      description: Check if an outcome exists by ID
+      operationId: outcomeExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Outcome ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Persons Endpoints
+  /persons:
+    get:
+      tags:
+        - Persons
+      summary: Get all persons
+      description: Retrieve a paginated list of all persons
+      operationId: getAllPersons
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Persons retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PagePersonDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Persons
+      summary: Create a new person
+      description: Create a new person entry
+      operationId: createPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonDTO'
+      responses:
+        '201':
+          description: Person created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PersonDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /persons/{id}:
+    get:
+      tags:
+        - Persons
+      summary: Get person by ID
+      description: Retrieve a specific person by its ID
+      operationId: getPersonById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Person ID
+          example: 1
+      responses:
+        '200':
+          description: Person retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PersonDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Persons
+      summary: Update person
+      description: Update an existing person
+      operationId: updatePerson
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Person ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonDTO'
+      responses:
+        '200':
+          description: Person updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PersonDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Persons
+      summary: Partially update person
+      description: Partially update an existing person
+      operationId: patchPerson
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Person ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonDTO'
+      responses:
+        '200':
+          description: Person updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PersonDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Persons
+      summary: Delete person
+      description: Delete a person by ID
+      operationId: deletePerson
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Person ID
+          example: 1
+      responses:
+        '200':
+          description: Person deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /persons/{id}/exists:
+    get:
+      tags:
+        - Persons
+      summary: Check if person exists
+      description: Check if a person exists by ID
+      operationId: personExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Person ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Players Endpoints
+  /players:
+    get:
+      tags:
+        - Players
+      summary: Get all players
+      description: Retrieve a paginated list of all players
+      operationId: getAllPlayers
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Players retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PagePlayerDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Players
+      summary: Create a new player
+      description: Create a new player entry
+      operationId: createPlayer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerDTO'
+      responses:
+        '201':
+          description: Player created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PlayerDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /players/{id}:
+    get:
+      tags:
+        - Players
+      summary: Get player by ID
+      description: Retrieve a specific player by its ID
+      operationId: getPlayerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Player ID
+          example: 1
+      responses:
+        '200':
+          description: Player retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PlayerDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Players
+      summary: Update player
+      description: Update an existing player
+      operationId: updatePlayer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Player ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerDTO'
+      responses:
+        '200':
+          description: Player updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PlayerDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Players
+      summary: Partially update player
+      description: Partially update an existing player
+      operationId: patchPlayer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Player ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerDTO'
+      responses:
+        '200':
+          description: Player updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PlayerDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Players
+      summary: Delete player
+      description: Delete a player by ID
+      operationId: deletePlayer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Player ID
+          example: 1
+      responses:
+        '200':
+          description: Player deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /players/{id}/exists:
+    get:
+      tags:
+        - Players
+      summary: Check if player exists
+      description: Check if a player exists by ID
+      operationId: playerExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Player ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Staff Endpoints
+  /staff:
+    get:
+      tags:
+        - Staff
+      summary: Get all staff
+      description: Retrieve a paginated list of all staff
+      operationId: getAllStaff
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Staff retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageStaffDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Staff
+      summary: Create a new staff
+      description: Create a new staff entry
+      operationId: createStaff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaffDTO'
+      responses:
+        '201':
+          description: Staff created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StaffDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /staff/{id}:
+    get:
+      tags:
+        - Staff
+      summary: Get staff by ID
+      description: Retrieve a specific staff by its ID
+      operationId: getStaffById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Staff ID
+          example: 1
+      responses:
+        '200':
+          description: Staff retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StaffDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Staff
+      summary: Update staff
+      description: Update an existing staff
+      operationId: updateStaff
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Staff ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaffDTO'
+      responses:
+        '200':
+          description: Staff updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StaffDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Staff
+      summary: Partially update staff
+      description: Partially update an existing staff
+      operationId: patchStaff
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Staff ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaffDTO'
+      responses:
+        '200':
+          description: Staff updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/StaffDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Staff
+      summary: Delete staff
+      description: Delete a staff by ID
+      operationId: deleteStaff
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Staff ID
+          example: 1
+      responses:
+        '200':
+          description: Staff deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /staff/{id}/exists:
+    get:
+      tags:
+        - Staff
+      summary: Check if staff exists
+      description: Check if a staff exists by ID
+      operationId: staffExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Staff ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Roster Entries Endpoints
+  /roster-entries:
+    get:
+      tags:
+        - Roster Entries
+      summary: Get all roster entries
+      description: Retrieve a paginated list of all roster entries
+      operationId: getAllRosterEntries
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/SizeParam'
+        - $ref: '#/components/parameters/SortByParam'
+        - $ref: '#/components/parameters/SortDirParam'
+      responses:
+        '200':
+          description: Roster entries retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PageRosterEntryDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      tags:
+        - Roster Entries
+      summary: Create a new roster entry
+      description: Create a new roster entry
+      operationId: createRosterEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RosterEntryDTO'
+      responses:
+        '201':
+          description: Roster entry created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/RosterEntryDTO'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /roster-entries/{id}:
+    get:
+      tags:
+        - Roster Entries
+      summary: Get roster entry by ID
+      description: Retrieve a specific roster entry by its ID
+      operationId: getRosterEntryById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Roster Entry ID
+          example: 1
+      responses:
+        '200':
+          description: Roster entry retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/RosterEntryDTO'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Roster Entries
+      summary: Update roster entry
+      description: Update an existing roster entry
+      operationId: updateRosterEntry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Roster Entry ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RosterEntryDTO'
+      responses:
+        '200':
+          description: Roster entry updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/RosterEntryDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Roster Entries
+      summary: Partially update roster entry
+      description: Partially update an existing roster entry
+      operationId: patchRosterEntry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Roster Entry ID
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RosterEntryDTO'
+      responses:
+        '200':
+          description: Roster entry updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/RosterEntryDTO'
+        '304':
+          description: No changes detected
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Roster Entries
+      summary: Delete roster entry
+      description: Delete a roster entry by ID
+      operationId: deleteRosterEntry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Roster Entry ID
+          example: 1
+      responses:
+        '200':
+          description: Roster entry deleted successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: 'null'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /roster-entries/{id}/exists:
+    get:
+      tags:
+        - Roster Entries
+      summary: Check if roster entry exists
+      description: Check if a roster entry exists by ID
+      operationId: rosterEntryExists
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Roster Entry ID
+          example: 1
+      responses:
+        '200':
+          description: Existence check completed
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: boolean
         '500':
           $ref: '#/components/responses/InternalServerError'
 
@@ -2153,13 +6435,17 @@ components:
     # Enums
     Gender:
       type: string
+      description: Gender classification for teams and persons
       enum:
         - MALE
         - FEMALE
-      description: Gender classification
+      x-enum-descriptions:
+        - "Male teams or persons"
+        - "Female teams or persons"
 
     AgeCategory:
       type: string
+      description: Age category classification for teams
       enum:
         - PROFESSIONAL
         - RESERVE
@@ -2182,19 +6468,46 @@ components:
         - U7
         - U6
         - VETERANS
-      description: Age category classification for teams
+      x-enum-descriptions:
+        - "Top-level professional teams"
+        - "Reserve/B teams"
+        - "Amateur level teams"
+        - "Under 23 years old"
+        - "Under 21 years old"
+        - "Under 20 years old"
+        - "Under 19 years old"
+        - "Under 18 years old"
+        - "Under 17 years old"
+        - "Under 16 years old"
+        - "Under 15 years old"
+        - "Under 14 years old"
+        - "Under 13 years old"
+        - "Under 12 years old"
+        - "Under 11 years old"
+        - "Under 10 years old"
+        - "Under 9 years old"
+        - "Under 8 years old"
+        - "Under 7 years old"
+        - "Under 6 years old"
+        - "Veteran/masters teams (35+)"
 
     OrganizationType:
       type: string
+      description: Type of football organization
       enum:
         - CLUB
         - FEDERATION
         - CONFEDERATION
         - GOVERNINGBODY
-      description: Type of football organization
+      x-enum-descriptions:
+        - "Football club (e.g., Real Madrid, Manchester United)"
+        - "National football federation (e.g., FMF, USSF)"
+        - "Continental confederation (e.g., UEFA, CONMEBOL)"
+        - "Global governing body (e.g., FIFA)"
 
     StructureType:
       type: string
+      description: Type of competition structure
       enum:
         - REGULAR_SEASON
         - PLAYOFF
@@ -2202,7 +6515,13 @@ components:
         - KNOCKOUT
         - GROUP_STAGE
         - ROUND_ROBIN
-      description: Type of competition structure
+      x-enum-descriptions:
+        - "Regular season with home and away matches"
+        - "Playoff bracket after regular season"
+        - "Play-in tournament to qualify for playoffs"
+        - "Single or two-leg knockout elimination"
+        - "Group stage with multiple groups"
+        - "Round-robin format where all teams play each other"
 
     # Point System DTO
     PointSystemDTO:
@@ -2847,6 +7166,1167 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StructureDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Tournament Schemas
+    TournamentDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - organizationId
+        - type
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Tournament unique identifier
+          example: 1
+        name:
+          type: string
+          description: Tournament name (unique)
+          example: Liga MX
+          maxLength: 100
+        displayName:
+          type: string
+          description: Tournament display name
+          example: Liga MX
+          maxLength: 150
+        organizationId:
+          type: integer
+          format: int64
+          description: Organization ID that owns this tournament
+          example: 1
+        type:
+          $ref: '#/components/schemas/TournamentType'
+        active:
+          type: boolean
+          description: Whether the tournament is active
+          example: true
+          default: true
+
+    TournamentType:
+      type: string
+      enum:
+        - LEAGUE
+        - CUP
+        - FRIENDLY
+        - PLAYOFF
+      description: Type of tournament
+      x-enum-descriptions:
+        LEAGUE: Regular league competition
+        CUP: Cup/knockout tournament
+        FRIENDLY: Friendly match series
+        PLAYOFF: Playoff tournament
+
+    PageTournamentDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TournamentDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Season Schemas
+    SeasonDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - tournamentId
+        - startDate
+        - endDate
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Season unique identifier
+          example: 1
+        name:
+          type: string
+          description: Season name (unique)
+          example: Apertura 2024
+          maxLength: 100
+        displayName:
+          type: string
+          description: Season display name
+          example: Apertura 2024
+          maxLength: 150
+        tournamentId:
+          type: integer
+          format: int64
+          description: Tournament ID this season belongs to
+          example: 1
+        startDate:
+          type: string
+          format: date
+          description: Season start date
+          example: '2024-07-01'
+        endDate:
+          type: string
+          format: date
+          description: Season end date
+          example: '2024-12-15'
+        active:
+          type: boolean
+          description: Whether the season is currently active
+          example: true
+          default: true
+
+    PageSeasonDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/SeasonDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Season Team Schemas
+    SeasonTeamDTO:
+      type: object
+      required:
+        - seasonId
+        - teamId
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Season team unique identifier
+          example: 1
+        seasonId:
+          type: integer
+          format: int64
+          description: Season ID
+          example: 1
+        teamId:
+          type: integer
+          format: int64
+          description: Team ID
+          example: 1
+        group:
+          type: string
+          description: Group assignment (for group stage competitions)
+          example: A
+          maxLength: 50
+
+    PageSeasonTeamDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/SeasonTeamDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Competition Schemas
+    CompetitionDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - seasonId
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Competition unique identifier
+          example: 1
+        name:
+          type: string
+          description: Competition name (unique)
+          example: Liga MX Apertura 2024
+          maxLength: 100
+        displayName:
+          type: string
+          description: Competition display name
+          example: Apertura 2024
+          maxLength: 150
+        seasonId:
+          type: integer
+          format: int64
+          description: Season ID this competition belongs to
+          example: 1
+        active:
+          type: boolean
+          description: Whether the competition is active
+          example: true
+          default: true
+
+    PageCompetitionDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompetitionDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Stage Schemas
+    StageDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - competitionId
+        - stageOrder
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Stage unique identifier
+          example: 1
+        name:
+          type: string
+          description: Stage name (unique within competition)
+          example: Regular Season
+          maxLength: 100
+        displayName:
+          type: string
+          description: Stage display name
+          example: Regular Season
+          maxLength: 150
+        competitionId:
+          type: integer
+          format: int64
+          description: Competition ID this stage belongs to
+          example: 1
+        stageOrder:
+          type: integer
+          description: Order of this stage in the competition
+          example: 1
+        structureId:
+          type: integer
+          format: int64
+          description: Structure ID defining the stage format
+          example: 1
+
+    PageStageDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/StageDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Matchday Schemas
+    MatchdayDTO:
+      type: object
+      required:
+        - name
+        - displayName
+        - stageId
+        - matchdayNumber
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Matchday unique identifier
+          example: 1
+        name:
+          type: string
+          description: Matchday name (unique within stage)
+          example: Jornada 1
+          maxLength: 100
+        displayName:
+          type: string
+          description: Matchday display name
+          example: Jornada 1
+          maxLength: 150
+        stageId:
+          type: integer
+          format: int64
+          description: Stage ID this matchday belongs to
+          example: 1
+        matchdayNumber:
+          type: integer
+          description: Matchday number within the stage
+          example: 1
+        startDate:
+          type: string
+          format: date
+          description: Matchday start date
+          example: '2024-07-05'
+        endDate:
+          type: string
+          format: date
+          description: Matchday end date
+          example: '2024-07-07'
+
+    PageMatchdayDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchdayDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Match Schemas
+    MatchDTO:
+      type: object
+      required:
+        - matchdayId
+        - homeTeamId
+        - awayTeamId
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Match unique identifier
+          example: 1
+        matchdayId:
+          type: integer
+          format: int64
+          description: Matchday ID this match belongs to
+          example: 1
+        homeTeamId:
+          type: integer
+          format: int64
+          description: Home team ID
+          example: 1
+        awayTeamId:
+          type: integer
+          format: int64
+          description: Away team ID
+          example: 2
+        venueId:
+          type: integer
+          format: int64
+          description: Venue ID where the match is played
+          example: 1
+        matchDateTime:
+          type: string
+          format: date-time
+          description: Match date and time
+          example: '2024-07-05T20:00:00'
+        homeScore:
+          type: integer
+          description: Home team score
+          example: 2
+        awayScore:
+          type: integer
+          description: Away team score
+          example: 1
+        status:
+          $ref: '#/components/schemas/MatchStatus'
+        attendance:
+          type: integer
+          description: Match attendance
+          example: 45000
+
+    MatchStatus:
+      type: string
+      enum:
+        - SCHEDULED
+        - IN_PROGRESS
+        - COMPLETED
+        - POSTPONED
+        - CANCELLED
+        - SUSPENDED
+      description: Match status
+      x-enum-descriptions:
+        SCHEDULED: Match is scheduled but not started
+        IN_PROGRESS: Match is currently being played
+        COMPLETED: Match has finished
+        POSTPONED: Match has been postponed
+        CANCELLED: Match has been cancelled
+        SUSPENDED: Match has been suspended
+
+    PageMatchDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Match Event Schemas
+    MatchEventDTO:
+      type: object
+      required:
+        - matchId
+        - eventType
+        - minute
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Match event unique identifier
+          example: 1
+        matchId:
+          type: integer
+          format: int64
+          description: Match ID this event belongs to
+          example: 1
+        eventType:
+          $ref: '#/components/schemas/MatchEventType'
+        minute:
+          type: integer
+          description: Minute when the event occurred
+          example: 45
+        additionalMinute:
+          type: integer
+          description: Additional/stoppage time minute
+          example: 2
+        playerId:
+          type: integer
+          format: int64
+          description: Primary player involved in the event
+          example: 1
+        secondaryPlayerId:
+          type: integer
+          format: int64
+          description: Secondary player involved (e.g., assist provider)
+          example: 2
+        teamId:
+          type: integer
+          format: int64
+          description: Team associated with the event
+          example: 1
+        description:
+          type: string
+          description: Additional description of the event
+          example: Header from corner kick
+          maxLength: 500
+
+    MatchEventType:
+      type: string
+      enum:
+        - GOAL
+        - OWN_GOAL
+        - PENALTY_GOAL
+        - PENALTY_MISS
+        - YELLOW_CARD
+        - RED_CARD
+        - SECOND_YELLOW
+        - SUBSTITUTION
+        - INJURY
+        - VAR_DECISION
+      description: Type of match event
+      x-enum-descriptions:
+        GOAL: Regular goal scored
+        OWN_GOAL: Own goal
+        PENALTY_GOAL: Goal scored from penalty kick
+        PENALTY_MISS: Penalty kick missed
+        YELLOW_CARD: Yellow card shown
+        RED_CARD: Direct red card shown
+        SECOND_YELLOW: Second yellow card (resulting in red)
+        SUBSTITUTION: Player substitution
+        INJURY: Player injury
+        VAR_DECISION: VAR review decision
+
+    PageMatchEventDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchEventDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Lineup Schemas
+    LineupDTO:
+      type: object
+      required:
+        - matchId
+        - teamId
+        - playerId
+        - position
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Lineup entry unique identifier
+          example: 1
+        matchId:
+          type: integer
+          format: int64
+          description: Match ID
+          example: 1
+        teamId:
+          type: integer
+          format: int64
+          description: Team ID
+          example: 1
+        playerId:
+          type: integer
+          format: int64
+          description: Player ID
+          example: 1
+        position:
+          $ref: '#/components/schemas/PlayerPosition'
+        shirtNumber:
+          type: integer
+          description: Player shirt number
+          example: 10
+        starter:
+          type: boolean
+          description: Whether the player is a starter
+          example: true
+          default: true
+        captain:
+          type: boolean
+          description: Whether the player is the team captain
+          example: false
+          default: false
+
+    PlayerPosition:
+      type: string
+      enum:
+        - GOALKEEPER
+        - DEFENDER
+        - MIDFIELDER
+        - FORWARD
+      description: Player position on the field
+      x-enum-descriptions:
+        GOALKEEPER: Goalkeeper position
+        DEFENDER: Defensive position
+        MIDFIELDER: Midfield position
+        FORWARD: Forward/striker position
+
+    PageLineupDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineupDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Standing Schemas
+    StandingDTO:
+      type: object
+      required:
+        - stageId
+        - teamId
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Standing entry unique identifier
+          example: 1
+        stageId:
+          type: integer
+          format: int64
+          description: Stage ID
+          example: 1
+        teamId:
+          type: integer
+          format: int64
+          description: Team ID
+          example: 1
+        position:
+          type: integer
+          description: Current position in standings
+          example: 1
+        played:
+          type: integer
+          description: Games played
+          example: 10
+          default: 0
+        won:
+          type: integer
+          description: Games won
+          example: 7
+          default: 0
+        drawn:
+          type: integer
+          description: Games drawn
+          example: 2
+          default: 0
+        lost:
+          type: integer
+          description: Games lost
+          example: 1
+          default: 0
+        goalsFor:
+          type: integer
+          description: Goals scored
+          example: 20
+          default: 0
+        goalsAgainst:
+          type: integer
+          description: Goals conceded
+          example: 8
+          default: 0
+        goalDifference:
+          type: integer
+          description: Goal difference (goalsFor - goalsAgainst)
+          example: 12
+          default: 0
+        points:
+          type: integer
+          description: Total points
+          example: 23
+          default: 0
+
+    PageStandingDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/StandingDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Outcome Schemas
+    OutcomeDTO:
+      type: object
+      required:
+        - matchId
+        - teamId
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Outcome entry unique identifier
+          example: 1
+        matchId:
+          type: integer
+          format: int64
+          description: Match ID
+          example: 1
+        teamId:
+          type: integer
+          format: int64
+          description: Team ID
+          example: 1
+        result:
+          $ref: '#/components/schemas/MatchResult'
+        pointsEarned:
+          type: integer
+          description: Points earned from this match
+          example: 3
+          default: 0
+
+    MatchResult:
+      type: string
+      enum:
+        - WIN
+        - DRAW
+        - LOSS
+      description: Match result for a team
+      x-enum-descriptions:
+        WIN: Team won the match
+        DRAW: Match ended in a draw
+        LOSS: Team lost the match
+
+    PageOutcomeDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutcomeDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Person Schemas
+    PersonDTO:
+      type: object
+      required:
+        - firstName
+        - lastName
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Person unique identifier
+          example: 1
+        firstName:
+          type: string
+          description: Person's first name
+          example: Lionel
+          maxLength: 100
+        lastName:
+          type: string
+          description: Person's last name
+          example: Messi
+          maxLength: 100
+        dateOfBirth:
+          type: string
+          format: date
+          description: Date of birth
+          example: '1987-06-24'
+        nationalityId:
+          type: integer
+          format: int64
+          description: Country ID for nationality
+          example: 1
+        photoUrl:
+          type: string
+          description: URL to person's photo
+          example: https://example.com/photos/messi.jpg
+          maxLength: 500
+
+    PagePersonDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Player Schemas
+    PlayerDTO:
+      type: object
+      required:
+        - personId
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Player unique identifier
+          example: 1
+        personId:
+          type: integer
+          format: int64
+          description: Person ID
+          example: 1
+        position:
+          $ref: '#/components/schemas/PlayerPosition'
+        preferredFoot:
+          $ref: '#/components/schemas/PreferredFoot'
+        height:
+          type: number
+          format: double
+          description: Player height in cm
+          example: 170.0
+        weight:
+          type: number
+          format: double
+          description: Player weight in kg
+          example: 72.0
+        shirtNumber:
+          type: integer
+          description: Preferred shirt number
+          example: 10
+        active:
+          type: boolean
+          description: Whether the player is active
+          example: true
+          default: true
+
+    PreferredFoot:
+      type: string
+      enum:
+        - LEFT
+        - RIGHT
+        - BOTH
+      description: Player's preferred foot
+      x-enum-descriptions:
+        LEFT: Left-footed player
+        RIGHT: Right-footed player
+        BOTH: Ambidextrous player
+
+    PagePlayerDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Staff Schemas
+    StaffDTO:
+      type: object
+      required:
+        - personId
+        - role
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Staff unique identifier
+          example: 1
+        personId:
+          type: integer
+          format: int64
+          description: Person ID
+          example: 1
+        role:
+          $ref: '#/components/schemas/StaffRole'
+        active:
+          type: boolean
+          description: Whether the staff member is active
+          example: true
+          default: true
+
+    StaffRole:
+      type: string
+      enum:
+        - HEAD_COACH
+        - ASSISTANT_COACH
+        - GOALKEEPER_COACH
+        - FITNESS_COACH
+        - PHYSIOTHERAPIST
+        - TEAM_DOCTOR
+        - MANAGER
+        - SCOUT
+      description: Staff role
+      x-enum-descriptions:
+        HEAD_COACH: Head coach/manager
+        ASSISTANT_COACH: Assistant coach
+        GOALKEEPER_COACH: Goalkeeper coach
+        FITNESS_COACH: Fitness coach
+        PHYSIOTHERAPIST: Team physiotherapist
+        TEAM_DOCTOR: Team doctor
+        MANAGER: General manager
+        SCOUT: Scout
+
+    PageStaffDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/StaffDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    # Roster Entry Schemas
+    RosterEntryDTO:
+      type: object
+      required:
+        - seasonTeamId
+        - playerId
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Roster entry unique identifier
+          example: 1
+        seasonTeamId:
+          type: integer
+          format: int64
+          description: Season team ID
+          example: 1
+        playerId:
+          type: integer
+          format: int64
+          description: Player ID
+          example: 1
+        shirtNumber:
+          type: integer
+          description: Player's shirt number for this season
+          example: 10
+        joinDate:
+          type: string
+          format: date
+          description: Date when player joined the roster
+          example: '2024-07-01'
+        leaveDate:
+          type: string
+          format: date
+          description: Date when player left the roster
+          example: '2024-12-31'
+        loanedFrom:
+          type: integer
+          format: int64
+          description: Team ID player is loaned from
+          example: 5
+        active:
+          type: boolean
+          description: Whether the roster entry is active
+          example: true
+          default: true
+
+    PageRosterEntryDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/RosterEntryDTO'
         pageable:
           type: object
         totalElements:
