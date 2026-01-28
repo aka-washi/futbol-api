@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.staff.service;
 
+import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.constraints.NotNull;
@@ -56,10 +57,12 @@ public class StaffService extends BaseCrudService<Staff, Long, StaffDTO> {
   @Override
   protected boolean isDuplicate(@NotNull Staff staff) {
     Objects.requireNonNull(staff, "Staff cannot be null");
-    // A staff member is unique by person and role - one person can have multiple
-    // staff roles
-    return staff.getPerson() != null && staff.getRole() != null
-        && staffRepository.existsByPersonIdAndRole(staff.getPerson().getId(), staff.getRole());
+
+    // Check unique constraint: person
+    if (staff.getPerson() != null) {
+      return existsByUniqueFields(Map.of("person.id", staff.getPerson().getId()));
+    }
+    return false;
   }
 
   @Override
@@ -67,8 +70,11 @@ public class StaffService extends BaseCrudService<Staff, Long, StaffDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(staff, "Staff cannot be null");
 
-    return staff.getPerson() != null && staff.getRole() != null
-        && staffRepository.existsByPersonIdAndRoleAndIdNot(staff.getPerson().getId(), staff.getRole(), id);
+    // Check unique constraint: person (excluding current ID)
+    if (staff.getPerson() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of("person.id", staff.getPerson().getId()), id);
+    }
+    return false;
   }
 
 }

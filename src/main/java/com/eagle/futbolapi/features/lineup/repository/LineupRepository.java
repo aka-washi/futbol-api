@@ -1,14 +1,19 @@
 package com.eagle.futbolapi.features.lineup.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.eagle.futbolapi.features.base.repository.BaseRepository;
 import com.eagle.futbolapi.features.lineup.entity.Lineup;
 
 @Repository
-public interface LineupRepository extends JpaRepository<Lineup, Long> {
+public interface LineupRepository extends BaseRepository<Lineup, Long> {
+
+  // Unique field methods: match + team + player
+  Optional<Lineup> findByMatchIdAndTeamIdAndPlayerId(Long matchId, Long teamId, Long playerId);
 
   boolean existsByMatchIdAndTeamIdAndPlayerId(Long matchId, Long teamId, Long playerId);
 

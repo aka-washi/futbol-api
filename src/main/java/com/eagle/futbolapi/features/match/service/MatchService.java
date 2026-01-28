@@ -1,9 +1,10 @@
 package com.eagle.futbolapi.features.match.service;
 
-import jakarta.validation.constraints.NotNull;
-
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,12 +97,15 @@ public class MatchService extends BaseCrudService<Match, Long, MatchDTO> {
   @Override
   protected boolean isDuplicate(@NotNull Match match) {
     Objects.requireNonNull(match, "Match cannot be null");
-    // A match is unique by matchday, home team, away team, and scheduled date
-    return match.getMatchday() != null && match.getHomeTeam() != null && match.getAwayTeam() != null
-        && match.getScheduledDate() != null
-        && matchRepository.existsByMatchdayIdAndHomeTeamIdAndAwayTeamIdAndScheduledDate(
-            match.getMatchday().getId(), match.getHomeTeam().getId(), match.getAwayTeam().getId(),
-            match.getScheduledDate());
+
+    // Check composite unique constraint: matchday + homeTeam + awayTeam
+    if (match.getMatchday() != null && match.getHomeTeam() != null && match.getAwayTeam() != null) {
+      return existsByUniqueFields(Map.of(
+          "matchday.id", match.getMatchday().getId(),
+          "homeTeam.id", match.getHomeTeam().getId(),
+          "awayTeam.id", match.getAwayTeam().getId()));
+    }
+    return false;
   }
 
   @Override
@@ -109,11 +113,14 @@ public class MatchService extends BaseCrudService<Match, Long, MatchDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(match, "Match cannot be null");
 
-    return match.getMatchday() != null && match.getHomeTeam() != null && match.getAwayTeam() != null
-        && match.getScheduledDate() != null
-        && matchRepository.existsByMatchdayIdAndHomeTeamIdAndAwayTeamIdAndScheduledDateAndIdNot(
-            match.getMatchday().getId(), match.getHomeTeam().getId(), match.getAwayTeam().getId(),
-            match.getScheduledDate(), id);
+    // Check composite unique constraint: matchday + homeTeam + awayTeam (excluding current ID)
+    if (match.getMatchday() != null && match.getHomeTeam() != null && match.getAwayTeam() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "matchday.id", match.getMatchday().getId(),
+          "homeTeam.id", match.getHomeTeam().getId(),
+          "awayTeam.id", match.getAwayTeam().getId()), id);
+    }
+    return false;
   }
 
 }

@@ -1,13 +1,20 @@
 package com.eagle.futbolapi.features.base.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
@@ -21,6 +28,10 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     this.repository = repository;
     this.mapper = mapper;
   }
+
+  // ============================================================================
+  // Standard CRUD Operations
+  // ============================================================================
 
   public Page<T> getAll(Pageable pageable) {
     if (pageable == null) {
@@ -80,6 +91,107 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     }
     return repository.existsById(id);
   }
+
+  // ============================================================================
+  // Generic Unique Fields Methods using JPA Specifications
+  // ============================================================================
+
+  /**
+   * Build a JPA Specification from a map of unique field values.
+   * Supports nested fields using dot notation (e.g., "season.id", "team.id").
+   *
+   * @param uniqueFields map of field names to values
+   * @return Specification for querying
+   */
+  protected Specification<T> buildUniqueFieldsSpec(Map<String, Object> uniqueFields) {
+    return (root, query, cb) -> {
+      List<Predicate> predicates = new ArrayList<>();
+      uniqueFields.forEach((field, value) -> {
+        if (value != null) {
+          Path<?> path = getPath(root, field);
+          predicates.add(cb.equal(path, value));
+        }
+      });
+      return cb.and(predicates.toArray(new Predicate[0]));
+    };
+  }
+
+  /**
+   * Get the path for a field, supporting nested fields with dot notation.
+   */
+  @SuppressWarnings("unchecked")
+  private <Y> Path<Y> getPath(Path<?> root, String field) {
+    if (field.contains(".")) {
+      String[] parts = field.split("\\.");
+      Path<?> path = root;
+      for (String part : parts) {
+        path = path.get(part);
+      }
+      return (Path<Y>) path;
+    }
+    return (Path<Y>) root.get(field);
+  }
+
+  /**
+   * Find entity by unique fields using dynamic specification.
+   *
+   * @param uniqueFields map of field names to values (supports dot notation for
+   *                     nested fields)
+   * @return Optional containing the entity if found
+   */
+  public Optional<T> getByUniqueFields(Map<String, Object> uniqueFields) {
+    if (uniqueFields == null || uniqueFields.isEmpty()) {
+      return Optional.empty();
+    }
+    return getSpecificationExecutor().findOne(buildUniqueFieldsSpec(uniqueFields));
+  }
+
+  /**
+   * Check if entity exists by unique fields.
+   *
+   * @param uniqueFields map of field names to values
+   * @return true if entity exists
+   */
+  public boolean existsByUniqueFields(Map<String, Object> uniqueFields) {
+    if (uniqueFields == null || uniqueFields.isEmpty()) {
+      return false;
+    }
+    return getSpecificationExecutor().exists(buildUniqueFieldsSpec(uniqueFields));
+  }
+
+  /**
+   * Check if entity exists by unique fields excluding given ID.
+   *
+   * @param uniqueFields map of field names to values
+   * @param id           ID to exclude from the check
+   * @return true if another entity exists with the same unique fields
+   */
+  public boolean existsByUniqueFieldsAndNotId(Map<String, Object> uniqueFields, K id) {
+    if (uniqueFields == null || uniqueFields.isEmpty() || id == null) {
+      return false;
+    }
+    Specification<T> spec = buildUniqueFieldsSpec(uniqueFields)
+        .and((root, query, cb) -> cb.notEqual(root.get("id"), id));
+    return getSpecificationExecutor().exists(spec);
+  }
+
+  /**
+   * Get the JpaSpecificationExecutor from the repository.
+   * Throws exception if repository doesn't support specifications.
+   */
+  @SuppressWarnings("unchecked")
+  protected JpaSpecificationExecutor<T> getSpecificationExecutor() {
+    if (repository instanceof JpaSpecificationExecutor) {
+      return (JpaSpecificationExecutor<T>) repository;
+    }
+    throw new UnsupportedOperationException(
+        "Repository does not support JpaSpecificationExecutor. " +
+            "Extend BaseRepository instead of JpaRepository.");
+  }
+
+  // ============================================================================
+  // Helper Methods
+  // ============================================================================
 
   private T saveNew(T entity) {
     if (entity == null) {

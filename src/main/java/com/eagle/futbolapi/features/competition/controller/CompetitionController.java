@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.competition.controller;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -80,18 +81,12 @@ public class CompetitionController
   }
 
   @GetMapping("/unique")
-  public ResponseEntity<ApiResponse<CompetitionDTO>> getByUniqueValues(
-      @RequestParam String name,
+  public ResponseEntity<ApiResponse<CompetitionDTO>> getByUniqueFields(
       @RequestParam Long seasonId,
-      @RequestParam String type,
-      @RequestParam String startDate,
-      @RequestParam String endDate) {
-    var competition = service.getByUniqueValues(
-        name,
-        seasonId,
-        CompetitionType.valueOf(type),
-        LocalDate.parse(startDate),
-        LocalDate.parse(endDate));
+      @RequestParam String type) {
+    var competition = service.getByUniqueFields(Map.of(
+        "season.id", seasonId,
+        "type", CompetitionType.valueOf(type)));
     CompetitionDTO competitionDTO = competition.map(mapper::toDTO).orElse(null);
     return ResponseUtil.success(competitionDTO, SUCCESS_MESSAGE);
   }

@@ -1,14 +1,19 @@
 package com.eagle.futbolapi.features.player.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.eagle.futbolapi.features.base.repository.BaseRepository;
 import com.eagle.futbolapi.features.player.entity.Player;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<Player, Long> {
+public interface PlayerRepository extends BaseRepository<Player, Long> {
+
+  // Unique field methods: person
+  Optional<Player> findByPersonId(Long personId);
 
   boolean existsByPersonId(Long personId);
 

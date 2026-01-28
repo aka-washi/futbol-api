@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.player.service;
 
+import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.constraints.NotNull;
@@ -56,8 +57,12 @@ public class PlayerService extends BaseCrudService<Player, Long, PlayerDTO> {
   @Override
   protected boolean isDuplicate(@NotNull Player player) {
     Objects.requireNonNull(player, "Player cannot be null");
-    // A player is unique by person - one person can only be one player
-    return player.getPerson() != null && playerRepository.existsByPersonId(player.getPerson().getId());
+
+    // Check unique constraint: person
+    if (player.getPerson() != null) {
+      return existsByUniqueFields(Map.of("person.id", player.getPerson().getId()));
+    }
+    return false;
   }
 
   @Override
@@ -65,7 +70,11 @@ public class PlayerService extends BaseCrudService<Player, Long, PlayerDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(player, "Player cannot be null");
 
-    return player.getPerson() != null && playerRepository.existsByPersonIdAndIdNot(player.getPerson().getId(), id);
+    // Check unique constraint: person (excluding current ID)
+    if (player.getPerson() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of("person.id", player.getPerson().getId()), id);
+    }
+    return false;
   }
 
 }

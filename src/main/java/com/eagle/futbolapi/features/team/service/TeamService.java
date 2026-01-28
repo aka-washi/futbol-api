@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.team.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -146,11 +147,16 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
   protected boolean isDuplicate(@NotNull Team entity) {
     Objects.requireNonNull(entity, "Entity cannot be null");
 
-    return teamRepository.existsByNameAndGenderAndAgeCategoryAndOrganizationId(
-        entity.getName(),
-        entity.getGender(),
-        entity.getAgeCategory(),
-        entity.getOrganization().getId());
+    // Check composite unique constraint: name + gender + ageCategory + organization
+    if (entity.getName() != null && entity.getGender() != null
+        && entity.getAgeCategory() != null && entity.getOrganization() != null) {
+      return existsByUniqueFields(Map.of(
+          "name", entity.getName(),
+          "gender", entity.getGender(),
+          "ageCategory", entity.getAgeCategory(),
+          "organization.id", entity.getOrganization().getId()));
+    }
+    return false;
   }
 
   @Override
@@ -158,12 +164,16 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(entity, "Entity cannot be null");
 
-    return teamRepository.existsByNameAndGenderAndAgeCategoryAndOrganizationIdAndIdNot(
-        entity.getName(),
-        entity.getGender(),
-        entity.getAgeCategory(),
-        entity.getOrganization().getId(),
-        id);
+    // Check composite unique constraint: name + gender + ageCategory + organization (excluding current ID)
+    if (entity.getName() != null && entity.getGender() != null
+        && entity.getAgeCategory() != null && entity.getOrganization() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "name", entity.getName(),
+          "gender", entity.getGender(),
+          "ageCategory", entity.getAgeCategory(),
+          "organization.id", entity.getOrganization().getId()), id);
+    }
+    return false;
   }
 
 }

@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.structure.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -77,8 +78,11 @@ public class StructureService extends BaseCrudService<Structure, Long, Structure
   protected boolean isDuplicate(@NotNull Structure structure) {
     Objects.requireNonNull(structure, "Structure cannot be null");
 
-    return structureRepository.existsByName(structure.getName())
-        || structureRepository.existsByDisplayName(structure.getDisplayName());
+    // Check unique constraint: name
+    if (structure.getName() != null) {
+      return existsByUniqueFields(Map.of("name", structure.getName()));
+    }
+    return false;
   }
 
   @Override
@@ -86,8 +90,11 @@ public class StructureService extends BaseCrudService<Structure, Long, Structure
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(structure, "Structure cannot be null");
 
-    return structureRepository.existsByNameAndIdNot(structure.getName(), id)
-        || structureRepository.existsByDisplayNameAndIdNot(structure.getDisplayName(), id);
+    // Check unique constraint: name (excluding current ID)
+    if (structure.getName() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of("name", structure.getName()), id);
+    }
+    return false;
   }
 
 }

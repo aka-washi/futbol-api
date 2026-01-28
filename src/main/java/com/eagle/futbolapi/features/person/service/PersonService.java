@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.person.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -86,8 +87,10 @@ public class PersonService extends BaseCrudService<Person, Long, PersonDTO> {
   protected boolean isDuplicate(@NotNull Person person) {
     Objects.requireNonNull(person, "Person cannot be null");
 
-    return (person.getUniqueRegKey() != null && personRepository.existsByUniqueRegKey(person.getUniqueRegKey()))
-        || (person.getEmail() != null && personRepository.existsByEmail(person.getEmail()));
+    // Check multiple unique constraints: uniqueRegKey OR email
+    return (person.getUniqueRegKey() != null
+        && existsByUniqueFields(Map.of("uniqueRegKey", person.getUniqueRegKey())))
+        || (person.getEmail() != null && existsByUniqueFields(Map.of("email", person.getEmail())));
   }
 
   @Override
@@ -95,9 +98,10 @@ public class PersonService extends BaseCrudService<Person, Long, PersonDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(person, "Person cannot be null");
 
+    // Check multiple unique constraints excluding current ID: uniqueRegKey OR email
     return (person.getUniqueRegKey() != null
-        && personRepository.existsByUniqueRegKeyAndNotId(person.getUniqueRegKey(), id))
-        || (person.getEmail() != null && personRepository.existsByEmailAndNotId(person.getEmail(), id));
+        && existsByUniqueFieldsAndNotId(Map.of("uniqueRegKey", person.getUniqueRegKey()), id))
+        || (person.getEmail() != null && existsByUniqueFieldsAndNotId(Map.of("email", person.getEmail()), id));
   }
 
 }

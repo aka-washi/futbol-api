@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.lineup.service;
 
+import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.constraints.NotNull;
@@ -21,7 +22,6 @@ import com.eagle.futbolapi.features.team.service.TeamService;
 @Transactional
 public class LineupService extends BaseCrudService<Lineup, Long, LineupDTO> {
 
-  private final LineupRepository lineupRepository;
   private final MatchService matchService;
   private final TeamService teamService;
   private final PlayerService playerService;
@@ -29,7 +29,6 @@ public class LineupService extends BaseCrudService<Lineup, Long, LineupDTO> {
   public LineupService(LineupRepository lineupRepository, MatchService matchService,
       TeamService teamService, PlayerService playerService, LineupMapper mapper) {
     super(lineupRepository, mapper);
-    this.lineupRepository = lineupRepository;
     this.matchService = matchService;
     this.teamService = teamService;
     this.playerService = playerService;
@@ -66,10 +65,15 @@ public class LineupService extends BaseCrudService<Lineup, Long, LineupDTO> {
   @Override
   protected boolean isDuplicate(@NotNull Lineup lineup) {
     Objects.requireNonNull(lineup, "Lineup cannot be null");
-    // A lineup entry is unique by match, team, and player
-    return lineup.getMatch() != null && lineup.getTeam() != null && lineup.getPlayer() != null
-        && lineupRepository.existsByMatchIdAndTeamIdAndPlayerId(
-            lineup.getMatch().getId(), lineup.getTeam().getId(), lineup.getPlayer().getId());
+
+    // Check composite unique constraint: match + team + player
+    if (lineup.getMatch() != null && lineup.getTeam() != null && lineup.getPlayer() != null) {
+      return existsByUniqueFields(Map.of(
+          "match.id", lineup.getMatch().getId(),
+          "team.id", lineup.getTeam().getId(),
+          "player.id", lineup.getPlayer().getId()));
+    }
+    return false;
   }
 
   @Override
@@ -77,9 +81,14 @@ public class LineupService extends BaseCrudService<Lineup, Long, LineupDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(lineup, "Lineup cannot be null");
 
-    return lineup.getMatch() != null && lineup.getTeam() != null && lineup.getPlayer() != null
-        && lineupRepository.existsByMatchIdAndTeamIdAndPlayerIdAndIdNot(
-            lineup.getMatch().getId(), lineup.getTeam().getId(), lineup.getPlayer().getId(), id);
+    // Check composite unique constraint: match + team + player (excluding current ID)
+    if (lineup.getMatch() != null && lineup.getTeam() != null && lineup.getPlayer() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "match.id", lineup.getMatch().getId(),
+          "team.id", lineup.getTeam().getId(),
+          "player.id", lineup.getPlayer().getId()), id);
+    }
+    return false;
   }
 
 }

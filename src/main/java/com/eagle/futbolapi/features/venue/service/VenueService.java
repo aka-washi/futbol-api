@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.venue.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -71,9 +72,13 @@ public class VenueService extends BaseCrudService<Venue, Long, VenueDTO> {
   protected boolean isDuplicate(@NotNull Venue venue) {
     Objects.requireNonNull(venue, "Venue cannot be null");
 
-    return venue.getName() != null && venueRepository.existsByName(venue.getName())
-        || venue.getDisplayName() != null && venueRepository.existsByDisplayName(venue.getDisplayName())
-        || venue.getCountry() != null && venueRepository.existsByCountryId(venue.getCountry().getId());
+    // Check composite unique constraint: name + country
+    if (venue.getName() != null && venue.getCountry() != null) {
+      return existsByUniqueFields(Map.of(
+          "name", venue.getName(),
+          "country.id", venue.getCountry().getId()));
+    }
+    return false;
   }
 
   @Override
@@ -81,9 +86,13 @@ public class VenueService extends BaseCrudService<Venue, Long, VenueDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(venue, "Venue details cannot be null");
 
-    return venue.getName() != null && venueRepository.existsByNameAndIdNot(venue.getName(), id)
-        || venue.getDisplayName() != null && venueRepository.existsByDisplayNameAndIdNot(venue.getDisplayName(), id)
-        || venue.getCountry() != null && venueRepository.existsByCountryIdAndIdNot(venue.getCountry().getId(), id);
+    // Check composite unique constraint: name + country (excluding current ID)
+    if (venue.getName() != null && venue.getCountry() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "name", venue.getName(),
+          "country.id", venue.getCountry().getId()), id);
+    }
+    return false;
   }
 
 }

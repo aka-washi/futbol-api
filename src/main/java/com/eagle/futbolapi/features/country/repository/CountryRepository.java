@@ -2,13 +2,13 @@ package com.eagle.futbolapi.features.country.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.eagle.futbolapi.features.base.repository.BaseRepository;
 import com.eagle.futbolapi.features.country.entity.Country;
 
 @Repository
-public interface CountryRepository extends JpaRepository<Country, Long> {
+public interface CountryRepository extends BaseRepository<Country, Long> {
 
     Optional<Country> findByName(String name);
 

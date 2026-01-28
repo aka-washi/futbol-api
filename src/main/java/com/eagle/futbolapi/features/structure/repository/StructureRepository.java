@@ -4,14 +4,14 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.eagle.futbolapi.features.base.enums.StructureType;
+import com.eagle.futbolapi.features.base.repository.BaseRepository;
 import com.eagle.futbolapi.features.structure.entity.Structure;
 
 @Repository
-public interface StructureRepository extends JpaRepository<Structure, Long> {
+public interface StructureRepository extends BaseRepository<Structure, Long> {
 
   Optional<Structure> findByName(String name);
 

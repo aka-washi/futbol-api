@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.competition.service;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -48,8 +49,6 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
     return competitionRepository.findByDisplayName(displayName);
   }
 
-  // TODO: Rename method? getActiveCompetitionBySeasonId or
-  // getCompetitionBySeasonIdAndActiveStatus
   public Optional<Competition> getCompetitionBySeasonIdAndActive(Long seasonId, Boolean active) {
     if (seasonId == null) {
       throw new IllegalArgumentException("Season ID cannot be null");
@@ -68,46 +67,6 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
       throw new IllegalArgumentException("Date cannot be null");
     }
     return competitionRepository.findByTypeAndDate(type, date);
-  }
-
-  public Optional<Competition> getByUniqueValues(
-      String name,
-      Long seasonId,
-      CompetitionType type,
-      LocalDate startDate,
-      LocalDate endDate) {
-    return competitionRepository.findByUniqueValues(
-        name,
-        seasonService.getById(seasonId)
-            .orElseThrow(() -> new ResourceNotFoundException("Season", "id", seasonId)),
-        type, startDate, endDate);
-  }
-
-  public boolean existsByUniqueValues(
-      String name,
-      Long seasonId,
-      CompetitionType type,
-      LocalDate startDate,
-      LocalDate endDate) {
-    return competitionRepository.existsByUniqueValues(
-        name,
-        seasonService.getById(seasonId)
-            .orElseThrow(() -> new ResourceNotFoundException("Season", "id", seasonId)),
-        type, startDate, endDate);
-  }
-
-  public boolean existsByUniqueValuesAndIdNot(
-      String name,
-      Long seasonId,
-      CompetitionType type,
-      LocalDate startDate,
-      LocalDate endDate,
-      Long id) {
-    return competitionRepository.existsByUniqueValuesAndIdNot(
-        name,
-        seasonService.getById(seasonId)
-            .orElseThrow(() -> new ResourceNotFoundException("Season", "id", seasonId)),
-        type, startDate, endDate, id);
   }
 
   public Page<Competition> getActiveCompetitions(Pageable pageable) {
@@ -158,12 +117,13 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
   protected boolean isDuplicate(@NotNull Competition competition) {
     Objects.requireNonNull(competition, "Competition cannot be null");
 
-    return existsByUniqueValues(
-        competition.getName(),
-        competition.getSeason().getId(),
-        competition.getType(),
-        competition.getStartDate(),
-        competition.getEndDate());
+    // Check composite unique constraint: season + type
+    if (competition.getSeason() != null && competition.getType() != null) {
+      return existsByUniqueFields(Map.of(
+          "season.id", competition.getSeason().getId(),
+          "type", competition.getType()));
+    }
+    return false;
   }
 
   @Override
@@ -171,12 +131,12 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(competition, "Competition cannot be null");
 
-    return existsByUniqueValuesAndIdNot(
-        competition.getName(),
-        competition.getSeason().getId(),
-        competition.getType(),
-        competition.getStartDate(),
-        competition.getEndDate(),
-        id);
+    // Check composite unique constraint: season + type (excluding current ID)
+    if (competition.getSeason() != null && competition.getType() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "season.id", competition.getSeason().getId(),
+          "type", competition.getType()), id);
+    }
+    return false;
   }
 }

@@ -4,6 +4,12 @@
     "label": "Base Entity",
     "type": "base",
     "package": "com.eagle.futbolapi.features.base.entity",
+    "uniqueFields": [
+      {
+        "field": "id",
+        "type": "long"
+      }
+    ],
     "fields": [
       {
         "name": "id",
@@ -57,6 +63,16 @@
       {
         "field": "code",
         "label": "Code"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "field": "code",
+        "type": "string"
+      },
+      {
+        "field": "isoCode",
+        "type": "string"
       }
     ],
     "fields": [
@@ -115,6 +131,12 @@
       {
         "field": "country.displayName",
         "label": "Display Name"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "fields": ["name", "country", "type"],
+        "type": "composite"
       }
     ],
     "fields": [
@@ -212,6 +234,12 @@
       {
         "field": "birthCountry.displayName",
         "label": "Birth Country"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "field": "uniqueRegKey",
+        "type": "string"
       }
     ],
     "fields": [
@@ -341,6 +369,12 @@
         "label": "Position"
       }
     ],
+    "uniqueFields": [
+      {
+        "field": "person",
+        "type": "relation"
+      }
+    ],
     "fields": [
       {
         "name": "person",
@@ -417,6 +451,12 @@
         "label": "Role"
       }
     ],
+    "uniqueFields": [
+      {
+        "field": "person",
+        "type": "relation"
+      }
+    ],
     "fields": [
       {
         "name": "person",
@@ -480,6 +520,12 @@
       {
         "field": "country.displayName",
         "label": "Country"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "fields": ["name", "country"],
+        "type": "composite"
       }
     ],
     "fields": [
@@ -570,6 +616,12 @@
       {
         "field": "ageCategory",
         "label": "Age Category"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "field": "code",
+        "type": "string"
       }
     ],
     "fields": [
@@ -718,6 +770,12 @@
         "label": "Type"
       }
     ],
+    "uniqueFields": [
+      {
+        "fields": ["name", "organization"],
+        "type": "composite"
+      }
+    ],
     "fields": [
       {
         "name": "organization",
@@ -849,6 +907,12 @@
         "label": "Display Name"
       }
     ],
+    "uniqueFields": [
+      {
+        "fields": ["tournament", "name"],
+        "type": "composite"
+      }
+    ],
     "fields": [
       {
         "name": "tournament",
@@ -924,6 +988,12 @@
       {
         "field": "season.displayName",
         "label": "Season"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "fields": ["season", "type"],
+        "type": "composite"
       }
     ],
     "fields": [
@@ -1010,6 +1080,12 @@
         "label": "Win Points"
       }
     ],
+    "uniqueFields": [
+      {
+        "field": "name",
+        "type": "string"
+      }
+    ],
     "fields": [
       {
         "name": "name",
@@ -1083,6 +1159,12 @@
       {
         "field": "type",
         "label": "Type"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "field": "name",
+        "type": "string"
       }
     ],
     "fields": [
@@ -1183,6 +1265,12 @@
         "label": "Order"
       }
     ],
+    "uniqueFields": [
+      {
+        "fields": ["competition", "order"],
+        "type": "composite"
+      }
+    ],
     "fields": [
       {
         "name": "competition",
@@ -1268,6 +1356,12 @@
         "label": "Stage"
       }
     ],
+    "uniqueFields": [
+      {
+        "fields": ["stage", "number"],
+        "type": "composite"
+      }
+    ],
     "fields": [
       {
         "name": "stage",
@@ -1346,6 +1440,12 @@
       {
         "field": "awayTeam.name",
         "label": "Away Team"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "fields": ["matchday", "homeTeam", "awayTeam"],
+        "type": "composite"
       }
     ],
     "fields": [
@@ -1524,6 +1624,16 @@
         "label": "Staff"
       }
     ],
+    "uniqueFields": [
+      {
+        "fields": ["season", "team", "player"],
+        "type": "composite"
+      },
+      {
+        "fields": ["season", "team", "staff"],
+        "type": "composite"
+      }
+    ],
     "fields": [
       {
         "name": "season",
@@ -1613,6 +1723,12 @@
       {
         "field": "type",
         "label": "Type"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "fields": ["match", "team", "player"],
+        "type": "composite"
       }
     ],
     "fields": [
@@ -1934,6 +2050,12 @@
         "label": "Team"
       }
     ],
+    "uniqueFields": [
+      {
+        "fields": ["season", "team"],
+        "type": "composite"
+      }
+    ],
     "fields": [
       {
         "name": "season",
@@ -1997,6 +2119,12 @@
       {
         "field": "position",
         "label": "Position"
+      }
+    ],
+    "uniqueFields": [
+      {
+        "fields": ["stage", "team"],
+        "type": "composite"
       }
     ],
     "fields": [

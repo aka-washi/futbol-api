@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.organization.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -99,11 +100,14 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
   protected boolean isDuplicate(@NotNull Organization organization) {
     Objects.requireNonNull(organization, "Organization cannot be null");
 
-    return (organization.getAbbreviation() != null
-        && repository.existsByAbbreviation(organization.getAbbreviation()))
-        || (organization.getDisplayName() != null
-            && repository.existsByDisplayName(organization.getDisplayName()))
-        || (organization.getName() != null && repository.existsByName(organization.getName()));
+    // Check composite unique constraint: name + country + type
+    if (organization.getName() != null && organization.getCountry() != null && organization.getType() != null) {
+      return existsByUniqueFields(Map.of(
+          "name", organization.getName(),
+          "country.id", organization.getCountry().getId(),
+          "type", organization.getType()));
+    }
+    return false;
   }
 
   @Override
@@ -111,12 +115,14 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(organization, "Organization cannot be null");
 
-    return (organization.getAbbreviation() != null
-        && repository.existsByAbbreviationAndIdNot(organization.getAbbreviation(), id))
-        || (organization.getDisplayName() != null
-            && repository.existsByDisplayNameAndIdNot(organization.getDisplayName(), id))
-        || (organization.getName() != null
-            && repository.existsByNameAndIdNot(organization.getName(), id));
+    // Check composite unique constraint: name + country + type (excluding current ID)
+    if (organization.getName() != null && organization.getCountry() != null && organization.getType() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "name", organization.getName(),
+          "country.id", organization.getCountry().getId(),
+          "type", organization.getType()), id);
+    }
+    return false;
   }
 
 }

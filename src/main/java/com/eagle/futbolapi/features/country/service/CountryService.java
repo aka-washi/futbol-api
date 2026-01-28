@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.country.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -57,9 +58,10 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
   protected boolean isDuplicate(@NotNull Country country) {
     Objects.requireNonNull(country, "Country cannot be null");
 
-    return (country.getCode() != null && repository.existsByCode(country.getCode()))
-        || (country.getIsoCode() != null && repository.existsByIsoCode(country.getIsoCode()))
-        || (country.getDisplayName() != null && repository.existsByDisplayName(country.getDisplayName()));
+    // Check multiple unique constraints: code OR isoCode OR displayName
+    return (country.getCode() != null && existsByUniqueFields(Map.of("code", country.getCode())))
+        || (country.getIsoCode() != null && existsByUniqueFields(Map.of("isoCode", country.getIsoCode())))
+        || (country.getDisplayName() != null && existsByUniqueFields(Map.of("displayName", country.getDisplayName())));
   }
 
   @Override
@@ -67,9 +69,10 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(country, "Country cannot be null");
 
-    return (country.getCode() != null && repository.existsByCodeAndIdNot(country.getCode(), id))
-        || (country.getIsoCode() != null && repository.existsByIsoCodeAndIdNot(country.getIsoCode(), id))
+    // Check multiple unique constraints excluding current ID: code OR isoCode OR displayName
+    return (country.getCode() != null && existsByUniqueFieldsAndNotId(Map.of("code", country.getCode()), id))
+        || (country.getIsoCode() != null && existsByUniqueFieldsAndNotId(Map.of("isoCode", country.getIsoCode()), id))
         || (country.getDisplayName() != null
-            && repository.existsByDisplayNameAndIdNot(country.getDisplayName(), id));
+            && existsByUniqueFieldsAndNotId(Map.of("displayName", country.getDisplayName()), id));
   }
 }

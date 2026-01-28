@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.season.controller;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
@@ -80,18 +81,12 @@ public class SeasonController extends BaseCrudController<Season, SeasonDTO, Seas
   }
 
   @GetMapping("/uniqueValues")
-  public ResponseEntity<ApiResponse<Optional<Season>>> getSeasonByUniqueValues(
+  public ResponseEntity<ApiResponse<Optional<Season>>> getByUniqueFields(
       @RequestParam Long tournamentId,
-      @RequestParam String name,
-      @RequestParam String startDate,
-      @RequestParam String endDate,
-      @RequestParam Boolean active) {
-    Optional<Season> exists = service.getSeasonByUniqueValues(
-        tournamentId,
-        name,
-        LocalDate.parse(startDate),
-        LocalDate.parse(endDate),
-        active);
+      @RequestParam String name) {
+    Optional<Season> exists = service.getByUniqueFields(Map.of(
+        "tournament.id", tournamentId,
+        "name", name));
     return ResponseUtil.success(exists, SUCCESS_MESSAGE);
   }
 

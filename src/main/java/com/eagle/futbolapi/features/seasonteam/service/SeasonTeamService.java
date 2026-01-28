@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.seasonteam.service;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.constraints.NotNull;
@@ -82,10 +83,14 @@ public class SeasonTeamService extends BaseCrudService<SeasonTeam, Long, SeasonT
   @Override
   protected boolean isDuplicate(@NotNull SeasonTeam seasonTeam) {
     Objects.requireNonNull(seasonTeam, "SeasonTeam cannot be null");
-    // A season team is unique by season and team
-    return seasonTeam.getSeason() != null && seasonTeam.getTeam() != null
-        && seasonTeamRepository.existsBySeasonIdAndTeamId(
-            seasonTeam.getSeason().getId(), seasonTeam.getTeam().getId());
+
+    // Check composite unique constraint: season + team
+    if (seasonTeam.getSeason() != null && seasonTeam.getTeam() != null) {
+      return existsByUniqueFields(Map.of(
+          "season.id", seasonTeam.getSeason().getId(),
+          "team.id", seasonTeam.getTeam().getId()));
+    }
+    return false;
   }
 
   @Override
@@ -93,9 +98,13 @@ public class SeasonTeamService extends BaseCrudService<SeasonTeam, Long, SeasonT
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(seasonTeam, "SeasonTeam cannot be null");
 
-    return seasonTeam.getSeason() != null && seasonTeam.getTeam() != null
-        && seasonTeamRepository.existsBySeasonIdAndTeamIdAndIdNot(
-            seasonTeam.getSeason().getId(), seasonTeam.getTeam().getId(), id);
+    // Check composite unique constraint: season + team (excluding current ID)
+    if (seasonTeam.getSeason() != null && seasonTeam.getTeam() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "season.id", seasonTeam.getSeason().getId(),
+          "team.id", seasonTeam.getTeam().getId()), id);
+    }
+    return false;
   }
 
 }

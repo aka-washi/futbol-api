@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.tournament.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -47,26 +48,12 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
     return tournamentRepository.findByDisplayName(displayName);
   }
 
-  public Optional<Tournament> getTournamentByUniqueValues(Long organizationId, String type, String ageCategory,
-      Integer level) {
-    return tournamentRepository.findByUniqueValues(
-        organizationService.getById(organizationId)
-            .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId)),
-        TournamentType.valueOf(type),
-        ageCategory,
-        level);
-  }
-
   public Page<Tournament> getTournamentsByOrganizationAndActive(Long organizationId, Boolean active,
       Pageable pageable) {
     if (pageable == null) {
       pageable = Pageable.unpaged();
     }
-    return tournamentRepository.findByOrganizationAndActive(
-        organizationService.getById(organizationId)
-            .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId)),
-        active,
-        pageable);
+    return tournamentRepository.findByOrganizationIdAndActive(organizationId, active, pageable);
   }
 
   public Page<Tournament> getTournamentsByTypeAndActive(TournamentType type, Boolean active, Pageable pageable) {
@@ -76,10 +63,7 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
     if (type == null) {
       throw new IllegalArgumentException("Tournament type cannot be null or empty");
     }
-    return tournamentRepository.findByTypeAndActive(
-        type,
-        active,
-        pageable);
+    return tournamentRepository.findByTypeAndActive(type, active, pageable);
   }
 
   // Relationships
@@ -114,23 +98,26 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
   protected boolean isDuplicate(@NotNull Tournament tournament) {
     Objects.requireNonNull(tournament, "Tournament cannot be null");
 
-    return tournamentRepository.existsByUniqueValues(
-        tournament.getOrganization(),
-        tournament.getType(),
-        tournament.getAgeCategory(),
-        tournament.getLevel());
+    // Check composite unique constraint: name + organization
+    if (tournament.getName() != null && tournament.getOrganization() != null) {
+      return existsByUniqueFields(Map.of(
+          "name", tournament.getName(),
+          "organization.id", tournament.getOrganization().getId()));
+    }
+    return false;
   }
 
   @Override
   protected boolean isDuplicate(Long id, @NotNull Tournament tournament) {
     Objects.requireNonNull(tournament, "Tournament cannot be null");
 
-    return tournamentRepository.existsByUniqueValuesAndIdNot(
-        tournament.getOrganization(),
-        tournament.getType(),
-        tournament.getAgeCategory(),
-        tournament.getLevel(),
-        id);
+    // Check composite unique constraint: name + organization (excluding current ID)
+    if (tournament.getName() != null && tournament.getOrganization() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "name", tournament.getName(),
+          "organization.id", tournament.getOrganization().getId()), id);
+    }
+    return false;
   }
 
 }

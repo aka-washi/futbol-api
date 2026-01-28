@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.pointsystem.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -43,12 +44,11 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long, Point
   protected boolean isDuplicate(@NotNull PointSystem pointSystem) {
     Objects.requireNonNull(pointSystem, "Point System cannot be null");
 
-    return pointSystemRepository.existsByPointValues(
-        pointSystem.getPointsForWin(),
-        pointSystem.getPointsForDraw(),
-        pointSystem.getPointsForLoss(),
-        pointSystem.getPointsForWinOnPenalties(),
-        pointSystem.getPointsForLossOnPenalties());
+    // Check unique constraint: name
+    if (pointSystem.getName() != null) {
+      return existsByUniqueFields(Map.of("name", pointSystem.getName()));
+    }
+    return false;
   }
 
   @Override
@@ -56,13 +56,11 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long, Point
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(pointSystem, "Point System details cannot be null");
 
-    return pointSystemRepository.existsByPointValuesAndIdNot(
-        pointSystem.getPointsForWin(),
-        pointSystem.getPointsForDraw(),
-        pointSystem.getPointsForLoss(),
-        pointSystem.getPointsForWinOnPenalties(),
-        pointSystem.getPointsForLossOnPenalties(),
-        id);
+    // Check unique constraint: name (excluding current ID)
+    if (pointSystem.getName() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of("name", pointSystem.getName()), id);
+    }
+    return false;
   }
 
 }

@@ -2,21 +2,24 @@ package com.eagle.futbolapi.features.pointsystem.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.eagle.futbolapi.features.base.repository.BaseRepository;
 import com.eagle.futbolapi.features.pointsystem.entity.PointSystem;
 
 @Repository
-public interface PointSystemRepository extends JpaRepository<PointSystem, Long> {
+public interface PointSystemRepository extends BaseRepository<PointSystem, Long> {
 
   Optional<PointSystem> findByName(String name);
 
   Optional<PointSystem> findByDisplayName(String displayName);
 
+  // Unique field methods: name
   boolean existsByName(String name);
+
+  boolean existsByNameAndIdNot(String name, Long id);
 
   boolean existsByDisplayName(String displayName);
 

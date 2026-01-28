@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.standing.service;
 
+import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.constraints.NotNull;
@@ -78,9 +79,14 @@ public class StandingService extends BaseCrudService<Standing, Long, StandingDTO
   @Override
   protected boolean isDuplicate(@NotNull Standing standing) {
     Objects.requireNonNull(standing, "Standing cannot be null");
-    // A standing is unique by stage and team
-    return standing.getStage() != null && standing.getTeam() != null
-        && standingRepository.existsByStageIdAndTeamId(standing.getStage().getId(), standing.getTeam().getId());
+
+    // Check composite unique constraint: stage + team
+    if (standing.getStage() != null && standing.getTeam() != null) {
+      return existsByUniqueFields(Map.of(
+          "stage.id", standing.getStage().getId(),
+          "team.id", standing.getTeam().getId()));
+    }
+    return false;
   }
 
   @Override
@@ -88,9 +94,13 @@ public class StandingService extends BaseCrudService<Standing, Long, StandingDTO
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(standing, "Standing cannot be null");
 
-    return standing.getStage() != null && standing.getTeam() != null
-        && standingRepository.existsByStageIdAndTeamIdAndIdNot(
-            standing.getStage().getId(), standing.getTeam().getId(), id);
+    // Check composite unique constraint: stage + team (excluding current ID)
+    if (standing.getStage() != null && standing.getTeam() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "stage.id", standing.getStage().getId(),
+          "team.id", standing.getTeam().getId()), id);
+    }
+    return false;
   }
 
 }

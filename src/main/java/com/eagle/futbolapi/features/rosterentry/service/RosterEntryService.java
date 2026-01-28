@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.rosterentry.service;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.constraints.NotNull;
@@ -109,14 +110,20 @@ public class RosterEntryService extends BaseCrudService<RosterEntry, Long, Roste
   @Override
   protected boolean isDuplicate(@NotNull RosterEntry rosterEntry) {
     Objects.requireNonNull(rosterEntry, "RosterEntry cannot be null");
-    // A roster entry is unique by season, team, and either player or staff
+
+    // Check unique constraint for player: season + team + player
     if (rosterEntry.getSeason() != null && rosterEntry.getTeam() != null && rosterEntry.getPlayer() != null) {
-      return rosterEntryRepository.existsBySeasonIdAndTeamIdAndPlayerId(
-          rosterEntry.getSeason().getId(), rosterEntry.getTeam().getId(), rosterEntry.getPlayer().getId());
+      return existsByUniqueFields(Map.of(
+          "season.id", rosterEntry.getSeason().getId(),
+          "team.id", rosterEntry.getTeam().getId(),
+          "player.id", rosterEntry.getPlayer().getId()));
     }
+    // Check unique constraint for staff: season + team + staff
     if (rosterEntry.getSeason() != null && rosterEntry.getTeam() != null && rosterEntry.getStaff() != null) {
-      return rosterEntryRepository.existsBySeasonIdAndTeamIdAndStaffId(
-          rosterEntry.getSeason().getId(), rosterEntry.getTeam().getId(), rosterEntry.getStaff().getId());
+      return existsByUniqueFields(Map.of(
+          "season.id", rosterEntry.getSeason().getId(),
+          "team.id", rosterEntry.getTeam().getId(),
+          "staff.id", rosterEntry.getStaff().getId()));
     }
     return false;
   }
@@ -126,13 +133,19 @@ public class RosterEntryService extends BaseCrudService<RosterEntry, Long, Roste
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(rosterEntry, "RosterEntry cannot be null");
 
+    // Check unique constraint for player: season + team + player (excluding current ID)
     if (rosterEntry.getSeason() != null && rosterEntry.getTeam() != null && rosterEntry.getPlayer() != null) {
-      return rosterEntryRepository.existsBySeasonIdAndTeamIdAndPlayerIdAndIdNot(
-          rosterEntry.getSeason().getId(), rosterEntry.getTeam().getId(), rosterEntry.getPlayer().getId(), id);
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "season.id", rosterEntry.getSeason().getId(),
+          "team.id", rosterEntry.getTeam().getId(),
+          "player.id", rosterEntry.getPlayer().getId()), id);
     }
+    // Check unique constraint for staff: season + team + staff (excluding current ID)
     if (rosterEntry.getSeason() != null && rosterEntry.getTeam() != null && rosterEntry.getStaff() != null) {
-      return rosterEntryRepository.existsBySeasonIdAndTeamIdAndStaffIdAndIdNot(
-          rosterEntry.getSeason().getId(), rosterEntry.getTeam().getId(), rosterEntry.getStaff().getId(), id);
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "season.id", rosterEntry.getSeason().getId(),
+          "team.id", rosterEntry.getTeam().getId(),
+          "staff.id", rosterEntry.getStaff().getId()), id);
     }
     return false;
   }

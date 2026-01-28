@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.season.service;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -67,21 +68,6 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
     return seasonRepository.findByTournamentAndDateRange(tournamentId, date);
   }
 
-  public Optional<Season> getSeasonByUniqueValues(
-      Long tournamentId,
-      String name,
-      LocalDate startDate,
-      LocalDate endDate,
-      Boolean active) {
-    return seasonRepository.findByUniqueValues(
-        tournamentService.getById(tournamentId)
-            .orElseThrow(() -> new ResourceNotFoundException("Tournament", "id", tournamentId)),
-        name,
-        startDate,
-        endDate,
-        active);
-  }
-
   public Page<Season> getSeasonsByTournamentId(Long tournamentId, Pageable pageable) {
     if (tournamentId == null) {
       throw new IllegalArgumentException("Tournament ID cannot be null");
@@ -123,12 +109,13 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
   protected boolean isDuplicate(@NotNull Season season) {
     Objects.requireNonNull(season, "Season cannot be null");
 
-    return seasonRepository.existsByUniqueValues(
-        season.getName(),
-        season.getTournament(),
-        season.getStartDate(),
-        season.getEndDate(),
-        season.getActive());
+    // Check composite unique constraint: tournament + name
+    if (season.getTournament() != null && season.getName() != null) {
+      return existsByUniqueFields(Map.of(
+          "tournament.id", season.getTournament().getId(),
+          "name", season.getName()));
+    }
+    return false;
   }
 
   @Override
@@ -136,12 +123,12 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(season, "Season cannot be null");
 
-    return seasonRepository.existsByUniqueValuesAndIdNot(
-        season.getName(),
-        season.getTournament(),
-        season.getStartDate(),
-        season.getEndDate(),
-        season.getActive(),
-        id);
+    // Check composite unique constraint: tournament + name (excluding current ID)
+    if (season.getTournament() != null && season.getName() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "tournament.id", season.getTournament().getId(),
+          "name", season.getName()), id);
+    }
+    return false;
   }
 }

@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.tournament.controller;
 
+import java.util.Map;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -58,15 +60,14 @@ public class TournamentController
   }
 
   @GetMapping("/unique")
-  public ResponseEntity<ApiResponse<TournamentDTO>> getTournamentByUniqueValues(
-      @RequestParam Long organizationId,
-      @RequestParam String type,
-      @RequestParam String ageCategory,
-      @RequestParam Integer level) {
-    Tournament tournament = service.getTournamentByUniqueValues(organizationId, type, ageCategory, level)
+  public ResponseEntity<ApiResponse<TournamentDTO>> getByUniqueFields(
+      @RequestParam String name,
+      @RequestParam Long organizationId) {
+    Tournament tournament = service.getByUniqueFields(Map.of(
+        "name", name,
+        "organization.id", organizationId))
         .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "unique values",
-            String.format("organizationId: %d, type: %s, ageCategory: %s, level: %d",
-                organizationId, type, ageCategory, level)));
+            String.format("name: %s, organizationId: %d", name, organizationId)));
     TournamentDTO tournamentDTO = mapper.toDTO(tournament);
     return ResponseUtil.success(tournamentDTO, SUCCESS_MESSAGE);
   }

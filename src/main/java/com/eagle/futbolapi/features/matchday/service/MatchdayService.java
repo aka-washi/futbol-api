@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.matchday.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -62,7 +63,14 @@ public class MatchdayService extends BaseCrudService<Matchday, Long, MatchdayDTO
   @Override
   protected boolean isDuplicate(@NotNull Matchday entity) {
     Objects.requireNonNull(entity, "Matchday cannot be null");
-    return repository.existsByUniqueValues(entity.getName(), entity.getStage().getId());
+
+    // Check composite unique constraint: stage + number
+    if (entity.getStage() != null && entity.getNumber() != null) {
+      return existsByUniqueFields(Map.of(
+          "stage.id", entity.getStage().getId(),
+          "number", entity.getNumber()));
+    }
+    return false;
   }
 
   @Override
@@ -70,7 +78,13 @@ public class MatchdayService extends BaseCrudService<Matchday, Long, MatchdayDTO
     Objects.requireNonNull(entity, "Matchday cannot be null");
     Objects.requireNonNull(id, "Matchday ID cannot be null");
 
-    return repository.existsByUniqueValuesAndIdNot(entity.getName(), entity.getStage().getId(), id);
+    // Check composite unique constraint: stage + number (excluding current ID)
+    if (entity.getStage() != null && entity.getNumber() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "stage.id", entity.getStage().getId(),
+          "number", entity.getNumber()), id);
+    }
+    return false;
   }
 
 }

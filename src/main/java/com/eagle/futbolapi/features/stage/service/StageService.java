@@ -1,6 +1,8 @@
 package com.eagle.futbolapi.features.stage.service;
 
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
@@ -118,28 +120,27 @@ public class StageService extends BaseCrudService<Stage, Long, StageDTO> {
 
   @Override
   protected boolean isDuplicate(@NotNull Stage stage) {
-    Optional<Stage> existingByName = stageRepository.findByName(stage.getName());
-    if (existingByName.isPresent() && !existingByName.get().getId().equals(stage.getId())) {
-      return true;
-    }
+    Objects.requireNonNull(stage, "Stage cannot be null");
 
-    Optional<Stage> existingByDisplayName = stageRepository.findByDisplayName(stage.getDisplayName());
-    if (existingByDisplayName.isPresent() && !existingByDisplayName.get().getId().equals(stage.getId())) {
-      return true;
+    // Check composite unique constraint: competition + order
+    if (stage.getCompetition() != null && stage.getOrder() != null) {
+      return existsByUniqueFields(Map.of(
+          "competition.id", stage.getCompetition().getId(),
+          "order", stage.getOrder()));
     }
-
     return false;
   }
 
   @Override
   protected boolean isDuplicate(@NotNull Long id, @NotNull Stage stage) {
-    Optional<Stage> existingByName = stageRepository.findByName(stage.getName());
-    if (existingByName.isPresent() && !existingByName.get().getId().equals(id)) {
-      return true;
-    }
-    Optional<Stage> existingByDisplayName = stageRepository.findByDisplayName(stage.getDisplayName());
-    if (existingByDisplayName.isPresent() && !existingByDisplayName.get().getId().equals(id)) {
-      return true;
+    Objects.requireNonNull(id, "ID cannot be null");
+    Objects.requireNonNull(stage, "Stage cannot be null");
+
+    // Check composite unique constraint: competition + order (excluding current ID)
+    if (stage.getCompetition() != null && stage.getOrder() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "competition.id", stage.getCompetition().getId(),
+          "order", stage.getOrder()), id);
     }
     return false;
   }
