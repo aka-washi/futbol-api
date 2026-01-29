@@ -39,6 +39,13 @@ public class PersonService extends BaseCrudService<Person, Long, PersonDTO> {
     return personRepository.findByUniqueRegKey(uniqueRegKey);
   }
 
+  public Optional<Person> getByDisplayName(String displayName) {
+    if (displayName == null || displayName.trim().isEmpty()) {
+      throw new IllegalArgumentException("Display name cannot be null or empty");
+    }
+    return personRepository.findByDisplayName(displayName);
+  }
+
   public Optional<Person> getByEmail(String email) {
     if (email == null || email.trim().isEmpty()) {
       throw new IllegalArgumentException("Email cannot be null or empty");

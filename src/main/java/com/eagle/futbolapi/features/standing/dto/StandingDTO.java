@@ -2,7 +2,7 @@ package com.eagle.futbolapi.features.standing.dto;
 
 import java.time.LocalDateTime;
 
-import jakarta.validation.constraints.NotNull;
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,15 +13,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@AtLeastOneNotNull.List({
+    @AtLeastOneNotNull(fields = { "stageId",
+        "stageDisplayName" }, message = "Either stageId or stageDisplayName must be provided"),
+    @AtLeastOneNotNull(fields = { "teamId",
+        "teamDisplayName" }, message = "Either teamId or teamDisplayName must be provided")
+})
 public class StandingDTO {
 
   private Long id;
 
-  @NotNull(message = "Stage is required")
   private Long stageId;
   private String stageDisplayName;
 
-  @NotNull(message = "Team is required")
   private Long teamId;
   private String teamDisplayName;
 

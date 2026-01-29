@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +17,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@AtLeastOneNotNull(fields = { "competitionId",
+    "competitionDisplayName" }, message = "Either competitionId or competitionDisplayName must be provided")
 public class OutcomeDTO {
 
   private Long id;

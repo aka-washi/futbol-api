@@ -16,6 +16,8 @@ public interface PersonRepository extends BaseRepository<Person, Long> {
 
   Optional<Person> findByUniqueRegKey(String uniqueRegKey);
 
+  Optional<Person> findByDisplayName(String displayName);
+
   Optional<Person> findByEmail(String email);
 
   @Query("SELECT p FROM Person p WHERE p.nationality.id = :countryId")

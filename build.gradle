@@ -91,7 +91,7 @@ spotless {
         target 'src/**/*.java'
         importOrder('java', 'javax', 'jakarta', 'org', 'com')
         removeUnusedImports()
-        indentWithSpaces(4)
+        indentWithSpaces(2)
         trimTrailingWhitespace()
         endWithNewline()
 //         licenseHeader '''/*

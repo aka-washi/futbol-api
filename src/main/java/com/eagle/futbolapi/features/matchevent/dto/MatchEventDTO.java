@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,19 +15,24 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@AtLeastOneNotNull.List({
+    @AtLeastOneNotNull(fields = { "matchId",
+        "matchDisplayName" }, message = "Either matchId or matchDisplayName must be provided"),
+    @AtLeastOneNotNull(fields = { "teamId",
+        "teamDisplayName" }, message = "Either teamId or teamDisplayName must be provided"),
+    @AtLeastOneNotNull(fields = { "playerId",
+        "playerDisplayName" }, message = "Either playerId or playerDisplayName must be provided")
+})
 public class MatchEventDTO {
 
   private Long id;
 
-  @NotNull(message = "Match is required")
   private Long matchId;
   private String matchDisplayName;
 
-  @NotNull(message = "Team is required")
   private Long teamId;
   private String teamDisplayName;
 
-  @NotNull(message = "Player is required")
   private Long playerId;
   private String playerDisplayName;
 

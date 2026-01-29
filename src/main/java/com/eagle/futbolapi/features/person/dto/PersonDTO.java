@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +19,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@AtLeastOneNotNull.List({
+    @AtLeastOneNotNull(fields = { "birthCountryId",
+        "birthCountryDisplayName" }, message = "Either birthCountryId or birthCountryDisplayName must be provided"),
+    @AtLeastOneNotNull(fields = { "nationalityCountryId",
+        "nationalityCountryDisplayName" }, message = "Either nationalityCountryId or nationalityCountryDisplayName must be provided")
+})
 public class PersonDTO {
 
   private Long id;

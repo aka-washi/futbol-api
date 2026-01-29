@@ -18,7 +18,7 @@ import jakarta.validation.Payload;
  *
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * {@code @AtLeastOneNotNull(fields = {"organizationId", "organizationDisplayName"},
  *                          message = "Either organizationId or organizationDisplayName must be provided")}

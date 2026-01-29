@@ -16,6 +16,7 @@ import com.eagle.futbolapi.features.match.entity.Match;
 import com.eagle.futbolapi.features.match.mapper.MatchMapper;
 import com.eagle.futbolapi.features.match.repository.MatchRepository;
 import com.eagle.futbolapi.features.matchday.service.MatchdayService;
+import com.eagle.futbolapi.features.person.service.PersonService;
 import com.eagle.futbolapi.features.team.service.TeamService;
 import com.eagle.futbolapi.features.venue.service.VenueService;
 
@@ -27,14 +28,16 @@ public class MatchService extends BaseCrudService<Match, Long, MatchDTO> {
   private final MatchdayService matchdayService;
   private final TeamService teamService;
   private final VenueService venueService;
+  private final PersonService personService;
 
   public MatchService(MatchRepository matchRepository, MatchMapper mapper, MatchdayService matchdayService,
-      TeamService teamService, VenueService venueService) {
+      TeamService teamService, VenueService venueService, PersonService personService) {
     super(matchRepository, mapper);
     this.matchRepository = matchRepository;
     this.matchdayService = matchdayService;
     this.teamService = teamService;
     this.venueService = venueService;
+    this.personService = personService;
   }
 
   public Optional<Match> getMatchByName(String name) {
@@ -84,13 +87,22 @@ public class MatchService extends BaseCrudService<Match, Long, MatchDTO> {
       match.setAwayTeam(awayTeam);
     }
 
-    // Map venue from name
-    if (dto.getVenueName() != null && !dto.getVenueName().trim().isEmpty()) {
-      String venueName = dto.getVenueName();
-      var venue = venueService.getVenueByDisplayName(venueName)
+    // Map venue from display name
+    if (dto.getVenueDisplayName() != null && !dto.getVenueDisplayName().trim().isEmpty()) {
+      String venueDisplayName = dto.getVenueDisplayName();
+      var venue = venueService.getVenueByDisplayName(venueDisplayName)
           .orElseThrow(() -> new ResourceNotFoundException(
-              "Venue with display name " + venueName + " not found"));
+              "Venue with display name " + venueDisplayName + " not found"));
       match.setVenue(venue);
+    }
+
+    // Map referee from display name
+    if (dto.getRefereeDisplayName() != null && !dto.getRefereeDisplayName().trim().isEmpty()) {
+      String refereeDisplayName = dto.getRefereeDisplayName();
+      var referee = personService.getByDisplayName(refereeDisplayName)
+          .orElseThrow(() -> new ResourceNotFoundException(
+              "Referee with display name " + refereeDisplayName + " not found"));
+      match.setReferee(referee);
     }
   }
 
@@ -113,7 +125,8 @@ public class MatchService extends BaseCrudService<Match, Long, MatchDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(match, "Match cannot be null");
 
-    // Check composite unique constraint: matchday + homeTeam + awayTeam (excluding current ID)
+    // Check composite unique constraint: matchday + homeTeam + awayTeam (excluding
+    // current ID)
     if (match.getMatchday() != null && match.getHomeTeam() != null && match.getAwayTeam() != null) {
       return existsByUniqueFieldsAndNotId(Map.of(
           "matchday.id", match.getMatchday().getId(),
