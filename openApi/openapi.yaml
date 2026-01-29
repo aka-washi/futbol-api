@@ -7922,9 +7922,19 @@ components:
     # Standing Schemas
     StandingDTO:
       type: object
+      description: |
+        Standing data transfer object. Either stageId or stageDisplayName must be provided.
+        Either teamId or teamDisplayName must be provided.
       required:
         - stageId
         - teamId
+      x-validation-rules:
+        - rule: atLeastOneRequired
+          fields: [stageId, stageDisplayName]
+          message: Either stageId or stageDisplayName must be provided
+        - rule: atLeastOneRequired
+          fields: [teamId, teamDisplayName]
+          message: Either teamId or teamDisplayName must be provided
       properties:
         id:
           type: integer
@@ -7937,11 +7947,19 @@ components:
           format: int64
           description: Stage ID
           example: 1
+        stageDisplayName:
+          type: string
+          description: Stage display name (alternative to stageId)
+          example: "Premier League 2025-26 Regular Season"
         teamId:
           type: integer
           format: int64
           description: Team ID
           example: 1
+        teamDisplayName:
+          type: string
+          description: Team display name (alternative to teamId)
+          example: "Manchester United"
         position:
           type: integer
           description: Current position in standings
@@ -7986,6 +8004,66 @@ components:
           description: Total points
           example: 23
           default: 0
+        form:
+          type: string
+          maxLength: 10
+          description: Last 5 match results (e.g., WWDLW)
+          example: "WWDLW"
+        homeWon:
+          type: integer
+          description: Home games won
+          example: 5
+          default: 0
+        homeDrawn:
+          type: integer
+          description: Home games drawn
+          example: 1
+          default: 0
+        homeLost:
+          type: integer
+          description: Home games lost
+          example: 0
+          default: 0
+        awayWon:
+          type: integer
+          description: Away games won
+          example: 2
+          default: 0
+        awayDrawn:
+          type: integer
+          description: Away games drawn
+          example: 1
+          default: 0
+        awayLost:
+          type: integer
+          description: Away games lost
+          example: 1
+          default: 0
+        notes:
+          type: string
+          maxLength: 255
+          description: Additional notes about the standing entry
+          example: "Qualified for Champions League"
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when the standing was created
+        createdBy:
+          type: string
+          maxLength: 100
+          readOnly: true
+          description: User who created the standing
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when the standing was last updated
+        updatedBy:
+          type: string
+          maxLength: 100
+          readOnly: true
+          description: User who last updated the standing
 
     PageStandingDTO:
       type: object
