@@ -16,9 +16,9 @@ public interface RosterEntryMapper extends BaseMapper<RosterEntry, RosterEntryDT
   @Mapping(target = "teamId", source = "team.id")
   @Mapping(target = "teamDisplayName", source = "team.displayName")
   @Mapping(target = "playerId", source = "player.id")
-  @Mapping(target = "playerDisplayName", source = "player.displayName")
+  @Mapping(target = "playerDisplayName", source = "player.person.displayName")
   @Mapping(target = "staffId", source = "staff.id")
-  @Mapping(target = "staffDisplayName", source = "staff.displayName")
+  @Mapping(target = "staffDisplayName", source = "staff.person.displayName")
   RosterEntryDTO toDTO(RosterEntry rosterEntry);
 
   @Mapping(target = "season", ignore = true)

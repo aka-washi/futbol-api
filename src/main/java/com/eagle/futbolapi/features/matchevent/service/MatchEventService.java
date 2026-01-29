@@ -57,16 +57,44 @@ public class MatchEventService extends BaseCrudService<MatchEvent, Long, MatchEv
       matchEvent.setTeam(team);
     }
 
-    // Map player from ID
-    if (dto.getPlayerId() != null) {
+    // Map player from display name or ID
+    if (dto.getPlayerDisplayName() != null && !dto.getPlayerDisplayName().trim().isEmpty()) {
+      var player = playerService.getByPersonDisplayName(dto.getPlayerDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Player", "playerDisplayName", dto.getPlayerDisplayName()));
+      matchEvent.setPlayer(player);
+    } else if (dto.getPlayerId() != null) {
       var player = playerService.getById(dto.getPlayerId())
           .orElseThrow(() -> new ResourceNotFoundException("Player", "id", dto.getPlayerId()));
       matchEvent.setPlayer(player);
     }
 
+    // Map assist player from display name or ID
+    if (dto.getAssistPlayerDisplayName() != null && !dto.getAssistPlayerDisplayName().trim().isEmpty()) {
+      var assistPlayer = playerService.getByPersonDisplayName(dto.getAssistPlayerDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Assist Player", "playerDisplayName",
+              dto.getAssistPlayerDisplayName()));
+      matchEvent.setAssistPlayer(assistPlayer);
+    } else if (dto.getAssistPlayerId() != null) {
+      var assistPlayer = playerService.getById(dto.getAssistPlayerId())
+          .orElseThrow(() -> new ResourceNotFoundException("Assist Player", "id", dto.getAssistPlayerId()));
+      matchEvent.setAssistPlayer(assistPlayer);
+    }
+
+    // Map substitute player from display name or ID
+    if (dto.getSubstitutePlayerDisplayName() != null && !dto.getSubstitutePlayerDisplayName().trim().isEmpty()) {
+      var substitutePlayer = playerService.getByPersonDisplayName(dto.getSubstitutePlayerDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Substitute Player", "playerDisplayName",
+              dto.getSubstitutePlayerDisplayName()));
+      matchEvent.setSubstitutePlayer(substitutePlayer);
+    } else if (dto.getSubstitutePlayerId() != null) {
+      var substitutePlayer = playerService.getById(dto.getSubstitutePlayerId())
+          .orElseThrow(() -> new ResourceNotFoundException("Substitute Player", "id", dto.getSubstitutePlayerId()));
+      matchEvent.setSubstitutePlayer(substitutePlayer);
+    }
+
     // Map event type from string
-    if (dto.getEventType() != null && !dto.getEventType().trim().isEmpty()) {
-      matchEvent.setType(EventType.valueOf(dto.getEventType().toUpperCase()));
+    if (dto.getType() != null && !dto.getType().trim().isEmpty()) {
+      matchEvent.setType(EventType.valueOf(dto.getType().toUpperCase()));
     }
 
     // Map period from string

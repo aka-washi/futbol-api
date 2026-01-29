@@ -12,8 +12,9 @@ import com.eagle.futbolapi.features.player.entity.Player;
 @Repository
 public interface PlayerRepository extends BaseRepository<Player, Long> {
 
-  // Unique field methods: person
   Optional<Player> findByPersonId(Long personId);
+
+  Optional<Player> findByPersonDisplayName(String personDisplayName);
 
   boolean existsByPersonId(Long personId);
 

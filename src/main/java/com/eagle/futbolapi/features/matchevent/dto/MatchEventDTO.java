@@ -36,14 +36,24 @@ public class MatchEventDTO {
   private Long playerId;
   private String playerDisplayName;
 
-  @NotNull(message = "Event type is required")
-  private String eventType;
+  private Long assistPlayerId;
+  private String assistPlayerDisplayName;
+
+  private Long substitutePlayerId;
+  private String substitutePlayerDisplayName;
+
+  @NotNull(message = "Type is required")
+  private String type;
+
+  private String period;
 
   @NotNull(message = "Minute is required")
   private Integer minute;
+  private Integer extraMinute;
 
-  private String period;
   private String description;
+
+  private String videoUrl;
 
   private LocalDateTime createdAt;
   private String createdBy;

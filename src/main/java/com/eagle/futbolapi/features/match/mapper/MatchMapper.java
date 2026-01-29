@@ -18,9 +18,9 @@ public interface MatchMapper extends BaseMapper<Match, MatchDTO> {
   @Mapping(target = "awayTeamId", source = "awayTeam.id")
   @Mapping(target = "awayTeamDisplayName", source = "awayTeam.displayName")
   @Mapping(target = "venueId", source = "venue.id")
-  @Mapping(target = "venueName", source = "venue.displayName")
+  @Mapping(target = "venueDisplayName", source = "venue.displayName")
   @Mapping(target = "refereeId", source = "referee.id")
-  @Mapping(target = "refereeName", source = "referee.displayName")
+  @Mapping(target = "refereeDisplayName", source = "referee.displayName")
   MatchDTO toDTO(Match match);
 
   @Mapping(target = "matchday", ignore = true)

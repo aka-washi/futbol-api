@@ -88,8 +88,7 @@ public class Outcome extends BaseEntity {
         staff,
         outcomeType,
         position,
-        value,
-        notes);
+        value);
   }
 
   @Override
@@ -105,7 +104,6 @@ public class Outcome extends BaseEntity {
         && Objects.equals(staff, other.staff)
         && Objects.equals(outcomeType, other.outcomeType)
         && Objects.equals(position, other.position)
-        && Objects.equals(value, other.value)
-        && Objects.equals(notes, other.notes);
+        && Objects.equals(value, other.value);
   }
 }

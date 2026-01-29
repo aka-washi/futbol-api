@@ -77,8 +77,8 @@ public class Lineup extends BaseEntity {
     @Builder.Default
     private Boolean captain = false;
 
-    @Column(name = "lu_order_num")
-    private Integer orderNum; // Position in the lineup
+    @Column(name = "lu_order_number")
+    private Integer orderNumber; // Position in the lineup
 
     @Override
     public int hashCode() {
@@ -90,7 +90,7 @@ public class Lineup extends BaseEntity {
                 position,
                 jerseyNumber,
                 captain,
-                orderNum);
+                orderNumber);
     }
 
     @Override
@@ -107,6 +107,6 @@ public class Lineup extends BaseEntity {
                 && Objects.equals(position, other.position)
                 && Objects.equals(jerseyNumber, other.jerseyNumber)
                 && Objects.equals(captain, other.captain)
-                && Objects.equals(orderNum, other.orderNum);
+                && Objects.equals(orderNumber, other.orderNumber);
     }
 }

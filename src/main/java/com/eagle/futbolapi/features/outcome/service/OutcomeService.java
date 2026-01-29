@@ -58,15 +58,25 @@ public class OutcomeService extends BaseCrudService<Outcome, Long, OutcomeDTO> {
       outcome.setTeam(team);
     }
 
-    // Map player from ID (optional)
-    if (dto.getPlayerId() != null) {
+    // Map player from person display name or ID
+    if (dto.getPlayerPersonDisplayName() != null && !dto.getPlayerPersonDisplayName().trim().isEmpty()) {
+      var player = playerService.getByPersonDisplayName(dto.getPlayerPersonDisplayName())
+          .orElseThrow(
+              () -> new ResourceNotFoundException("Player", "person.displayName", dto.getPlayerPersonDisplayName()));
+      outcome.setPlayer(player);
+    } else if (dto.getPlayerId() != null) {
       var player = playerService.getById(dto.getPlayerId())
           .orElseThrow(() -> new ResourceNotFoundException("Player", "id", dto.getPlayerId()));
       outcome.setPlayer(player);
     }
 
-    // Map staff from ID (optional)
-    if (dto.getStaffId() != null) {
+    // Map staff from person display name or ID (optional)
+    if (dto.getStaffPersonDisplayName() != null && !dto.getStaffPersonDisplayName().trim().isEmpty()) {
+      var staff = staffService.getByPersonDisplayName(dto.getStaffPersonDisplayName())
+          .orElseThrow(
+              () -> new ResourceNotFoundException("Staff", "person.displayName", dto.getStaffPersonDisplayName()));
+      outcome.setStaff(staff);
+    } else if (dto.getStaffId() != null) {
       var staff = staffService.getById(dto.getStaffId())
           .orElseThrow(() -> new ResourceNotFoundException("Staff", "id", dto.getStaffId()));
       outcome.setStaff(staff);

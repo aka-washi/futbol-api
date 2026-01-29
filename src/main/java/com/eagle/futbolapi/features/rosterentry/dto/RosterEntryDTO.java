@@ -17,36 +17,36 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @AtLeastOneNotNull.List({
-    @AtLeastOneNotNull(fields = { "seasonId",
-        "seasonDisplayName" }, message = "Either seasonId or seasonDisplayName must be provided"),
-    @AtLeastOneNotNull(fields = { "teamId",
-        "teamDisplayName" }, message = "Either teamId or teamDisplayName must be provided")
+        @AtLeastOneNotNull(fields = { "seasonId",
+                "seasonDisplayName" }, message = "Either seasonId or seasonDisplayName must be provided"),
+        @AtLeastOneNotNull(fields = { "teamId",
+                "teamDisplayName" }, message = "Either teamId or teamDisplayName must be provided")
 })
 public class RosterEntryDTO {
 
-  private Long id;
+    private Long id;
 
-  private Long seasonId;
-  private String seasonDisplayName;
+    private Long seasonId;
+    private String seasonDisplayName;
 
-  private Long teamId;
-  private String teamDisplayName;
+    private Long teamId;
+    private String teamDisplayName;
 
-  private Long playerId;
-  private String playerDisplayName;
+    private Long playerId;
+    private String playerDisplayName;
 
-  private Long staffId;
-  private String staffDisplayName;
+    private Long staffId;
+    private String staffDisplayName;
 
-  @NotNull(message = "Entry date is required")
-  private LocalDate entryDate;
+    private Integer jerseyNumber;
 
-  private LocalDate exitDate;
-  private Integer jerseyNumber;
-  private Boolean active;
+    @NotNull(message = "Joined date is required")
+    private LocalDate joinedDate;
+    private LocalDate leftDate;
+    private Boolean active;
 
-  private LocalDateTime createdAt;
-  private String createdBy;
-  private LocalDateTime updatedAt;
-  private String updatedBy;
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime updatedAt;
+    private String updatedBy;
 }

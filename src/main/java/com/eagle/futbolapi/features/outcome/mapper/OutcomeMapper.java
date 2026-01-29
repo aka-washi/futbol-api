@@ -16,9 +16,9 @@ public interface OutcomeMapper extends BaseMapper<Outcome, OutcomeDTO> {
   @Mapping(target = "teamId", source = "team.id")
   @Mapping(target = "teamDisplayName", source = "team.displayName")
   @Mapping(target = "playerId", source = "player.id")
-  @Mapping(target = "playerDisplayName", source = "player.displayName")
+  @Mapping(target = "playerPersonDisplayName", source = "player.person.displayName")
   @Mapping(target = "staffId", source = "staff.id")
-  @Mapping(target = "staffDisplayName", source = "staff.displayName")
+  @Mapping(target = "staffPersonDisplayName", source = "staff.person.displayName")
   OutcomeDTO toDTO(Outcome entity);
 
   @Mapping(target = "competition", ignore = true)

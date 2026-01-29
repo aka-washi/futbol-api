@@ -16,11 +16,11 @@ public interface MatchEventMapper extends BaseMapper<MatchEvent, MatchEventDTO> 
   @Mapping(target = "teamId", source = "team.id")
   @Mapping(target = "teamDisplayName", source = "team.displayName")
   @Mapping(target = "playerId", source = "player.id")
-  @Mapping(target = "playerDisplayName", source = "player.displayName")
+  @Mapping(target = "playerDisplayName", source = "player.person.displayName")
   @Mapping(target = "assistPlayerId", source = "assistPlayer.id")
-  @Mapping(target = "assistPlayerDisplayName", source = "assistPlayer.displayName")
+  @Mapping(target = "assistPlayerDisplayName", source = "assistPlayer.person.displayName")
   @Mapping(target = "substitutePlayerId", source = "substitutePlayer.id")
-  @Mapping(target = "substitutePlayerDisplayName", source = "substitutePlayer.displayName")
+  @Mapping(target = "substitutePlayerDisplayName", source = "substitutePlayer.person.displayName")
   MatchEventDTO toDTO(MatchEvent matchEvent);
 
   @Mapping(target = "match", ignore = true)

@@ -13,11 +13,11 @@ public interface PersonMapper extends BaseMapper<Person, PersonDTO> {
 
   @Mapping(target = "birthCountryId", source = "birthCountry.id")
   @Mapping(target = "birthCountryDisplayName", source = "birthCountry.displayName")
-  @Mapping(target = "nationalityCountryId", source = "nationalityCountry.id")
-  @Mapping(target = "nationalityCountryDisplayName", source = "nationalityCountry.displayName")
+  @Mapping(target = "nationalityCountryId", source = "nationality.id")
+  @Mapping(target = "nationalityCountryDisplayName", source = "nationality.displayName")
   PersonDTO toDTO(Person entity);
 
   @Mapping(target = "birthCountry", ignore = true)
-  @Mapping(target = "nationalityCountry", ignore = true)
+  @Mapping(target = "nationality", ignore = true)
   Person toEntity(PersonDTO dto);
 }

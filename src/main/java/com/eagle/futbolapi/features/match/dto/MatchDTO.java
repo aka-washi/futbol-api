@@ -31,16 +31,15 @@ import lombok.NoArgsConstructor;
 public class MatchDTO {
 
   private Long id;
+  private String name;
+  private String displayName;
 
-  @NotNull(message = "Matchday is required")
   private Long matchdayId;
   private String matchdayDisplayName;
 
-  @NotNull(message = "Home team is required")
   private Long homeTeamId;
   private String homeTeamDisplayName;
 
-  @NotNull(message = "Away team is required")
   private Long awayTeamId;
   private String awayTeamDisplayName;
 
@@ -51,15 +50,21 @@ public class MatchDTO {
   private String refereeDisplayName;
 
   @NotNull(message = "Match date is required")
-  private LocalDate matchDate;
-
+  private LocalDate scheduledDate;
   private LocalDateTime kickoffTime;
-
-  private Integer homeTeamScore;
-  private Integer awayTeamScore;
-
   private String status;
-  private Integer duration;
+  private Integer homeScore;
+  private Integer awayScore;
+  private Integer homeHalfTimeScore;
+  private Integer awayHalfTimeScore;
+  private Boolean extraTimeAllowed;
+  private Boolean penaltyShootoutAllowed;
+  private Integer homeExtraTimeScore;
+  private Integer awayExtraTimeScore;
+  private Integer homePenaltyScore;
+  private Integer awayPenaltyScore;
+  private Integer attendance;
+  private String weatherConditions;
   private String notes;
 
   private LocalDateTime createdAt;

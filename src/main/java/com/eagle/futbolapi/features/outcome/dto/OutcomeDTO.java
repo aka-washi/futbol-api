@@ -31,18 +31,20 @@ public class OutcomeDTO {
   private String teamDisplayName;
 
   private Long playerId;
-  private String playerDisplayName;
+  private String playerPersonDisplayName;
 
   private Long staffId;
-  private String staffDisplayName;
+  private String staffPersonDisplayName;
 
   @NotNull(message = "Outcome type is required")
   private String outcomeType;
 
-  @Size(max = 500, message = "Description cannot exceed 500 characters")
-  private String description;
+  private Integer position;
 
   private BigDecimal value;
+
+  @Size(max = 500, message = "Notes cannot exceed 500 characters")
+  private String notes;
 
   private LocalDateTime createdAt;
   private String createdBy;

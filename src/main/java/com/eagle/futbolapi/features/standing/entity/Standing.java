@@ -118,6 +118,9 @@ public class Standing extends BaseEntity {
   @Builder.Default
   private Integer awayLost = 0;
 
+  @Column(name = "sd_notes", length = 255)
+  private String notes;
+
   @Override
   public int hashCode() {
     return Objects.hash(

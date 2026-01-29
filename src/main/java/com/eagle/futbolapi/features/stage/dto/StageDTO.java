@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,15 +18,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@AtLeastOneNotNull.List({
+    @AtLeastOneNotNull(fields = { "competitionId",
+        "competitionDisplayName" }, message = "Either competitionId or competitionDisplayName must be provided"),
+    @AtLeastOneNotNull(fields = { "structureId",
+        "structureDisplayName" }, message = "Either structureId or structureDisplayName must be provided")
+})
 public class StageDTO {
 
   private Long id;
 
-  @NotNull(message = "Competition is required")
   private Long competitionId;
   private String competitionDisplayName;
 
-  @NotNull(message = "Structure is required")
   private Long structureId;
   private String structureDisplayName;
 

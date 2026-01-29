@@ -14,35 +14,41 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @AtLeastOneNotNull.List({
-    @AtLeastOneNotNull(fields = { "stageId",
-        "stageDisplayName" }, message = "Either stageId or stageDisplayName must be provided"),
-    @AtLeastOneNotNull(fields = { "teamId",
-        "teamDisplayName" }, message = "Either teamId or teamDisplayName must be provided")
+        @AtLeastOneNotNull(fields = { "stageId",
+                "stageDisplayName" }, message = "Either stageId or stageDisplayName must be provided"),
+        @AtLeastOneNotNull(fields = { "teamId",
+                "teamDisplayName" }, message = "Either teamId or teamDisplayName must be provided")
 })
 public class StandingDTO {
 
-  private Long id;
+    private Long id;
 
-  private Long stageId;
-  private String stageDisplayName;
+    private Long stageId;
+    private String stageDisplayName;
 
-  private Long teamId;
-  private String teamDisplayName;
+    private Long teamId;
+    private String teamDisplayName;
 
-  private Integer position;
-  private Integer played;
-  private Integer won;
-  private Integer drawn;
-  private Integer lost;
-  private Integer goalsFor;
-  private Integer goalsAgainst;
-  private Integer goalDifference;
-  private Integer points;
-  private String form;
-  private String notes;
+    private Integer position;
+    private Integer played;
+    private Integer won;
+    private Integer drawn;
+    private Integer lost;
+    private Integer goalsFor;
+    private Integer goalsAgainst;
+    private Integer goalDifference;
+    private Integer points;
+    private String form;
+    private Integer homeWon;
+    private Integer homeDrawn;
+    private Integer homeLost;
+    private Integer awayWon;
+    private Integer awayDrawn;
+    private Integer awayLost;
+    private String notes;
 
-  private LocalDateTime createdAt;
-  private String createdBy;
-  private LocalDateTime updatedAt;
-  private String updatedBy;
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime updatedAt;
+    private String updatedBy;
 }

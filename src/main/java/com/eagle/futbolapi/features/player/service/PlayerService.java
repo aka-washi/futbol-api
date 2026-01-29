@@ -2,6 +2,7 @@ package com.eagle.futbolapi.features.player.service;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -31,6 +32,10 @@ public class PlayerService extends BaseCrudService<Player, Long, PlayerDTO> {
     this.playerRepository = playerRepository;
     this.personService = personService;
     this.teamService = teamService;
+  }
+
+  public Optional<Player> getByPersonDisplayName(String personDisplayName) {
+    return playerRepository.findByPersonDisplayName(personDisplayName);
   }
 
   @Override

@@ -12,8 +12,9 @@ import com.eagle.futbolapi.features.staff.entity.Staff;
 @Repository
 public interface StaffRepository extends BaseRepository<Staff, Long> {
 
-  // Unique field methods: person
   Optional<Staff> findByPersonId(Long personId);
+
+  Optional<Staff> findByPersonDisplayName(String displayName);
 
   boolean existsByPersonId(Long personId);
 
