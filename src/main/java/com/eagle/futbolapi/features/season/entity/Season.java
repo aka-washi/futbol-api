@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.tournament.entity.Tournament;
 
@@ -48,10 +49,12 @@ public class Season extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tournament_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   @NotNull
+  @UniqueField(fieldPath = "tournament.id")
   private Tournament tournament;
 
   @NotBlank
   @Column(name = "sn_name", nullable = false, length = 100)
+  @UniqueField
   private String name; // e.g., "2025-2026"
 
   @NotBlank

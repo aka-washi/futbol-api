@@ -109,13 +109,11 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
   protected boolean isDuplicate(@NotNull Season season) {
     Objects.requireNonNull(season, "Season cannot be null");
 
-    // Check composite unique constraint: tournament + name
-    if (season.getTournament() != null && season.getName() != null) {
-      return existsByUniqueFields(Map.of(
-          "tournament.id", season.getTournament().getId(),
-          "name", season.getName()));
-    }
-    return false;
+    // Get automatically detected unique fields (tournament.id and name)
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(season);
+
+    // Check composite unique constraint: tournament.id + name
+    return uniqueFields.size() >= 2 && existsByUniqueFields(uniqueFields);
   }
 
   @Override
@@ -123,12 +121,11 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(season, "Season cannot be null");
 
-    // Check composite unique constraint: tournament + name (excluding current ID)
-    if (season.getTournament() != null && season.getName() != null) {
-      return existsByUniqueFieldsAndNotId(Map.of(
-          "tournament.id", season.getTournament().getId(),
-          "name", season.getName()), id);
-    }
-    return false;
+    // Get automatically detected unique fields (tournament.id and name)
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(season);
+
+    // Check composite unique constraint: tournament.id + name (excluding current
+    // ID)
+    return uniqueFields.size() >= 2 && existsByUniqueFieldsAndNotId(uniqueFields, id);
   }
 }

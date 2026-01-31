@@ -2,6 +2,7 @@ package com.eagle.futbolapi.features.base.service;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -17,6 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.mapper.BaseMapper;
@@ -183,6 +185,40 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   }
 
   /**
+   * Get the value of a nested field using dot notation (e.g., "tournament.id").
+   *
+   * @param obj       the object to start from
+   * @param fieldPath the dot-separated field path
+   * @return the value of the nested field
+   * @throws NoSuchFieldException   if any field in the path doesn't exist
+   * @throws IllegalAccessException if any field cannot be accessed
+   */
+  private Object getNestedFieldValue(Object obj, String fieldPath) throws NoSuchFieldException, IllegalAccessException {
+    if (obj == null || fieldPath == null || fieldPath.isEmpty()) {
+      return null;
+    }
+
+    String[] parts = fieldPath.split("\\.");
+    Object current = obj;
+
+    for (String part : parts) {
+      if (current == null) {
+        return null;
+      }
+
+      Field field = findField(current.getClass(), part);
+      if (field == null) {
+        throw new NoSuchFieldException("Field '" + part + "' not found in " + current.getClass().getSimpleName());
+      }
+
+      field.setAccessible(true);
+      current = field.get(current);
+    }
+
+    return current;
+  }
+
+  /**
    * Check if a field is an audit field that should not be updated.
    */
   private boolean isAuditField(String fieldName) {
@@ -211,12 +247,74 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   // ============================================================================
 
   /**
-   * Build a JPA Specification from a map of unique field values.
-   * Supports nested fields using dot notation (e.g., "season.id", "team.id").
+   * Build a unique fields map for an entity by extracting all fields annotated
+   * with @UniqueField.
+   * This utility method uses reflection to automatically identify unique fields
+   * and their values.
+   * Supports nested field access using dot notation in the fieldPath attribute.
    *
-   * @param uniqueFields map of field names to values
-   * @return Specification for querying
+   * @param entity the entity to extract unique fields from
+   * @return Map of field paths to values for fields marked with @UniqueField
    */
+  protected Map<String, Object> buildUniqueFieldsMap(T entity) {
+    Map<String, Object> uniqueFields = new HashMap<>();
+    if (entity == null) {
+      return uniqueFields;
+    }
+
+    Class<?> entityClass = entity.getClass();
+    for (Field field : getAllFields(entityClass)) {
+      // Check if field has @UniqueField annotation
+      if (field.isAnnotationPresent(UniqueField.class)) {
+        UniqueField uniqueFieldAnnotation = field.getAnnotation(UniqueField.class);
+        String fieldPath = uniqueFieldAnnotation.fieldPath();
+
+        // If fieldPath is empty, use the field name
+        if (fieldPath.isEmpty()) {
+          fieldPath = field.getName();
+        }
+
+        try {
+          field.setAccessible(true);
+          Object value = field.get(entity);
+
+          // If the fieldPath contains dots, we need to resolve nested access
+          if (fieldPath.contains(".")) {
+            value = getNestedFieldValue(entity, fieldPath);
+          }
+
+          if (value != null) {
+            uniqueFields.put(fieldPath, value);
+          }
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+          // Skip fields that cannot be accessed or don't exist
+        }
+      }
+    }
+    return uniqueFields;
+  }
+
+  /**
+   * Build a unique fields map for an entity by combining automatically detected
+   * unique fields
+   * with additional manually specified unique field mappings.
+   * This is useful for composite unique constraints or unique fields not marked
+   * with @Column(unique = true).
+   *
+   * @param entity                 the entity to extract unique fields from
+   * @param additionalUniqueFields additional field mappings to include (e.g.,
+   *                               Map.of("tournament.id", tournamentId))
+   * @return Map of field names to values combining both automatic detection and
+   *         manual specification
+   */
+  protected Map<String, Object> buildUniqueFieldsMap(T entity, Map<String, Object> additionalUniqueFields) {
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(entity);
+    if (additionalUniqueFields != null) {
+      uniqueFields.putAll(additionalUniqueFields);
+    }
+    return uniqueFields;
+  }
+
   protected Specification<T> buildUniqueFieldsSpec(Map<String, Object> uniqueFields) {
     return (root, query, cb) -> {
       List<Predicate> predicates = new ArrayList<>();

@@ -94,10 +94,11 @@ public class PersonService extends BaseCrudService<Person, Long, PersonDTO> {
   protected boolean isDuplicate(@NotNull Person person) {
     Objects.requireNonNull(person, "Person cannot be null");
 
-    // Check multiple unique constraints: uniqueRegKey OR email
-    return (person.getUniqueRegKey() != null
-        && existsByUniqueFields(Map.of("uniqueRegKey", person.getUniqueRegKey())))
-        || (person.getEmail() != null && existsByUniqueFields(Map.of("email", person.getEmail())));
+    // Get automatically detected unique fields (uniqueRegKey and email)
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(person);
+
+    // Check if any of the unique fields already exist
+    return !uniqueFields.isEmpty() && existsByUniqueFields(uniqueFields);
   }
 
   @Override
