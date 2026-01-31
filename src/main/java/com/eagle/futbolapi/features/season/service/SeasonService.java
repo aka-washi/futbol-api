@@ -1,7 +1,6 @@
 package com.eagle.futbolapi.features.season.service;
 
 import java.time.LocalDate;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -12,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.season.dto.SeasonDTO;
@@ -109,11 +109,8 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
   protected boolean isDuplicate(@NotNull Season season) {
     Objects.requireNonNull(season, "Season cannot be null");
 
-    // Get automatically detected unique fields (tournament.id and name)
-    Map<String, Object> uniqueFields = buildUniqueFieldsMap(season);
-
-    // Check composite unique constraint: tournament.id + name
-    return uniqueFields.size() >= 2 && existsByUniqueFields(uniqueFields);
+    // Check composite unique constraint: tournament.id + name (ALL fields combined)
+    return isDuplicate(season, UniquenessStrategy.ALL);
   }
 
   @Override
@@ -121,11 +118,8 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(season, "Season cannot be null");
 
-    // Get automatically detected unique fields (tournament.id and name)
-    Map<String, Object> uniqueFields = buildUniqueFieldsMap(season);
-
     // Check composite unique constraint: tournament.id + name (excluding current
-    // ID)
-    return uniqueFields.size() >= 2 && existsByUniqueFieldsAndNotId(uniqueFields, id);
+    // ID, ALL fields combined)
+    return isDuplicate(id, season, UniquenessStrategy.ALL);
   }
 }

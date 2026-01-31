@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.person.service;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -11,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.country.service.CountryService;
@@ -94,11 +94,8 @@ public class PersonService extends BaseCrudService<Person, Long, PersonDTO> {
   protected boolean isDuplicate(@NotNull Person person) {
     Objects.requireNonNull(person, "Person cannot be null");
 
-    // Get automatically detected unique fields (uniqueRegKey and email)
-    Map<String, Object> uniqueFields = buildUniqueFieldsMap(person);
-
-    // Check if any of the unique fields already exist
-    return !uniqueFields.isEmpty() && existsByUniqueFields(uniqueFields);
+    // Check if any of the unique fields already exist (OR logic)
+    return isDuplicate(person, UniquenessStrategy.ANY);
   }
 
   @Override
@@ -106,10 +103,9 @@ public class PersonService extends BaseCrudService<Person, Long, PersonDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(person, "Person cannot be null");
 
-    // Check multiple unique constraints excluding current ID: uniqueRegKey OR email
-    return (person.getUniqueRegKey() != null
-        && existsByUniqueFieldsAndNotId(Map.of("uniqueRegKey", person.getUniqueRegKey()), id))
-        || (person.getEmail() != null && existsByUniqueFieldsAndNotId(Map.of("email", person.getEmail()), id));
+    // Check if any of the unique fields already exist excluding current ID (OR
+    // logic)
+    return isDuplicate(id, person, UniquenessStrategy.ANY);
   }
 
 }

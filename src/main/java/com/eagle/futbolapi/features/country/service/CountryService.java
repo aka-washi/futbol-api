@@ -15,6 +15,9 @@ import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.country.mapper.CountryMapper;
 import com.eagle.futbolapi.features.country.repository.CountryRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 @Transactional
 public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
@@ -58,10 +61,10 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
   protected boolean isDuplicate(@NotNull Country country) {
     Objects.requireNonNull(country, "Country cannot be null");
 
-    // Check multiple unique constraints: code OR isoCode OR displayName
-    return (country.getCode() != null && existsByUniqueFields(Map.of("code", country.getCode())))
-        || (country.getIsoCode() != null && existsByUniqueFields(Map.of("isoCode", country.getIsoCode())))
-        || (country.getDisplayName() != null && existsByUniqueFields(Map.of("displayName", country.getDisplayName())));
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(country);
+    log.error("Unique fields for duplicate check: {}", uniqueFields);
+    log.error("Existed by UniqueFields {}", existsByUniqueFields(uniqueFields));
+    return !uniqueFields.isEmpty() && existsByUniqueFields(uniqueFields);
   }
 
   @Override
@@ -69,10 +72,9 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(country, "Country cannot be null");
 
-    // Check multiple unique constraints excluding current ID: code OR isoCode OR displayName
-    return (country.getCode() != null && existsByUniqueFieldsAndNotId(Map.of("code", country.getCode()), id))
-        || (country.getIsoCode() != null && existsByUniqueFieldsAndNotId(Map.of("isoCode", country.getIsoCode()), id))
-        || (country.getDisplayName() != null
-            && existsByUniqueFieldsAndNotId(Map.of("displayName", country.getDisplayName()), id));
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(country);
+    log.error("Unique fields for duplicate check: {}", uniqueFields);
+    log.error("Existed by UniqueFields {}", existsByUniqueFieldsAndNotId(uniqueFields, id));
+    return !uniqueFields.isEmpty() && existsByUniqueFieldsAndNotId(uniqueFields, id);
   }
 }

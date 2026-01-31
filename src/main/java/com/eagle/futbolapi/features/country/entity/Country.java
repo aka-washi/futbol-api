@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -36,17 +37,21 @@ import lombok.experimental.SuperBuilder;
 public class Country extends BaseEntity {
 
   @NotBlank
+  @UniqueField
   @Column(name = "co_name", nullable = false, length = 100)
   private String name;
 
+  @UniqueField
   @Column(name = "co_code", unique = true, length = 10)
   private String code;
 
   @NotBlank
+  @UniqueField
   @Column(name = "co_iso_code", unique = true, length = 3)
   private String isoCode; // ISO 3166-1 alpha-3
 
   @NotBlank
+  @UniqueField
   @Column(name = "co_display_name", length = 100, nullable = false)
   private String displayName;
 

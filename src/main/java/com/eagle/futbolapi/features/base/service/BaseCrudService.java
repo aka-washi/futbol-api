@@ -20,6 +20,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 
@@ -453,6 +454,59 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
 
   protected void resolveRelationships(D dto, T entity) {
     // Default: no relationships to resolve
+  }
+
+  // ============================================================================
+  // Uniqueness Checking Helper Methods
+  // ============================================================================
+
+  /**
+   * Check if an entity is a duplicate using the specified uniqueness strategy.
+   *
+   * @param entity   the entity to check
+   * @param strategy the uniqueness strategy (ALL or ANY)
+   * @return true if the entity is considered a duplicate
+   */
+  protected boolean isDuplicate(@NotNull T entity, @NotNull UniquenessStrategy strategy) {
+    Objects.requireNonNull(entity, "Entity cannot be null");
+    Objects.requireNonNull(strategy, "Uniqueness strategy cannot be null");
+
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(entity);
+    if (uniqueFields.isEmpty()) {
+      return false;
+    }
+
+    return switch (strategy) {
+      case ALL -> existsByUniqueFields(uniqueFields);
+      case ANY -> uniqueFields.entrySet().stream()
+          .anyMatch(entry -> existsByUniqueFields(Map.of(entry.getKey(), entry.getValue())));
+    };
+  }
+
+  /**
+   * Check if an entity is a duplicate (excluding given ID) using the specified
+   * uniqueness strategy.
+   *
+   * @param id       the ID to exclude from the check
+   * @param entity   the entity to check
+   * @param strategy the uniqueness strategy (ALL or ANY)
+   * @return true if another entity exists with the same unique fields
+   */
+  protected boolean isDuplicate(@NotNull K id, @NotNull T entity, @NotNull UniquenessStrategy strategy) {
+    Objects.requireNonNull(id, "ID cannot be null");
+    Objects.requireNonNull(entity, "Entity cannot be null");
+    Objects.requireNonNull(strategy, "Uniqueness strategy cannot be null");
+
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(entity);
+    if (uniqueFields.isEmpty()) {
+      return false;
+    }
+
+    return switch (strategy) {
+      case ALL -> existsByUniqueFieldsAndNotId(uniqueFields, id);
+      case ANY -> uniqueFields.entrySet().stream()
+          .anyMatch(entry -> existsByUniqueFieldsAndNotId(Map.of(entry.getKey(), entry.getValue()), id));
+    };
   }
 
   protected abstract boolean isDuplicate(@NotNull T entity);
