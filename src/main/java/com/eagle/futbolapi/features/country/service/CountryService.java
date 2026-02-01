@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.country.service;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -9,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.country.dto.CountryDTO;
 import com.eagle.futbolapi.features.country.entity.Country;
@@ -61,10 +61,7 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
   protected boolean isDuplicate(@NotNull Country country) {
     Objects.requireNonNull(country, "Country cannot be null");
 
-    Map<String, Object> uniqueFields = buildUniqueFieldsMap(country);
-    log.error("Unique fields for duplicate check: {}", uniqueFields);
-    log.error("Existed by UniqueFields {}", existsByUniqueFields(uniqueFields));
-    return !uniqueFields.isEmpty() && existsByUniqueFields(uniqueFields);
+    return isDuplicate(country, UniquenessStrategy.ANY);
   }
 
   @Override
@@ -72,9 +69,6 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDTO> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(country, "Country cannot be null");
 
-    Map<String, Object> uniqueFields = buildUniqueFieldsMap(country);
-    log.error("Unique fields for duplicate check: {}", uniqueFields);
-    log.error("Existed by UniqueFields {}", existsByUniqueFieldsAndNotId(uniqueFields, id));
-    return !uniqueFields.isEmpty() && existsByUniqueFieldsAndNotId(uniqueFields, id);
+    return isDuplicate(id, country, UniquenessStrategy.ANY);
   }
 }

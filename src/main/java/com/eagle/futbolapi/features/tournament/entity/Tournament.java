@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.AgeCategory;
 import com.eagle.futbolapi.features.base.enums.TournamentType;
@@ -48,30 +49,35 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Tournament extends BaseEntity {
 
+  @UniqueField(fieldPath = "organization.id")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   @NotNull
   private Organization organization;
 
   @NotBlank
+  @UniqueField
   @Column(name = "tn_name", nullable = false)
   private String name;
 
   @NotBlank
+  @UniqueField
   @Column(name = "tn_display_name", nullable = false, length = 150)
   private String displayName;
 
   @Enumerated(EnumType.STRING)
+  @UniqueField
   @Column(name = "tn_type", nullable = false, length = 50)
   @NotNull
   private TournamentType type;
 
   @Enumerated(EnumType.STRING)
+  @UniqueField
   @Column(name = "tn_category", nullable = false, length = 20)
   @NotNull
   private AgeCategory ageCategory;
 
-  @Column(name = "tn_level", nullable = false)
+  @Column(name = "tn_level")
   private Integer level; // 1 = First Division, 2 = Second Division, etc.
 
   @OneToOne(fetch = FetchType.LAZY)
@@ -84,10 +90,13 @@ public class Tournament extends BaseEntity {
   @Column(name = "tn_logo")
   private String logo;
 
-  @Column(name = "tn_founded_year", nullable = false)
+  @Column(name = "tn_founded_year")
   private Integer foundedYear;
 
-  @Column(name = "to_active", nullable = false)
+  @Column(name = "tn_website")
+  private String website;
+
+  @Column(name = "tn_active", nullable = false)
   @Builder.Default
   private Boolean active = true;
 
@@ -100,7 +109,12 @@ public class Tournament extends BaseEntity {
         type,
         ageCategory,
         level,
-        relegationTo);
+        relegationTo,
+        description,
+        logo,
+        foundedYear,
+        website,
+        active);
   }
 
   @Override
@@ -116,7 +130,12 @@ public class Tournament extends BaseEntity {
         && Objects.equals(type, other.type)
         && Objects.equals(ageCategory, other.ageCategory)
         && Objects.equals(level, other.level)
-        && Objects.equals(relegationTo, other.relegationTo);
+        && Objects.equals(relegationTo, other.relegationTo)
+        && Objects.equals(description, other.description)
+        && Objects.equals(logo, other.logo)
+        && Objects.equals(foundedYear, other.foundedYear)
+        && Objects.equals(website, other.website)
+        && Objects.equals(active, other.active);
   }
 
 }

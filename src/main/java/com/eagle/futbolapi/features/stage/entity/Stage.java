@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.StageStatus;
 import com.eagle.futbolapi.features.competition.entity.Competition;
@@ -48,11 +49,13 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Stage extends BaseEntity {
 
+  @UniqueField(fieldPath = "competition.id")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "competition_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   @NotNull
   private Competition competition;
 
+  @UniqueField(fieldPath = "structure.id")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "structure_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   @NotNull
@@ -78,6 +81,7 @@ public class Stage extends BaseEntity {
   private LocalDate endDate;
 
   @Enumerated(EnumType.STRING)
+  @UniqueField
   @Column(name = "sg_status", nullable = false, length = 50)
   @Builder.Default
   private StageStatus status = StageStatus.NOT_STARTED;

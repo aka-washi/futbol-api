@@ -3,7 +3,6 @@ package com.eagle.futbolapi.features.tournament.dto;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
@@ -47,9 +46,8 @@ public class TournamentDTO {
     private String description;
 
     private String logo;
-
-    @NotNull(message = "Founded year is required")
     private Integer foundedYear;
+    private String website;
 
     private Boolean active;
 

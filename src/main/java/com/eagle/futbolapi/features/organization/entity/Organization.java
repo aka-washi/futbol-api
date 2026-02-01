@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.OrganizationType;
 import com.eagle.futbolapi.features.country.entity.Country;
@@ -47,21 +48,26 @@ import lombok.experimental.SuperBuilder;
 public class Organization extends BaseEntity {
 
   @NotBlank
+  @UniqueField
   @Column(name = "og_name", nullable = false)
   private String name;
 
   @NotBlank
+  @UniqueField
   @Column(name = "og_display_name", length = 100, nullable = false)
   private String displayName;
 
+  @UniqueField
   @Column(name = "og_abbreviation", length = 20)
   private String abbreviation;
 
+  @UniqueField
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "country_id", nullable = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Country country;
 
   @NotNull
+  @UniqueField
   @Column(name = "og_founded", nullable = false)
   private LocalDate founded;
 
@@ -94,7 +100,11 @@ public class Organization extends BaseEntity {
         country,
         founded,
         parentOrganization,
-        type);
+        type,
+        logo,
+        website,
+        headquarters,
+        description);
   }
 
   @Override
@@ -110,7 +120,11 @@ public class Organization extends BaseEntity {
         && Objects.equals(country, other.country)
         && Objects.equals(founded, other.founded)
         && Objects.equals(parentOrganization, other.parentOrganization)
-        && Objects.equals(type, other.type);
+        && Objects.equals(type, other.type)
+        && Objects.equals(logo, other.logo)
+        && Objects.equals(website, other.website)
+        && Objects.equals(headquarters, other.headquarters)
+        && Objects.equals(description, other.description);
   }
 
 }

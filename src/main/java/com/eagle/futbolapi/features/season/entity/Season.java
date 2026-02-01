@@ -58,6 +58,7 @@ public class Season extends BaseEntity {
   private String name; // e.g., "2025-2026"
 
   @NotBlank
+  @UniqueField
   @Column(name = "sn_display_name", length = 100, nullable = false)
   private String displayName;
 
@@ -98,7 +99,8 @@ public class Season extends BaseEntity {
         startDate,
         endDate,
         active,
-        hasRelegation);
+        hasRelegation,
+        description);
   }
 
   @Override
@@ -114,7 +116,8 @@ public class Season extends BaseEntity {
         && Objects.equals(startDate, other.startDate)
         && Objects.equals(endDate, other.endDate)
         && Objects.equals(active, other.active)
-        && Objects.equals(hasRelegation, other.hasRelegation);
+        && Objects.equals(hasRelegation, other.hasRelegation)
+        && Objects.equals(description, other.description);
   }
 
 }

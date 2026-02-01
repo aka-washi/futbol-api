@@ -1,7 +1,6 @@
 package com.eagle.futbolapi.features.competition.service;
 
 import java.time.LocalDate;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eagle.futbolapi.features.base.enums.CompetitionType;
+import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.competition.dto.CompetitionDTO;
@@ -117,13 +117,7 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
   protected boolean isDuplicate(@NotNull Competition competition) {
     Objects.requireNonNull(competition, "Competition cannot be null");
 
-    // Check composite unique constraint: season + type
-    if (competition.getSeason() != null && competition.getType() != null) {
-      return existsByUniqueFields(Map.of(
-          "season.id", competition.getSeason().getId(),
-          "type", competition.getType()));
-    }
-    return false;
+    return isDuplicate(competition, UniquenessStrategy.ALL);
   }
 
   @Override
@@ -131,12 +125,6 @@ public class CompetitionService extends BaseCrudService<Competition, Long, Compe
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(competition, "Competition cannot be null");
 
-    // Check composite unique constraint: season + type (excluding current ID)
-    if (competition.getSeason() != null && competition.getType() != null) {
-      return existsByUniqueFieldsAndNotId(Map.of(
-          "season.id", competition.getSeason().getId(),
-          "type", competition.getType()), id);
-    }
-    return false;
+    return isDuplicate(id, competition, UniquenessStrategy.ALL);
   }
 }

@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.organization.service;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eagle.futbolapi.features.base.enums.OrganizationType;
+import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.country.service.CountryService;
@@ -100,14 +100,7 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
   protected boolean isDuplicate(@NotNull Organization organization) {
     Objects.requireNonNull(organization, "Organization cannot be null");
 
-    // Check composite unique constraint: name + country + type
-    if (organization.getName() != null && organization.getCountry() != null && organization.getType() != null) {
-      return existsByUniqueFields(Map.of(
-          "name", organization.getName(),
-          "country.id", organization.getCountry().getId(),
-          "type", organization.getType()));
-    }
-    return false;
+    return isDuplicate(organization, UniquenessStrategy.ALL);
   }
 
   @Override
@@ -115,14 +108,7 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(organization, "Organization cannot be null");
 
-    // Check composite unique constraint: name + country + type (excluding current ID)
-    if (organization.getName() != null && organization.getCountry() != null && organization.getType() != null) {
-      return existsByUniqueFieldsAndNotId(Map.of(
-          "name", organization.getName(),
-          "country.id", organization.getCountry().getId(),
-          "type", organization.getType()), id);
-    }
-    return false;
+    return isDuplicate(id, organization, UniquenessStrategy.ALL);
   }
 
 }

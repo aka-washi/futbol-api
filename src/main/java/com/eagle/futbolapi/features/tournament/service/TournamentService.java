@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.tournament.service;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eagle.futbolapi.features.base.enums.TournamentType;
+import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.organization.service.OrganizationService;
@@ -98,26 +98,14 @@ public class TournamentService extends BaseCrudService<Tournament, Long, Tournam
   protected boolean isDuplicate(@NotNull Tournament tournament) {
     Objects.requireNonNull(tournament, "Tournament cannot be null");
 
-    // Check composite unique constraint: name + organization
-    if (tournament.getName() != null && tournament.getOrganization() != null) {
-      return existsByUniqueFields(Map.of(
-          "name", tournament.getName(),
-          "organization.id", tournament.getOrganization().getId()));
-    }
-    return false;
+    return isDuplicate(tournament, UniquenessStrategy.ALL);
   }
 
   @Override
   protected boolean isDuplicate(Long id, @NotNull Tournament tournament) {
     Objects.requireNonNull(tournament, "Tournament cannot be null");
 
-    // Check composite unique constraint: name + organization (excluding current ID)
-    if (tournament.getName() != null && tournament.getOrganization() != null) {
-      return existsByUniqueFieldsAndNotId(Map.of(
-          "name", tournament.getName(),
-          "organization.id", tournament.getOrganization().getId()), id);
-    }
-    return false;
+    return isDuplicate(id, tournament, UniquenessStrategy.ALL);
   }
 
 }

@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.CompetitionType;
 import com.eagle.futbolapi.features.season.entity.Season;
@@ -48,15 +49,18 @@ import lombok.experimental.SuperBuilder;
 public class Competition extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @UniqueField(fieldPath = "season.id")
   @JoinColumn(name = "season_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   @NotNull
   private Season season;
 
   @NotBlank
+  @UniqueField
   @Column(name = "cp_name", nullable = false)
   private String name; // e.g., "Apertura 2025", "La Liga 2025-2026"
 
   @NotBlank
+  @UniqueField
   @Column(name = "cp_display_name", length = 100, nullable = false)
   private String displayName;
 
@@ -95,7 +99,8 @@ public class Competition extends BaseEntity {
         startDate,
         endDate,
         active,
-        totalMatchdays);
+        totalMatchdays,
+        description);
   }
 
   @Override
@@ -112,7 +117,8 @@ public class Competition extends BaseEntity {
         && Objects.equals(startDate, other.startDate)
         && Objects.equals(endDate, other.endDate)
         && Objects.equals(active, other.active)
-        && Objects.equals(totalMatchdays, other.totalMatchdays);
+        && Objects.equals(totalMatchdays, other.totalMatchdays)
+        && Objects.equals(description, other.description);
   }
 
 }
