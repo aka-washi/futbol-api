@@ -66,7 +66,7 @@
       {"name": "website","type": "string","label": "Website"},
       {"name": "headquarters","type": "string","label": "Headquarters"},
       {"name": "description","type": "string","label": "Description"},
-      {"name": "type","type": "enum","enum": [  "CLUB",  "FEDERATION",  "CONFEDERATION",  "GOVERNINGBODY"],"required": true,"label": "Type"}
+      {"name": "type","type": "enum","enum": [  "CLUB",  "FEDERATION",  "CONFEDERATION",  "GOVERNING_BODY"],"required": true,"label": "Type"}
     ]
   },
   {
@@ -226,7 +226,7 @@
       {"name": "displayName","type": "string","label": "Display Name","required": true},
       {"name": "startDate","type": "date","label": "Start Date","required": true},
       {"name": "endDate","type": "date","label": "End Date","required": true},
-      {"name": "status","type": "enum","enum": [  "PLANNED",  "ONGOING",  "COMPLETED",  "CANCELLED"],"label": "Status","default": "PLANNED"},
+      {"name": "status","type": "enum","enum": [  "PLANNED",  "IN_PROGRESS",  "COMPLETED",  "CANCELLED"],"label": "Status","default": "PLANNED"},
       {"name": "hasRelegation","type": "boolean","label": "Has Relegation","default": true},
       {"name": "hasPromotion","type": "boolean","label": "Has Promotion","default": true},
       {"name": "numberOfTeams","type": "integer","label": "Number of Teams"},
@@ -247,7 +247,7 @@
       {"name": "type","type": "enum","enum": [  "APERTURA",  "CLAUSURA",  "FULL_SEASON",  "PLAYOFF",  "CUP"],"label": "Type","required": true},
       {"name": "startDate","type": "date","label": "Start Date","required": true},
       {"name": "endDate","type": "date","label": "End Date","required": true},
-      {"name": "status","type": "enum","enum": [  "PLANNED",  "ONGOING",  "COMPLETED",  "CANCELLED"],"label": "Status","default": "PLANNED"},
+      {"name": "status","type": "enum","enum": [  "PLANNED",  "IN_PROGRESS",  "COMPLETED",  "CANCELLED"],"label": "Status","default": "PLANNED"},
       {"name": "totalMatches","type": "integer","label": "Total Matches","required": true},
       {"name": "description","type": "string","label": "Description"}
     ]
