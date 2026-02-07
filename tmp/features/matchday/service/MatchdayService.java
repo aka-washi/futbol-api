@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.matchday.service;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -8,62 +9,82 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.service.BaseCrudService;
+import com.eagle.futbolapi.features.matchday.dto.MatchdayDTO;
 import com.eagle.futbolapi.features.matchday.entity.Matchday;
+import com.eagle.futbolapi.features.matchday.mapper.MatchdayMapper;
 import com.eagle.futbolapi.features.matchday.repository.MatchdayRepository;
-import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
-import com.eagle.futbolapi.features.shared.service.BaseCrudService;
+import com.eagle.futbolapi.features.stage.service.StageService;
 
 @Service
 @Transactional
-public class MatchdayService extends BaseCrudService<Matchday, Long> {
+public class MatchdayService extends BaseCrudService<Matchday, Long, MatchdayDTO> {
 
-    private final MatchdayRepository matchdayRepository;
+  private final MatchdayRepository repository;
+  private final StageService stageService;
 
-    public MatchdayService(MatchdayRepository matchdayRepository) {
-        super(matchdayRepository);
-        this.matchdayRepository = matchdayRepository;
+  protected MatchdayService(
+      MatchdayRepository repository,
+      StageService stageService,
+      MatchdayMapper mapper) {
+    super(repository, mapper);
+    this.repository = repository;
+    this.stageService = stageService;
+  }
+
+  public Optional<Matchday> getByName(String name) {
+    if (name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("Matchday name cannot be null or empty");
     }
+    return repository.findByName(name);
+  }
 
-    public Optional<Matchday> getMatchdayByName(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Matchday name cannot be null or empty");
-        }
-        return matchdayRepository.findByName(name);
+  public Optional<Matchday> getByDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Matchday display name cannot be null or empty");
     }
+    return repository.findByDisplayName(displayName);
+  }
 
-    public Optional<Matchday> getMatchdayByDisplayName(String displayName) {
-        if (displayName == null || displayName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Matchday display name cannot be null or empty");
-        }
-        return matchdayRepository.findByDisplayName(displayName);
+  @Override
+  protected void resolveRelationships(MatchdayDTO dto, Matchday matchday) {
+    if (dto.getStageDisplayName() != null && !dto.getStageDisplayName().trim().isEmpty()) {
+      var stage = stageService.getStageByDisplayName(dto.getStageDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Stage", "displayName", dto.getStageDisplayName()));
+      matchday.setStage(stage);
+    } else if (dto.getStageId() != null) {
+      var stage = stageService.getById(dto.getStageId())
+          .orElseThrow(() -> new ResourceNotFoundException("Stage", "id", dto.getStageId()));
+      matchday.setStage(stage);
     }
+  }
 
-    @Override
-    public Matchday update(Long id, Matchday matchday) {
-        Matchday existing = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-        matchday.setCreatedAt(existing.getCreatedAt());
-        matchday.setId(id);
-        return super.update(id, matchday);
+  @Override
+  protected boolean isDuplicate(@NotNull Matchday entity) {
+    Objects.requireNonNull(entity, "Matchday cannot be null");
+
+    // Check composite unique constraint: stage + number
+    if (entity.getStage() != null && entity.getNumber() != null) {
+      return existsByUniqueFields(Map.of(
+          "stage.id", entity.getStage().getId(),
+          "number", entity.getNumber()));
     }
+    return false;
+  }
 
-    @Override
-    protected boolean isDuplicate(@NotNull Matchday matchday) {
-        Objects.requireNonNull(matchday, "Matchday cannot be null");
+  @Override
+  protected boolean isDuplicate(Long id, @NotNull Matchday entity) {
+    Objects.requireNonNull(entity, "Matchday cannot be null");
+    Objects.requireNonNull(id, "Matchday ID cannot be null");
 
-        // For now, no strict duplicate check - business logic specific
-        return false;
+    // Check composite unique constraint: stage + number (excluding current ID)
+    if (entity.getStage() != null && entity.getNumber() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "stage.id", entity.getStage().getId(),
+          "number", entity.getNumber()), id);
     }
+    return false;
+  }
 
-    @Override
-    protected boolean isDuplicate(Long id, @NotNull Matchday matchday) {
-        Objects.requireNonNull(id, "ID cannot be null");
-        Objects.requireNonNull(matchday, "Matchday details cannot be null");
-
-        Matchday existingMatchday = getById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Matchday", "id", id));
-
-        // For updates, no strict duplicate check - business logic specific
-        return false;
-    }
 }

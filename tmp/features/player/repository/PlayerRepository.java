@@ -1,29 +1,24 @@
 package com.eagle.futbolapi.features.player.repository;
 
-import java.util.List;
+import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.eagle.futbolapi.features.person.entity.Person;
+import com.eagle.futbolapi.features.base.repository.BaseRepository;
 import com.eagle.futbolapi.features.player.entity.Player;
-import com.eagle.futbolapi.features.team.entity.Team;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<Player, Long> {
+public interface PlayerRepository extends BaseRepository<Player, Long> {
 
-    List<Player> findByPerson(Person person);
+  Optional<Player> findByPersonId(Long personId);
 
-    List<Player> findByCurrentTeam(Team currentTeam);
+  Optional<Player> findByPersonDisplayName(String personDisplayName);
 
-    List<Player> findByCurrentTeamId(Long currentTeamId);
+  boolean existsByPersonId(Long personId);
 
-    @Query("SELECT p FROM Player p WHERE p.person.displayName ILIKE %:searchTerm%")
-    List<Player> findByDisplayNameContainingIgnoreCase(@Param("searchTerm") String searchTerm);
-
-    @Query("SELECT p FROM Player p WHERE p.person.displayName = :displayName")
-    List<Player> findByDisplayName(@Param("displayName") String displayName);
+  @Query("SELECT COUNT(p) > 0 FROM Player p WHERE p.person.id = :personId AND p.id != :id")
+  boolean existsByPersonIdAndIdNot(@Param("personId") Long personId, @Param("id") Long id);
 
 }

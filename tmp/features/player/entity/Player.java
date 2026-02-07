@@ -17,8 +17,10 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.Position;
+import com.eagle.futbolapi.features.base.enums.PreferredFoot;
 import com.eagle.futbolapi.features.person.entity.Person;
-import com.eagle.futbolapi.features.shared.BaseEntity;
 import com.eagle.futbolapi.features.team.entity.Team;
 
 import lombok.AllArgsConstructor;
@@ -35,62 +37,61 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "player")
 @AttributeOverrides({
-        @AttributeOverride(name = "id", column = @Column(name = "pl_id")),
-        @AttributeOverride(name = "createdAt", column = @Column(name = "pl_created_at", nullable = false, updatable = false)),
-        @AttributeOverride(name = "createdBy", column = @Column(name = "pl_created_by", length = 100, updatable = false)),
-        @AttributeOverride(name = "updatedAt", column = @Column(name = "pl_updated_at")),
-        @AttributeOverride(name = "updatedBy", column = @Column(name = "pl_updated_by", length = 100))
+    @AttributeOverride(name = "id", column = @Column(name = "pl_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "pl_created_at", nullable = false, updatable = false)),
+    @AttributeOverride(name = "createdBy", column = @Column(name = "pl_created_by", length = 100, updatable = false)),
+    @AttributeOverride(name = "updatedAt", column = @Column(name = "pl_updated_at")),
+    @AttributeOverride(name = "updatedBy", column = @Column(name = "pl_updated_by", length = 100))
 })
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Player extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "person_id", nullable = false, unique = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    @NotNull
-    private Person person;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "person_id", nullable = false, unique = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @NotNull
+  private Person person;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "pl_position", nullable = false, length = 50)
-    @NotNull
-    private Position position;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "pl_position", nullable = false, length = 50)
+  @NotNull
+  private Position position;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "pl_preferred_foot", length = 10)
-    private PreferredFoot preferredFoot;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "pl_preferred_foot", length = 10)
+  private PreferredFoot preferredFoot;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Team currentTeam;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "team_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Team currentTeam;
 
-    @Column(name = "pl_active", nullable = false)
-    @Builder.Default
-    private Boolean active = true;
+  @Column(name = "pl_active", nullable = false)
+  @Builder.Default
+  private Boolean active = true;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-            person,
-            position,
-            preferredFoot,
-            currentTeam,
-            active
-        );
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        person,
+        position,
+        preferredFoot,
+        currentTeam,
+        active);
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Player))
-            return false;
-        Player other = (Player) obj;
-        return Objects.equals(person, other.person)
-            && Objects.equals(position, other.position)
-            && Objects.equals(preferredFoot, other.preferredFoot)
-            && Objects.equals(currentTeam, other.currentTeam)
-            && Objects.equals(active, other.active);
-    }
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Player))
+      return false;
+    Player other = (Player) obj;
+    return Objects.equals(person, other.person)
+        && Objects.equals(position, other.position)
+        && Objects.equals(preferredFoot, other.preferredFoot)
+        && Objects.equals(currentTeam, other.currentTeam)
+        && Objects.equals(active, other.active);
+  }
 
 }

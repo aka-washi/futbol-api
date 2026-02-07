@@ -10,76 +10,102 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.service.BaseCrudService;
+import com.eagle.futbolapi.features.country.service.CountryService;
+import com.eagle.futbolapi.features.person.dto.PersonDTO;
 import com.eagle.futbolapi.features.person.entity.Person;
+import com.eagle.futbolapi.features.person.mapper.PersonMapper;
 import com.eagle.futbolapi.features.person.repository.PersonRepository;
-import com.eagle.futbolapi.features.shared.service.BaseCrudService;
 
 @Service
 @Transactional
-public class PersonService extends BaseCrudService<Person, Long> {
+public class PersonService extends BaseCrudService<Person, Long, PersonDTO> {
 
   private final PersonRepository personRepository;
+  private final CountryService countryService;
 
-  public PersonService(PersonRepository personRepository) {
-    super(personRepository);
+  public PersonService(PersonRepository personRepository, CountryService countryService, PersonMapper mapper) {
+    super(personRepository, mapper);
     this.personRepository = personRepository;
+    this.countryService = countryService;
   }
 
-  public Optional<Person> getPersonByUniqueRegKey(String uniqueRegKey) {
+  public Optional<Person> getByUniqueRegKey(String uniqueRegKey) {
     if (uniqueRegKey == null || uniqueRegKey.trim().isEmpty()) {
-      throw new IllegalArgumentException("Unique Registration Key cannot be null or empty");
+      throw new IllegalArgumentException("Unique registration key cannot be null or empty");
     }
     return personRepository.findByUniqueRegKey(uniqueRegKey);
   }
 
-  public Optional<Person> getPersonByEmail(String email) {
+  public Optional<Person> getByDisplayName(String displayName) {
+    if (displayName == null || displayName.trim().isEmpty()) {
+      throw new IllegalArgumentException("Display name cannot be null or empty");
+    }
+    return personRepository.findByDisplayName(displayName);
+  }
+
+  public Optional<Person> getByEmail(String email) {
     if (email == null || email.trim().isEmpty()) {
       throw new IllegalArgumentException("Email cannot be null or empty");
     }
     return personRepository.findByEmail(email);
   }
 
-  public Page<Person> getPersonsByCountryId(Long countryId, Pageable pageable) {
-    if (pageable == null) {
-      pageable = Pageable.unpaged();
-    }
+  public Page<Person> getByCountryId(Long countryId, Pageable pageable) {
     if (countryId == null) {
       throw new IllegalArgumentException("Country ID cannot be null");
+    }
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
     }
     return personRepository.findByCountryId(countryId, pageable);
   }
 
-  public Page<Person> searchPersonsByDisplayName(String searchTerm, Pageable pageable) {
-    if (pageable == null) {
-      pageable = Pageable.unpaged();
+  @Override
+  protected void resolveRelationships(PersonDTO dto, Person person) {
+    // Map birth country from display name or ID
+    if (dto.getBirthCountryDisplayName() != null && !dto.getBirthCountryDisplayName().trim().isEmpty()) {
+      var country = countryService.getCountryByDisplayName(dto.getBirthCountryDisplayName())
+          .orElseThrow(
+              () -> new ResourceNotFoundException("Country", "displayName", dto.getBirthCountryDisplayName()));
+      person.setBirthCountry(country);
+    } else if (dto.getBirthCountryId() != null) {
+      var country = countryService.getById(dto.getBirthCountryId())
+          .orElseThrow(() -> new ResourceNotFoundException("Country", "id", dto.getBirthCountryId()));
+      person.setBirthCountry(country);
     }
-    if (searchTerm == null || searchTerm.trim().isEmpty()) {
-      throw new IllegalArgumentException("Search term cannot be null or empty");
+
+    // Map nationality country from display name or ID
+    if (dto.getNationalityCountryDisplayName() != null && !dto.getNationalityCountryDisplayName().trim().isEmpty()) {
+      var country = countryService.getCountryByDisplayName(dto.getNationalityCountryDisplayName())
+          .orElseThrow(
+              () -> new ResourceNotFoundException("Country", "displayName", dto.getNationalityCountryDisplayName()));
+      person.setNationality(country);
+    } else if (dto.getNationalityCountryId() != null) {
+      var country = countryService.getById(dto.getNationalityCountryId())
+          .orElseThrow(() -> new ResourceNotFoundException("Country", "id", dto.getNationalityCountryId()));
+      person.setNationality(country);
     }
-    return personRepository.findByDisplayNameContainingIgnoreCase(searchTerm, pageable);
   }
 
   @Override
   protected boolean isDuplicate(@NotNull Person person) {
-    Objects.requireNonNull(person, "Person entity cannot be null");
-    boolean uniqueRegKeyExists = personRepository.existsByUniqueRegKey(person.getUniqueRegKey());
-    boolean emailExists = personRepository.existsByEmail(person.getEmail());
-    return uniqueRegKeyExists || emailExists;
+    Objects.requireNonNull(person, "Person cannot be null");
+
+    // Check if any of the unique fields already exist (OR logic)
+    return isDuplicate(person, UniquenessStrategy.ANY);
   }
 
   @Override
-  protected boolean isDuplicate(Long id, @NotNull Person person) {
-    Objects.requireNonNull(person, "Person entity cannot be null");
-    Objects.requireNonNull(id, "Person ID cannot be null");
+  protected boolean isDuplicate(@NotNull Long id, @NotNull Person person) {
+    Objects.requireNonNull(id, "ID cannot be null");
+    Objects.requireNonNull(person, "Person cannot be null");
 
-    if (person.getUniqueRegKey() == null || person.getEmail() == null) {
-      throw new IllegalArgumentException("Unique Registration Key and Email cannot be null");
-    }
-
-    boolean uniqueRegKeyExists = personRepository.existsByUniqueRegKeyAndNotId(person.getUniqueRegKey(), id);
-    boolean emailExists = personRepository.existsByEmailAndNotId(person.getEmail(), id);
-
-    return uniqueRegKeyExists || emailExists;
+    // Check if any of the unique fields already exist excluding current ID (OR
+    // logic)
+    return isDuplicate(id, person, UniquenessStrategy.ANY);
   }
 
 }

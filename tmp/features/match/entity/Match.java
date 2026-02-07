@@ -16,15 +16,21 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.MatchStatus;
 import com.eagle.futbolapi.features.matchday.entity.Matchday;
 import com.eagle.futbolapi.features.person.entity.Person;
-import com.eagle.futbolapi.features.shared.BaseEntity;
 import com.eagle.futbolapi.features.team.entity.Team;
 import com.eagle.futbolapi.features.venue.entity.Venue;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
@@ -34,148 +40,151 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "[match]")
 @AttributeOverrides({
-        @AttributeOverride(name = "id", column = @Column(name = "mt_id")),
-        @AttributeOverride(name = "createdAt", column = @Column(name = "mt_created_at", nullable = false, updatable = false)),
-        @AttributeOverride(name = "createdBy", column = @Column(name = "mt_created_by", length = 100, updatable = false)),
-        @AttributeOverride(name = "updatedAt", column = @Column(name = "mt_updated_at")),
-        @AttributeOverride(name = "updatedBy", column = @Column(name = "mt_updated_by", length = 100))
+    @AttributeOverride(name = "id", column = @Column(name = "mt_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "mt_created_at", nullable = false, updatable = false)),
+    @AttributeOverride(name = "createdBy", column = @Column(name = "mt_created_by", length = 100, updatable = false)),
+    @AttributeOverride(name = "updatedAt", column = @Column(name = "mt_updated_at")),
+    @AttributeOverride(name = "updatedBy", column = @Column(name = "mt_updated_by", length = 100))
 })
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Match extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "matchday_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    @NotNull
-    private Matchday matchday;
+  @NotBlank
+  @Column(name = "mt_name", nullable = false)
+  private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "home_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    @NotNull
-    private Team homeTeam;
+  @NotBlank
+  @Column(name = "mt_display_name", length = 100, nullable = false)
+  private String displayName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "away_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    @NotNull
-    private Team awayTeam;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "matchday_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @NotNull
+  private Matchday matchday;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Venue venue;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "home_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @NotNull
+  private Team homeTeam;
 
-    @NotNull
-    @Column(name = "mt_scheduled_date", nullable = false)
-    private LocalDate scheduledDate;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "away_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @NotNull
+  private Team awayTeam;
 
-    @Column(name = "mt_kickoff_time")
-    private LocalDateTime kickoffTime;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Venue venue;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "mt_status", nullable = false, length = 50)
-    @Builder.Default
-    private MatchStatus status = MatchStatus.SCHEDULED;
+  @NotNull
+  @Column(name = "mt_scheduled_date", nullable = false)
+  private LocalDate scheduledDate;
 
-    @Column(name = "mt_home_score")
-    private Integer homeScore;
+  @Column(name = "mt_kickoff_time")
+  private LocalDateTime kickoffTime;
 
-    @Column(name = "mt_away_score")
-    private Integer awayScore;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "mt_status", nullable = false, length = 50)
+  @Builder.Default
+  private MatchStatus status = MatchStatus.SCHEDULED;
 
-    @Column(name = "mt_home_halftime_score")
-    private Integer homeHalfTimeScore;
+  @Column(name = "mt_home_score")
+  private Integer homeScore;
 
-    @Column(name = "mt_away_halftime_score")
-    private Integer awayHalfTimeScore;
+  @Column(name = "mt_away_score")
+  private Integer awayScore;
 
-    @Builder.Default
-    @Column(name = "mt_extra_time_allowed", nullable = false)
-    private Boolean extraTimeAllowed = false;
+  @Column(name = "mt_home_halftime_score")
+  private Integer homeHalfTimeScore;
 
-    @Builder.Default
-    @Column(name = "mt_penalty_shootout_allowed", nullable = false)
-    private Boolean penaltyShootoutAllowed = false;
+  @Column(name = "mt_away_halftime_score")
+  private Integer awayHalfTimeScore;
 
-    @Column(name = "mt_home_extratime_score")
-    private Integer homeExtraTimeScore;
+  @Builder.Default
+  @Column(name = "mt_extra_time_allowed", nullable = false)
+  private Boolean extraTimeAllowed = false;
 
-    @Column(name = "mt_away_extratime_score")
-    private Integer awayExtraTimeScore;
+  @Builder.Default
+  @Column(name = "mt_penalty_shootout_allowed", nullable = false)
+  private Boolean penaltyShootoutAllowed = false;
 
-    @Column(name = "mt_home_penalty_score")
-    private Integer homePenaltyScore;
+  @Column(name = "mt_home_extratime_score")
+  private Integer homeExtraTimeScore;
 
-    @Column(name = "mt_away_penalty_score")
-    private Integer awayPenaltyScore;
+  @Column(name = "mt_away_extratime_score")
+  private Integer awayExtraTimeScore;
 
-    @Column(name = "mt_attendance")
-    private Integer attendance;
+  @Column(name = "mt_home_penalty_score")
+  private Integer homePenaltyScore;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "referee_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Person referee;
+  @Column(name = "mt_away_penalty_score")
+  private Integer awayPenaltyScore;
 
-    @Column(name = "mt_weather_conditions")
-    private String weatherConditions;
+  @Column(name = "mt_attendance")
+  private Integer attendance;
 
-    @Column(name = "mt_notes", columnDefinition = "TEXT")
-    private String notes;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "referee_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Person referee;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-            matchday,
-            homeTeam,
-            awayTeam,
-            venue,
-            scheduledDate,
-            kickoffTime,
-            status,
-            homeScore,
-            awayScore,
-            homeHalfTimeScore,
-            awayHalfTimeScore,
-            extraTimeAllowed,
-            penaltyShootoutAllowed,
-            homeExtraTimeScore,
-            awayExtraTimeScore,
-            homePenaltyScore,
-            awayPenaltyScore,
-            attendance,
-            referee,
-            weatherConditions,
-            notes
-        );
-    }
+  @Column(name = "mt_weather_conditions")
+  private String weatherConditions;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Match))
-            return false;
-        Match other = (Match) obj;
-        return Objects.equals(matchday, other.matchday)
-            && Objects.equals(homeTeam, other.homeTeam)
-            && Objects.equals(awayTeam, other.awayTeam)
-            && Objects.equals(venue, other.venue)
-            && Objects.equals(scheduledDate, other.scheduledDate)
-            && Objects.equals(kickoffTime, other.kickoffTime)
-            && Objects.equals(status, other.status)
-            && Objects.equals(homeScore, other.homeScore)
-            && Objects.equals(awayScore, other.awayScore)
-            && Objects.equals(homeHalfTimeScore, other.homeHalfTimeScore)
-            && Objects.equals(awayHalfTimeScore, other.awayHalfTimeScore)
-            && Objects.equals(extraTimeAllowed, other.extraTimeAllowed)
-            && Objects.equals(penaltyShootoutAllowed, other.penaltyShootoutAllowed)
-            && Objects.equals(homeExtraTimeScore, other.homeExtraTimeScore)
-            && Objects.equals(awayExtraTimeScore, other.awayExtraTimeScore)
-            && Objects.equals(homePenaltyScore, other.homePenaltyScore)
-            && Objects.equals(awayPenaltyScore, other.awayPenaltyScore)
-            && Objects.equals(attendance, other.attendance)
-            && Objects.equals(referee, other.referee)
-            && Objects.equals(weatherConditions, other.weatherConditions)
-            && Objects.equals(notes, other.notes);
-    }
+  @Column(name = "mt_notes", columnDefinition = "TEXT")
+  private String notes;
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        matchday,
+        homeTeam,
+        awayTeam,
+        venue,
+        scheduledDate,
+        kickoffTime,
+        status,
+        homeScore,
+        awayScore,
+        homeHalfTimeScore,
+        awayHalfTimeScore,
+        extraTimeAllowed,
+        penaltyShootoutAllowed,
+        homeExtraTimeScore,
+        awayExtraTimeScore,
+        homePenaltyScore,
+        awayPenaltyScore,
+        attendance,
+        referee);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Match))
+      return false;
+    Match other = (Match) obj;
+    return Objects.equals(matchday, other.matchday)
+        && Objects.equals(homeTeam, other.homeTeam)
+        && Objects.equals(awayTeam, other.awayTeam)
+        && Objects.equals(venue, other.venue)
+        && Objects.equals(scheduledDate, other.scheduledDate)
+        && Objects.equals(kickoffTime, other.kickoffTime)
+        && Objects.equals(status, other.status)
+        && Objects.equals(homeScore, other.homeScore)
+        && Objects.equals(awayScore, other.awayScore)
+        && Objects.equals(homeHalfTimeScore, other.homeHalfTimeScore)
+        && Objects.equals(awayHalfTimeScore, other.awayHalfTimeScore)
+        && Objects.equals(extraTimeAllowed, other.extraTimeAllowed)
+        && Objects.equals(penaltyShootoutAllowed, other.penaltyShootoutAllowed)
+        && Objects.equals(homeExtraTimeScore, other.homeExtraTimeScore)
+        && Objects.equals(awayExtraTimeScore, other.awayExtraTimeScore)
+        && Objects.equals(homePenaltyScore, other.homePenaltyScore)
+        && Objects.equals(awayPenaltyScore, other.awayPenaltyScore)
+        && Objects.equals(attendance, other.attendance)
+        && Objects.equals(referee, other.referee);
+  }
 
 }

@@ -7,48 +7,123 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.eagle.futbolapi.features.base.enums.EventType;
+import com.eagle.futbolapi.features.base.enums.Period;
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.service.BaseCrudService;
+import com.eagle.futbolapi.features.match.service.MatchService;
+import com.eagle.futbolapi.features.matchevent.dto.MatchEventDTO;
 import com.eagle.futbolapi.features.matchevent.entity.MatchEvent;
+import com.eagle.futbolapi.features.matchevent.mapper.MatchEventMapper;
 import com.eagle.futbolapi.features.matchevent.repository.MatchEventRepository;
-import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
-import com.eagle.futbolapi.features.shared.service.BaseCrudService;
+import com.eagle.futbolapi.features.player.service.PlayerService;
+import com.eagle.futbolapi.features.team.service.TeamService;
 
 @Service
 @Transactional
-public class MatchEventService extends BaseCrudService<MatchEvent, Long> {
+public class MatchEventService extends BaseCrudService<MatchEvent, Long, MatchEventDTO> {
 
-    private final MatchEventRepository matchEventRepository;
+  private final MatchEventRepository matchEventRepository;
+  private final MatchService matchService;
+  private final TeamService teamService;
+  private final PlayerService playerService;
 
-    public MatchEventService(MatchEventRepository matchEventRepository) {
-        super(matchEventRepository);
-        this.matchEventRepository = matchEventRepository;
+  public MatchEventService(MatchEventRepository matchEventRepository, MatchService matchService,
+      TeamService teamService, PlayerService playerService, MatchEventMapper mapper) {
+    super(matchEventRepository, mapper);
+    this.matchEventRepository = matchEventRepository;
+    this.matchService = matchService;
+    this.teamService = teamService;
+    this.playerService = playerService;
+  }
+
+  @Override
+  protected void resolveRelationships(MatchEventDTO dto, MatchEvent matchEvent) {
+    // Map match from ID
+    if (dto.getMatchId() != null) {
+      var match = matchService.getById(dto.getMatchId())
+          .orElseThrow(() -> new ResourceNotFoundException("Match", "id", dto.getMatchId()));
+      matchEvent.setMatch(match);
     }
 
-    @Override
-    public MatchEvent update(Long id, MatchEvent matchEvent) {
-        MatchEvent existing = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-        matchEvent.setCreatedAt(existing.getCreatedAt());
-        matchEvent.setId(id);
-        return super.update(id, matchEvent);
+    // Map team from display name or ID
+    if (dto.getTeamDisplayName() != null && !dto.getTeamDisplayName().trim().isEmpty()) {
+      var team = teamService.getByDisplayName(dto.getTeamDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Team", "displayName", dto.getTeamDisplayName()));
+      matchEvent.setTeam(team);
+    } else if (dto.getTeamId() != null) {
+      var team = teamService.getById(dto.getTeamId())
+          .orElseThrow(() -> new ResourceNotFoundException("Team", "id", dto.getTeamId()));
+      matchEvent.setTeam(team);
     }
 
-    @Override
-    protected boolean isDuplicate(@NotNull MatchEvent matchEvent) {
-        Objects.requireNonNull(matchEvent, "MatchEvent cannot be null");
-
-        // For now, no strict duplicate check - business logic specific
-        return false;
+    // Map player from display name or ID
+    if (dto.getPlayerDisplayName() != null && !dto.getPlayerDisplayName().trim().isEmpty()) {
+      var player = playerService.getByPersonDisplayName(dto.getPlayerDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Player", "playerDisplayName", dto.getPlayerDisplayName()));
+      matchEvent.setPlayer(player);
+    } else if (dto.getPlayerId() != null) {
+      var player = playerService.getById(dto.getPlayerId())
+          .orElseThrow(() -> new ResourceNotFoundException("Player", "id", dto.getPlayerId()));
+      matchEvent.setPlayer(player);
     }
 
-    @Override
-    protected boolean isDuplicate(Long id, @NotNull MatchEvent matchEvent) {
-        Objects.requireNonNull(id, "ID cannot be null");
-        Objects.requireNonNull(matchEvent, "MatchEvent details cannot be null");
-
-        MatchEvent existingMatchEvent = getById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("MatchEvent", "id", id));
-
-        // For updates, no strict duplicate check - business logic specific
-        return false;
+    // Map assist player from display name or ID
+    if (dto.getAssistPlayerDisplayName() != null && !dto.getAssistPlayerDisplayName().trim().isEmpty()) {
+      var assistPlayer = playerService.getByPersonDisplayName(dto.getAssistPlayerDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Assist Player", "playerDisplayName",
+              dto.getAssistPlayerDisplayName()));
+      matchEvent.setAssistPlayer(assistPlayer);
+    } else if (dto.getAssistPlayerId() != null) {
+      var assistPlayer = playerService.getById(dto.getAssistPlayerId())
+          .orElseThrow(() -> new ResourceNotFoundException("Assist Player", "id", dto.getAssistPlayerId()));
+      matchEvent.setAssistPlayer(assistPlayer);
     }
+
+    // Map substitute player from display name or ID
+    if (dto.getSubstitutePlayerDisplayName() != null && !dto.getSubstitutePlayerDisplayName().trim().isEmpty()) {
+      var substitutePlayer = playerService.getByPersonDisplayName(dto.getSubstitutePlayerDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Substitute Player", "playerDisplayName",
+              dto.getSubstitutePlayerDisplayName()));
+      matchEvent.setSubstitutePlayer(substitutePlayer);
+    } else if (dto.getSubstitutePlayerId() != null) {
+      var substitutePlayer = playerService.getById(dto.getSubstitutePlayerId())
+          .orElseThrow(() -> new ResourceNotFoundException("Substitute Player", "id", dto.getSubstitutePlayerId()));
+      matchEvent.setSubstitutePlayer(substitutePlayer);
+    }
+
+    // Map event type from string
+    if (dto.getType() != null && !dto.getType().trim().isEmpty()) {
+      matchEvent.setType(EventType.valueOf(dto.getType().toUpperCase()));
+    }
+
+    // Map period from string
+    if (dto.getPeriod() != null && !dto.getPeriod().trim().isEmpty()) {
+      matchEvent.setPeriod(Period.valueOf(dto.getPeriod().toUpperCase()));
+    }
+  }
+
+  @Override
+  protected boolean isDuplicate(@NotNull MatchEvent matchEvent) {
+    Objects.requireNonNull(matchEvent, "MatchEvent cannot be null");
+    // A match event is unique by match, player, type, and minute
+    return matchEvent.getMatch() != null && matchEvent.getPlayer() != null && matchEvent.getType() != null
+        && matchEvent.getMinute() != null
+        && matchEventRepository.existsByMatchIdAndPlayerIdAndTypeAndMinute(
+            matchEvent.getMatch().getId(), matchEvent.getPlayer().getId(), matchEvent.getType(),
+            matchEvent.getMinute());
+  }
+
+  @Override
+  protected boolean isDuplicate(@NotNull Long id, @NotNull MatchEvent matchEvent) {
+    Objects.requireNonNull(id, "ID cannot be null");
+    Objects.requireNonNull(matchEvent, "MatchEvent cannot be null");
+
+    return matchEvent.getMatch() != null && matchEvent.getPlayer() != null && matchEvent.getType() != null
+        && matchEvent.getMinute() != null
+        && matchEventRepository.existsByMatchIdAndPlayerIdAndTypeAndMinuteAndIdNot(
+            matchEvent.getMatch().getId(), matchEvent.getPlayer().getId(), matchEvent.getType(),
+            matchEvent.getMinute(), id);
+  }
+
 }

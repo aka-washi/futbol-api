@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.shared.BaseEntity;
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.stage.entity.Stage;
 import com.eagle.futbolapi.features.team.entity.Team;
 
@@ -118,6 +118,9 @@ public class Standing extends BaseEntity {
   @Builder.Default
   private Integer awayLost = 0;
 
+  @Column(name = "sd_notes", length = 255)
+  private String notes;
+
   @Override
   public int hashCode() {
     return Objects.hash(
@@ -138,8 +141,7 @@ public class Standing extends BaseEntity {
         homeLost,
         awayWon,
         awayDrawn,
-        awayLost
-    );
+        awayLost);
   }
 
   @Override

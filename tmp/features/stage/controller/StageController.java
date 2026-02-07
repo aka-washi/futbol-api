@@ -1,83 +1,55 @@
 package com.eagle.futbolapi.features.stage.controller;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eagle.futbolapi.features.shared.controller.BaseCrudController;
-import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.controller.BaseCrudController;
+import com.eagle.futbolapi.features.base.dto.ApiResponse;
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.util.ResponseUtil;
 import com.eagle.futbolapi.features.stage.dto.StageDTO;
 import com.eagle.futbolapi.features.stage.entity.Stage;
+import com.eagle.futbolapi.features.stage.mapper.StageMapper;
 import com.eagle.futbolapi.features.stage.service.StageService;
 
+@Validated
 @RestController
 @RequestMapping("/stages")
-@Validated
-public class StageController extends BaseCrudController<Stage, StageDTO, StageService, Object> {
+public class StageController extends BaseCrudController<Stage, StageDTO, StageService, StageMapper> {
 
-    public StageController(StageService stageService) {
-        super(
-                stageService,
-                null, // Mapper not available yet
-                "Stage",
-                "Stage retrieved successfully",
-                "Stage already exists",
-                "SERVER_ERROR");
-    }
+  private static final String RESOURCE_NAME = "Stage";
+  private static final String SUCCESS_MESSAGE = "Stage(s) retrieved successfully";
+  private static final String DUPLICATE_MESSAGE = "Stage already exists";
+  private static final String SERVER_ERROR = "SERVER_ERROR";
 
-    // Implement abstract methods from BaseCrudController
-    @Override
-    protected Page<Stage> getAllEntities(Pageable pageable) {
-        return service.getAll(pageable);
-    }
+  public StageController(StageService stageService, StageMapper stageMapper) {
+    super(
+        stageService,
+        stageMapper,
+        RESOURCE_NAME,
+        SUCCESS_MESSAGE,
+        DUPLICATE_MESSAGE,
+        SERVER_ERROR);
+  }
 
-    @Override
-    protected Stage getEntityById(Long id) {
-        return service.getById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id));
-    }
+  @GetMapping("/name/{name}")
+  public ResponseEntity<ApiResponse<StageDTO>> getStageByName(@PathVariable String name) {
+    Stage stage = service.getStageByName(name)
+        .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "name", name));
+    StageDTO stageDTO = mapper.toDTO(stage);
+    return ResponseUtil.success(stageDTO, SUCCESS_MESSAGE);
+  }
 
-    @Override
-    protected Stage createEntity(Stage entity) {
-        return service.create(entity);
-    }
+  @GetMapping("/displayName/{displayName}")
+  public ResponseEntity<ApiResponse<StageDTO>> getStageByDisplayName(@PathVariable String displayName) {
+    Stage stage = service.getStageByDisplayName(displayName)
+        .orElseThrow(() -> new ResourceNotFoundException(RESOURCE_NAME, "displayName", displayName));
+    StageDTO stageDTO = mapper.toDTO(stage);
+    return ResponseUtil.success(stageDTO, SUCCESS_MESSAGE);
+  }
 
-    @Override
-    protected Stage updateEntity(Long id, Stage entity) {
-        return service.update(id, entity);
-    }
-
-    @Override
-    protected void deleteEntity(Long id) {
-        service.delete(id);
-    }
-
-    @Override
-    protected boolean existsById(Long id) {
-        return service.existsById(id);
-    }
-
-    @Override
-    protected StageDTO toDTO(Stage entity) {
-        // Simple DTO conversion (would be better with mapper)
-        return StageDTO.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .createdAt(entity.getCreatedAt())
-                .createdBy(entity.getCreatedBy())
-                .updatedAt(entity.getUpdatedAt())
-                .updatedBy(entity.getUpdatedBy())
-                .build();
-    }
-
-    @Override
-    protected Stage toEntity(StageDTO dto) {
-        // Simple entity conversion (would be better with mapper)
-        return Stage.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .build();
-    }
 }

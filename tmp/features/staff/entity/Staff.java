@@ -17,8 +17,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.StaffRole;
 import com.eagle.futbolapi.features.person.entity.Person;
-import com.eagle.futbolapi.features.shared.BaseEntity;
 import com.eagle.futbolapi.features.team.entity.Team;
 
 import lombok.AllArgsConstructor;
@@ -70,8 +71,7 @@ public class Staff extends BaseEntity {
         person,
         role,
         currentTeam,
-        active
-    );
+        active);
   }
 
   @Override

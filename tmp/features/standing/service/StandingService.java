@@ -1,99 +1,106 @@
 package com.eagle.futbolapi.features.standing.service;
 
+import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
-import com.eagle.futbolapi.features.shared.service.BaseCrudService;
-import com.eagle.futbolapi.features.stage.entity.Stage;
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.stage.service.StageService;
+import com.eagle.futbolapi.features.standing.dto.StandingDTO;
 import com.eagle.futbolapi.features.standing.entity.Standing;
+import com.eagle.futbolapi.features.standing.mapper.StandingMapper;
 import com.eagle.futbolapi.features.standing.repository.StandingRepository;
-import com.eagle.futbolapi.features.team.entity.Team;
 import com.eagle.futbolapi.features.team.service.TeamService;
 
 @Service
 @Transactional
-public class StandingService extends BaseCrudService<Standing, Long> {
+public class StandingService extends BaseCrudService<Standing, Long, StandingDTO> {
 
-    private final StandingRepository standingRepository;
-    private final StageService stageService;
-    private final TeamService teamService;
+  private final StandingRepository standingRepository;
+  private final StageService stageService;
+  private final TeamService teamService;
 
-    public StandingService(StandingRepository standingRepository, StageService stageService, TeamService teamService) {
-        super(standingRepository);
-        this.standingRepository = standingRepository;
-        this.stageService = stageService;
-        this.teamService = teamService;
+  public StandingService(StandingRepository standingRepository, StageService stageService,
+      TeamService teamService, StandingMapper mapper) {
+    super(standingRepository, mapper);
+    this.standingRepository = standingRepository;
+    this.stageService = stageService;
+    this.teamService = teamService;
+  }
+
+  public Page<Standing> getByStageIdOrderByPosition(Long stageId, Pageable pageable) {
+    if (stageId == null) {
+      throw new IllegalArgumentException("Stage ID cannot be null");
+    }
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    return standingRepository.findByStageIdOrderByPosition(stageId, pageable);
+  }
+
+  public Page<Standing> getByStageIdOrderByPointsDesc(Long stageId, Pageable pageable) {
+    if (stageId == null) {
+      throw new IllegalArgumentException("Stage ID cannot be null");
+    }
+    if (pageable == null) {
+      pageable = Pageable.unpaged();
+    }
+    return standingRepository.findByStageIdOrderByPointsDesc(stageId, pageable);
+  }
+
+  @Override
+  protected void resolveRelationships(StandingDTO dto, Standing standing) {
+    // Map stage from ID
+    if (dto.getStageId() != null) {
+      var stage = stageService.getById(dto.getStageId())
+          .orElseThrow(() -> new ResourceNotFoundException("Stage", "id", dto.getStageId()));
+      standing.setStage(stage);
     }
 
-    // Helper methods to resolve dependencies by name/displayName
-    public Optional<Stage> resolveStageByName(String stageName) {
-        if (stageName == null || stageName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Stage name cannot be null or empty");
-        }
-        return stageService.getStageByName(stageName);
+    // Map team from display name or ID
+    if (dto.getTeamDisplayName() != null && !dto.getTeamDisplayName().trim().isEmpty()) {
+      var team = teamService.getByDisplayName(dto.getTeamDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Team", "displayName", dto.getTeamDisplayName()));
+      standing.setTeam(team);
+    } else if (dto.getTeamId() != null) {
+      var team = teamService.getById(dto.getTeamId())
+          .orElseThrow(() -> new ResourceNotFoundException("Team", "id", dto.getTeamId()));
+      standing.setTeam(team);
     }
+  }
 
-    public Optional<Stage> resolveStageByDisplayName(String displayName) {
-        if (displayName == null || displayName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Stage display name cannot be null or empty");
-        }
-        return stageService.getStageByDisplayName(displayName);
+  @Override
+  protected boolean isDuplicate(@NotNull Standing standing) {
+    Objects.requireNonNull(standing, "Standing cannot be null");
+
+    // Check composite unique constraint: stage + team
+    if (standing.getStage() != null && standing.getTeam() != null) {
+      return existsByUniqueFields(Map.of(
+          "stage.id", standing.getStage().getId(),
+          "team.id", standing.getTeam().getId()));
     }
+    return false;
+  }
 
-    public Optional<Team> resolveTeamByName(String teamName) {
-        if (teamName == null || teamName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Team name cannot be null or empty");
-        }
-        return teamService.getTeamByName(teamName);
+  @Override
+  protected boolean isDuplicate(@NotNull Long id, @NotNull Standing standing) {
+    Objects.requireNonNull(id, "ID cannot be null");
+    Objects.requireNonNull(standing, "Standing cannot be null");
+
+    // Check composite unique constraint: stage + team (excluding current ID)
+    if (standing.getStage() != null && standing.getTeam() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of(
+          "stage.id", standing.getStage().getId(),
+          "team.id", standing.getTeam().getId()), id);
     }
+    return false;
+  }
 
-    public Optional<Team> resolveTeamByDisplayName(String displayName) {
-        if (displayName == null || displayName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Team display name cannot be null or empty");
-        }
-        return teamService.getTeamByDisplayName(displayName);
-    }
-
-    public Optional<Team> resolveTeamByCode(String teamCode) {
-        if (teamCode == null || teamCode.trim().isEmpty()) {
-            throw new IllegalArgumentException("Team code cannot be null or empty");
-        }
-        return teamService.getTeamByCode(teamCode);
-    }
-
-    @Override
-    public Standing update(Long id, Standing standing) {
-        Standing existing = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-        standing.setCreatedAt(existing.getCreatedAt());
-        standing.setId(id);
-        return super.update(id, standing);
-    }
-
-    @Override
-    protected boolean isDuplicate(@NotNull Standing standing) {
-        Objects.requireNonNull(standing, "Standing cannot be null");
-
-        // For now, no strict duplicate check - business logic specific
-        return false;
-    }
-
-    @Override
-    protected boolean isDuplicate(Long id, @NotNull Standing standing) {
-        Objects.requireNonNull(id, "ID cannot be null");
-        Objects.requireNonNull(standing, "Standing details cannot be null");
-
-        Standing existingStanding = getById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Standing", "id", id));
-
-        // For updates, no strict duplicate check - business logic specific
-        return false;
-    }
 }

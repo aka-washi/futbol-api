@@ -16,9 +16,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.LineupType;
 import com.eagle.futbolapi.features.match.entity.Match;
 import com.eagle.futbolapi.features.player.entity.Player;
-import com.eagle.futbolapi.features.shared.BaseEntity;
 import com.eagle.futbolapi.features.team.entity.Team;
 
 import lombok.AllArgsConstructor;
@@ -76,21 +77,20 @@ public class Lineup extends BaseEntity {
     @Builder.Default
     private Boolean captain = false;
 
-    @Column(name = "lu_order_num")
-    private Integer orderNum; // Position in the lineup
+    @Column(name = "lu_order_number")
+    private Integer orderNumber; // Position in the lineup
 
     @Override
     public int hashCode() {
         return Objects.hash(
-            match,
-            team,
-            player,
-            type,
-            position,
-            jerseyNumber,
-            captain,
-            orderNum
-        );
+                match,
+                team,
+                player,
+                type,
+                position,
+                jerseyNumber,
+                captain,
+                orderNumber);
     }
 
     @Override
@@ -101,12 +101,12 @@ public class Lineup extends BaseEntity {
             return false;
         Lineup other = (Lineup) obj;
         return Objects.equals(match, other.match)
-            && Objects.equals(team, other.team)
-            && Objects.equals(player, other.player)
-            && Objects.equals(type, other.type)
-            && Objects.equals(position, other.position)
-            && Objects.equals(jerseyNumber, other.jerseyNumber)
-            && Objects.equals(captain, other.captain)
-            && Objects.equals(orderNum, other.orderNum);
+                && Objects.equals(team, other.team)
+                && Objects.equals(player, other.player)
+                && Objects.equals(type, other.type)
+                && Objects.equals(position, other.position)
+                && Objects.equals(jerseyNumber, other.jerseyNumber)
+                && Objects.equals(captain, other.captain)
+                && Objects.equals(orderNumber, other.orderNumber);
     }
 }

@@ -1,93 +1,85 @@
 package com.eagle.futbolapi.features.player.service;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eagle.futbolapi.features.person.entity.Person;
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
+import com.eagle.futbolapi.features.base.service.BaseCrudService;
+import com.eagle.futbolapi.features.person.service.PersonService;
+import com.eagle.futbolapi.features.player.dto.PlayerDTO;
 import com.eagle.futbolapi.features.player.entity.Player;
+import com.eagle.futbolapi.features.player.mapper.PlayerMapper;
 import com.eagle.futbolapi.features.player.repository.PlayerRepository;
-import com.eagle.futbolapi.features.shared.exception.ResourceNotFoundException;
-import com.eagle.futbolapi.features.shared.service.BaseCrudService;
-import com.eagle.futbolapi.features.team.entity.Team;
+import com.eagle.futbolapi.features.team.service.TeamService;
 
 @Service
 @Transactional
-public class PlayerService extends BaseCrudService<Player, Long> {
+public class PlayerService extends BaseCrudService<Player, Long, PlayerDTO> {
 
-    private final PlayerRepository playerRepository;
+  private final PlayerRepository playerRepository;
+  private final PersonService personService;
+  private final TeamService teamService;
 
-    public PlayerService(PlayerRepository playerRepository) {
-        super(playerRepository);
-        this.playerRepository = playerRepository;
+  public PlayerService(PlayerRepository playerRepository, PersonService personService,
+      TeamService teamService, PlayerMapper mapper) {
+    super(playerRepository, mapper);
+    this.playerRepository = playerRepository;
+    this.personService = personService;
+    this.teamService = teamService;
+  }
+
+  public Optional<Player> getByPersonDisplayName(String personDisplayName) {
+    return playerRepository.findByPersonDisplayName(personDisplayName);
+  }
+
+  @Override
+  protected void resolveRelationships(PlayerDTO dto, Player player) {
+    // Map person from ID
+    if (dto.getPersonId() != null) {
+      var person = personService.getById(dto.getPersonId())
+          .orElseThrow(() -> new ResourceNotFoundException("Person", "id", dto.getPersonId()));
+      player.setPerson(person);
     }
 
-    public List<Player> searchPlayersByDisplayName(String searchTerm) {
-        if (searchTerm == null || searchTerm.trim().isEmpty()) {
-            throw new IllegalArgumentException("Search term cannot be null or empty");
-        }
-        return playerRepository.findByDisplayNameContainingIgnoreCase(searchTerm);
+    // Map current team from display name or ID
+    if (dto.getCurrentTeamDisplayName() != null && !dto.getCurrentTeamDisplayName().trim().isEmpty()) {
+      var team = teamService.getByDisplayName(dto.getCurrentTeamDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Team", "displayName", dto.getCurrentTeamDisplayName()));
+      player.setCurrentTeam(team);
+    } else if (dto.getCurrentTeamId() != null) {
+      var team = teamService.getById(dto.getCurrentTeamId())
+          .orElseThrow(() -> new ResourceNotFoundException("Team", "id", dto.getCurrentTeamId()));
+      player.setCurrentTeam(team);
     }
+  }
 
-    public List<Player> getPlayersByDisplayName(String displayName) {
-        if (displayName == null || displayName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Display name cannot be null or empty");
-        }
-        return playerRepository.findByDisplayName(displayName);
+  @Override
+  protected boolean isDuplicate(@NotNull Player player) {
+    Objects.requireNonNull(player, "Player cannot be null");
+
+    // Check unique constraint: person
+    if (player.getPerson() != null) {
+      return existsByUniqueFields(Map.of("person.id", player.getPerson().getId()));
     }
+    return false;
+  }
 
-    public List<Player> getPlayersByPerson(Person person) {
-        if (person == null) {
-            throw new IllegalArgumentException("Person cannot be null");
-        }
-        return playerRepository.findByPerson(person);
+  @Override
+  protected boolean isDuplicate(@NotNull Long id, @NotNull Player player) {
+    Objects.requireNonNull(id, "ID cannot be null");
+    Objects.requireNonNull(player, "Player cannot be null");
+
+    // Check unique constraint: person (excluding current ID)
+    if (player.getPerson() != null) {
+      return existsByUniqueFieldsAndNotId(Map.of("person.id", player.getPerson().getId()), id);
     }
+    return false;
+  }
 
-    public List<Player> getPlayersByCurrentTeam(Team currentTeam) {
-        if (currentTeam == null) {
-            throw new IllegalArgumentException("Current team cannot be null");
-        }
-        return playerRepository.findByCurrentTeam(currentTeam);
-    }
-
-    public List<Player> getPlayersByCurrentTeamId(Long currentTeamId) {
-        if (currentTeamId == null) {
-            throw new IllegalArgumentException("Current team ID cannot be null");
-        }
-        return playerRepository.findByCurrentTeamId(currentTeamId);
-    }
-
-    @Override
-    public Player update(Long id, Player player) {
-        Player existing = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Entity with given ID does not exist"));
-        player.setCreatedAt(existing.getCreatedAt());
-        player.setId(id);
-        return super.update(id, player);
-    }
-
-    @Override
-    protected boolean isDuplicate(@NotNull Player player) {
-        Objects.requireNonNull(player, "Player cannot be null");
-
-        // Players can have same names, jersey numbers can be repeated across teams
-        // For now, no strict duplicate check - business logic specific
-        return false;
-    }
-
-    @Override
-    protected boolean isDuplicate(Long id, @NotNull Player player) {
-        Objects.requireNonNull(id, "ID cannot be null");
-        Objects.requireNonNull(player, "Player details cannot be null");
-
-        Player existingPlayer = getById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Player", "id", id));
-
-        // For updates, no strict duplicate check - business logic specific
-        return false;
-    }
 }

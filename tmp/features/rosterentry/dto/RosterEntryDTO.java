@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,15 +16,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@AtLeastOneNotNull.List({
+        @AtLeastOneNotNull(fields = { "seasonId",
+                "seasonDisplayName" }, message = "Either seasonId or seasonDisplayName must be provided"),
+        @AtLeastOneNotNull(fields = { "teamId",
+                "teamDisplayName" }, message = "Either teamId or teamDisplayName must be provided")
+})
 public class RosterEntryDTO {
 
     private Long id;
 
-    @NotNull(message = "Season is required")
     private Long seasonId;
     private String seasonDisplayName;
 
-    @NotNull(message = "Team is required")
     private Long teamId;
     private String teamDisplayName;
 
@@ -32,11 +38,11 @@ public class RosterEntryDTO {
     private Long staffId;
     private String staffDisplayName;
 
-    @NotNull(message = "Entry date is required")
-    private LocalDate entryDate;
-
-    private LocalDate exitDate;
     private Integer jerseyNumber;
+
+    @NotNull(message = "Joined date is required")
+    private LocalDate joinedDate;
+    private LocalDate leftDate;
     private Boolean active;
 
     private LocalDateTime createdAt;

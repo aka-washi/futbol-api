@@ -19,8 +19,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.Gender;
 import com.eagle.futbolapi.features.country.entity.Country;
-import com.eagle.futbolapi.features.shared.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -60,6 +62,7 @@ public class Person extends BaseEntity {
   private static final int LETTER_OFFSET = 1;
 
   @Column(name = "ps_unique_reg_key", unique = true, nullable = false, length = 20)
+  @UniqueField
   private String uniqueRegKey;
 
   @Column(name = "ps_first_name", nullable = false, length = 50)
@@ -82,6 +85,7 @@ public class Person extends BaseEntity {
   private Gender gender;
 
   @Column(name = "ps_email", unique = true, nullable = true, length = 100)
+  @UniqueField
   private String email;
 
   @Column(name = "ps_birth_date")
