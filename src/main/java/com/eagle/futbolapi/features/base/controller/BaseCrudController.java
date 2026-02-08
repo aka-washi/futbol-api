@@ -70,7 +70,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
       @RequestParam(defaultValue = DEFAULT_SORT_DIRECTION) String sortDir) {
     Pageable pageable = ResponseUtil.buildPageable(page, size, sortBy, sortDir);
     Page<E> entityPage = service.getAll(pageable);
-    Page<D> dtoPage = entityPage.map(mapper::toDTO);
+    Page<D> dtoPage = entityPage.map(mapper::toDto);
     return ResponseUtil.successWithPaginationDto(dtoPage, successMessage);
   }
 
@@ -78,7 +78,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
   public ResponseEntity<ApiResponse<D>> getById(@PathVariable Long id) {
     E entity = service.getById(id)
         .orElseThrow(() -> new ResourceNotFoundException(resourceName, "id", id));
-    D dto = mapper.toDTO(entity);
+    D dto = mapper.toDto(entity);
     return ResponseUtil.success(dto, successMessage);
   }
 
@@ -86,7 +86,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
   public ResponseEntity<ApiResponse<D>> create(@Valid @RequestBody D dto) {
     try {
       E savedEntity = service.create(dto);
-      D savedDto = mapper.toDTO(savedEntity);
+      D savedDto = mapper.toDto(savedEntity);
       return ResponseUtil.created(savedDto, resourceName + " created successfully");
     } catch (DuplicateResourceException e) {
       return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -101,7 +101,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
   public ResponseEntity<ApiResponse<D>> update(@PathVariable Long id, @Valid @RequestBody D dto) {
     try {
       E updatedEntity = service.update(id, dto);
-      D updatedDto = mapper.toDTO(updatedEntity);
+      D updatedDto = mapper.toDto(updatedEntity);
       return ResponseUtil.success(updatedDto, resourceName + " updated successfully");
     } catch (NoChangesDetectedException e) {
       return ResponseEntity.status(HttpStatus.NOT_MODIFIED)
@@ -119,7 +119,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
   public ResponseEntity<ApiResponse<D>> patch(@PathVariable Long id, @RequestBody D dto) {
     try {
       E patchedEntity = service.patch(id, dto);
-      D patchedDto = mapper.toDTO(patchedEntity);
+      D patchedDto = mapper.toDto(patchedEntity);
       return ResponseUtil.success(patchedDto, resourceName + " updated successfully");
     } catch (NoChangesDetectedException e) {
       return ResponseEntity.status(HttpStatus.NOT_MODIFIED)

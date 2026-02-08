@@ -14,7 +14,7 @@ public interface BaseMapper<E, D> {
    * @param entity the entity to convert
    * @return the DTO
    */
-  D toDTO(E entity);
+  D toDto(E entity);
 
   /**
    * Converts a DTO to an entity.
