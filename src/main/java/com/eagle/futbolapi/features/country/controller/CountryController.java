@@ -20,8 +20,8 @@ public class CountryController extends BaseCrudController<Country, CountryDto, C
   private static final String DUPLICATE_MESSAGE = "Country already exists";
   private static final String SERVER_ERROR = "SERVER_ERROR";
 
-    protected CountryController(CountryService service, CountryMapper mapper) {
-        super(service, mapper, RESOURCE_NAME, SUCCESS_MESSAGE, DUPLICATE_MESSAGE, SERVER_ERROR);
-    }
+  protected CountryController(CountryService service, CountryMapper mapper) {
+    super(service, mapper, RESOURCE_NAME, SUCCESS_MESSAGE, DUPLICATE_MESSAGE, SERVER_ERROR);
+  }
 
 }
