@@ -62,7 +62,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
   }
 
   @GetMapping
-  public ResponseEntity<ApiResponse<Page<D>>> getAll(
+  public ResponseEntity<ApiResponse<PageResponseDTO<D>>> getAll(
       @RequestParam(defaultValue = DEFAULT_PAGE) @Min(MIN_DEFAULT_PAGE) int page,
       @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) @Min(MIN_PAGE_SIZE) int size,
       @RequestParam(defaultValue = DEFAULT_SORT_FIELD) String sortBy,
@@ -70,7 +70,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
     Pageable pageable = ResponseUtil.buildPageable(page, size, sortBy, sortDir);
     Page<E> entityPage = service.getAll(pageable);
     Page<D> dtoPage = entityPage.map(mapper::toDTO);
-    return ResponseUtil.successWithPagination(dtoPage, successMessage);
+    return ResponseUtil.successWithPaginationDto(dtoPage, successMessage);
   }
 
   @GetMapping("/{id}")

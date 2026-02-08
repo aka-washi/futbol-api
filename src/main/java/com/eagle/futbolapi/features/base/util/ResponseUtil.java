@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.eagle.futbolapi.features.base.dto.ApiResponse;
 import com.eagle.futbolapi.features.base.dto.PaginationInfo;
+import com.eagle.futbolapi.features.base.dto.PageResponseDto;
 
 /**
  * Utility class for building standardized API responses.
@@ -38,28 +39,37 @@ public final class ResponseUtil {
   /**
    * Build a successful response with paginated data
    */
-  public static <T> ResponseEntity<ApiResponse<Page<T>>> successWithPagination(
+    public static <T> ResponseEntity<ApiResponse<PageResponseDto<T>>> successWithPaginationDto(
       Page<T> page, String message) {
     PaginationInfo paginationInfo = PaginationInfo.builder()
-        .page(page.getNumber())
-        .size(page.getSize())
-        .totalElements(page.getTotalElements())
-        .totalPages(page.getTotalPages())
-        .first(page.isFirst())
-        .last(page.isLast())
-        .hasNext(page.hasNext())
-        .hasPrevious(page.hasPrevious())
-        .build();
+      .page(page.getNumber())
+      .size(page.getSize())
+      .totalElements(page.getTotalElements())
+      .totalPages(page.getTotalPages())
+      .first(page.isFirst())
+      .last(page.isLast())
+      .hasNext(page.hasNext())
+      .hasPrevious(page.hasPrevious())
+      .build();
 
-    ApiResponse<Page<T>> response = ApiResponse.<Page<T>>builder()
-        .success(true)
-        .message(message)
-        .data(page)
-        .pagination(paginationInfo)
-        .build();
+    PageResponseDto<T> pageResponseDTO = new PageResponseDto<>(
+      page.getContent(),
+      page.getNumber(),
+      page.getSize(),
+      page.getTotalElements(),
+      page.getTotalPages(),
+      page.isLast()
+    );
+
+    ApiResponse<PageResponseDto<T>> response = ApiResponse.<PageResponseDto<T>>builder()
+      .success(true)
+      .message(message)
+      .data(pageResponseDTO)
+      .pagination(paginationInfo)
+      .build();
 
     return ResponseEntity.ok(response);
-  }
+    }
 
   /**
    * Build a created response (201)
