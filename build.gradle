@@ -38,6 +38,9 @@ dependencies {
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
     runtimeOnly 'com.h2database:h2'
 
+    // H2 Console for development
+    implementation 'org.springframework.boot:spring-boot-h2console'
+
     // Additional utilities
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
