@@ -23,19 +23,19 @@ import lombok.experimental.SuperBuilder;
  * Entity class representing a Country in the football database.
  * Stores information about countries including their names, codes, and flag
  * URLs.
- * 
+ *
  * <p>
  * This entity enforces uniqueness constraints on name, display name, code, and
  * ISO code
  * to prevent duplicate country entries. The {@link UniqueField} annotation is
  * used
  * to enable automatic duplicate detection.
- * 
+ *
  * <p>
  * Column names follow the naming convention with 'cty_' prefix.
  * All base entity fields (id, timestamps, audit fields) are mapped with
  * attribute overrides.
- * 
+ *
  * @see BaseEntity
  * @see com.eagle.futbolapi.features.country.dto.CountryDto
  */

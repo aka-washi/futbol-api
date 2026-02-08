@@ -23,21 +23,21 @@ import lombok.experimental.SuperBuilder;
  * Entity class representing a Season in the football database.
  * Stores information about football seasons, which are time periods
  * during which competitions are organized.
- * 
+ *
  * <p>
  * This entity enforces uniqueness constraints on both name and display name
  * to prevent duplicate season entries. The {@link UniqueField} annotation is
  * used
  * to enable automatic duplicate detection.
- * 
+ *
  * <p>
  * Column names follow the naming convention with 'ssn_' prefix.
  * All base entity fields (id, timestamps, audit fields) are mapped with
  * attribute overrides.
- * 
+ *
  * <p>
  * Examples of season names: "2023-2024", "2024/25", "Summer 2024"
- * 
+ *
  * @see BaseEntity
  * @see com.eagle.futbolapi.features.season.dto.SeasonDto
  */

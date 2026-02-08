@@ -44,7 +44,9 @@
       {"name": "pointsForDraw","type": "integer","label": "Points for Draw","required": true,"default": 1},
       {"name": "pointsForLoss","type": "integer","label": "Points for Loss","required": true,"default": 0},
       {"name": "pointsForWinOnPenalties","type": "integer","label": "Points for Win on Penalties"},
-      {"name": "pointsForLossOnPenalties","type": "integer","label": "Points for Loss on Penalties"}
+      {"name": "pointsForLossOnPenalties","type": "integer","label": "Points for Loss on Penalties"},
+      {"name": "pointsForForfeitWin","type": "integer","label": "Points for Forfeit Win"},
+      {"name": "pointsForForfeitLoss","type": "integer","label": "Points for Forfeit Loss"}
     ]
   },
   {

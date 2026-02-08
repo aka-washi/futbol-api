@@ -15,13 +15,13 @@ import com.eagle.futbolapi.features.season.service.SeasonService;
  * <li>Updating existing seasons</li>
  * <li>Deleting seasons</li>
  * </ul>
- * 
+ *
  * <p>
  * All endpoints are mapped under the {@code /seasons} base path.
  * Request and response bodies use {@link SeasonDto} for data transfer.
  * Input validation is performed automatically using Bean Validation
  * annotations.
- * 
+ *
  * @see SeasonDto
  * @see SeasonService
  * @see BaseCrudController
@@ -35,7 +35,7 @@ public class SeasonController extends BaseCrudController<Season, SeasonDto, Seas
 
   /**
    * Constructs a new SeasonController with the required dependencies.
-   * 
+   *
    * @param service the SeasonService instance for business logic operations
    * @param mapper  the SeasonMapper instance for entity-DTO conversions
    */

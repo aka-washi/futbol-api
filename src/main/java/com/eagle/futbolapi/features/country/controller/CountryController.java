@@ -19,13 +19,13 @@ import com.eagle.futbolapi.features.country.service.CountryService;
  * <li>Updating existing countries</li>
  * <li>Deleting countries</li>
  * </ul>
- * 
+ *
  * <p>
  * All endpoints are mapped under the {@code /countries} base path.
  * Request and response bodies use {@link CountryDto} for data transfer.
  * Input validation is performed automatically using Bean Validation
  * annotations.
- * 
+ *
  * @see CountryDto
  * @see CountryService
  * @see BaseCrudController
@@ -42,7 +42,7 @@ public class CountryController extends BaseCrudController<Country, CountryDto, C
 
   /**
    * Constructs a new CountryController with the required dependencies.
-   * 
+   *
    * @param service the CountryService instance for business logic operations
    * @param mapper  the CountryMapper instance for entity-DTO conversions
    */

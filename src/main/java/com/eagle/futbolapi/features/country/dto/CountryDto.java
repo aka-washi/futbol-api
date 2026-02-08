@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
  * Data Transfer Object for Country entities.
  * Used for transferring country data between the API layer and clients.
  * Contains validation constraints to ensure data integrity.
- * 
+ *
  * <p>
  * This DTO includes both entity metadata (ID, timestamps, audit fields)
  * and country-specific information (name, codes, flag URL).
- * 
+ *
  * @see com.eagle.futbolapi.features.country.entity.Country
  */
 @Data

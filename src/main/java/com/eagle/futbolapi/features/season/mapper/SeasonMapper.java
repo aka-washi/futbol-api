@@ -11,11 +11,11 @@ import com.eagle.futbolapi.features.season.entity.Season;
  * MapStruct mapper for converting between Season entities and SeasonDto
  * objects.
  * Provides bidirectional mapping functionality with automatic field mapping.
- * 
+ *
  * <p>
  * This mapper is automatically implemented by MapStruct at compile time
  * and registered as a Spring bean through the component model configuration.
- * 
+ *
  * @see Season
  * @see SeasonDto
  * @see BaseMapper
@@ -25,7 +25,7 @@ public interface SeasonMapper extends BaseMapper<Season, SeasonDto> {
 
   /**
    * Converts a Season entity to a SeasonDto.
-   * 
+   *
    * @param season the Season entity to convert
    * @return the corresponding SeasonDto, or null if season is null
    */
@@ -33,10 +33,10 @@ public interface SeasonMapper extends BaseMapper<Season, SeasonDto> {
 
   /**
    * Converts a SeasonDto to a Season entity.
-   * 
-   * @param seasonDTO the SeasonDto to convert
-   * @return the corresponding Season entity, or null if seasonDTO is null
+   *
+   * @param seasonDto the SeasonDto to convert
+   * @return the corresponding Season entity, or null if seasonDto is null
    */
-  Season toEntity(SeasonDto seasonDTO);
+  Season toEntity(SeasonDto seasonDto);
 
 }

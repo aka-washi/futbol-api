@@ -14,15 +14,15 @@ import lombok.NoArgsConstructor;
  * Data Transfer Object for Season entities.
  * Used for transferring season data between the API layer and clients.
  * Contains validation constraints to ensure data integrity.
- * 
+ *
  * <p>
  * This DTO includes both entity metadata (ID, timestamps, audit fields)
  * and season-specific information (name and display name).
- * 
+ *
  * <p>
  * Seasons typically represent time periods in football competitions,
  * such as "2023-2024" or "2024/25".
- * 
+ *
  * @see com.eagle.futbolapi.features.season.entity.Season
  */
 @Data
