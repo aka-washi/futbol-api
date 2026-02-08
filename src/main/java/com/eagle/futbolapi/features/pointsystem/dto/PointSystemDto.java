@@ -79,44 +79,44 @@ public class PointSystemDto {
    * Must be non-negative. Typically 3 in modern football.
    */
   @Min(0)
-  private int pointsForWin;
+  private Integer pointsForWin;
 
   /**
    * Points awarded for a draw.
    * Must be non-negative. Typically 1 in modern football.
    */
   @Min(0)
-  private int pointsForDraw;
+  private Integer pointsForDraw;
 
   /**
    * Points awarded for a loss.
    * Must be non-negative. Typically 0 in modern football.
    */
   @Min(0)
-  private int pointsForLoss;
+  private Integer pointsForLoss;
 
   /**
    * Points awarded for winning after a penalty shootout.
    * Used in knockout competitions where draws are resolved.
    */
-  private int pointsForWinOnPenalties;
+  private Integer pointsForWinOnPenalties;
 
   /**
    * Points awarded for losing after a penalty shootout.
    * Used in knockout competitions where draws are resolved.
    */
-  private int pointsForLossOnPenalties;
+  private Integer pointsForLossOnPenalties;
 
   /**
    * Points awarded for winning by opponent forfeit.
    * Typically the same as a regular win or higher.
    */
-  private int pointsForForfeitWin;
+  private Integer pointsForForfeitWin;
 
   /**
    * Points awarded for losing by forfeit.
    * Often 0 or negative to penalize the forfeiting team.
    */
-  private int pointsForForfeitLoss;
+  private Integer pointsForForfeitLoss;
 
 }

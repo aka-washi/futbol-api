@@ -1,5 +1,9 @@
 package com.eagle.futbolapi.features.season.controller;
 
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.eagle.futbolapi.features.base.controller.BaseCrudController;
 import com.eagle.futbolapi.features.season.dto.SeasonDto;
 import com.eagle.futbolapi.features.season.entity.Season;
@@ -26,6 +30,9 @@ import com.eagle.futbolapi.features.season.service.SeasonService;
  * @see SeasonService
  * @see BaseCrudController
  */
+@Validated
+@RestController
+@RequestMapping("/seasons")
 public class SeasonController extends BaseCrudController<Season, SeasonDto, SeasonService, SeasonMapper> {
 
   private static final String RESOURCE_NAME = "Season";

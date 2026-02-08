@@ -24,6 +24,9 @@ import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
 import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   protected final JpaRepository<T, K> repository;
   protected final BaseMapper<T, D> mapper;
@@ -92,27 +95,52 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
    * @return the updated entity
    */
   public T patch(K id, D dto) {
+    log.debug("Patching entity with ID: {}", id);
+
     // Get existing entity
     T existing = getById(id).orElseThrow(
         () -> new IllegalArgumentException("Entity with given ID does not exist"));
 
+    log.debug("Existing entity before patch: {}", existing);
+
     // Apply partial updates using reflection
     applyPartialUpdate(dto, existing);
+
+    log.debug("Entity after partial update: {}", existing);
 
     // Resolve relationships for any updated relationship fields
     resolveRelationships(dto, existing);
 
+    log.debug("Entity after relationship resolution: {}", existing);
+
     // Check for duplicates
     if (isDuplicate(id, existing)) {
+      log.error("Duplicate entity detected for ID: {}", id);
       throw new IllegalArgumentException("Duplicate entity");
     }
 
-    return repository.save(existing);
+    log.debug("No duplicates found, proceeding to save");
+
+    try {
+      T saved = repository.save(existing);
+      log.debug("Successfully saved entity with ID: {}", id);
+      return saved;
+    } catch (Exception e) {
+      // Get the root cause
+      Throwable rootCause = e;
+      while (rootCause.getCause() != null && rootCause.getCause() != rootCause) {
+        rootCause = rootCause.getCause();
+      }
+      log.error("Failed to save entity during patch operation for ID: {}. Error: {} - Root cause: {}",
+          id, e.getMessage(), rootCause.getMessage(), rootCause);
+      throw e;
+    }
   }
 
   /**
    * Apply partial update from DTO to entity using reflection.
-   * Only non-null fields from the DTO are copied to the entity.
+   * Only non-null fields from the DTO are copied to the entity, unless the field
+   * allows null.
    *
    * @param dto    the source DTO
    * @param entity the target entity
@@ -125,13 +153,15 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     Class<?> dtoClass = dto.getClass();
     Class<?> entityClass = entity.getClass();
 
+    log.debug("Applying partial update from DTO to entity");
+
     for (Field dtoField : getAllFields(dtoClass)) {
       try {
         dtoField.setAccessible(true);
         Object value = dtoField.get(dto);
 
-        // Skip null values and ID field (should not be updated)
-        if (value == null || "id".equals(dtoField.getName())) {
+        // Skip ID field (should not be updated)
+        if ("id".equals(dtoField.getName())) {
           continue;
         }
 
@@ -147,11 +177,22 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
 
         // Try to find matching field in entity
         Field entityField = findField(entityClass, dtoField.getName());
-        if (entityField != null) {
-          entityField.setAccessible(true);
-          entityField.set(entity, value);
+        if (entityField == null) {
+          continue;
         }
+
+        // Handle null values: skip only if the ENTITY field doesn't allow null
+        if (value == null && !isFieldNullable(entityField)) {
+          log.debug("Skipping null value for non-nullable entity field: {}", dtoField.getName());
+          continue;
+        }
+
+        entityField.setAccessible(true);
+        Object oldValue = entityField.get(entity);
+        entityField.set(entity, value);
+        log.debug("Updated field '{}': {} -> {}", dtoField.getName(), oldValue, value);
       } catch (IllegalAccessException e) {
+        log.warn("Could not access field: {}", dtoField.getName());
         // Skip fields that cannot be accessed
       }
     }
@@ -229,6 +270,37 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
         "updatedBy".equals(fieldName);
   }
 
+  /**
+   * Check if a field allows null values by examining its annotations.
+   * A field is considered nullable if it doesn't have @NotNull
+   * or @Column(nullable=false).
+   *
+   * @param field the field to check
+   * @return true if the field allows null values
+   */
+  private boolean isFieldNullable(Field field) {
+    // Check for @NotNull annotation (from jakarta.validation.constraints)
+    if (field.isAnnotationPresent(NotNull.class)) {
+      return false;
+    }
+
+    // Check for @Column annotation with nullable=false
+    if (field.isAnnotationPresent(jakarta.persistence.Column.class)) {
+      jakarta.persistence.Column columnAnnotation = field.getAnnotation(jakarta.persistence.Column.class);
+      if (!columnAnnotation.nullable()) {
+        return false;
+      }
+    }
+
+    // Check for primitive types (they can't be null)
+    if (field.getType().isPrimitive()) {
+      return false;
+    }
+
+    // Default: field is nullable
+    return true;
+  }
+
   public void delete(K id) {
     if (id == null) {
       throw new IllegalArgumentException("ID cannot be null");
@@ -253,6 +325,8 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
    * This utility method uses reflection to automatically identify unique fields
    * and their values.
    * Supports nested field access using dot notation in the fieldPath attribute.
+   * Includes null values for nullable fields to properly handle uniqueness
+   * checks.
    *
    * @param entity the entity to extract unique fields from
    * @return Map of field paths to values for fields marked with @UniqueField
@@ -284,14 +358,16 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
             value = getNestedFieldValue(entity, fieldPath);
           }
 
-          if (value != null) {
-            uniqueFields.put(fieldPath, value);
-          }
+          // Include all fields, even null values, for proper uniqueness checking
+          uniqueFields.put(fieldPath, value);
+          log.debug("Added unique field '{}' with value: {}", fieldPath, value);
         } catch (IllegalAccessException | NoSuchFieldException e) {
+          log.warn("Could not access unique field '{}': {}", fieldPath, e.getMessage());
           // Skip fields that cannot be accessed or don't exist
         }
       }
     }
+    log.debug("Built unique fields map with {} fields: {}", uniqueFields.size(), uniqueFields);
     return uniqueFields;
   }
 
@@ -317,12 +393,16 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   }
 
   protected Specification<T> buildUniqueFieldsSpec(Map<String, Object> uniqueFields) {
+    log.debug("Building unique fields specification with fields: {}", uniqueFields);
     return (root, query, cb) -> {
       List<Predicate> predicates = new ArrayList<>();
       uniqueFields.forEach((field, value) -> {
+        Path<?> path = getPath(root, field);
         if (value != null) {
-          Path<?> path = getPath(root, field);
           predicates.add(cb.equal(path, value));
+        } else {
+          // For null values, use IS NULL predicate
+          predicates.add(cb.isNull(path));
         }
       });
       return cb.and(predicates.toArray(new Predicate[0]));

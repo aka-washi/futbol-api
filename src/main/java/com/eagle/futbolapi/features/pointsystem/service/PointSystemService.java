@@ -72,6 +72,15 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long, Point
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(pointSystem, "PointSystem cannot be null");
 
-    return isDuplicate(pointSystem, UniquenessStrategy.ALL);
+    log.debug(
+        "Checking for duplicates: ID={}, name={}, displayName={}, pointsForWin={}, pointsForDraw={}, pointsForLoss={}, pointsForWinOnPenalties={}, pointsForLossOnPenalties={}, pointsForForfeitWin={}, pointsForForfeitLoss={}",
+        id, pointSystem.getName(), pointSystem.getDisplayName(),
+        pointSystem.getPointsForWin(), pointSystem.getPointsForDraw(), pointSystem.getPointsForLoss(),
+        pointSystem.getPointsForWinOnPenalties(), pointSystem.getPointsForLossOnPenalties(),
+        pointSystem.getPointsForForfeitWin(), pointSystem.getPointsForForfeitLoss());
+
+    boolean result = isDuplicate(id, pointSystem, UniquenessStrategy.ALL);
+    log.debug("Duplicate check result for ID {}: {}", id, result);
+    return result;
   }
 }

@@ -1,5 +1,9 @@
 package com.eagle.futbolapi.features.pointsystem.controller;
 
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.eagle.futbolapi.features.base.controller.BaseCrudController;
 import com.eagle.futbolapi.features.pointsystem.dto.PointSystemDto;
 import com.eagle.futbolapi.features.pointsystem.entity.PointSystem;
@@ -26,6 +30,9 @@ import com.eagle.futbolapi.features.pointsystem.service.PointSystemService;
  * @see PointSystemService
  * @see BaseCrudController
  */
+@Validated
+@RestController
+@RequestMapping("/pointSystems")
 public class PointSystemController
     extends BaseCrudController<PointSystem, PointSystemDto, PointSystemService, PointSystemMapper> {
 

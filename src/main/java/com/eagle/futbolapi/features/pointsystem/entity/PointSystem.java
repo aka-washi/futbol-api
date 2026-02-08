@@ -93,7 +93,7 @@ public class PointSystem extends BaseEntity {
    */
   @UniqueField
   @Column(name = "pts_points_for_win", nullable = false)
-  private int pointsForWin;
+  private Integer pointsForWin;
 
   /**
    * Points awarded for a draw match.
@@ -101,7 +101,7 @@ public class PointSystem extends BaseEntity {
    */
   @UniqueField
   @Column(name = "pts_points_for_draw", nullable = false)
-  private int pointsForDraw;
+  private Integer pointsForDraw;
 
   /**
    * Points awarded for a regulation loss.
@@ -109,7 +109,7 @@ public class PointSystem extends BaseEntity {
    */
   @UniqueField
   @Column(name = "pts_points_for_loss", nullable = false)
-  private int pointsForLoss;
+  private Integer pointsForLoss;
 
   /**
    * Points awarded for winning after penalty shootout.
@@ -117,7 +117,7 @@ public class PointSystem extends BaseEntity {
    */
   @UniqueField
   @Column(name = "pts_points_for_win_on_penalties")
-  private int pointsForWinOnPenalties;
+  private Integer pointsForWinOnPenalties;
 
   /**
    * Points awarded for losing after penalty shootout.
@@ -125,7 +125,7 @@ public class PointSystem extends BaseEntity {
    */
   @UniqueField
   @Column(name = "pts_points_for_loss_on_penalties")
-  private int pointsForLossOnPenalties;
+  private Integer pointsForLossOnPenalties;
 
   /**
    * Points awarded when opponent forfeits and team wins by default.
@@ -133,7 +133,7 @@ public class PointSystem extends BaseEntity {
    */
   @UniqueField
   @Column(name = "pts_points_for_forfeit_win")
-  private int pointsForForfeitWin;
+  private Integer pointsForForfeitWin;
 
   /**
    * Points awarded when team forfeits the match.
@@ -141,7 +141,7 @@ public class PointSystem extends BaseEntity {
    */
   @UniqueField
   @Column(name = "pts_points_for_forfeit_loss")
-  private int pointsForForfeitLoss;
+  private Integer pointsForForfeitLoss;
 
   @Override
   public int hashCode() {
