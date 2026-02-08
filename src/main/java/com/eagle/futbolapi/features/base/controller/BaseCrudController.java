@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eagle.futbolapi.features.base.dto.ApiResponse;
+import com.eagle.futbolapi.features.base.dto.PageResponseDto;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.exception.DuplicateResourceException;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
@@ -62,7 +63,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
   }
 
   @GetMapping
-  public ResponseEntity<ApiResponse<PageResponseDTO<D>>> getAll(
+  public ResponseEntity<ApiResponse<PageResponseDto<D>>> getAll(
       @RequestParam(defaultValue = DEFAULT_PAGE) @Min(MIN_DEFAULT_PAGE) int page,
       @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) @Min(MIN_PAGE_SIZE) int size,
       @RequestParam(defaultValue = DEFAULT_SORT_FIELD) String sortBy,
