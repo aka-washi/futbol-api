@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.country.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -34,6 +35,13 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDto> {
    */
   protected CountryService(CountryRepository repository, CountryMapper mapper) {
     super(repository, mapper);
+  }
+
+  public Optional<Country> findByDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Country display name cannot be null or empty");
+    }
+    return ((CountryRepository) repository).findByDisplayName(displayName);
   }
 
   /**
