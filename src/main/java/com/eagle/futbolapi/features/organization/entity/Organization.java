@@ -3,11 +3,6 @@ package com.eagle.futbolapi.features.organization.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.eagle.futbolapi.features.base.annotation.UniqueField;
-import com.eagle.futbolapi.features.base.entity.BaseEntity;
-import com.eagle.futbolapi.features.base.enums.OrganizationType;
-import com.eagle.futbolapi.features.country.entity.Country;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -21,13 +16,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.OrganizationType;
+import com.eagle.futbolapi.features.country.entity.Country;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
-import tools.jackson.core.ObjectReadContext.Base;
 
 @Getter
 @Setter
