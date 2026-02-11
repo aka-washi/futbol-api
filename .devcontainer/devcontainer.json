@@ -1,28 +1,10 @@
 {
   "name": "Java",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "localhost:5000/rdg-java:1.0.0",
-    "runArgs": ["--name", "futbol-api"],
-
-  // "features": {
-  //   "ghcr.io/devcontainers/features/java:1": {
-  //     "version": "none",
-  //     "installMaven": "false",
-  //     "installGradle": "true"
-  //   }
-  // },
-
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "runArgs": [
+    "--name", "futbol-api",
+    "--network", "futbol-network"
+  ],
   "forwardPorts": [8080],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "java -version",
-  // Lifecycle scripts
   "postCreateCommand": ".devcontainer/setup-network.sh && echo 'Dev container is ready for Futbol API development!'"
-
-  // Configure tool-specific properties.
-  // "customizations": {},
-
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
 }
