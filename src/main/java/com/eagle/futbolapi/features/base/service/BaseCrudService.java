@@ -22,6 +22,7 @@ import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.NoChangesDetectedException;
+import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -181,9 +182,10 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
           continue;
         }
 
-        // Handle null values: skip only if the ENTITY field doesn't allow null
-        if (value == null && !isFieldNullable(entityField)) {
-          log.debug("Skipping null value for non-nullable entity field: {}", dtoField.getName());
+        // Handle null values: skip all null values in PATCH operations
+        // (null in DTO means field was not provided, not an explicit null)
+        if (value == null) {
+          log.debug("Skipping null value for field: {}", dtoField.getName());
           continue;
         }
 
@@ -304,6 +306,9 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   public void delete(K id) {
     if (id == null) {
       throw new IllegalArgumentException("ID cannot be null");
+    }
+    if(!existsById(id)) {
+      throw new ResourceNotFoundException("Resource not found with ID: " + id);
     }
     repository.deleteById(id);
   }

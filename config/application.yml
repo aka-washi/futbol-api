@@ -11,13 +11,15 @@ spring:
       hibernate:
         '[format_sql]': true
 
+  web:
+    error:
+      include-message: always
+      include-binding-errors: always
+
 server:
   port: 8080
   servlet:
     context-path: /api/v1
-  error:
-    include-message: always
-    include-binding-errors: always
 
 management:
   endpoints:

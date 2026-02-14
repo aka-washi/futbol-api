@@ -410,9 +410,9 @@
         "required": true
       },
       {
-        "name": "image",
+        "name": "imageUrl",
         "type": "string",
-        "label": "Image"
+        "label": "Image Url"
       },
       {
         "name": "surface",
@@ -435,9 +435,9 @@
         "label": "Opened Date"
       },
       {
-        "name": "isActive",
+        "name": "active",
         "type": "boolean",
-        "label": "Is Active"
+        "label": "Active"
       }
     ]
   },
