@@ -42,7 +42,7 @@ public abstract class BaseCrudController<E extends BaseEntity, D, S extends Base
   private static final int MIN_DEFAULT_PAGE = 0;
   private static final String DEFAULT_PAGE_SIZE = "20";
   private static final int MIN_PAGE_SIZE = 1;
-  private static final String DEFAULT_SORT_FIELD = "name";
+  private static final String DEFAULT_SORT_FIELD = "id";
   private static final String DEFAULT_SORT_DIRECTION = "asc";
 
   protected final S service;

@@ -18,6 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import com.eagle.futbolapi.features.base.annotation.GeneratedField;
 import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
@@ -74,6 +75,9 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     entity.setId((Long) id);
     entity.setCreatedAt(existing.getCreatedAt());
     entity.setCreatedBy(existing.getCreatedBy());
+
+    // Preserve generated fields (e.g., auto-generated keys)
+    preserveGeneratedFields(existing, entity);
 
     // Validate and save
     if (Objects.equals(existing, entity)) {
@@ -182,6 +186,16 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
           continue;
         }
 
+        // Skip fields marked as generated (auto-generated and cannot be modified)
+        if (entityField.isAnnotationPresent(GeneratedField.class)) {
+          if (value != null) {
+            GeneratedField annotation = entityField.getAnnotation(GeneratedField.class);
+            log.warn("Attempted to modify generated field '{}': {}. {}", 
+                dtoField.getName(), value, annotation.message());
+          }
+          continue;
+        }
+
         // Handle null values: skip all null values in PATCH operations
         // (null in DTO means field was not provided, not an explicit null)
         if (value == null) {
@@ -273,34 +287,31 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   }
 
   /**
-   * Check if a field allows null values by examining its annotations.
-   * A field is considered nullable if it doesn't have @NotNull
-   * or @Column(nullable=false).
-   *
-   * @param field the field to check
-   * @return true if the field allows null values
+   * Preserve generated fields from the existing entity to the new entity.
+   * Fields marked with @GeneratedField cannot be modified and must be preserved.
    */
-  private boolean isFieldNullable(Field field) {
-    // Check for @NotNull annotation (from jakarta.validation.constraints)
-    if (field.isAnnotationPresent(NotNull.class)) {
-      return false;
-    }
-
-    // Check for @Column annotation with nullable=false
-    if (field.isAnnotationPresent(jakarta.persistence.Column.class)) {
-      jakarta.persistence.Column columnAnnotation = field.getAnnotation(jakarta.persistence.Column.class);
-      if (!columnAnnotation.nullable()) {
-        return false;
+  private void preserveGeneratedFields(T existing, T entity) {
+    Class<?> entityClass = entity.getClass();
+    
+    // Traverse the class hierarchy to find all fields
+    while (entityClass != null && !entityClass.equals(Object.class)) {
+      Field[] fields = entityClass.getDeclaredFields();
+      
+      for (Field field : fields) {
+        if (field.isAnnotationPresent(GeneratedField.class)) {
+          try {
+            field.setAccessible(true);
+            Object existingValue = field.get(existing);
+            field.set(entity, existingValue);
+            log.debug("Preserved generated field '{}': {}", field.getName(), existingValue);
+          } catch (IllegalAccessException e) {
+            log.warn("Could not preserve generated field: {}", field.getName());
+          }
+        }
       }
+      
+      entityClass = entityClass.getSuperclass();
     }
-
-    // Check for primitive types (they can't be null)
-    if (field.getType().isPrimitive()) {
-      return false;
-    }
-
-    // Default: field is nullable
-    return true;
   }
 
   public void delete(K id) {
