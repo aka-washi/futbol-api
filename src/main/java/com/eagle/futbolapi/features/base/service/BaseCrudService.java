@@ -190,7 +190,7 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
         if (entityField.isAnnotationPresent(GeneratedField.class)) {
           if (value != null) {
             GeneratedField annotation = entityField.getAnnotation(GeneratedField.class);
-            log.warn("Attempted to modify generated field '{}': {}. {}", 
+            log.warn("Attempted to modify generated field '{}': {}. {}",
                 dtoField.getName(), value, annotation.message());
           }
           continue;
@@ -292,11 +292,11 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
    */
   private void preserveGeneratedFields(T existing, T entity) {
     Class<?> entityClass = entity.getClass();
-    
+
     // Traverse the class hierarchy to find all fields
     while (entityClass != null && !entityClass.equals(Object.class)) {
       Field[] fields = entityClass.getDeclaredFields();
-      
+
       for (Field field : fields) {
         if (field.isAnnotationPresent(GeneratedField.class)) {
           try {
@@ -309,7 +309,7 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
           }
         }
       }
-      
+
       entityClass = entityClass.getSuperclass();
     }
   }

@@ -3,6 +3,8 @@ package com.eagle.futbolapi.features.person.service;
 import java.util.Objects;
 import java.util.Optional;
 
+import jakarta.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +17,6 @@ import com.eagle.futbolapi.features.person.entity.Person;
 import com.eagle.futbolapi.features.person.mapper.PersonMapper;
 import com.eagle.futbolapi.features.person.repository.PersonRepository;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

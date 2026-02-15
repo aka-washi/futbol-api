@@ -15,5 +15,5 @@ public interface PersonRepository extends BaseRepository<Person, Long> {
   Optional<Person> findByDisplayName(String displayName);
 
   Optional<Person> findByEmail(String email);
-  
+
 }
