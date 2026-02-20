@@ -10,6 +10,8 @@ import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.country.mapper.CountryMapper;
 import com.eagle.futbolapi.features.country.service.CountryService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * REST controller for managing Country resources.
  * Provides endpoints for CRUD operations on countries including:
@@ -30,6 +32,7 @@ import com.eagle.futbolapi.features.country.service.CountryService;
  * @see CountryService
  * @see BaseCrudController
  */
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/countries")

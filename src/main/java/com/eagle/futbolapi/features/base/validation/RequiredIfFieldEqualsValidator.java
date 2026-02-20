@@ -5,11 +5,14 @@ import java.lang.reflect.Field;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Validator implementation for {@link RequiredIfFieldEquals} annotation. Checks
  * that the target
  * field is non-null when the condition field equals the specified value.
  */
+@Slf4j
 public class RequiredIfFieldEqualsValidator
     implements ConstraintValidator<RequiredIfFieldEquals, Object> {
 
@@ -33,9 +36,13 @@ public class RequiredIfFieldEqualsValidator
     }
 
     try {
+      log.debug("Validating RequiredIfFieldEquals: conditionField='{}', conditionValue='{}', targetField='{}'",
+          conditionFieldName, conditionValue, fieldName);
+      
       // Get the condition field value
       Field conditionField = getField(object.getClass(), conditionFieldName);
       if (conditionField == null) {
+        log.warn("Condition field '{}' not found, skipping validation", conditionFieldName);
         return true; // Condition field not found, skip validation
       }
 
@@ -44,6 +51,7 @@ public class RequiredIfFieldEqualsValidator
 
       // Check if the condition is met
       boolean conditionMet = isConditionMet(conditionFieldValue);
+      log.debug("Condition met: {} (actual value: {}, expected: {})", conditionMet, conditionFieldValue, conditionValue);
 
       if (!conditionMet) {
         return true; // Condition not met, field is not required
@@ -52,6 +60,7 @@ public class RequiredIfFieldEqualsValidator
       // Condition is met, check if the target field has a value
       Field targetField = getField(object.getClass(), fieldName);
       if (targetField == null) {
+        log.warn("Target field '{}' not found, skipping validation", fieldName);
         return true; // Target field not found, skip validation
       }
 
@@ -59,17 +68,21 @@ public class RequiredIfFieldEqualsValidator
       Object targetValue = targetField.get(object);
 
       boolean isValid = isValuePresent(targetValue);
-
+      
       if (!isValid) {
+        log.debug("Validation failed: field '{}' is required but not provided", fieldName);
         // Customize the error message and associate with the target field
         context.disableDefaultConstraintViolation();
         context.buildConstraintViolationWithTemplate(message).addPropertyNode(fieldName)
             .addConstraintViolation();
+      } else {
+        log.debug("Validation passed: field '{}' has value", fieldName);
       }
 
       return isValid;
 
     } catch (IllegalAccessException e) {
+      log.error("Error accessing field during validation: {}", e.getMessage());
       return true; // Skip validation on error
     }
   }

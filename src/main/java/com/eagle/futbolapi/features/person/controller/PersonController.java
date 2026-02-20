@@ -10,6 +10,9 @@ import com.eagle.futbolapi.features.person.entity.Person;
 import com.eagle.futbolapi.features.person.mapper.PersonMapper;
 import com.eagle.futbolapi.features.person.service.PersonService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/persons")

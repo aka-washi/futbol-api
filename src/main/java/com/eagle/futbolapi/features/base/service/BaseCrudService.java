@@ -43,26 +43,40 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   // ============================================================================
 
   public Page<T> getAll(Pageable pageable) {
+    log.debug("Fetching all entities with pageable: {}", pageable);
     if (pageable == null) {
       pageable = Pageable.unpaged();
     }
-    return repository.findAll(pageable);
+    Page<T> result = repository.findAll(pageable);
+    log.debug("Retrieved {} entities", result.getNumberOfElements());
+    return result;
   }
 
   public Optional<T> getById(K id) {
+    log.debug("Fetching entity by id: {}", id);
     if (id == null) {
       throw new IllegalArgumentException("ID cannot be null");
     }
-    return repository.findById(id);
+    Optional<T> result = repository.findById(id);
+    if (result.isPresent()) {
+      log.debug("Found entity with id: {}", id);
+    } else {
+      log.debug("No entity found with id: {}", id);
+    }
+    return result;
   }
 
   public T create(D dto) {
+    log.info("Creating new entity from DTO");
     T entity = convertToEntity(dto);
     resolveRelationships(dto, entity);
-    return saveNew(entity);
+    T saved = saveNew(entity);
+    log.info("Successfully created entity with id: {}", saved.getId());
+    return saved;
   }
 
   public T update(K id, D dto) {
+    log.info("Updating entity with id: {}", id);
     // Get existing season to preserve audit fields
     T existing = getById(id).orElseThrow(
         () -> new IllegalArgumentException("Entity with given ID does not exist"));
@@ -81,13 +95,17 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
 
     // Validate and save
     if (Objects.equals(existing, entity)) {
+      log.warn("No changes detected for entity with id: {}", id);
       throw new NoChangesDetectedException("No changes detected for entity", id);
     }
     if (isDuplicate(id, entity)) {
+      log.error("Duplicate entity detected for id: {}", id);
       throw new IllegalArgumentException("Duplicate entity");
     }
 
-    return saveExisting(id, entity);
+    T updated = saveExisting(id, entity);
+    log.info("Successfully updated entity with id: {}", id);
+    return updated;
   }
 
   /**
@@ -315,20 +333,26 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   }
 
   public void delete(K id) {
+    log.info("Deleting entity with id: {}", id);
     if (id == null) {
       throw new IllegalArgumentException("ID cannot be null");
     }
     if(!existsById(id)) {
+      log.error("Failed to delete: Resource not found with id: {}", id);
       throw new ResourceNotFoundException("Resource not found with ID: " + id);
     }
     repository.deleteById(id);
+    log.info("Successfully deleted entity with id: {}", id);
   }
 
   public boolean existsById(K id) {
+    log.debug("Checking existence of entity with id: {}", id);
     if (id == null) {
       throw new IllegalArgumentException("ID cannot be null");
     }
-    return repository.existsById(id);
+    boolean exists = repository.existsById(id);
+    log.debug("Entity with id {} exists: {}", id, exists);
+    return exists;
   }
 
   // ============================================================================

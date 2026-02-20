@@ -10,6 +10,9 @@ import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.organization.mapper.OrganizationMapper;
 import com.eagle.futbolapi.features.organization.service.OrganizationService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/organizations")

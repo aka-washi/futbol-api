@@ -12,11 +12,14 @@ import com.eagle.futbolapi.features.base.dto.ApiResponse;
 import com.eagle.futbolapi.features.base.dto.PageResponseDto;
 import com.eagle.futbolapi.features.base.dto.PaginationInfo;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Utility class for building standardized API responses.
  * Provides common patterns for success and error responses with pagination
  * support.
  */
+@Slf4j
 public final class ResponseUtil {
 
   private static final int DEFAULT_PAGE = 0;
@@ -41,6 +44,9 @@ public final class ResponseUtil {
    */
   public static <T> ResponseEntity<ApiResponse<PageResponseDto<T>>> successWithPaginationDto(
       Page<T> page, String message) {
+    log.debug("Building paginated response with {} elements (page {}/{})", 
+        page.getNumberOfElements(), page.getNumber() + 1, page.getTotalPages());
+    
     PaginationInfo paginationInfo = PaginationInfo.builder()
         .page(page.getNumber())
         .size(page.getSize())
@@ -74,6 +80,7 @@ public final class ResponseUtil {
    * Build a created response (201)
    */
   public static <T> ResponseEntity<ApiResponse<T>> created(T data, String message) {
+    log.debug("Building created response: {}", message);
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(ApiResponse.success(data, message));
   }
@@ -83,6 +90,7 @@ public final class ResponseUtil {
    */
   public static <T> ResponseEntity<ApiResponse<T>> error(
       HttpStatus status, String errorCode, String message) {
+    log.debug("Building error response [{} - {}]: {}", status, errorCode, message);
     return ResponseEntity.status(status)
         .body(ApiResponse.error(errorCode, message));
   }
@@ -91,6 +99,7 @@ public final class ResponseUtil {
    * Build a not found error response (404)
    */
   public static <T> ResponseEntity<ApiResponse<T>> notFound(String message) {
+    log.debug("Building not found response: {}", message);
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
         .body(ApiResponse.error("RESOURCE_NOT_FOUND", message));
   }
@@ -99,10 +108,12 @@ public final class ResponseUtil {
    * Build an internal server error response (500)
    */
   public static <T> ResponseEntity<ApiResponse<T>> serverError(String message) {
+    log.error("Building server error response: {}", message);
     return error(HttpStatus.INTERNAL_SERVER_ERROR, "SERVER_ERROR", message);
   }
 
   public static Pageable buildPageable(int page, int size, String sortBy, String sortDir) {
+    log.debug("Building pageable: page={}, size={}, sortBy={}, sortDir={}", page, size, sortBy, sortDir);
     Sort sort = DESCENDING.equalsIgnoreCase(sortDir)
         ? Sort.by(sortBy).descending()
         : Sort.by(sortBy).ascending();
@@ -114,6 +125,7 @@ public final class ResponseUtil {
     int size = DEFAULT_PAGE_SIZE;
     String sortBy = DEFAULT_SORT_FIELD;
     String sortDir = DEFAULT_SORT_DIRECTION;
+    log.debug("Creating pageable with defaults");
     return buildPageable(page, size, sortBy, sortDir);
   }
 

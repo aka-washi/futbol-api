@@ -10,6 +10,8 @@ import com.eagle.futbolapi.features.pointsystem.entity.PointSystem;
 import com.eagle.futbolapi.features.pointsystem.mapper.PointSystemMapper;
 import com.eagle.futbolapi.features.pointsystem.service.PointSystemService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * REST controller for managing Point System resources.
  * Provides endpoints for CRUD operations on point systems including:
@@ -30,6 +32,7 @@ import com.eagle.futbolapi.features.pointsystem.service.PointSystemService;
  * @see PointSystemService
  * @see BaseCrudController
  */
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/pointSystems")

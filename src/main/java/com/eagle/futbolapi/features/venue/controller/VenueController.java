@@ -10,6 +10,9 @@ import com.eagle.futbolapi.features.venue.entity.Venue;
 import com.eagle.futbolapi.features.venue.mapper.VenueMapper;
 import com.eagle.futbolapi.features.venue.service.VenueService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/venues")

@@ -10,6 +10,8 @@ import com.eagle.futbolapi.features.season.entity.Season;
 import com.eagle.futbolapi.features.season.mapper.SeasonMapper;
 import com.eagle.futbolapi.features.season.service.SeasonService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * REST controller for managing Season resources.
  * Provides endpoints for CRUD operations on seasons including:
@@ -30,6 +32,7 @@ import com.eagle.futbolapi.features.season.service.SeasonService;
  * @see SeasonService
  * @see BaseCrudController
  */
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/seasons")
