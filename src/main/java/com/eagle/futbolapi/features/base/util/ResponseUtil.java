@@ -44,9 +44,9 @@ public final class ResponseUtil {
    */
   public static <T> ResponseEntity<ApiResponse<PageResponseDto<T>>> successWithPaginationDto(
       Page<T> page, String message) {
-    log.debug("Building paginated response with {} elements (page {}/{})", 
+    log.debug("Building paginated response with {} elements (page {}/{})",
         page.getNumberOfElements(), page.getNumber() + 1, page.getTotalPages());
-    
+
     PaginationInfo paginationInfo = PaginationInfo.builder()
         .page(page.getNumber())
         .size(page.getSize())

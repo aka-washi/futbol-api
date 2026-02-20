@@ -65,12 +65,10 @@ public class Organization extends BaseEntity {
   @Column(name = "org_abbreviation", length = 20, nullable = false)
   private String abbreviation;
 
-  @UniqueField
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "country_id", nullable = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Country country;
 
-  @UniqueField
   @Column(name = "org_founded")
   private LocalDate founded;
 

@@ -31,7 +31,7 @@ public class AtLeastOneNotNullValidator implements ConstraintValidator<AtLeastOn
     }
 
     log.debug("Validating AtLeastOneNotNull for fields: {}", String.join(", ", fields));
-    
+
     boolean atLeastOneProvided = false;
 
     for (String fieldName : fields) {

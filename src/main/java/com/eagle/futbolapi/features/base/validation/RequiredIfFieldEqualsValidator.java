@@ -38,7 +38,7 @@ public class RequiredIfFieldEqualsValidator
     try {
       log.debug("Validating RequiredIfFieldEquals: conditionField='{}', conditionValue='{}', targetField='{}'",
           conditionFieldName, conditionValue, fieldName);
-      
+
       // Get the condition field value
       Field conditionField = getField(object.getClass(), conditionFieldName);
       if (conditionField == null) {
@@ -68,7 +68,7 @@ public class RequiredIfFieldEqualsValidator
       Object targetValue = targetField.get(object);
 
       boolean isValid = isValuePresent(targetValue);
-      
+
       if (!isValid) {
         log.debug("Validation failed: field '{}' is required but not provided", fieldName);
         // Customize the error message and associate with the target field

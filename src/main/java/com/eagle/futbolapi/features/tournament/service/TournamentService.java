@@ -3,11 +3,10 @@ package com.eagle.futbolapi.features.tournament.service;
 import java.util.Objects;
 import java.util.Optional;
 
+import jakarta.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import jakarta.validation.constraints.NotNull;
-import lombok.extern.slf4j.Slf4j;
 
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
@@ -17,6 +16,8 @@ import com.eagle.futbolapi.features.tournament.dto.TournamentDto;
 import com.eagle.futbolapi.features.tournament.entity.Tournament;
 import com.eagle.futbolapi.features.tournament.mapper.TournamentMapper;
 import com.eagle.futbolapi.features.tournament.repository.TournamentRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
