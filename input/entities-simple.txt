@@ -1,0 +1,382 @@
+ENTITY: country
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - name
+  - code
+  - isoCode
+  - displayName
+  - flagUrl
+
+ENTITY: season
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - name
+  - displayName
+
+ENTITY: pointSystem
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - name
+  - displayName
+  - description
+  - pointsForWin
+  - pointsForDraw
+  - pointsForLoss
+  - pointsForWinOnPenalties
+  - pointsForLossOnPenalties
+  - pointsForForfeitWin
+  - pointsForForfeitLoss
+
+ENTITY: organization
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - name
+  - displayName
+  - type
+  - abbreviation
+  - country
+  - founded
+  - parentOrganization
+  - logo
+  - website
+  - headquarters
+  - description
+
+ENTITY: venue
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - name
+  - displayName
+  - country
+  - capacity
+  - imageUrl
+  - surface
+  - address
+  - city
+  - opened
+  - active
+
+ENTITY: person
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - uniqueRegKey
+  - firstName
+  - middleName
+  - lastName
+  - secondLastName
+  - displayName
+  - gender
+  - email
+  - birthDate
+  - birthPlace
+  - birthCountry
+  - nationality
+  - height
+  - weight
+  - photoUrl
+
+ENTITY: tournament
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - organization
+  - name
+  - displayName
+  - type
+  - gender
+  - ageCategory
+  - level
+  - foundedYear
+  - status
+
+ENTITY: team
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - organization
+  - name
+  - displayName
+  - abbreviation
+  - gender
+  - ageCategory
+  - founded
+  - country
+  - venue
+  - logo
+  - primaryColor
+  - secondaryColor
+  - website
+  - status
+
+ENTITY: player
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - person
+  - position
+  - preferredFoot
+  - currentTeam
+  - isActive
+
+ENTITY: staff
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - person
+  - role
+  - currentTeam
+  - isActive
+
+ENTITY: stageFormat
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - displayName
+  - type
+  - pointSystem
+  - numberOfTeams
+  - numberOfGroups
+  - teamsPerGroup
+  - hasHomeAndAway
+  - teamsQualifyingForNextStage
+  - description
+
+ENTITY: tournamentSeason
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - season
+  - tournament
+  - displayName
+  - startDate
+  - endDate
+  - status
+  - hasRelegation
+  - hasPromotion
+  - numberOfTeams
+  - description
+
+ENTITY: competition
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - tournamentSeason
+  - displayName
+  - type
+  - startDate
+  - endDate
+  - status
+  - totalMatches
+  - description
+
+ENTITY: seasonTeam
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - season
+  - team
+  - joinedDate
+  - leftDate
+  - isActive
+
+ENTITY: stage
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - displayName
+  - competition
+  - stageFormat
+  - order
+  - status
+  - startDate
+  - endDate
+
+ENTITY: registration
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - displayName
+  - competition
+  - team
+  - player
+  - staff
+  - jerseyNumber
+  - joinedDate
+  - leftDate
+
+ENTITY: group
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - stage
+  - name
+  - displayName
+  - order
+  - numberOfTeams
+
+ENTITY: matchday
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - displayName
+  - stage
+  - round
+  - startDate
+  - endDate
+  - status
+
+ENTITY: standing
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - stage
+  - group
+  - team
+  - position
+  - played
+  - won
+  - drawn
+  - lost
+  - goalsFor
+  - goalsAgainst
+  - goalDifference
+  - points
+  - form
+  - homeWon
+  - homeDrawn
+  - homeLost
+  - awayWon
+  - awayDrawn
+  - awayLost
+
+ENTITY: match
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - matchday
+  - group
+  - homeTeam
+  - awayTeam
+  - venue
+  - scheduledDate
+  - kickoffTime
+  - status
+  - homeScore
+  - awayScore
+  - homeHalfTimeScore
+  - awayHalfTimeScore
+  - extraTimeAllowed
+  - penaltyShootoutAllowed
+  - homeExtraTimeScore
+  - awayExtraTimeScore
+  - homePenaltyScore
+  - awayPenaltyScore
+  - attendance
+  - referee
+  - notes
+
+ENTITY: lineup
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - displayName
+  - match
+  - team
+  - formation
+
+ENTITY: competitionResult
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - competition
+  - team
+  - player
+  - staff
+  - resultType
+  - position
+  - value
+  - notes
+
+ENTITY: lineupMember
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - lineup
+  - personType
+  - player
+  - staff
+  - roleType
+  - position
+  - jerseyNumber
+  - captain
+  - orderNum
+
+ENTITY: matchEvent
+  - id
+  - createdAt
+  - createdBy
+  - updatedAt
+  - updatedBy
+  - match
+  - team
+  - player
+  - type
+  - period
+  - minute
+  - extraMinute
+  - assistPlayer
+  - substitutePlayer
+  - description
+  - videoUrl
