@@ -13,24 +13,7 @@ import com.eagle.futbolapi.features.pointsystem.service.PointSystemService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * REST controller for managing Point System resources.
- * Provides endpoints for CRUD operations on point systems including:
- * <ul>
- * <li>Creating new point systems</li>
- * <li>Retrieving point systems by ID or listing all point systems</li>
- * <li>Updating existing point systems</li>
- * <li>Deleting point systems</li>
- * </ul>
- *
- * <p>
- * All endpoints are mapped under the {@code /point-systems} base path.
- * Request and response bodies use {@link PointSystemDto} for data transfer.
- * Input validation is performed automatically using Bean Validation
- * annotations.
- *
- * @see PointSystemDto
- * @see PointSystemService
- * @see BaseCrudController
+ * REST controller for PointSystem resources.
  */
 @Slf4j
 @Validated
@@ -44,12 +27,6 @@ public class PointSystemController
   private static final String DUPLICATE_MESSAGE = "Point System already exists";
   private static final String SERVER_ERROR = "SERVER_ERROR";
 
-  /**
-   * Constructs a new PointSystemController with the required dependencies.
-   *
-   * @param service the PointSystemService instance for business logic operations
-   * @param mapper  the PointSystemMapper instance for entity-DTO conversions
-   */
   protected PointSystemController(PointSystemService service, PointSystemMapper mapper) {
     super(service, mapper, RESOURCE_NAME, SUCCESS_MESSAGE, DUPLICATE_MESSAGE, SERVER_ERROR);
   }

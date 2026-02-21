@@ -108,15 +108,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return updated;
   }
 
-  /**
-   * Partially update an entity with only the non-null fields from the DTO.
-   * This method uses reflection to copy only the non-null fields from the DTO to
-   * the existing entity.
-   *
-   * @param id  the ID of the entity to update
-   * @param dto the DTO containing the fields to update (null fields are ignored)
-   * @return the updated entity
-   */
   public T patch(K id, D dto) {
     log.debug("Patching entity with ID: {}", id);
 
@@ -160,14 +151,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     }
   }
 
-  /**
-   * Apply partial update from DTO to entity using reflection.
-   * Only non-null fields from the DTO are copied to the entity, unless the field
-   * allows null.
-   *
-   * @param dto    the source DTO
-   * @param entity the target entity
-   */
   protected void applyPartialUpdate(D dto, T entity) {
     if (dto == null || entity == null) {
       return;
@@ -260,15 +243,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return null;
   }
 
-  /**
-   * Get the value of a nested field using dot notation (e.g., "tournament.id").
-   *
-   * @param obj       the object to start from
-   * @param fieldPath the dot-separated field path
-   * @return the value of the nested field
-   * @throws NoSuchFieldException   if any field in the path doesn't exist
-   * @throws IllegalAccessException if any field cannot be accessed
-   */
   private Object getNestedFieldValue(Object obj, String fieldPath) throws NoSuchFieldException, IllegalAccessException {
     if (obj == null || fieldPath == null || fieldPath.isEmpty()) {
       return null;
@@ -359,18 +333,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   // Generic Unique Fields Methods using JPA Specifications
   // ============================================================================
 
-  /**
-   * Build a unique fields map for an entity by extracting all fields annotated
-   * with @UniqueField.
-   * This utility method uses reflection to automatically identify unique fields
-   * and their values.
-   * Supports nested field access using dot notation in the fieldPath attribute.
-   * Includes null values for nullable fields to properly handle uniqueness
-   * checks.
-   *
-   * @param entity the entity to extract unique fields from
-   * @return Map of field paths to values for fields marked with @UniqueField
-   */
   protected Map<String, Object> buildUniqueFieldsMap(T entity) {
     Map<String, Object> uniqueFields = new HashMap<>();
     if (entity == null) {
@@ -411,19 +373,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return uniqueFields;
   }
 
-  /**
-   * Build a unique fields map for an entity by combining automatically detected
-   * unique fields
-   * with additional manually specified unique field mappings.
-   * This is useful for composite unique constraints or unique fields not marked
-   * with @Column(unique = true).
-   *
-   * @param entity                 the entity to extract unique fields from
-   * @param additionalUniqueFields additional field mappings to include (e.g.,
-   *                               Map.of("tournament.id", tournamentId))
-   * @return Map of field names to values combining both automatic detection and
-   *         manual specification
-   */
   protected Map<String, Object> buildUniqueFieldsMap(T entity, Map<String, Object> additionalUniqueFields) {
     Map<String, Object> uniqueFields = buildUniqueFieldsMap(entity);
     if (additionalUniqueFields != null) {
@@ -465,13 +414,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return (Path<Y>) root.get(field);
   }
 
-  /**
-   * Find entity by unique fields using dynamic specification.
-   *
-   * @param uniqueFields map of field names to values (supports dot notation for
-   *                     nested fields)
-   * @return Optional containing the entity if found
-   */
   public Optional<T> getByUniqueFields(Map<String, Object> uniqueFields) {
     if (uniqueFields == null || uniqueFields.isEmpty()) {
       return Optional.empty();
@@ -479,12 +421,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return getSpecificationExecutor().findOne(buildUniqueFieldsSpec(uniqueFields));
   }
 
-  /**
-   * Check if entity exists by unique fields.
-   *
-   * @param uniqueFields map of field names to values
-   * @return true if entity exists
-   */
   public boolean existsByUniqueFields(Map<String, Object> uniqueFields) {
     if (uniqueFields == null || uniqueFields.isEmpty()) {
       return false;
@@ -492,13 +428,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return getSpecificationExecutor().exists(buildUniqueFieldsSpec(uniqueFields));
   }
 
-  /**
-   * Check if entity exists by unique fields excluding given ID.
-   *
-   * @param uniqueFields map of field names to values
-   * @param id           ID to exclude from the check
-   * @return true if another entity exists with the same unique fields
-   */
   public boolean existsByUniqueFieldsAndNotId(Map<String, Object> uniqueFields, K id) {
     if (uniqueFields == null || uniqueFields.isEmpty() || id == null) {
       return false;
@@ -508,10 +437,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return getSpecificationExecutor().exists(spec);
   }
 
-  /**
-   * Get the JpaSpecificationExecutor from the repository.
-   * Throws exception if repository doesn't support specifications.
-   */
   @SuppressWarnings("unchecked")
   protected JpaSpecificationExecutor<T> getSpecificationExecutor() {
     if (repository instanceof JpaSpecificationExecutor) {
@@ -580,13 +505,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   // Uniqueness Checking Helper Methods
   // ============================================================================
 
-  /**
-   * Check if an entity is a duplicate using the specified uniqueness strategy.
-   *
-   * @param entity   the entity to check
-   * @param strategy the uniqueness strategy (ALL or ANY)
-   * @return true if the entity is considered a duplicate
-   */
   protected boolean isDuplicate(@NotNull T entity, @NotNull UniquenessStrategy strategy) {
     Objects.requireNonNull(entity, "Entity cannot be null");
     Objects.requireNonNull(strategy, "Uniqueness strategy cannot be null");
@@ -605,15 +523,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     };
   }
 
-  /**
-   * Check if an entity is a duplicate (excluding given ID) using the specified
-   * uniqueness strategy.
-   *
-   * @param id       the ID to exclude from the check
-   * @param entity   the entity to check
-   * @param strategy the uniqueness strategy (ALL or ANY)
-   * @return true if another entity exists with the same unique fields
-   */
   protected boolean isDuplicate(@NotNull K id, @NotNull T entity, @NotNull UniquenessStrategy strategy) {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(entity, "Entity cannot be null");

@@ -9,18 +9,9 @@ import com.eagle.futbolapi.features.base.enums.TournamentType;
 import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 import com.eagle.futbolapi.features.tournament.dto.TournamentDto;
 import com.eagle.futbolapi.features.tournament.entity.Tournament;
+
 /**
- * MapStruct mapper for converting between Tournament entities and TournamentDto
- * objects.
- * Provides bidirectional mapping functionality with automatic field mapping.
- *
- * <p>
- * This mapper is automatically implemented by MapStruct at compile time
- * and registered as a Spring bean through the component model configuration.
- *
- * @see Tournament
- * @see TournamentDto
- * @see BaseMapper
+ * MapStruct mapper for Tournament entity and DTO conversion.
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface TournamentMapper extends BaseMapper<Tournament, TournamentDto> {

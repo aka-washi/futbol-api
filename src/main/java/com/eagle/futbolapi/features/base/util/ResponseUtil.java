@@ -16,8 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Utility class for building standardized API responses.
- * Provides common patterns for success and error responses with pagination
- * support.
  */
 @Slf4j
 public final class ResponseUtil {

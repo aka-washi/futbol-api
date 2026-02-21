@@ -120,10 +120,8 @@ public class Person extends BaseEntity {
   }
 
   /**
-   * Generates a unique registration key based on personal information
-   * Format:
-   * [LastName1][LastNameConsonant][YYYY][FirstNameConsonant][FirstName1][MM][DD][Gender][CountryCode][CheckDigit]
-   */
+ * Generates a unique registration key based on personal information
+ */
   public String generateUniqueRegKey() {
     validateRequiredFields();
 
@@ -183,12 +181,8 @@ public class Person extends BaseEntity {
   }
 
   /**
-   * Finds the first internal consonant in a name (excluding first and last
-   * characters)
-   *
-   * @param name the name to search
-   * @return the first internal consonant or 'X' if none found
-   */
+ * Finds the first internal consonant in a name (excluding first and last
+ */
   private String getFirstInternalConsonant(String name) {
     if (name == null || name.length() <= MIN_NAME_LENGTH_FOR_CONSONANT) {
       return DEFAULT_CONSONANT;
@@ -207,11 +201,8 @@ public class Person extends BaseEntity {
   }
 
   /**
-   * Calculates a check digit using a simple modulo algorithm
-   *
-   * @param regKeyPart the registration key part without check digit
-   * @return single digit checksum
-   */
+ * Calculates a check digit using a simple modulo algorithm
+ */
   private String calculateCheckDigit(String regKeyPart) {
     int sum = 0;
     for (int i = 0; i < regKeyPart.length(); i++) {

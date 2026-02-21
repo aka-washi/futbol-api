@@ -31,11 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Generic base controller for CRUD operations.
- *
- * @param <E> Entity type (must extend BaseEntity)
- * @param <D> DTO type
- * @param <S> Service type (must extend BaseCrudService)
- * @param <M> Mapper type (must extend BaseMapper)
  */
 @Slf4j
 @Validated
