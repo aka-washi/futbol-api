@@ -53,7 +53,14 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(organization, "Organization cannot be null");
 
-    return isDuplicate(id, organization, UniquenessStrategy.ALL);
+    log.debug(
+        "Checking for duplicates: ID={}, name={}, displayName={}, type={}, abbreviation={}",
+        id, organization.getName(), organization.getDisplayName(),
+        organization.getType(), organization.getAbbreviation());
+
+    boolean result = isDuplicate(id, organization, UniquenessStrategy.ALL);
+    log.debug("Duplicate check result for ID {}: {}", id, result);
+    return result;
   }
 
   @Override

@@ -64,7 +64,13 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDto> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(team, "Team cannot be null");
 
-    return isDuplicate(id, team, UniquenessStrategy.ANY);
+    log.debug(
+        "Checking for duplicates: ID={}, name={}, displayName={}, gender={}, ageCategory={}",
+        id, team.getName(), team.getDisplayName(), team.getGender(), team.getAgeCategory());
+
+    boolean result = isDuplicate(id, team, UniquenessStrategy.ANY);
+    log.debug("Duplicate check result for ID {}: {}", id, result);
+    return result;
   }
 
   @Override

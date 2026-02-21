@@ -52,7 +52,13 @@ public class VenueService extends BaseCrudService<Venue, Long, VenueDto> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(entity, "Venue cannot be null");
 
-    return isDuplicate(id, entity, UniquenessStrategy.ALL);
+    log.debug(
+        "Checking for duplicates: ID={}, name={}, displayName={}, capacity={}",
+        id, entity.getName(), entity.getDisplayName(), entity.getCapacity());
+
+    boolean result = isDuplicate(id, entity, UniquenessStrategy.ALL);
+    log.debug("Duplicate check result for ID {}: {}", id, result);
+    return result;
   }
 
   @Override

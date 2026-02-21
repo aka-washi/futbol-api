@@ -48,7 +48,13 @@ public class CountryService extends BaseCrudService<Country, Long, CountryDto> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(country, "Country cannot be null");
 
-    return isDuplicate(id, country, UniquenessStrategy.ANY);
+    log.debug(
+        "Checking for duplicates: ID={}, name={}, displayName={}, code={}",
+        id, country.getName(), country.getDisplayName(), country.getCode());
+
+    boolean result = isDuplicate(id, country, UniquenessStrategy.ANY);
+    log.debug("Duplicate check result for ID {}: {}", id, result);
+    return result;
   }
 
 }

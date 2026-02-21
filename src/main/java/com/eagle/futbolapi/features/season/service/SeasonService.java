@@ -40,7 +40,13 @@ public class SeasonService extends BaseCrudService<Season, Long, SeasonDto> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(season, "Season cannot be null");
 
-    return isDuplicate(id, season, UniquenessStrategy.ANY);
+    log.debug(
+        "Checking for duplicates: ID={}, name={}, displayName={}",
+        id, season.getName(), season.getDisplayName());
+
+    boolean result = isDuplicate(id, season, UniquenessStrategy.ANY);
+    log.debug("Duplicate check result for ID {}: {}", id, result);
+    return result;
   }
 
 }

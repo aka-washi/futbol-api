@@ -3,11 +3,11 @@ package com.eagle.futbolapi.features.team.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

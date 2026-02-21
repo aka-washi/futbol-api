@@ -66,7 +66,14 @@ public class PersonService extends BaseCrudService<Person, Long, PersonDto> {
     Objects.requireNonNull(id, "ID cannot be null");
     Objects.requireNonNull(entity, "Person cannot be null");
 
-    return isDuplicate(id, entity, UniquenessStrategy.ANY);
+    log.debug(
+        "Checking for duplicates: ID={}, uniqueRegKey={}, firstName={}, lastName={}, displayName={}, email={}",
+        id, entity.getUniqueRegKey(), entity.getFirstName(), entity.getLastName(),
+        entity.getDisplayName(), entity.getEmail());
+
+    boolean result = isDuplicate(id, entity, UniquenessStrategy.ANY);
+    log.debug("Duplicate check result for ID {}: {}", id, result);
+    return result;
   }
 
   @Override
