@@ -432,123 +432,6 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return uniqueFields;
   }
 
-  /**
-   * Inner record to hold level information for multi-level uniqueness checking.
-   */
-  protected record LevelInfo(
-      int level,
-      UniquenessStrategy levelStrategy,
-      Map<String, Object> fields) {
-  }
-
-  /**
-   * Build a map of levels to their field information for multi-level uniqueness checking.
-   * Organizes fields by their level number and captures the level strategy.
-   *
-   * @param entity the entity to extract unique fields from
-   * @return Map of level number to LevelInfo containing fields and strategy
-   */
-  protected Map<Integer, LevelInfo> buildUniqueLevelsMap(T entity) {
-    Map<Integer, LevelInfo> levelsMap = new HashMap<>();
-    if (entity == null) {
-      return levelsMap;
-    }
-
-    Class<?> entityClass = entity.getClass();
-    for (Field field : getAllFields(entityClass)) {
-      if (field.isAnnotationPresent(UniqueField.class)) {
-        UniqueField annotation = field.getAnnotation(UniqueField.class);
-        int level = annotation.level();
-        UniquenessStrategy levelStrategy = annotation.levelStrategy();
-        String fieldPath = annotation.fieldPath().isEmpty() ? field.getName() : annotation.fieldPath();
-
-        try {
-          field.setAccessible(true);
-          Object value = field.get(entity);
-
-          // If the fieldPath contains dots, we need to resolve nested access
-          if (fieldPath.contains(".")) {
-            value = getNestedFieldValue(entity, fieldPath);
-          }
-
-          // Get or create LevelInfo for this level
-          LevelInfo levelInfo = levelsMap.computeIfAbsent(level, k ->
-              new LevelInfo(level, levelStrategy, new HashMap<>()));
-
-          // Add field to the level's field map
-          levelInfo.fields().put(fieldPath, value);
-
-          log.debug("Added field '{}' with value '{}' to level {} with strategy {}",
-              fieldPath, value, level, levelStrategy);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-          log.warn("Could not access unique field '{}': {}", fieldPath, e.getMessage());
-        }
-      }
-    }
-
-    log.debug("Built {} levels for uniqueness checking", levelsMap.size());
-    return levelsMap;
-  }
-
-  /**
-   * Build a JPA Specification from multi-level field information.
-   * Combines fields within each level using the level strategy,
-   * then combines all levels using the final strategy.
-   *
-   * @param levelsMap      map of level number to level information
-   * @param finalStrategy  strategy to combine levels (ALL = AND, ANY = OR)
-   * @return JPA Specification for the multi-level uniqueness check
-   */
-  protected Specification<T> buildMultiLevelSpec(Map<Integer, LevelInfo> levelsMap,
-                                                   UniquenessStrategy finalStrategy) {
-    log.debug("Building multi-level specification with {} levels and final strategy {}",
-        levelsMap.size(), finalStrategy);
-
-    return (root, query, cb) -> {
-      List<Predicate> levelPredicates = new ArrayList<>();
-
-      // Build predicate for each level
-      for (LevelInfo levelInfo : levelsMap.values()) {
-        List<Predicate> fieldPredicates = new ArrayList<>();
-
-        // Build predicates for all fields in this level
-        levelInfo.fields().forEach((fieldPath, value) -> {
-          Path<?> path = getPath(root, fieldPath);
-          if (value != null) {
-            fieldPredicates.add(cb.equal(path, value));
-          } else {
-            fieldPredicates.add(cb.isNull(path));
-          }
-        });
-
-        // Combine fields within this level using the level strategy
-        if (!fieldPredicates.isEmpty()) {
-          Predicate levelPredicate = switch (levelInfo.levelStrategy()) {
-            case ALL -> cb.and(fieldPredicates.toArray(new Predicate[0]));
-            case ANY -> cb.or(fieldPredicates.toArray(new Predicate[0]));
-          };
-          levelPredicates.add(levelPredicate);
-          log.debug("Level {} predicate built with {} fields using {} strategy",
-              levelInfo.level(), fieldPredicates.size(), levelInfo.levelStrategy());
-        }
-      }
-
-      // Combine all levels using final strategy
-      if (levelPredicates.isEmpty()) {
-        return cb.conjunction(); // Always false - no predicates
-      } else if (levelPredicates.size() == 1) {
-        return levelPredicates.get(0); // Only one level, return as-is
-      } else {
-        Predicate result = switch (finalStrategy) {
-          case ALL -> cb.and(levelPredicates.toArray(new Predicate[0]));
-          case ANY -> cb.or(levelPredicates.toArray(new Predicate[0]));
-        };
-        log.debug("Combined {} levels using {} strategy", levelPredicates.size(), finalStrategy);
-        return result;
-      }
-    };
-  }
-
   protected Specification<T> buildUniqueFieldsSpec(Map<String, Object> uniqueFields) {
     log.debug("Building unique fields specification with fields: {}", uniqueFields);
     return (root, query, cb) -> {
@@ -700,67 +583,35 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   /**
    * Check if an entity is a duplicate using the specified uniqueness strategy.
    *
-   * <p>This method supports two modes:</p>
-   * <ul>
-   *   <li><strong>Multi-Level Mode:</strong> If any field has a non-zero level,
-   *       uses hierarchical level-based checking with individual level strategies</li>
-   *   <li><strong>Simple Mode:</strong> If all fields are level 0 (default),
-   *       uses backward-compatible simple strategy checking</li>
-   * </ul>
-   *
    * @param entity   the entity to check
-   * @param strategy the final uniqueness strategy for combining levels (ALL or ANY)
+   * @param strategy the uniqueness strategy (ALL or ANY)
    * @return true if the entity is considered a duplicate
    */
   protected boolean isDuplicate(@NotNull T entity, @NotNull UniquenessStrategy strategy) {
     Objects.requireNonNull(entity, "Entity cannot be null");
     Objects.requireNonNull(strategy, "Uniqueness strategy cannot be null");
 
-    // Build level map for multi-level checking
-    Map<Integer, LevelInfo> levelsMap = buildUniqueLevelsMap(entity);
-    if (levelsMap.isEmpty()) {
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(entity);
+    if (uniqueFields.isEmpty()) {
       log.debug("No unique fields found for duplicate checking");
       return false;
     }
 
-    // Check if we're using multi-level logic (any non-zero level exists)
-    boolean hasMultipleLevels = levelsMap.keySet().stream().anyMatch(level -> level != 0);
-
-    if (hasMultipleLevels || levelsMap.size() > 1) {
-      // Multi-level mode: use hierarchical checking
-      log.debug("Using multi-level duplicate checking with {} levels and final strategy {}",
-          levelsMap.size(), strategy);
-      Specification<T> spec = buildMultiLevelSpec(levelsMap, strategy);
-      return getSpecificationExecutor().exists(spec);
-    } else {
-      // Simple mode: all fields are in level 0, use backward-compatible logic
-      log.debug("Using simple duplicate checking with strategy {}", strategy);
-      LevelInfo level0 = levelsMap.get(0);
-      Map<String, Object> uniqueFields = level0.fields();
-
-      return switch (strategy) {
-        case ALL -> existsByUniqueFields(uniqueFields);
-        case ANY -> uniqueFields.entrySet().stream()
-            .anyMatch(entry -> existsByUniqueFields(Map.of(entry.getKey(), entry.getValue())));
-      };
-    }
+    log.debug("Using duplicate checking with strategy {}", strategy);
+    return switch (strategy) {
+      case ALL -> existsByUniqueFields(uniqueFields);
+      case ANY -> uniqueFields.entrySet().stream()
+          .anyMatch(entry -> existsByUniqueFields(Map.of(entry.getKey(), entry.getValue())));
+    };
   }
 
   /**
    * Check if an entity is a duplicate (excluding given ID) using the specified
    * uniqueness strategy.
    *
-   * <p>This method supports two modes:</p>
-   * <ul>
-   *   <li><strong>Multi-Level Mode:</strong> If any field has a non-zero level,
-   *       uses hierarchical level-based checking with individual level strategies</li>
-   *   <li><strong>Simple Mode:</strong> If all fields are level 0 (default),
-   *       uses backward-compatible simple strategy checking</li>
-   * </ul>
-   *
    * @param id       the ID to exclude from the check
    * @param entity   the entity to check
-   * @param strategy the final uniqueness strategy for combining levels (ALL or ANY)
+   * @param strategy the uniqueness strategy (ALL or ANY)
    * @return true if another entity exists with the same unique fields
    */
   protected boolean isDuplicate(@NotNull K id, @NotNull T entity, @NotNull UniquenessStrategy strategy) {
@@ -768,35 +619,18 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     Objects.requireNonNull(entity, "Entity cannot be null");
     Objects.requireNonNull(strategy, "Uniqueness strategy cannot be null");
 
-    // Build level map for multi-level checking
-    Map<Integer, LevelInfo> levelsMap = buildUniqueLevelsMap(entity);
-    if (levelsMap.isEmpty()) {
+    Map<String, Object> uniqueFields = buildUniqueFieldsMap(entity);
+    if (uniqueFields.isEmpty()) {
       log.debug("No unique fields found for duplicate checking");
       return false;
     }
 
-    // Check if we're using multi-level logic (any non-zero level exists)
-    boolean hasMultipleLevels = levelsMap.keySet().stream().anyMatch(level -> level != 0);
-
-    if (hasMultipleLevels || levelsMap.size() > 1) {
-      // Multi-level mode: use hierarchical checking
-      log.debug("Using multi-level duplicate checking for ID {} with {} levels and final strategy {}",
-          id, levelsMap.size(), strategy);
-      Specification<T> spec = buildMultiLevelSpec(levelsMap, strategy)
-          .and((root, query, cb) -> cb.notEqual(root.get("id"), id));
-      return getSpecificationExecutor().exists(spec);
-    } else {
-      // Simple mode: all fields are in level 0, use backward-compatible logic
-      log.debug("Using simple duplicate checking for ID {} with strategy {}", id, strategy);
-      LevelInfo level0 = levelsMap.get(0);
-      Map<String, Object> uniqueFields = level0.fields();
-
-      return switch (strategy) {
-        case ALL -> existsByUniqueFieldsAndNotId(uniqueFields, id);
-        case ANY -> uniqueFields.entrySet().stream()
-            .anyMatch(entry -> existsByUniqueFieldsAndNotId(Map.of(entry.getKey(), entry.getValue()), id));
-      };
-    }
+    log.debug("Using duplicate checking for ID {} with strategy {}", id, strategy);
+    return switch (strategy) {
+      case ALL -> existsByUniqueFieldsAndNotId(uniqueFields, id);
+      case ANY -> uniqueFields.entrySet().stream()
+          .anyMatch(entry -> existsByUniqueFieldsAndNotId(Map.of(entry.getKey(), entry.getValue()), id));
+    };
   }
 
   protected abstract boolean isDuplicate(@NotNull T entity);
