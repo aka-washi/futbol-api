@@ -3,6 +3,8 @@ package com.eagle.futbolapi.features.team.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -19,6 +21,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@AtLeastOneNotNull.List({
+    @AtLeastOneNotNull(fields = { "organizationId",
+        "organizationDisplayName" }, message = "Either organizationId or organizationDisplayName must be provided"),
+    @AtLeastOneNotNull(fields = { "countryId",
+        "countryDisplayName" }, message = "Either countryId or countryDisplayName must be provided")
+})
 public class TeamDto {
 
   private Long id;
@@ -27,7 +35,6 @@ public class TeamDto {
   private LocalDateTime updatedAt;
   private String updatedBy;
 
-  @NotNull(message = "Organization ID is required")
   private Long organizationId;
   private String organizationDisplayName;
 
@@ -51,7 +58,6 @@ public class TeamDto {
   @NotNull(message = "Founded date is required")
   private LocalDate founded;
 
-  @NotNull(message = "Country ID is required")
   private Long countryId;
 
   private String countryDisplayName;
