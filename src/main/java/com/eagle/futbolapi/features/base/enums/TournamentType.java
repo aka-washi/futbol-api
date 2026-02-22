@@ -4,10 +4,15 @@ package com.eagle.futbolapi.features.base.enums;
  * Enum defining the type of tournament.
  */
 public enum TournamentType {
-  LEAGUE("League"),
-  CUP("Cup"),
-  SUPER_CUP("Super Cup"),
-  PLAYOFF("Playoff");
+  DOMESTIC_LEAGUE("Domestic League"),
+  DOMESTIC_CUP("Domestic Cup"),
+  DOMESTIC_SUPER_CUP("Domestic Super Cup"),
+  DOMESTIC_PLAYOFF("Domestic Playoff"),
+  INTERNATIONAL_LEAGUE("International League"),
+  INTERNATIONAL_CUP("International Cup"),
+  INTERNATIONAL_SUPER_CUP("International Super Cup"),
+  CONTINENTAL_CUP("Continental Cup"),
+  CONTINENTAL_LEAGUE("Continental League");
 
   private final String label;
 

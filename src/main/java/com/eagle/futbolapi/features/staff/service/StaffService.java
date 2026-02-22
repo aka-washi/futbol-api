@@ -41,7 +41,7 @@ public class StaffService extends BaseCrudService<Staff, Long, StaffDto> {
   protected boolean isDuplicate(@NotNull Staff staff) {
     Objects.requireNonNull(staff, "Staff cannot be null");
 
-    return isDuplicate(staff, UniquenessStrategy.ALL);
+    return isDuplicate(staff, UniquenessStrategy.ANY);
   }
 
   @Override
@@ -56,7 +56,7 @@ public class StaffService extends BaseCrudService<Staff, Long, StaffDto> {
         staff.getCurrentTeam() != null ? staff.getCurrentTeam().getId() : null,
         staff.getActive());
 
-    boolean result = isDuplicate(id, staff, UniquenessStrategy.ALL);
+    boolean result = isDuplicate(id, staff, UniquenessStrategy.ANY);
     log.debug("Duplicate check result for ID {}: {}", id, result);
     return result;
   }

@@ -1,0 +1,42 @@
+[
+  {
+    "displayName": "Regular Season - Double Round Robin",
+    "type": "Regular Season",
+    "pointSystemDisplayName": "Standard 3-1-0",
+    "numberOfTeams": 18,
+    "hasHomeAndAway": true,
+    "description": "Standard double round-robin format where each team plays every other team twice"
+  },
+  {
+    "displayName": "Group Stage - 8 Groups of 4",
+    "type": "Group Stage",
+    "pointSystemDisplayName": "Standard 3-1-0",
+    "numberOfGroups": 8,
+    "teamsPerGroup": 4,
+    "hasHomeAndAway": false,
+    "teamsQualifyingForNextStage": 16,
+    "description": "Group stage with 8 groups of 4 teams, top 2 from each group advance"
+  },
+  {
+    "displayName": "Knockout Round - Single Elimination",
+    "type": "Knockout",
+    "numberOfTeams": 16,
+    "hasHomeAndAway": false,
+    "description": "Single elimination knockout format"
+  },
+  {
+    "displayName": "Knockout Round - Home and Away",
+    "type": "Knockout",
+    "numberOfTeams": 16,
+    "hasHomeAndAway": true,
+    "description": "Two-legged knockout format with home and away matches"
+  },
+  {
+    "displayName": "Playoff - Best of Series",
+    "type": "Playoff",
+    "pointSystemDisplayName": "Standard 3-1-0",
+    "numberOfTeams": 8,
+    "hasHomeAndAway": true,
+    "description": "Playoff format with home and away legs"
+  }
+]

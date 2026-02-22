@@ -42,7 +42,7 @@ public class PlayerService extends BaseCrudService<Player, Long, PlayerDto> {
   protected boolean isDuplicate(@NotNull Player player) {
     Objects.requireNonNull(player, "Player cannot be null");
 
-    return isDuplicate(player, UniquenessStrategy.ALL);
+    return isDuplicate(player, UniquenessStrategy.ANY);
   }
 
   @Override
@@ -57,7 +57,7 @@ public class PlayerService extends BaseCrudService<Player, Long, PlayerDto> {
         player.getCurrentTeam() != null ? player.getCurrentTeam().getId() : null,
         player.getActive());
 
-    boolean result = isDuplicate(id, player, UniquenessStrategy.ALL);
+    boolean result = isDuplicate(id, player, UniquenessStrategy.ANY);
     log.debug("Duplicate check result for ID {}: {}", id, result);
     return result;
   }

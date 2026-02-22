@@ -24,6 +24,11 @@ Check the health status of the bootstrap service.
 - `player` - Players
 - `staff` - Staff Members
 - `team` - Teams
+- `stageformat` / `stage-format` - Stage Formats
+- `tournamentseason` / `tournament-season` - Tournament Seasons
+- `competition` - Competitions
+- `seasonteam` / `season-team` - Season Teams
+- `stage` - Stages
 
 ## Request Format
 

@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.pointsystem.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -26,6 +27,13 @@ public class PointSystemService extends BaseCrudService<PointSystem, Long, Point
 
   protected PointSystemService(PointSystemRepository repository, PointSystemMapper mapper) {
     super(repository, mapper);
+  }
+
+  public Optional<PointSystem> findByDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("PointSystem display name cannot be null or empty");
+    }
+    return ((PointSystemRepository) repository).findByDisplayName(displayName);
   }
 
   @Override

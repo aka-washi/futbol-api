@@ -1,0 +1,52 @@
+[
+  {
+    "tournamentSeasonDisplayName": "Liga MX 2024-2025",
+    "displayName": "Liga MX Apertura 2024",
+    "type": "Apertura",
+    "startDate": "2024-07-01",
+    "endDate": "2024-12-15",
+    "status": "Completed",
+    "totalMatches": 153,
+    "description": "First half of the 2024-2025 Liga MX season"
+  },
+  {
+    "tournamentSeasonDisplayName": "Liga MX 2024-2025",
+    "displayName": "Liga MX Clausura 2025",
+    "type": "Clausura",
+    "startDate": "2025-01-10",
+    "endDate": "2025-05-30",
+    "status": "In Progress",
+    "totalMatches": 153,
+    "description": "Second half of the 2024-2025 Liga MX season"
+  },
+  {
+    "tournamentSeasonDisplayName": "Copa MX 2024-2025",
+    "displayName": "Copa MX 2024-2025",
+    "type": "Cup",
+    "startDate": "2024-08-15",
+    "endDate": "2025-05-15",
+    "status": "Planned",
+    "totalMatches": 48,
+    "description": "Mexican cup competition"
+  },
+  {
+    "tournamentSeasonDisplayName": "UEFA Champions League 2024-2025",
+    "displayName": "UEFA Champions League 2024-2025",
+    "type": "Cup",
+    "startDate": "2024-09-01",
+    "endDate": "2025-05-31",
+    "status": "In Progress",
+    "totalMatches": 125,
+    "description": "European club championship"
+  },
+  {
+    "tournamentSeasonDisplayName": "La Liga 2024-2025",
+    "displayName": "La Liga 2024-2025",
+    "type": "Full Season",
+    "startDate": "2024-08-15",
+    "endDate": "2025-05-25",
+    "status": "In Progress",
+    "totalMatches": 380,
+    "description": "Full season Spanish league"
+  }
+]

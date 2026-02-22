@@ -1,0 +1,62 @@
+[
+  {
+    "seasonDisplayName": "2024-2025",
+    "tournamentDisplayName": "Liga MX",
+    "displayName": "Liga MX 2024-2025",
+    "startDate": "2024-07-01",
+    "endDate": "2025-06-30",
+    "status": "In Progress",
+    "hasRelegation": true,
+    "hasPromotion": true,
+    "numberOfTeams": 18,
+    "description": "Mexican top division season 2024-2025"
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "tournamentDisplayName": "Copa MX",
+    "displayName": "Copa MX 2024-2025",
+    "startDate": "2024-08-15",
+    "endDate": "2025-05-30",
+    "status": "Planned",
+    "hasRelegation": false,
+    "hasPromotion": false,
+    "numberOfTeams": 24,
+    "description": "Mexican cup competition for 2024-2025 season"
+  },
+  {
+    "seasonDisplayName": "2023-2024",
+    "tournamentDisplayName": "Liga MX",
+    "displayName": "Liga MX 2023-2024",
+    "startDate": "2023-07-01",
+    "endDate": "2024-06-30",
+    "status": "Completed",
+    "hasRelegation": true,
+    "hasPromotion": true,
+    "numberOfTeams": 18,
+    "description": "Mexican top division season 2023-2024"
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "tournamentDisplayName": "UEFA Champions League",
+    "displayName": "UEFA Champions League 2024-2025",
+    "startDate": "2024-09-01",
+    "endDate": "2025-05-31",
+    "status": "In Progress",
+    "hasRelegation": false,
+    "hasPromotion": false,
+    "numberOfTeams": 32,
+    "description": "Europe's premier club competition"
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "tournamentDisplayName": "La Liga",
+    "displayName": "La Liga 2024-2025",
+    "startDate": "2024-08-15",
+    "endDate": "2025-05-25",
+    "status": "In Progress",
+    "hasRelegation": true,
+    "hasPromotion": true,
+    "numberOfTeams": 20,
+    "description": "Spanish top division season 2024-2025"
+  }
+]

@@ -17,6 +17,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.StaffRole;
 import com.eagle.futbolapi.features.person.entity.Person;
@@ -47,6 +48,7 @@ import lombok.experimental.SuperBuilder;
 public class Staff extends BaseEntity {
 
   @NotNull
+  @UniqueField
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "person_id", nullable = false, unique = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Person person;

@@ -1,0 +1,64 @@
+[
+  {
+    "seasonDisplayName": "2024-2025",
+    "teamDisplayName": "Club América",
+    "joinedDate": "2024-07-01",
+    "isActive": true
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "teamDisplayName": "Chivas Guadalajara",
+    "joinedDate": "2024-07-01",
+    "isActive": true
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "teamDisplayName": "Cruz Azul",
+    "joinedDate": "2024-07-01",
+    "isActive": true
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "teamDisplayName": "Tigres UANL",
+    "joinedDate": "2024-07-01",
+    "isActive": true
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "teamDisplayName": "Monterrey",
+    "joinedDate": "2024-07-01",
+    "isActive": true
+  },
+  {
+    "seasonDisplayName": "2023-2024",
+    "teamDisplayName": "Club América",
+    "joinedDate": "2023-07-01",
+    "leftDate": "2024-06-30",
+    "isActive": false
+  },
+  {
+    "seasonDisplayName": "2023-2024",
+    "teamDisplayName": "Chivas Guadalajara",
+    "joinedDate": "2023-07-01",
+    "leftDate": "2024-06-30",
+    "isActive": false
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "teamDisplayName": "Real Madrid",
+    "joinedDate": "2024-08-15",
+    "isActive": true
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "teamDisplayName": "FC Barcelona",
+    "joinedDate": "2024-08-15",
+    "isActive": true
+  },
+  {
+    "seasonDisplayName": "2024-2025",
+    "teamDisplayName": "Atlético Madrid",
+    "joinedDate": "2024-08-15",
+    "isActive": true
+  }
+]

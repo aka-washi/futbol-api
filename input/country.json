@@ -58,5 +58,11 @@
     "code": "BE",
     "isoCode": "BEL",
     "displayName": "Belgium"
+  },
+  {
+    "name": "Switzerland",
+    "code": "CH",
+    "isoCode": "CHE",
+    "displayName": "Switzerland"
   }
 ]

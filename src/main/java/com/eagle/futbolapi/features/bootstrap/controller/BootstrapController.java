@@ -103,4 +103,61 @@ public class BootstrapController {
     response.put("service", "Bootstrap Service");
     return ResponseEntity.ok(response);
   }
+
+  /**
+   * Load all entities in the proper dependency order.
+   * This endpoint loads data from the default input folder for all entity types.
+   *
+   * Loading order:
+   * 1. country
+   * 2. organization
+   * 3. pointsystem
+   * 4. season
+   * 5. person
+   * 6. team
+   * 7. tournament
+   * 8. player
+   * 9. staff
+   * 10. stageFormat
+   * 11. tournamentSeason
+   * 12. competition
+   * 13. seasonTeam
+   * 14. stage
+   *
+   * @return summary of all load operations
+   */
+  @PostMapping("/load-all")
+  public ResponseEntity<Map<String, Object>> loadAll() {
+    log.info("Bootstrap load-all request received");
+
+    try {
+      Map<String, BootstrapResponseDto> results = bootstrapService.loadAll();
+
+      int totalSuccess = results.values().stream().mapToInt(BootstrapResponseDto::getSuccessCount).sum();
+      int totalFailure = results.values().stream().mapToInt(BootstrapResponseDto::getFailureCount).sum();
+
+      Map<String, Object> responseMap = new HashMap<>();
+      responseMap.put("status", totalFailure > 0 ? "PARTIAL_SUCCESS" : "SUCCESS");
+      responseMap.put("totalSuccessCount", totalSuccess);
+      responseMap.put("totalFailureCount", totalFailure);
+      responseMap.put("results", results);
+      responseMap.put("message", String.format("Loaded %d entities successfully, %d failed across all types",
+          totalSuccess, totalFailure));
+
+      HttpStatus status = totalFailure > 0 && totalSuccess == 0
+          ? HttpStatus.BAD_REQUEST
+          : HttpStatus.OK;
+
+      return ResponseEntity.status(status).body(responseMap);
+
+    } catch (Exception e) {
+      log.error("Error processing bootstrap load-all request", e);
+
+      Map<String, Object> errorResponse = new HashMap<>();
+      errorResponse.put("status", "ERROR");
+      errorResponse.put("message", "Bootstrap load-all failed: " + e.getMessage());
+
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
+  }
 }
