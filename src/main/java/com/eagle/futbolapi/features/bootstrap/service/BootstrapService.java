@@ -24,6 +24,8 @@ import com.eagle.futbolapi.features.pointsystem.dto.PointSystemDto;
 import com.eagle.futbolapi.features.pointsystem.service.PointSystemService;
 import com.eagle.futbolapi.features.season.dto.SeasonDto;
 import com.eagle.futbolapi.features.season.service.SeasonService;
+import com.eagle.futbolapi.features.staff.dto.StaffDto;
+import com.eagle.futbolapi.features.staff.service.StaffService;
 import com.eagle.futbolapi.features.team.dto.TeamDto;
 import com.eagle.futbolapi.features.team.service.TeamService;
 
@@ -49,6 +51,7 @@ public class BootstrapService {
   private final SeasonService seasonService;
   private final PersonService personService;
   private final PlayerService playerService;
+  private final StaffService staffService;
   private final TeamService teamService;
 
   /**
@@ -151,6 +154,8 @@ public class BootstrapService {
         return loadEntities(dataArray, PersonDto.class, personService::create, "Person");
       case "player":
         return loadEntities(dataArray, PlayerDto.class, playerService::create, "Player");
+      case "staff":
+        return loadEntities(dataArray, StaffDto.class, staffService::create, "Staff");
       case "team":
         return loadEntities(dataArray, TeamDto.class, teamService::create, "Team");
       default:

@@ -63,14 +63,9 @@ public class StaffService extends BaseCrudService<Staff, Long, StaffDto> {
 
   @Override
   protected void resolveRelationships(StaffDto dto, Staff staff) {
-    // Map person from display name or ID
-    if (dto.getPersonDisplayName() != null && !dto.getPersonDisplayName().trim().isEmpty()) {
-      var person = personService.findByDisplayName(dto.getPersonDisplayName())
-          .orElseThrow(() -> new ResourceNotFoundException("Person", "displayName", dto.getPersonDisplayName()));
-      staff.setPerson(person);
-    } else if (dto.getPersonId() != null) {
-      var person = personService.getById(dto.getPersonId())
-          .orElseThrow(() -> new ResourceNotFoundException("Person", "id", dto.getPersonId()));
+    // Map person from PersonDto object - find or create
+    if (dto.getPerson() != null) {
+      var person = personService.findOrCreate(dto.getPerson());
       staff.setPerson(person);
     }
 

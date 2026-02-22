@@ -6,17 +6,17 @@ import org.mapstruct.MappingConstants;
 
 import com.eagle.futbolapi.features.base.enums.StaffRole;
 import com.eagle.futbolapi.features.base.mapper.BaseMapper;
+import com.eagle.futbolapi.features.person.mapper.PersonMapper;
 import com.eagle.futbolapi.features.staff.dto.StaffDto;
 import com.eagle.futbolapi.features.staff.entity.Staff;
 
 /**
  * MapStruct mapper for Staff entity and DTO conversion.
  */
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = { PersonMapper.class })
 public interface StaffMapper extends BaseMapper<Staff, StaffDto> {
 
-  @Mapping(target = "personId", source = "person.id")
-  @Mapping(target = "personDisplayName", source = "person.displayName")
+  @Mapping(target = "person", source = "person")
   @Mapping(target = "currentTeamId", source = "currentTeam.id")
   @Mapping(target = "currentTeamDisplayName", source = "currentTeam.displayName")
   @Mapping(target = "role", expression = "java(roleToString(staff.getRole()))")

@@ -1,0 +1,67 @@
+[
+  {
+    "person": {
+      "firstName": "Carlo",
+      "lastName": "Ancelotti",
+      "birthDate": "1959-06-10",
+      "gender": "Male",
+      "birthPlace": "Reggiolo",
+      "birthCountryDisplayName": "Italy",
+      "nationalityCountryDisplayName": "Italy"
+    },
+    "role": "Head Coach",
+    "active": true
+  },
+  {
+    "person": {
+      "firstName": "Josep",
+      "lastName": "Guardiola",
+      "birthDate": "1971-01-18",
+      "gender": "Male",
+      "birthPlace": "Santpedor",
+      "birthCountryDisplayName": "Spain",
+      "nationalityCountryDisplayName": "Spain"
+    },
+    "role": "Head Coach",
+    "active": true
+  },
+  {
+    "person": {
+      "firstName": "Jürgen",
+      "lastName": "Klopp",
+      "birthDate": "1967-06-16",
+      "gender": "Male",
+      "birthPlace": "Stuttgart",
+      "birthCountryDisplayName": "Germany",
+      "nationalityCountryDisplayName": "Germany"
+    },
+    "role": "Head Coach",
+    "active": true
+  },
+  {
+    "person": {
+      "firstName": "José",
+      "lastName": "Mourinho",
+      "birthDate": "1963-01-26",
+      "gender": "Male",
+      "birthPlace": "Setúbal",
+      "birthCountryDisplayName": "Portugal",
+      "nationalityCountryDisplayName": "Portugal"
+    },
+    "role": "Head Coach",
+    "active": true
+  },
+  {
+    "person": {
+      "firstName": "Zinedine",
+      "lastName": "Zidane",
+      "birthDate": "1972-06-23",
+      "gender": "Male",
+      "birthPlace": "Marseille",
+      "birthCountryDisplayName": "France",
+      "nationalityCountryDisplayName": "France"
+    },
+    "role": "Head Coach",
+    "active": true
+  }
+]

@@ -22,6 +22,7 @@ Check the health status of the bootstrap service.
 - `season` - Seasons
 - `person` - Persons
 - `player` - Players
+- `staff` - Staff Members
 - `team` - Teams
 
 ## Request Format
