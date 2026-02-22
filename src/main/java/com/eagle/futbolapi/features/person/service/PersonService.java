@@ -54,6 +54,47 @@ public class PersonService extends BaseCrudService<Person, Long, PersonDto> {
     return repository.findByEmail(email);
   }
 
+  /**
+   * Finds an existing person by uniqueRegKey or creates a new one if not found.
+   * The uniqueRegKey is generated from the person data.
+   *
+   * @param dto The PersonDto containing the person data
+   * @return The existing or newly created Person entity
+   */
+  public Person findOrCreate(PersonDto dto) {
+    if (dto == null) {
+      throw new IllegalArgumentException("PersonDto cannot be null");
+    }
+
+    log.debug("Finding or creating person from DTO");
+
+    // Convert DTO to entity
+    Person person = convertToEntity(dto);
+
+    // Resolve relationships and generate uniqueRegKey
+    resolveRelationships(dto, person);
+
+    // Try to find existing person by uniqueRegKey
+    Optional<Person> existing = getByUniqueRegKey(person.getUniqueRegKey());
+
+    if (existing.isPresent()) {
+      log.debug("Person with uniqueRegKey {} already exists, using existing person with ID {}",
+          person.getUniqueRegKey(), existing.get().getId());
+      return existing.get();
+    }
+
+    // Person doesn't exist, create new one
+    log.debug("Person with uniqueRegKey {} does not exist, creating new person",
+        person.getUniqueRegKey());
+
+    // Save the person (skip duplicate check since we already checked by uniqueRegKey)
+    Person saved = repository.save(person);
+    log.info("Successfully created new person with ID {} and uniqueRegKey {}",
+        saved.getId(), saved.getUniqueRegKey());
+
+    return saved;
+  }
+
   @Override
   protected boolean isDuplicate(@NotNull Person entity) {
     Objects.requireNonNull(entity, "Person cannot be null");

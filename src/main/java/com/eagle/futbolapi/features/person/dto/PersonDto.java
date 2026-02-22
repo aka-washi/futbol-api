@@ -31,7 +31,6 @@ import lombok.NoArgsConstructor;
 })
 public class PersonDto {
   private Long id;
-  @NotBlank(message = "Unique registration key is required")
   private String uniqueRegKey;
   @NotBlank(message = "First name is required")
   @Size(min = 1, max = 100, message = "First name must be between 1 and 100 characters")

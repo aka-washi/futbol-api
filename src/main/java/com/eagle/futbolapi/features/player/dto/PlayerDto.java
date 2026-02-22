@@ -2,10 +2,11 @@ package com.eagle.futbolapi.features.player.dto;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
+import com.eagle.futbolapi.features.person.dto.PersonDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +20,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@AtLeastOneNotNull(fields = { "personId",
-    "personDisplayName" }, message = "Either personId or personDisplayName must be provided")
 public class PlayerDto {
 
   private Long id;
@@ -29,8 +28,9 @@ public class PlayerDto {
   private LocalDateTime updatedAt;
   private String updatedBy;
 
-  private Long personId;
-  private String personDisplayName;
+  @Valid
+  @NotNull(message = "Person is required")
+  private PersonDto person;
 
   @NotBlank(message = "Position is required")
   private String position;

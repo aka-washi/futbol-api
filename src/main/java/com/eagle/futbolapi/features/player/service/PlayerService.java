@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
+import com.eagle.futbolapi.features.person.entity.Person;
 import com.eagle.futbolapi.features.person.service.PersonService;
 import com.eagle.futbolapi.features.player.dto.PlayerDto;
 import com.eagle.futbolapi.features.player.entity.Player;
@@ -63,14 +64,9 @@ public class PlayerService extends BaseCrudService<Player, Long, PlayerDto> {
 
   @Override
   protected void resolveRelationships(PlayerDto dto, Player player) {
-    // Map person from display name or ID
-    if (dto.getPersonDisplayName() != null && !dto.getPersonDisplayName().trim().isEmpty()) {
-      var person = personService.findByDisplayName(dto.getPersonDisplayName())
-          .orElseThrow(() -> new ResourceNotFoundException("Person", "displayName", dto.getPersonDisplayName()));
-      player.setPerson(person);
-    } else if (dto.getPersonId() != null) {
-      var person = personService.getById(dto.getPersonId())
-          .orElseThrow(() -> new ResourceNotFoundException("Person", "id", dto.getPersonId()));
+    // Map person from PersonDto object - find or create
+    if (dto.getPerson() != null) {
+      Person person = personService.findOrCreate(dto.getPerson());
       player.setPerson(person);
     }
 
