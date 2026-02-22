@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.player.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -28,14 +29,23 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class PlayerService extends BaseCrudService<Player, Long, PlayerDto> {
 
+  private final PlayerRepository repository;
   private final PersonService personService;
   private final TeamService teamService;
 
   protected PlayerService(PlayerRepository repository, PlayerMapper mapper,
       PersonService personService, TeamService teamService) {
     super(repository, mapper);
+    this.repository = repository;
     this.personService = personService;
     this.teamService = teamService;
+  }
+
+  public Optional<Player> findByPersonDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Person display name cannot be null or empty");
+    }
+    return repository.findByPersonDisplayName(displayName);
   }
 
   @Override

@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.eagle.futbolapi.features.bootstrap.dto.BootstrapRequestDto;
@@ -17,6 +18,18 @@ import com.eagle.futbolapi.features.competition.dto.CompetitionDto;
 import com.eagle.futbolapi.features.competition.service.CompetitionService;
 import com.eagle.futbolapi.features.country.dto.CountryDto;
 import com.eagle.futbolapi.features.country.service.CountryService;
+import com.eagle.futbolapi.features.group.dto.GroupDto;
+import com.eagle.futbolapi.features.group.service.GroupService;
+import com.eagle.futbolapi.features.lineup.dto.LineupDto;
+import com.eagle.futbolapi.features.lineup.service.LineupService;
+import com.eagle.futbolapi.features.lineupMember.dto.LineupMemberDto;
+import com.eagle.futbolapi.features.lineupMember.service.LineupMemberService;
+import com.eagle.futbolapi.features.match.dto.MatchDto;
+import com.eagle.futbolapi.features.match.service.MatchService;
+import com.eagle.futbolapi.features.matchday.dto.MatchdayDto;
+import com.eagle.futbolapi.features.matchday.service.MatchdayService;
+import com.eagle.futbolapi.features.matchevent.dto.MatchEventDto;
+import com.eagle.futbolapi.features.matchevent.service.MatchEventService;
 import com.eagle.futbolapi.features.organization.dto.OrganizationDto;
 import com.eagle.futbolapi.features.organization.service.OrganizationService;
 import com.eagle.futbolapi.features.person.dto.PersonDto;
@@ -35,12 +48,16 @@ import com.eagle.futbolapi.features.stage.dto.StageDto;
 import com.eagle.futbolapi.features.stage.service.StageService;
 import com.eagle.futbolapi.features.stageFormat.dto.StageFormatDto;
 import com.eagle.futbolapi.features.stageFormat.service.StageFormatService;
+import com.eagle.futbolapi.features.standing.dto.StandingDto;
+import com.eagle.futbolapi.features.standing.service.StandingService;
 import com.eagle.futbolapi.features.team.dto.TeamDto;
 import com.eagle.futbolapi.features.team.service.TeamService;
 import com.eagle.futbolapi.features.tournament.dto.TournamentDto;
 import com.eagle.futbolapi.features.tournament.service.TournamentService;
 import com.eagle.futbolapi.features.tournamentSeason.dto.TournamentSeasonDto;
 import com.eagle.futbolapi.features.tournamentSeason.service.TournamentSeasonService;
+import com.eagle.futbolapi.features.venue.dto.VenueDto;
+import com.eagle.futbolapi.features.venue.service.VenueService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,6 +89,14 @@ public class BootstrapService {
   private final CompetitionService competitionService;
   private final SeasonTeamService seasonTeamService;
   private final StageService stageService;
+  private final VenueService venueService;
+  private final GroupService groupService;
+  private final MatchdayService matchdayService;
+  private final StandingService standingService;
+  private final MatchService matchService;
+  private final LineupService lineupService;
+  private final LineupMemberService lineupMemberService;
+  private final MatchEventService matchEventService;
   private final BootstrapTransactionHelper transactionHelper;
 
   /**
@@ -122,7 +147,8 @@ public class BootstrapService {
         "pointsystem",       // No dependencies
         "season",            // No dependencies
         "person",            // No dependencies
-        "team",              // Depends on organization, country
+        "venue",             // Depends on country
+        "team",              // Depends on organization, country, venue
         "tournament",        // Depends on organization
         "player",            // Depends on person, team
         "staff",             // Depends on person, team
@@ -130,7 +156,14 @@ public class BootstrapService {
         "tournamentseason",  // Depends on tournament, season
         "competition",       // Depends on tournamentSeason
         "seasonteam",        // Depends on season, team
-        "stage"              // Depends on competition, stageFormat (optional)
+        "stage",             // Depends on competition, stageFormat (optional)
+        "group",             // Depends on stage
+        "matchday",          // Depends on stage
+        "standing",          // Depends on stage, team
+        "match",             // Depends on matchday, venue, team
+        "lineup",            // Depends on match, team
+        "lineupmember",      // Depends on lineup, player, staff
+        "matchevent"         // Depends on match, player
     };
 
     for (String entityType : entityTypes) {
@@ -233,7 +266,10 @@ public class BootstrapService {
         {"stageformat", "stageFormat"},
         {"tournamentseason", "tournamentSeason"},
         {"seasonteam", "seasonTeam"},
-        {"pointsystem", "pointSystem"}
+        {"pointsystem", "pointSystem"},
+        {"matchday", "matchDay"},
+        {"lineupmember", "lineupMember"},
+        {"matchevent", "matchEvent"}
     };
 
     for (String[] replacement : replacements) {
@@ -275,6 +311,8 @@ public class BootstrapService {
         return loadEntities(dataArray, SeasonDto.class, seasonService::create, "Season");
       case "person":
         return loadEntities(dataArray, PersonDto.class, personService::create, "Person");
+      case "venue":
+        return loadEntities(dataArray, VenueDto.class, venueService::create, "Venue");
       case "player":
         return loadEntities(dataArray, PlayerDto.class, playerService::create, "Player");
       case "staff":
@@ -296,6 +334,22 @@ public class BootstrapService {
         return loadEntities(dataArray, SeasonTeamDto.class, seasonTeamService::create, "SeasonTeam");
       case "stage":
         return loadEntities(dataArray, StageDto.class, stageService::create, "Stage");
+      case "group":
+        return loadEntities(dataArray, GroupDto.class, groupService::create, "Group");
+      case "matchday":
+        return loadEntities(dataArray, MatchdayDto.class, matchdayService::create, "Matchday");
+      case "standing":
+        return loadEntities(dataArray, StandingDto.class, standingService::create, "Standing");
+      case "match":
+        return loadEntities(dataArray, MatchDto.class, matchService::create, "Match");
+      case "lineup":
+        return loadEntities(dataArray, LineupDto.class, lineupService::create, "Lineup");
+      case "lineupmember":
+      case "lineup-member":
+        return loadEntities(dataArray, LineupMemberDto.class, lineupMemberService::create, "LineupMember");
+      case "matchevent":
+      case "match-event":
+        return loadEntities(dataArray, MatchEventDto.class, matchEventService::create, "MatchEvent");
       default:
         response.addError("Unsupported entity type: " + entityType);
         response.incrementFailure();
@@ -321,9 +375,9 @@ public class BootstrapService {
         log.debug("Successfully loaded {} entity", entityName);
       } catch (Exception e) {
         response.incrementFailure();
-        String errorMsg = String.format("Failed to load %s: %s", entityName, e.getMessage());
+        String errorMsg = buildErrorMessage(entityName, e);
         response.addError(errorMsg);
-        log.error(errorMsg, e);
+        log.warn(errorMsg);
       }
     }
 
@@ -333,5 +387,44 @@ public class BootstrapService {
 
     log.info(message);
     return response;
+  }
+
+  /**
+   * Build a user-friendly error message from an exception.
+   * Detects duplicate errors and provides a friendlier message.
+   */
+  private String buildErrorMessage(String entityName, Exception e) {
+    // Check if it's a duplicate error
+    if (isDuplicateError(e)) {
+      return String.format("Failed to load %s: Duplicate entity", entityName);
+    }
+    
+    // For other errors, return the exception message
+    return String.format("Failed to load %s: %s", entityName, e.getMessage());
+  }
+
+  /**
+   * Check if an exception indicates a duplicate/unique constraint violation.
+   */
+  private boolean isDuplicateError(Exception e) {
+    // Check if the exception is or contains a DataIntegrityViolationException
+    Throwable cause = e;
+    while (cause != null) {
+      if (cause instanceof DataIntegrityViolationException) {
+        String message = cause.getMessage();
+        if (message != null) {
+          // Check for common unique constraint violation patterns
+          return message.contains("Unique index or primary key violation") ||
+                 message.contains("unique constraint") ||
+                 message.contains("duplicate key") ||
+                 message.contains("UNIQUE KEY") ||
+                 message.contains("23505") ||  // PostgreSQL unique violation error code
+                 message.contains("ORA-00001"); // Oracle unique constraint error code
+        }
+        return true;
+      }
+      cause = cause.getCause();
+    }
+    return false;
   }
 }

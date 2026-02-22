@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.stage.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -30,11 +31,21 @@ public class StageService extends BaseCrudService<Stage, Long, StageDto> {
   private final CompetitionService competitionService;
   private final StageFormatService stageFormatService;
 
+  private final StageRepository stageRepository;
+
   protected StageService(StageRepository repository, StageMapper mapper,
       CompetitionService competitionService, StageFormatService stageFormatService) {
     super(repository, mapper);
+    this.stageRepository = repository;
     this.competitionService = competitionService;
     this.stageFormatService = stageFormatService;
+  }
+
+  public Optional<Stage> findByDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Stage display name cannot be null or empty");
+    }
+    return stageRepository.findByDisplayName(displayName);
   }
 
   @Override

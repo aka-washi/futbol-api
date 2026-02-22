@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.base.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Enum defining the role type of a lineup member.
  */
@@ -18,5 +20,18 @@ public enum LineupMemberRoleType {
 
   public String getLabel() {
     return label;
+  }
+
+  @JsonCreator
+  public static LineupMemberRoleType fromLabel(String label) {
+    if (label == null) {
+      return null;
+    }
+    for (LineupMemberRoleType e : LineupMemberRoleType.values()) {
+      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
+        return e;
+      }
+    }
+    throw new IllegalArgumentException("Unknown LineupMemberRoleType: " + label);
   }
 }

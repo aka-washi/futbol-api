@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.base.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Enum defining the type of tournament.
  */
@@ -22,5 +24,18 @@ public enum TournamentType {
 
   public String getLabel() {
     return label;
+  }
+
+  @JsonCreator
+  public static TournamentType fromLabel(String label) {
+    if (label == null) {
+      return null;
+    }
+    for (TournamentType e : TournamentType.values()) {
+      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
+        return e;
+      }
+    }
+    throw new IllegalArgumentException("Unknown TournamentType: " + label);
   }
 }

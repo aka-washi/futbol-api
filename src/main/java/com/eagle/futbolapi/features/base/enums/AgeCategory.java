@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.base.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Enum defining age categories for tournaments and teams.
  */
@@ -34,5 +36,18 @@ public enum AgeCategory {
 
   public String getLabel() {
     return label;
+  }
+
+  @JsonCreator
+  public static AgeCategory fromLabel(String label) {
+    if (label == null) {
+      return null;
+    }
+    for (AgeCategory e : AgeCategory.values()) {
+      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
+        return e;
+      }
+    }
+    throw new IllegalArgumentException("Unknown AgeCategory: " + label);
   }
 }

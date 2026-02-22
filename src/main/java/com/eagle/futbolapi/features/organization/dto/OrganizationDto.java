@@ -35,7 +35,6 @@ public class OrganizationDto {
   private String type;
   @Size(max = 10, message = "Abbreviation cannot exceed 10 characters")
   private String abbreviation;
-  @NotNull(message = "Country ID is required")
   private Long countryId;
   private String countryDisplayName;
   @NotNull(message = "Founded date is required")

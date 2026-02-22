@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.base.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Enum defining the role of a staff member.
  */
@@ -22,5 +24,18 @@ public enum StaffRole {
 
   public String getLabel() {
     return label;
+  }
+
+  @JsonCreator
+  public static StaffRole fromLabel(String label) {
+    if (label == null) {
+      return null;
+    }
+    for (StaffRole e : StaffRole.values()) {
+      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
+        return e;
+      }
+    }
+    throw new IllegalArgumentException("Unknown StaffRole: " + label);
   }
 }

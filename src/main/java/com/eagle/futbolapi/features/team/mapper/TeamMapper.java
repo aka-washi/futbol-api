@@ -43,14 +43,7 @@ public interface TeamMapper extends BaseMapper<Team, TeamDto> {
   }
 
   default Gender stringToGender(String gender) {
-    if (gender == null)
-      return null;
-    for (Gender g : Gender.values()) {
-      if (g.getLabel().equals(gender)) {
-        return g;
-      }
-    }
-    throw new IllegalArgumentException("Invalid gender: " + gender);
+    return Gender.fromLabel(gender);
   }
 
   default String ageCategoryToString(AgeCategory ageCategory) {
@@ -58,14 +51,7 @@ public interface TeamMapper extends BaseMapper<Team, TeamDto> {
   }
 
   default AgeCategory stringToAgeCategory(String ageCategory) {
-    if (ageCategory == null)
-      return null;
-    for (AgeCategory ac : AgeCategory.values()) {
-      if (ac.getLabel().equals(ageCategory)) {
-        return ac;
-      }
-    }
-    throw new IllegalArgumentException("Invalid age category: " + ageCategory);
+    return AgeCategory.fromLabel(ageCategory);
   }
 
   default String teamStatusToString(TeamStatus status) {
@@ -73,14 +59,7 @@ public interface TeamMapper extends BaseMapper<Team, TeamDto> {
   }
 
   default TeamStatus stringToTeamStatus(String status) {
-    if (status == null)
-      return null;
-    for (TeamStatus ts : TeamStatus.values()) {
-      if (ts.getLabel().equals(status)) {
-        return ts;
-      }
-    }
-    throw new IllegalArgumentException("Invalid team status: " + status);
+    return TeamStatus.fromLabel(status);
   }
 
 }

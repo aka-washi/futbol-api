@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.base.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Enum defining the period of a match.
  */
@@ -18,5 +20,18 @@ public enum MatchPeriod {
 
   public String getLabel() {
     return label;
+  }
+
+  @JsonCreator
+  public static MatchPeriod fromLabel(String label) {
+    if (label == null) {
+      return null;
+    }
+    for (MatchPeriod e : MatchPeriod.values()) {
+      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
+        return e;
+      }
+    }
+    throw new IllegalArgumentException("Unknown MatchPeriod: " + label);
   }
 }

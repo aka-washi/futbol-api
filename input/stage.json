@@ -1,6 +1,6 @@
 [
   {
-    "displayName": "Regular Season",
+    "displayName": "Liga MX Apertura 2024 - Regular Season",
     "competitionDisplayName": "Liga MX Apertura 2024",
     "stageFormatDisplayName": "Regular Season - Double Round Robin",
     "order": 1,
@@ -9,7 +9,7 @@
     "endDate": "2024-11-15"
   },
   {
-    "displayName": "Liguilla - Quarterfinals",
+    "displayName": "Liga MX Apertura 2024 - Liguilla Quarterfinals",
     "competitionDisplayName": "Liga MX Apertura 2024",
     "stageFormatDisplayName": "Knockout Round - Home and Away",
     "order": 2,
@@ -36,7 +36,7 @@
     "endDate": "2024-12-15"
   },
   {
-    "displayName": "Regular Season",
+    "displayName": "Liga MX Clausura 2025 - Regular Season",
     "competitionDisplayName": "Liga MX Clausura 2025",
     "stageFormatDisplayName": "Regular Season - Double Round Robin",
     "order": 1,
@@ -45,7 +45,7 @@
     "endDate": "2025-05-10"
   },
   {
-    "displayName": "Liguilla - Quarterfinals",
+    "displayName": "Liga MX Clausura 2025 - Liguilla Quarterfinals",
     "competitionDisplayName": "Liga MX Clausura 2025",
     "stageFormatDisplayName": "Knockout Round - Home and Away",
     "order": 2,

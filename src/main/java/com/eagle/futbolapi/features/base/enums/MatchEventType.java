@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.base.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Enum defining the type of match event.
  */
@@ -21,5 +23,18 @@ public enum MatchEventType {
 
   public String getLabel() {
     return label;
+  }
+
+  @JsonCreator
+  public static MatchEventType fromLabel(String label) {
+    if (label == null) {
+      return null;
+    }
+    for (MatchEventType e : MatchEventType.values()) {
+      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
+        return e;
+      }
+    }
+    throw new IllegalArgumentException("Unknown MatchEventType: " + label);
   }
 }

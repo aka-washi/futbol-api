@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Group A",
+    "displayName": "Group A",
+    "stageDisplayName": "Liga MX Apertura 2024 - Regular Season",
+    "order": 1,
+    "numberOfTeams": 4
+  },
+  {
+    "name": "Group B",
+    "displayName": "Group B",
+    "stageDisplayName": "Liga MX Apertura 2024 - Regular Season",
+    "order": 2,
+    "numberOfTeams": 4
+  }
+]

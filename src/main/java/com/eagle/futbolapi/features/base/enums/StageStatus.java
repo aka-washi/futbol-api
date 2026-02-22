@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.base.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Enum defining the status of a stage.
  */
@@ -16,5 +18,18 @@ public enum StageStatus {
 
   public String getLabel() {
     return label;
+  }
+
+  @JsonCreator
+  public static StageStatus fromLabel(String label) {
+    if (label == null) {
+      return null;
+    }
+    for (StageStatus e : StageStatus.values()) {
+      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
+        return e;
+      }
+    }
+    throw new IllegalArgumentException("Unknown StageStatus: " + label);
   }
 }

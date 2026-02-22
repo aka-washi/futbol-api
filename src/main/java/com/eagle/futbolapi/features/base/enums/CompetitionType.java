@@ -1,5 +1,7 @@
 package com.eagle.futbolapi.features.base.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Enum defining the type of competition.
  */
@@ -18,5 +20,18 @@ public enum CompetitionType {
 
   public String getLabel() {
     return label;
+  }
+
+  @JsonCreator
+  public static CompetitionType fromLabel(String label) {
+    if (label == null) {
+      return null;
+    }
+    for (CompetitionType e : CompetitionType.values()) {
+      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
+        return e;
+      }
+    }
+    throw new IllegalArgumentException("Unknown CompetitionType: " + label);
   }
 }
