@@ -499,6 +499,25 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PageCompetitionDTO'
+              examples:
+                ligaMxList:
+                  summary: Single-item page containing Liga MX competition
+                  value:
+                    success: true
+                    message: Competitions retrieved successfully
+                    data:
+                      content:
+                        - id: 1
+                          name: Liga MX Apertura 2024
+                          displayName: Apertura 2024
+                          seasonId: 1
+                          active: true
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
     post:
       tags:
       - Competitions
@@ -532,6 +551,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CompetitionDTO'
+            examples:
+              ligaMx:
+                summary: Example Competition - Liga MX Apertura 2024
+                value:
+                  name: Liga MX Apertura 2024
+                  displayName: Apertura 2024
+                  seasonId: 1
+                  active: true
   /competitions/{id}:
     delete:
       tags:
@@ -684,6 +711,28 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PageCountryDTO'
+              examples:
+                mexicoList:
+                  summary: Single-item page containing Mexico
+                  value:
+                    success: true
+                    message: Countries retrieved successfully
+                    data:
+                      content:
+                        - id: 1
+                          name: United Mexican States
+                          displayName: Mexico
+                          code: MX
+                          isoCode: MEX
+                          flagUrl: https://flagcdn.com/mx.svg
+                          createdAt: '2024-01-01T00:00:00'
+                          createdBy: system
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
     post:
       tags:
       - Countries
@@ -717,6 +766,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CountryDTO'
+            examples:
+              mexico:
+                summary: Example Country - Mexico
+                value:
+                  name: United Mexican States
+                  displayName: Mexico
+                  code: MX
+                  isoCode: MEX
+                  flagUrl: https://flagcdn.com/mx.svg
   /countries/{id}:
     delete:
       tags:
@@ -759,6 +817,19 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/CountryDTO'
+              examples:
+                mexico:
+                  summary: Mexico country example
+                  value:
+                    success: true
+                    message: Country retrieved successfully
+                    data:
+                      id: 1
+                      name: United Mexican States
+                      displayName: Mexico
+                      code: MX
+                      isoCode: MEX
+                      flagUrl: https://flagcdn.com/mx.svg
       parameters:
       - name: id
         in: path
@@ -1472,6 +1543,28 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PageMatchDTO'
+              examples:
+                clubAmericaMatchList:
+                  summary: Single-item page containing a Club América match
+                  value:
+                    success: true
+                    message: Matches retrieved successfully
+                    data:
+                      content:
+                        - id: 400
+                          matchdayId: 10
+                          homeTeamId: 100
+                          awayTeamId: 101
+                          venueId: 50
+                          matchDateTime: '2024-08-10T21:00:00'
+                          homeScore: 2
+                          awayScore: 1
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
     post:
       tags:
       - Matches
@@ -1505,6 +1598,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MatchDTO'
+            examples:
+              clubAmericaVsChivas:
+                summary: Example Match - Club América vs Chivas
+                value:
+                  matchdayId: 10
+                  homeTeamId: 100
+                  awayTeamId: 101
+                  venueId: 50
+                  matchDateTime: '2024-08-10T21:00:00'
   /matches/{id}:
     delete:
       tags:
@@ -1523,6 +1625,21 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/MatchDTO'
+              examples:
+                clubAmericaVsChivas:
+                  summary: Club América vs Chivas match example
+                  value:
+                    success: true
+                    message: Match retrieved successfully
+                    data:
+                      id: 400
+                      matchdayId: 10
+                      homeTeamId: 100
+                      awayTeamId: 101
+                      venueId: 50
+                      matchDateTime: '2024-08-10T21:00:00'
+                      homeScore: 2
+                      awayScore: 1
       parameters:
       - name: id
         in: path
@@ -1657,6 +1774,29 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PageOrganizationDTO'
+              examples:
+                clubAmericaList:
+                  summary: Single-item page containing Club América organization
+                  value:
+                    success: true
+                    message: Organizations retrieved successfully
+                    data:
+                      content:
+                        - id: 10
+                          name: Club de Fútbol América S.A. de C.V.
+                          displayName: América
+                          abbreviation: AME
+                          founded: '1916-10-12'
+                          countryDisplayName: Mexico
+                          countryId: 1
+                          headquarters: Mexico City, Mexico
+                          logo: https://en.wikipedia.org/wiki/Club_Am%C3%A9rica#/media/File:Club_Am%C3%A9rica_crest.svg
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
     post:
       tags:
       - Organizations
@@ -1690,6 +1830,17 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OrganizationDTO'
+            examples:
+              clubAmericaOrg:
+                summary: Example Organization - Club América
+                value:
+                  name: Club de Fútbol América S.A. de C.V.
+                  displayName: América
+                  abbreviation: AME
+                  founded: '1916-10-12'
+                  countryId: 1
+                  headquarters: Mexico City, Mexico
+                  website: https://www.clubamerica.com.mx
   /organizations/{id}:
     delete:
       tags:
@@ -1732,6 +1883,22 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/OrganizationDTO'
+              examples:
+                clubAmerica:
+                  summary: Club América organization example
+                  value:
+                    success: true
+                    message: Organization retrieved successfully
+                    data:
+                      id: 10
+                      name: Club de Fútbol América S.A. de C.V.
+                      displayName: América
+                      abbreviation: AME
+                      founded: '1916-10-12'
+                      countryDisplayName: Mexico
+                      countryId: 1
+                      headquarters: Mexico City, Mexico
+                      website: https://www.clubamerica.com.mx
       parameters:
       - name: id
         in: path
@@ -1842,6 +2009,26 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PagePersonDTO'
+              examples:
+                guillermoOchoaList:
+                  summary: Single-item page containing Guillermo Ochoa
+                  value:
+                    success: true
+                    message: Persons retrieved successfully
+                    data:
+                      content:
+                        - id: 200
+                          firstName: Guillermo
+                          lastName: Ochoa
+                          dateOfBirth: '1985-07-13'
+                          nationalityId: 1
+                          displayName: Guillermo Ochoa
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
     post:
       tags:
       - Persons
@@ -1875,6 +2062,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PersonDTO'
+            examples:
+              guillermoOchoa:
+                summary: Example Person - Guillermo Ochoa
+                value:
+                  firstName: Guillermo
+                  lastName: Ochoa
+                  dateOfBirth: '1985-07-13'
+                  nationalityId: 1
   /persons/{id}:
     delete:
       tags:
@@ -1917,6 +2112,19 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PersonDTO'
+              examples:
+                guillermoOchoa:
+                  summary: Guillermo Ochoa example
+                  value:
+                    success: true
+                    message: Person retrieved successfully
+                    data:
+                      id: 200
+                      firstName: Guillermo
+                      lastName: Ochoa
+                      dateOfBirth: '1985-07-13'
+                      nationalityId: 1
+                      displayName: Guillermo Ochoa
       parameters:
       - name: id
         in: path
@@ -2027,6 +2235,28 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PagePlayerDTO'
+              examples:
+                goalieOchoaList:
+                  summary: Single-item page containing Club América goalkeeper (Guillermo Ochoa)
+                  value:
+                    success: true
+                    message: Players retrieved successfully
+                    data:
+                      content:
+                        - id: 300
+                          personId: 200
+                          position: GOALKEEPER
+                          preferredFoot: RIGHT
+                          height: 185.0
+                          weight: 78.0
+                          shirtNumber: 1
+                          active: true
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
     post:
       tags:
       - Players
@@ -2060,6 +2290,17 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PlayerDTO'
+            examples:
+              goalieOchoa:
+                summary: Example Player - Guillermo Ochoa
+                value:
+                  personId: 200
+                  position: GOALKEEPER
+                  preferredFoot: RIGHT
+                  height: 185.0
+                  weight: 78.0
+                  shirtNumber: 1
+                  active: true
   /players/{id}:
     delete:
       tags:
@@ -2078,6 +2319,21 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PlayerDTO'
+              examples:
+                goalieOchoa:
+                  summary: Guillermo Ochoa player example
+                  value:
+                    success: true
+                    message: Player retrieved successfully
+                    data:
+                      id: 300
+                      personId: 200
+                      position: GOALKEEPER
+                      preferredFoot: RIGHT
+                      height: 185.0
+                      weight: 78.0
+                      shirtNumber: 1
+                      active: true
       parameters:
       - name: id
         in: path
@@ -3507,6 +3763,34 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PageTeamDTO'
+              examples:
+                clubAmericaList:
+                  summary: Single-item page containing Club América
+                  value:
+                    success: true
+                    message: Teams retrieved successfully
+                    data:
+                      content:
+                        - id: 100
+                          name: Club América
+                          displayName: América
+                          abbreviation: AME
+                          gender: MALE
+                          ageCategory: PROFESSIONAL
+                          founded: '1916-10-12'
+                          countryDisplayName: Mexico
+                          countryId: 1
+                          organizationDisplayName: América S.A.
+                          organizationId: 10
+                          logo: https://en.wikipedia.org/wiki/Club_Am%C3%A9rica#/media/File:Club_Am%C3%A9rica_crest.svg
+                          primaryColor: '#FFD700'
+                          secondaryColor: '#0000FF'
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
     post:
       tags:
       - Teams
@@ -3540,6 +3824,21 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TeamDTO'
+            examples:
+              clubAmerica:
+                summary: Example Team - Club América
+                value:
+                  name: Club América
+                  displayName: América
+                  abbreviation: AME
+                  gender: MALE
+                  ageCategory: PROFESSIONAL
+                  founded: '1916-10-12'
+                  countryDisplayName: Mexico
+                  countryId: 1
+                  organizationDisplayName: América S.A.
+                  organizationId: 10
+                  logo: https://en.wikipedia.org/wiki/Club_Am%C3%A9rica#/media/File:Club_Am%C3%A9rica_crest.svg
   /teams/{id}:
     delete:
       tags:
@@ -3582,6 +3881,25 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/TeamDTO'
+              examples:
+                clubAmerica:
+                  summary: Club América example
+                  value:
+                    success: true
+                    message: Team retrieved successfully
+                    data:
+                      id: 100
+                      name: Club América
+                      displayName: América
+                      abbreviation: AME
+                      gender: MALE
+                      ageCategory: PROFESSIONAL
+                      founded: '1916-10-12'
+                      countryDisplayName: Mexico
+                      countryId: 1
+                      organizationDisplayName: América S.A.
+                      organizationId: 10
+                      logo: https://en.wikipedia.org/wiki/Club_Am%C3%A9rica#/media/File:Club_Am%C3%A9rica_crest.svg
       parameters:
       - name: id
         in: path
@@ -4062,6 +4380,29 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/PageVenueDTO'
+              examples:
+                estadioAztecaList:
+                  summary: Single-item page containing Estadio Azteca
+                  value:
+                    success: true
+                    message: Venues retrieved successfully
+                    data:
+                      content:
+                        - id: 50
+                          name: Estadio Azteca
+                          displayName: Estadio Azteca
+                          city: Mexico City
+                          countryDisplayName: Mexico
+                          countryId: 1
+                          capacity: 87523
+                          address: Calz. de Tlalpan 3465, Sta. Úrsula Coapa, Coyoacán, 04650 Ciudad de México, CDMX, Mexico
+                          image: https://en.wikipedia.org/wiki/Estadio_Azteca#/media/File:Estadio_Azteca_2018.jpg
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
     post:
       tags:
       - Venues
@@ -4095,6 +4436,17 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/VenueDTO'
+            examples:
+              estadioAzteca:
+                summary: Example Venue - Estadio Azteca
+                value:
+                  name: Estadio Azteca
+                  displayName: Estadio Azteca
+                  city: Mexico City
+                  countryId: 1
+                  capacity: 87523
+                  address: Calz. de Tlalpan 3465, Sta. Úrsula Coapa, Coyoacán, 04650 Ciudad de México, CDMX, Mexico
+                  image: https://en.wikipedia.org/wiki/Estadio_Azteca#/media/File:Estadio_Azteca_2018.jpg
   /venues/{id}:
     delete:
       tags:
@@ -4113,6 +4465,22 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/VenueDTO'
+              examples:
+                estadioAzteca:
+                  summary: Estadio Azteca example
+                  value:
+                    success: true
+                    message: Venue retrieved successfully
+                    data:
+                      id: 50
+                      name: Estadio Azteca
+                      displayName: Estadio Azteca
+                      city: Mexico City
+                      countryDisplayName: Mexico
+                      countryId: 1
+                      capacity: 87523
+                      address: Calz. de Tlalpan 3465, Sta. Úrsula Coapa, Coyoacán, 04650 Ciudad de México, CDMX, Mexico
+                      image: https://en.wikipedia.org/wiki/Estadio_Azteca#/media/File:Estadio_Azteca_2018.jpg
       parameters:
       - name: id
         in: path
@@ -4229,6 +4597,247 @@ paths:
         schema:
           type: integer
           format: int64
+  /registrations:
+    get:
+      tags:
+      - Registrations
+      summary: GET /registrations
+      operationId: getRegistrations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/PageRegistrationDTO'
+              examples:
+                sample:
+                  summary: Single registration for Club América
+                  value:
+                    success: true
+                    message: Registrations retrieved successfully
+                    data:
+                      content:
+                        - id: 500
+                          displayName: John Doe
+                          competitionDisplayName: Liga MX
+                          competitionId: 20
+                          teamDisplayName: América
+                          teamId: 100
+                          playerId: 200
+                          playerDisplayName: John Doe
+                          jerseyNumber: 10
+                          joinedDate: '2024-01-01'
+                      pageable: {}
+                      totalElements: 1
+                      totalPages: 1
+                      last: true
+                      size: 20
+                      number: 0
+    post:
+      tags:
+      - Registrations
+      summary: POST /registrations
+      operationId: postRegistrations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/RegistrationDTO'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/RegistrationDTO'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationDTO'
+            examples:
+              clubAmericaRegistration:
+                summary: Register a player for Club América
+                value:
+                  displayName: John Doe
+                  competitionId: 20
+                  competitionDisplayName: Liga MX
+                  teamId: 100
+                  teamDisplayName: América
+                  playerId: 200
+                  playerDisplayName: John Doe
+                  jerseyNumber: 10
+                  joinedDate: '2024-01-01'
+  /registrations/{id}:
+    delete:
+      tags:
+      - Registrations
+      summary: DELETE /registrations/{id}
+      operationId: deleteRegistrationsById
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/RegistrationDTO'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags:
+      - Registrations
+      summary: GET /registrations/{id}
+      operationId: getRegistrationsById
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/RegistrationDTO'
+              examples:
+                clubAmerica:
+                  summary: Club América registration example
+                  value:
+                    success: true
+                    message: Registration retrieved successfully
+                    data:
+                      id: 500
+                      displayName: John Doe
+                      competitionDisplayName: Liga MX
+                      competitionId: 20
+                      teamDisplayName: América
+                      teamId: 100
+                      playerId: 200
+                      playerDisplayName: John Doe
+                      jerseyNumber: 10
+                      joinedDate: '2024-01-01'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    patch:
+      tags:
+      - Registrations
+      summary: PATCH /registrations/{id}
+      operationId: patchRegistrationsById
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/RegistrationDTO'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationDTO'
+    put:
+      tags:
+      - Registrations
+      summary: PUT /registrations/{id}
+      operationId: putRegistrationsById
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/RegistrationDTO'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationDTO'
+  /registrations/{id}/exists:
+    get:
+      tags:
+      - Registrations
+      summary: GET /registrations/{id}/exists
+      operationId: getRegistrationsByIdExists
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    data:
+                      type: boolean
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+
 components:
   parameters:
     PageParam:
@@ -4759,7 +5368,6 @@ components:
       required:
         - name
         - displayName
-        - code
         - gender
         - ageCategory
         - founded
@@ -4781,11 +5389,10 @@ components:
           maxLength: 100
           description: Display name
           example: América
-        code:
+        abbreviation:
           type: string
-          minLength: 3
-          maxLength: 5
-          description: Team code
+          maxLength: 10
+          description: Team abbreviation or short code
           example: AME
         gender:
           $ref: '#/components/schemas/Gender'
@@ -4912,7 +5519,7 @@ components:
           type: string
           description: Full address
           example: Calz. de Tlalpan 3465, Sta. Úrsula Coapa, Coyoacán, 04650 Ciudad de México, CDMX, Mexico
-        image:
+        imageUrl:
           type: string
           description: URL to venue image
           example: https://en.wikipedia.org/wiki/Estadio_Azteca#/media/File:Estadio_Azteca_2018.jpg
@@ -5589,11 +6196,37 @@ components:
           format: int64
           description: Venue ID where the match is played
           example: 1
-        matchDateTime:
+        scheduledDate:
+          type: string
+          format: date
+          description: Scheduled match date
+          example: '2024-08-10'
+        kickoffTime:
           type: string
           format: date-time
-          description: Match date and time
-          example: '2024-07-05T20:00:00'
+          description: Kickoff date and time
+          example: '2024-08-10T21:00:00'
+        matchdayDisplayName:
+          type: string
+          description: Matchday display name
+          example: Matchday 10
+        homeTeamDisplayName:
+          type: string
+          description: Home team display name
+          example: Club América
+        awayTeamDisplayName:
+          type: string
+          description: Away team display name
+          example: Chivas
+        refereeId:
+          type: integer
+          format: int64
+          description: Referee ID
+          nullable: true
+        refereeDisplayName:
+          type: string
+          description: Referee display name
+          nullable: true
         homeScore:
           type: integer
           description: Home team score
@@ -5608,6 +6241,60 @@ components:
           type: integer
           description: Match attendance
           example: 45000
+        homeHalfTimeScore:
+          type: integer
+          description: Home half-time score
+          example: 1
+        awayHalfTimeScore:
+          type: integer
+          description: Away half-time score
+          example: 0
+        extraTimeAllowed:
+          type: boolean
+          description: Whether extra time is allowed
+          example: false
+        penaltyShootoutAllowed:
+          type: boolean
+          description: Whether penalty shootout is allowed
+          example: false
+        homeExtraTimeScore:
+          type: integer
+          description: Home extra-time score
+          nullable: true
+        awayExtraTimeScore:
+          type: integer
+          description: Away extra-time score
+          nullable: true
+        homePenaltyScore:
+          type: integer
+          description: Home penalty shootout score
+          nullable: true
+        awayPenaltyScore:
+          type: integer
+          description: Away penalty shootout score
+          nullable: true
+        weatherConditions:
+          type: string
+          description: Weather conditions during the match
+          nullable: true
+        notes:
+          type: string
+          description: Additional notes about the match
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        createdBy:
+          type: string
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedBy:
+          type: string
+          readOnly: true
 
     MatchStatus:
       type: string
@@ -6104,18 +6791,18 @@ components:
         firstName:
           type: string
           description: Person's first name
-          example: Lionel
+          example: Guillermo
           maxLength: 100
         lastName:
           type: string
           description: Person's last name
-          example: Messi
+          example: Ochoa
           maxLength: 100
         dateOfBirth:
           type: string
           format: date
           description: Date of birth
-          example: '1987-06-24'
+          example: '1985-07-13'
         nationalityId:
           type: integer
           format: int64
@@ -6124,7 +6811,7 @@ components:
         photoUrl:
           type: string
           description: URL to person's photo
-          example: https://example.com/photos/messi.jpg
+          example: https://example.com/photos/guillermo_ochoa.jpg
           maxLength: 500
 
     PagePersonDTO:
@@ -6158,7 +6845,7 @@ components:
     PlayerDTO:
       type: object
       required:
-        - personId
+        - person
       properties:
         id:
           type: integer
@@ -6166,11 +6853,8 @@ components:
           readOnly: true
           description: Player unique identifier
           example: 1
-        personId:
-          type: integer
-          format: int64
-          description: Person ID
-          example: 1
+        person:
+          $ref: '#/components/schemas/PersonDTO'
         position:
           $ref: '#/components/schemas/PlayerPosition'
         preferredFoot:
@@ -6664,6 +7348,109 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupDTO'
+        pageable:
+          type: object
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+        size:
+          type: integer
+        number:
+          type: integer
+        first:
+          type: boolean
+        numberOfElements:
+          type: integer
+        empty:
+          type: boolean
+
+    RegistrationDTO:
+      type: object
+      required:
+        - displayName
+        - joinedDate
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Registration ID
+        displayName:
+          type: string
+          description: Display name for the registrant
+        competitionId:
+          type: integer
+          format: int64
+          description: Competition ID
+          nullable: true
+        competitionDisplayName:
+          type: string
+          readOnly: true
+          description: Competition display name
+        teamId:
+          type: integer
+          format: int64
+          description: Team ID
+          nullable: true
+        teamDisplayName:
+          type: string
+          readOnly: true
+          description: Team display name
+        playerId:
+          type: integer
+          format: int64
+          description: Player ID
+          nullable: true
+        playerDisplayName:
+          type: string
+          readOnly: true
+          description: Player display name
+        staffId:
+          type: integer
+          format: int64
+          description: Staff ID
+          nullable: true
+        staffDisplayName:
+          type: string
+          readOnly: true
+          description: Staff display name
+        jerseyNumber:
+          type: integer
+          description: Jersey number
+        joinedDate:
+          type: string
+          format: date
+          description: Date registrant joined
+        leftDate:
+          type: string
+          format: date
+          description: Date registrant left (if applicable)
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        createdBy:
+          type: string
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedBy:
+          type: string
+          readOnly: true
+
+    PageRegistrationDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegistrationDTO'
         pageable:
           type: object
         totalElements:
