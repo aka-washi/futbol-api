@@ -7,5 +7,5 @@ import com.eagle.futbolapi.features.registration.entity.Registration;
 
 @Repository
 public interface RegistrationRepository extends BaseRepository<Registration, Long> {
-
+    boolean existsByCompetitionIdAndTeamIdAndJerseyNumber(Long competitionId, Long teamId, Integer jerseyNumber);
 }

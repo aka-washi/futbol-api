@@ -78,6 +78,8 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
       log.debug("Could not clear ID on new entity: {}", e.getMessage());
     }
     resolveRelationships(dto, entity);
+    // Allow entity-specific business validations before persisting
+    validateForCreate(dto, entity);
     T saved = saveNew(entity);
     log.info("Successfully created entity with id: {}", saved.getId());
     return saved;
@@ -132,6 +134,9 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
 
     // Resolve relationships for any updated relationship fields
     resolveRelationships(dto, existing);
+
+    // Allow entity-specific business validations before saving updates
+    validateForPatch(dto, existing);
 
     log.debug("Entity after relationship resolution: {}", existing);
 
@@ -507,6 +512,29 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
 
   protected void resolveRelationships(D dto, T entity) {
     // Default: no relationships to resolve
+  }
+
+  /**
+   * Hook for entity-specific validations before create.
+   * Services may override and throw IllegalArgumentException or a custom exception
+   * to signal validation failures.
+   */
+  protected void validateForCreate(D dto, T entity) {
+    // Default: no-op
+  }
+
+  /**
+   * Hook for entity-specific validations before update (PUT).
+   */
+  protected void validateForUpdate(D dto, T entity) {
+    // Default: no-op
+  }
+
+  /**
+   * Hook for entity-specific validations before patch (PATCH).
+   */
+  protected void validateForPatch(D dto, T entity) {
+    // Default: no-op
   }
 
   // ============================================================================

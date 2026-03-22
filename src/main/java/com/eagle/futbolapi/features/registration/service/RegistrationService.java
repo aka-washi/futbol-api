@@ -46,6 +46,32 @@ public class RegistrationService extends BaseCrudService<Registration, Long, Reg
   }
 
   @Override
+  protected void validateForCreate(RegistrationDto dto, Registration entity) {
+    // Ensure either player or staff is set (DTO-level constraint exists, but double-check)
+    if ((entity.getPlayer() == null) && (entity.getStaff() == null)) {
+      throw new IllegalArgumentException("Either player or staff must be provided");
+    }
+
+    // If a jersey number is provided, ensure it's unique for the competition+team
+    if (entity.getJerseyNumber() != null) {
+      Long compId = entity.getCompetition() != null ? entity.getCompetition().getId() : null;
+      Long teamId = entity.getTeam() != null ? entity.getTeam().getId() : null;
+      if (compId == null || teamId == null) {
+        throw new IllegalArgumentException("Competition and Team must be provided when validating jersey number");
+      }
+      RegistrationRepository regRepo = (RegistrationRepository) repository;
+      boolean exists = regRepo.existsByCompetitionIdAndTeamIdAndJerseyNumber(compId, teamId, entity.getJerseyNumber());
+      if (exists) {
+        throw new IllegalArgumentException("Jersey number already in use for this team and competition");
+      }
+    }
+    // If registering a player, ensure the player is active
+    if (entity.getPlayer() != null && Boolean.FALSE.equals(entity.getPlayer().getActive())) {
+      throw new IllegalArgumentException("Player must be active to be registered");
+    }
+  }
+
+  @Override
   protected boolean isDuplicate(@NotNull Registration registration) {
     Objects.requireNonNull(registration, "Registration cannot be null");
     return isDuplicate(registration, UniquenessStrategy.ANY);
