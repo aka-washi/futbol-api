@@ -98,7 +98,7 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
 //         licenseHeader '''/*
-//  * Copyright (c) ${YEAR} Soccer Management
+//  * Copyright (c) ${YEAR} RedEagle Futbol Management
 //  */
 // '''
     }
