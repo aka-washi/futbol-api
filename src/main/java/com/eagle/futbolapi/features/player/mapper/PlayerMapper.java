@@ -35,14 +35,7 @@ public interface PlayerMapper extends BaseMapper<Player, PlayerDto> {
   }
 
   default PlayerPosition stringToPosition(String position) {
-    if (position == null)
-      return null;
-    for (PlayerPosition p : PlayerPosition.values()) {
-      if (p.getLabel().equals(position)) {
-        return p;
-      }
-    }
-    throw new IllegalArgumentException("Invalid position: " + position);
+    return PlayerPosition.fromLabel(position);
   }
 
   default String preferredFootToString(PreferredFoot preferredFoot) {
@@ -50,13 +43,6 @@ public interface PlayerMapper extends BaseMapper<Player, PlayerDto> {
   }
 
   default PreferredFoot stringToPreferredFoot(String preferredFoot) {
-    if (preferredFoot == null)
-      return null;
-    for (PreferredFoot pf : PreferredFoot.values()) {
-      if (pf.getLabel().equals(preferredFoot)) {
-        return pf;
-      }
-    }
-    throw new IllegalArgumentException("Invalid preferred foot: " + preferredFoot);
+    return PreferredFoot.fromLabel(preferredFoot);
   }
 }

@@ -65,6 +65,31 @@ tags:
   description: Operations related to tournaments
 - name: Venues
   description: Operations related to venues
+x-endpoint-order:
+  - /countries
+  - /organizations
+  - /pointSystems
+  - /venues
+  - /teams
+  - /persons
+  - /players
+  - /staff
+  - /stage-formats
+  - /tournaments
+  - /tournament-seasons
+  - /seasons
+  - /competitions
+  - /stages
+  - /api/groups
+  - /season-teams
+  - /registrations
+  - /matches
+  - /matchdays
+  - /match-events
+  - /lineups
+  - /api/lineup-members
+  - /standings
+  - /bootstrap
 paths:
   /api/groups:
     get:
@@ -4625,9 +4650,9 @@ paths:
                       content:
                         - id: 500
                           displayName: John Doe
-                          competitionDisplayName: Liga MX
+                          competitionDisplayName: Liga MX Clausura 2025
                           competitionId: 20
-                          teamDisplayName: América
+                          teamDisplayName: Club América
                           teamId: 100
                           playerId: 200
                           playerDisplayName: John Doe
@@ -4679,9 +4704,9 @@ paths:
                 value:
                   displayName: John Doe
                   competitionId: 20
-                  competitionDisplayName: Liga MX
+                  competitionDisplayName: Liga MX Clausura 2025
                   teamId: 100
-                  teamDisplayName: América
+                  teamDisplayName: Club América
                   playerId: 200
                   playerDisplayName: John Doe
                   jerseyNumber: 10
@@ -4737,9 +4762,9 @@ paths:
                     data:
                       id: 500
                       displayName: John Doe
-                      competitionDisplayName: Liga MX
+                      competitionDisplayName: Liga MX Clausura 2025
                       competitionId: 20
-                      teamDisplayName: América
+                      teamDisplayName: Club América
                       teamId: 100
                       playerId: 200
                       playerDisplayName: John Doe
@@ -7040,6 +7065,15 @@ components:
           description: Whether the roster entry is active
           example: true
           default: true
+      example:
+        id: 1
+        seasonTeamId: 10
+        playerId: 300
+        shirtNumber: 7
+        joinDate: '2024-07-01'
+        leaveDate: '2024-12-31'
+        loanedFrom: 5
+        active: true
 
     PageRosterEntryDTO:
       type: object
@@ -7109,6 +7143,13 @@ components:
           type: integer
         numberOfTeams:
           type: integer
+      example:
+        id: 1
+        stageId: 5
+        name: GroupA
+        displayName: Group A
+        order: 1
+        numberOfTeams: 4
 
     LineupMemberDTO:
       type: object
@@ -7163,6 +7204,17 @@ components:
           type: boolean
         orderNum:
           type: integer
+      example:
+        id: 10
+        lineupId: 400
+        personType: PLAYER
+        playerId: 300
+        playerDisplayName: Guillermo Ochoa
+        roleType: STARTER
+        position: GOALKEEPER
+        jerseyNumber: 1
+        captain: true
+        orderNum: 1
 
     StageFormatDTO:
       type: object
@@ -7443,6 +7495,17 @@ components:
         updatedBy:
           type: string
           readOnly: true
+      example:
+        id: 500
+        displayName: John Doe
+        competitionDisplayName: Liga MX Clausura 2025
+        competitionId: 20
+        teamDisplayName: Club América
+        teamId: 100
+        playerId: 200
+        playerDisplayName: John Doe
+        jerseyNumber: 10
+        joinedDate: '2024-01-01'
 
     PageRegistrationDTO:
       type: object

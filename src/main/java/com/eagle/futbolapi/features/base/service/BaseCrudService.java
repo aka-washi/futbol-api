@@ -69,6 +69,14 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
   public T create(D dto) {
     log.info("Creating new entity from DTO");
     T entity = convertToEntity(dto);
+    // Ensure new entities are persisted, not merged. Clear any incoming ID to avoid
+    // attempting to merge a detached entity which can cause optimistic locking
+    // failures if the provided ID refers to a row that was updated/deleted.
+    try {
+      entity.setId(null);
+    } catch (Exception e) {
+      log.debug("Could not clear ID on new entity: {}", e.getMessage());
+    }
     resolveRelationships(dto, entity);
     T saved = saveNew(entity);
     log.info("Successfully created entity with id: {}", saved.getId());
