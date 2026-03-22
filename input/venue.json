@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Estadio Azteca",
+    "displayName": "Estadio Azteca",
+    "city": "Mexico City",
+    "countryId": 1,
+    "capacity": 87523,
+    "address": "Calzada de Tlalpan 3465, Santa Ursula Coapa, Mexico City",
+    "surface": "Grass",
+    "opened": "1966-05-29",
+    "active": true,
+    "imageUrl": "https://example.com/azteca.jpg"
+  },
+  {
+    "name": "Maracana",
+    "displayName": "Estádio do Maracanã",
+    "city": "Rio de Janeiro",
+    "countryId": 2,
+    "capacity": 78838,
+    "address": "Av. Pres. Castelo Branco, Portão 3 - Maracanã, Rio de Janeiro",
+    "surface": "Grass",
+    "opened": "1950-06-16",
+    "active": true,
+    "imageUrl": "https://example.com/maracana.jpg"
+  },
+  {
+    "name": "Santiago Bernabeu",
+    "displayName": "Santiago Bernabéu",
+    "city": "Madrid",
+    "countryId": 3,
+    "capacity": 81044,
+    "address": "Av. de Concha Espina, 1, Madrid",
+    "surface": "Grass",
+    "opened": "1947-12-14",
+    "active": true,
+    "imageUrl": "https://example.com/bernabeu.jpg"
+  },
+  {
+    "name": "Camp Nou",
+    "displayName": "Camp Nou",
+    "city": "Barcelona",
+    "countryId": 3,
+    "capacity": 99354,
+    "address": "C. d'Aristides Maillol, Barcelona",
+    "surface": "Grass",
+    "opened": "1957-09-24",
+    "active": true,
+    "imageUrl": "https://example.com/campnou.jpg"
+  },
+  {
+    "name": "Allianz Arena",
+    "displayName": "Allianz Arena",
+    "city": "Munich",
+    "countryId": 5,
+    "capacity": 75024,
+    "address": "Werner-Heisenberg-Allee 25, Munich",
+    "surface": "Grass",
+    "opened": "2005-05-30",
+    "active": true,
+    "imageUrl": "https://example.com/allianz.jpg"
+  },
+  {
+    "name": "Stade de France",
+    "displayName": "Stade de France",
+    "city": "Paris",
+    "countryId": 4,
+    "capacity": 80698,
+    "address": "93200 Saint-Denis, France",
+    "surface": "Grass",
+    "opened": "1998-01-28",
+    "active": true,
+    "imageUrl": "https://example.com/stadefrance.jpg"
+  }
+]

@@ -1,0 +1,127 @@
+plugins {
+    id 'org.springframework.boot' version '4.0.4'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'jacoco'
+    id 'org.sonarqube' version '5.1.0.4882'
+    id 'com.diffplug.spotless' version '8.2.1'
+}
+
+group = 'com.eagle'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation 'net.bytebuddy:byte-buddy-agent:1.18.4'
+
+    // Database drivers
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    runtimeOnly 'com.h2database:h2'
+
+    // H2 Console for development
+    implementation 'org.springframework.boot:spring-boot-h2console'
+
+    // Additional utilities
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    // MapStruct
+    implementation 'org.mapstruct:mapstruct:1.6.3'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+    // Development
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                '**/EagleApiApplication.class'
+            ])
+        }))
+    }
+}
+
+springBoot {
+    buildInfo()
+}
+
+bootRun {
+    // Enable externalized configuration from config/ directory
+    systemProperty 'spring.config.location', 'file:./config/'
+    // Optionally set the active profile
+    // systemProperty 'spring.profiles.active', 'h2'
+}
+
+spotless {
+    java {
+        target 'src/**/*.java'
+        importOrder('java', 'javax', 'jakarta', 'org', 'com')
+        removeUnusedImports()
+        leadingTabsToSpaces(2)
+        trimTrailingWhitespace()
+        endWithNewline()
+//         licenseHeader '''/*
+//  * Copyright (c) ${YEAR} RedEagle Futbol Management
+//  */
+// '''
+    }
+    format 'misc', {
+        target '*.gradle', 'gradle/**/*.gradle', '*.md', '.gitignore'
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
+
+tasks.named('check') {
+    dependsOn 'spotlessCheck'
+}
+
+sonar {
+    properties {
+        property 'sonar.projectKey', 'futbol-api'
+        property 'sonar.projectName', 'Futbol API'
+        property 'sonar.host.url', 'http://localhost:9010'
+        property 'sonar.token', project.findProperty('sonar.token') ?: ''
+        property 'sonar.sources', 'src/main/java'
+        property 'sonar.tests', 'src/test/java'
+        property 'sonar.java.binaries', 'build/classes/java/main'
+        property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
+    }
+}

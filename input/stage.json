@@ -1,0 +1,101 @@
+[
+  {
+    "displayName": "Liga MX Apertura 2024 - Regular Season",
+    "competitionDisplayName": "Liga MX Apertura 2024",
+    "stageFormatDisplayName": "Regular Season - Double Round Robin",
+    "order": 1,
+    "status": "Completed",
+    "startDate": "2024-07-01",
+    "endDate": "2024-11-15"
+  },
+  {
+    "displayName": "Liga MX Apertura 2024 - Liguilla Quarterfinals",
+    "competitionDisplayName": "Liga MX Apertura 2024",
+    "stageFormatDisplayName": "Knockout Round - Home and Away",
+    "order": 2,
+    "status": "Completed",
+    "startDate": "2024-11-20",
+    "endDate": "2024-11-27"
+  },
+  {
+    "displayName": "Liguilla - Semifinals",
+    "competitionDisplayName": "Liga MX Apertura 2024",
+    "stageFormatDisplayName": "Knockout Round - Home and Away",
+    "order": 3,
+    "status": "Completed",
+    "startDate": "2024-12-01",
+    "endDate": "2024-12-08"
+  },
+  {
+    "displayName": "Liguilla - Final",
+    "competitionDisplayName": "Liga MX Apertura 2024",
+    "stageFormatDisplayName": "Knockout Round - Home and Away",
+    "order": 4,
+    "status": "Completed",
+    "startDate": "2024-12-12",
+    "endDate": "2024-12-15"
+  },
+  {
+    "displayName": "Liga MX Clausura 2025 - Regular Season",
+    "competitionDisplayName": "Liga MX Clausura 2025",
+    "stageFormatDisplayName": "Regular Season - Double Round Robin",
+    "order": 1,
+    "status": "In Progress",
+    "startDate": "2025-01-10",
+    "endDate": "2025-05-10"
+  },
+  {
+    "displayName": "Liga MX Clausura 2025 - Liguilla Quarterfinals",
+    "competitionDisplayName": "Liga MX Clausura 2025",
+    "stageFormatDisplayName": "Knockout Round - Home and Away",
+    "order": 2,
+    "status": "Not Started",
+    "startDate": "2025-05-15",
+    "endDate": "2025-05-22"
+  },
+  {
+    "displayName": "Group Stage",
+    "competitionDisplayName": "UEFA Champions League 2024-2025",
+    "stageFormatDisplayName": "Group Stage - 8 Groups of 4",
+    "order": 1,
+    "status": "In Progress",
+    "startDate": "2024-09-01",
+    "endDate": "2024-12-15"
+  },
+  {
+    "displayName": "Round of 16",
+    "competitionDisplayName": "UEFA Champions League 2024-2025",
+    "stageFormatDisplayName": "Knockout Round - Home and Away",
+    "order": 2,
+    "status": "Not Started",
+    "startDate": "2025-02-15",
+    "endDate": "2025-03-15"
+  },
+  {
+    "displayName": "Quarterfinals",
+    "competitionDisplayName": "UEFA Champions League 2024-2025",
+    "stageFormatDisplayName": "Knockout Round - Home and Away",
+    "order": 3,
+    "status": "Not Started",
+    "startDate": "2025-04-01",
+    "endDate": "2025-04-15"
+  },
+  {
+    "displayName": "Semifinals",
+    "competitionDisplayName": "UEFA Champions League 2024-2025",
+    "stageFormatDisplayName": "Knockout Round - Home and Away",
+    "order": 4,
+    "status": "Not Started",
+    "startDate": "2025-04-25",
+    "endDate": "2025-05-10"
+  },
+  {
+    "displayName": "Final",
+    "competitionDisplayName": "UEFA Champions League 2024-2025",
+    "stageFormatDisplayName": "Knockout Round - Single Elimination",
+    "order": 5,
+    "status": "Not Started",
+    "startDate": "2025-05-31",
+    "endDate": "2025-05-31"
+  }
+]

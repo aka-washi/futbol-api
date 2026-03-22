@@ -1,0 +1,26 @@
+[
+  {
+    "displayName": "Club América - Matchday 1",
+    "matchDisplayName": "Club América vs Chivas Guadalajara",
+    "teamDisplayName": "Club América",
+    "formation": "4-3-3"
+  },
+  {
+    "displayName": "Chivas Guadalajara - Matchday 1",
+    "matchDisplayName": "Club América vs Chivas Guadalajara",
+    "teamDisplayName": "Chivas Guadalajara",
+    "formation": "4-4-2"
+  },
+  {
+    "displayName": "Cruz Azul - Matchday 1",
+    "matchDisplayName": "Cruz Azul vs Monterrey",
+    "teamDisplayName": "Cruz Azul",
+    "formation": "4-2-3-1"
+  },
+  {
+    "displayName": "Monterrey - Matchday 1",
+    "matchDisplayName": "Cruz Azul vs Monterrey",
+    "teamDisplayName": "Monterrey",
+    "formation": "3-5-2"
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Club América vs Chivas Guadalajara - Matchday 1",
+    "displayName": "Club América vs Chivas Guadalajara",
+    "matchdayDisplayName": "Matchday 1",
+    "venueDisplayName": "Estadio Azteca",
+    "homeTeamDisplayName": "Club América",
+    "awayTeamDisplayName": "Chivas Guadalajara",
+    "matchDate": "2024-07-05T20:00:00",
+    "homeScore": 2,
+    "awayScore": 1,
+    "status": "Completed",
+    "attendance": 87523
+  },
+  {
+    "name": "Cruz Azul vs Monterrey - Matchday 1",
+    "displayName": "Cruz Azul vs Monterrey",
+    "matchdayDisplayName": "Matchday 1",
+    "venueDisplayName": "Estadio Azteca",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Monterrey",
+    "matchDate": "2024-07-06T19:00:00",
+    "homeScore": 1,
+    "awayScore": 1,
+    "status": "Completed",
+    "attendance": 45632
+  },
+  {
+    "name": "Tigres UANL vs Club América - Matchday 2",
+    "displayName": "Tigres UANL vs Club América",
+    "matchdayDisplayName": "Matchday 2",
+    "venueDisplayName": "Estadio Azteca",
+    "homeTeamDisplayName": "Tigres UANL",
+    "awayTeamDisplayName": "Club América",
+    "matchDate": "2024-07-12T21:00:00",
+    "homeScore": 0,
+    "awayScore": 2,
+    "status": "Completed",
+    "attendance": 42156
+  },
+  {
+    "name": "Chivas Guadalajara vs Cruz Azul - Matchday 2",
+    "displayName": "Chivas Guadalajara vs Cruz Azul",
+    "matchdayDisplayName": "Matchday 2",
+    "venueDisplayName": "Estadio Azteca",
+    "homeTeamDisplayName": "Chivas Guadalajara",
+    "awayTeamDisplayName": "Cruz Azul",
+    "matchDate": "2024-07-13T18:00:00",
+    "homeScore": 2,
+    "awayScore": 2,
+    "status": "Completed",
+    "attendance": 48921
+  }
+]

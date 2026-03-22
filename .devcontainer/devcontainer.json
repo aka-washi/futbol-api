@@ -1,0 +1,11 @@
+{
+  "name": "Java",
+  "image": "localhost:5000/rdg-java:1.0.0",
+  "runArgs": [
+    "--name", "futbol-api",
+    "--network", "futbol-network"
+  ],
+  "forwardPorts": [8080],
+  "initializeCommand": ".devcontainer/setup-network.sh",
+  "postCreateCommand": "echo 'Dev container is ready for development!'"
+}

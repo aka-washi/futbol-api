@@ -1,0 +1,24 @@
+[
+  {
+    "displayName": "Cuauhtémoc Blanco - Starting",
+    "lineupDisplayName": "Club América - Matchday 1",
+    "personType": "Player",
+    "playerPersonFirstName": "Cuauhtémoc",
+    "playerPersonLastName": "Blanco",
+    "roleType": "Starting",
+    "position": "Forward",
+    "jerseyNumber": 10,
+    "captain": true,
+    "orderNum": 1
+  },
+  {
+    "displayName": "Carlo Ancelotti - Coach",
+    "lineupDisplayName": "Club América - Matchday 1",
+    "personType": "Staff",
+    "staffPersonFirstName": "Carlo",
+    "staffPersonLastName": "Ancelotti",
+    "roleType": "Coach",
+    "captain": false,
+    "orderNum": 1
+  }
+]

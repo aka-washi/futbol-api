@@ -1,0 +1,68 @@
+[
+  {
+    "name": "United Mexican States",
+    "code": "MX",
+    "isoCode": "MEX",
+    "displayName": "Mexico"
+  },
+  {
+    "name": "Brazil",
+    "code": "BR",
+    "isoCode": "BRA",
+    "displayName": "Brazil"
+  },
+  {
+    "name": "Spain",
+    "code": "ES",
+    "isoCode": "ESP",
+    "displayName": "Spain"
+  },
+  {
+    "name": "France",
+    "code": "FR",
+    "isoCode": "FRA",
+    "displayName": "France"
+  },
+  {
+    "name": "Germany",
+    "code": "DE",
+    "isoCode": "DEU",
+    "displayName": "Germany"
+  },
+  {
+    "name": "Italy",
+    "code": "IT",
+    "isoCode": "ITA",
+    "displayName": "Italy"
+  },
+  {
+    "name": "England",
+    "code": "GB",
+    "isoCode": "GBR",
+    "displayName": "England"
+  },
+  {
+    "name": "Portugal",
+    "code": "PT",
+    "isoCode": "PRT",
+    "displayName": "Portugal"
+  },
+  {
+    "name": "Netherlands",
+    "code": "NL",
+    "isoCode": "NLD",
+    "displayName": "Netherlands"
+  },
+  {
+    "name": "Belgium",
+    "code": "BE",
+    "isoCode": "BEL",
+    "displayName": "Belgium"
+  },
+  {
+    "name": "Switzerland",
+    "code": "CH",
+    "isoCode": "CHE",
+    "displayName": "Switzerland"
+  }
+]

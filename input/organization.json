@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Federación Mexicana de Fútbol",
+    "displayName": "FMF",
+    "type": "Federation",
+    "abbreviation": "FMF",
+    "countryDisplayName": "Mexico",
+    "foundedDate": "1927-08-23",
+    "description": "Mexican Football Federation"
+  },
+  {
+    "name": "Liga MX",
+    "displayName": "Liga MX",
+    "type": "Governing Body",
+    "abbreviation": "LMX",
+    "countryDisplayName": "Mexico",
+    "parentOrganizationDisplayName": "FMF",
+    "foundedDate": "1943-01-01",
+    "description": "Top division of Mexican football"
+  },
+  {
+    "name": "Real Federación Española de Fútbol",
+    "displayName": "RFEF",
+    "type": "Federation",
+    "abbreviation": "RFEF",
+    "countryDisplayName": "Spain",
+    "foundedDate": "1909-09-29",
+    "description": "Royal Spanish Football Federation"
+  },
+  {
+    "name": "La Liga",
+    "displayName": "La Liga",
+    "type": "Governing Body",
+    "abbreviation": "LL",
+    "countryDisplayName": "Spain",
+    "parentOrganizationDisplayName": "RFEF",
+    "foundedDate": "1929-02-10",
+    "description": "Spanish first division"
+  },
+  {
+    "name": "UEFA",
+    "displayName": "UEFA",
+    "type": "Confederation",
+    "abbreviation": "UEFA",
+    "countryDisplayName": "Switzerland",
+    "foundedDate": "1954-06-15",
+    "description": "Union of European Football Associations"
+  }
+]
+

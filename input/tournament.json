@@ -1,0 +1,52 @@
+[
+  {
+    "organizationDisplayName": "Liga MX",
+    "name": "Liga MX",
+    "displayName": "Liga MX",
+    "type": "Domestic League",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Mexican top division professional league"
+  },
+  {
+    "organizationDisplayName": "FMF",
+    "name": "Copa MX",
+    "displayName": "Copa MX",
+    "type": "Domestic Cup",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Mexican national cup competition"
+  },
+  {
+    "organizationDisplayName": "UEFA",
+    "name": "UEFA Champions League",
+    "displayName": "UEFA Champions League",
+    "type": "International Cup",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Premier European club competition"
+  },
+  {
+    "organizationDisplayName": "La Liga",
+    "name": "La Liga",
+    "displayName": "La Liga",
+    "type": "Domestic League",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Spanish top division"
+  },
+  {
+    "organizationDisplayName": "FMF",
+    "name": "Liga de Expansión MX",
+    "displayName": "Liga de Expansión MX",
+    "type": "Domestic League",
+    "ageCategory": "Professional",
+    "level": 2,
+    "active": true,
+    "description": "Mexican second division"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "person": {
+      "firstName": "Cuauhtémoc",
+      "lastName": "Blanco",
+      "birthDate": "1973-01-17",
+      "gender": "Male",
+      "birthPlace": "Mexico City",
+      "birthCountryDisplayName": "Mexico",
+      "nationalityCountryDisplayName": "Mexico",
+      "height": 1.78,
+      "weight": 82
+    },
+    "position": "Forward",
+    "preferredFoot": "Right",
+    "active": false
+  },
+  {
+    "person": {
+      "firstName": "Cristiano",
+      "lastName": "Ronaldo",
+      "birthDate": "1985-02-05",
+      "gender": "Male",
+      "birthPlace": "Funchal",
+      "birthCountryDisplayName": "Portugal",
+      "nationalityCountryDisplayName": "Portugal",
+      "height": 1.87,
+      "weight": 84
+    },
+    "position": "Forward",
+    "preferredFoot": "Right",
+    "active": true
+  }
+]
