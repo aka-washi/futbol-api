@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import com.eagle.futbolapi.features.base.enums.MatchEventType;
 import com.eagle.futbolapi.features.base.enums.MatchPeriod;
@@ -21,6 +22,7 @@ import com.eagle.futbolapi.features.team.service.TeamService;
 
 @Service
 @Transactional
+@Validated
 public class MatchEventService extends BaseCrudService<MatchEvent, Long, MatchEventDto> {
 
   private final MatchEventRepository matchEventRepository;

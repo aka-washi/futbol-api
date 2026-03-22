@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
@@ -22,6 +23,7 @@ import com.eagle.futbolapi.features.venue.service.VenueService;
 
 @Service
 @Transactional
+@Validated
 public class MatchService extends BaseCrudService<Match, Long, MatchDto> {
 
   private final MatchRepository matchRepository;
