@@ -398,7 +398,7 @@ public class BootstrapService {
     if (isDuplicateError(e)) {
       return String.format("Failed to load %s: Duplicate entity", entityName);
     }
-    
+
     // For other errors, return the exception message
     return String.format("Failed to load %s: %s", entityName, e.getMessage());
   }
