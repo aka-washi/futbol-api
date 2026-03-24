@@ -121,8 +121,9 @@ public class BootstrapController {
    * 10. stageFormat
    * 11. tournamentSeason
    * 12. competition
-   * 13. seasonTeam
-   * 14. stage
+   * 13. registration
+   * 14. seasonTeam
+   * 15. stage
    *
    * @return summary of all load operations
    */

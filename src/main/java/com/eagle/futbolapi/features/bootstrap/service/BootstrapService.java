@@ -38,6 +38,8 @@ import com.eagle.futbolapi.features.player.dto.PlayerDto;
 import com.eagle.futbolapi.features.player.service.PlayerService;
 import com.eagle.futbolapi.features.pointsystem.dto.PointSystemDto;
 import com.eagle.futbolapi.features.pointsystem.service.PointSystemService;
+import com.eagle.futbolapi.features.registration.dto.RegistrationDto;
+import com.eagle.futbolapi.features.registration.service.RegistrationService;
 import com.eagle.futbolapi.features.season.dto.SeasonDto;
 import com.eagle.futbolapi.features.season.service.SeasonService;
 import com.eagle.futbolapi.features.seasonTeam.dto.SeasonTeamDto;
@@ -84,6 +86,7 @@ public class BootstrapService {
   private final StaffService staffService;
   private final TeamService teamService;
   private final TournamentService tournamentService;
+  private final RegistrationService registrationService;
   private final StageFormatService stageFormatService;
   private final TournamentSeasonService tournamentSeasonService;
   private final CompetitionService competitionService;
@@ -155,6 +158,7 @@ public class BootstrapService {
         "stageformat",       // Depends on pointsystem (optional)
         "tournamentseason",  // Depends on tournament, season
         "competition",       // Depends on tournamentSeason
+        "registration",      // Depends on person, team, tournament, competition
         "seasonteam",        // Depends on season, team
         "stage",             // Depends on competition, stageFormat (optional)
         "group",             // Depends on stage
@@ -321,6 +325,8 @@ public class BootstrapService {
         return loadEntities(dataArray, TeamDto.class, teamService::create, "Team");
       case "tournament":
         return loadEntities(dataArray, TournamentDto.class, tournamentService::create, "Tournament");
+      case "registration":
+        return loadEntities(dataArray, RegistrationDto.class, registrationService::create, "Registration");
       case "stageformat":
       case "stage-format":
         return loadEntities(dataArray, StageFormatDto.class, stageFormatService::create, "StageFormat");

@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/api/groups")
+@RequestMapping("/groups")
 public class GroupController extends BaseCrudController<Group, GroupDto, GroupService, GroupMapper> {
 
   private static final String RESOURCE_NAME = "Group";

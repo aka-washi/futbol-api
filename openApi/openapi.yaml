@@ -80,22 +80,22 @@ x-endpoint-order:
   - /seasons
   - /competitions
   - /stages
-  - /api/groups
+  - /groups
   - /season-teams
   - /registrations
   - /matches
   - /matchdays
   - /match-events
   - /lineups
-  - /api/lineup-members
+  - /lineup-members
   - /standings
   - /bootstrap
 paths:
-  /api/groups:
+  /groups:
     get:
       tags:
       - Groups
-      summary: GET /api/groups
+      summary: GET /groups
       operationId: getApiGroups
       responses:
         '200':
@@ -112,7 +112,7 @@ paths:
     post:
       tags:
       - Groups
-      summary: POST /api/groups
+      summary: POST /groups
       operationId: postApiGroups
       responses:
         '200':
@@ -142,11 +142,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/GroupDTO'
-  /api/groups/{id}:
+  /groups/{id}:
     delete:
       tags:
       - Groups
-      summary: DELETE /api/groups/{id}
+      summary: DELETE /groups/{id}
       operationId: deleteApiGroupsById
       responses:
         '200':
@@ -170,7 +170,7 @@ paths:
     get:
       tags:
       - Groups
-      summary: GET /api/groups/{id}
+      summary: GET /groups/{id}
       operationId: getApiGroupsById
       responses:
         '200':
@@ -194,7 +194,7 @@ paths:
     patch:
       tags:
       - Groups
-      summary: PATCH /api/groups/{id}
+      summary: PATCH /groups/{id}
       operationId: patchApiGroupsById
       responses:
         '200':
@@ -224,7 +224,7 @@ paths:
     put:
       tags:
       - Groups
-      summary: PUT /api/groups/{id}
+      summary: PUT /groups/{id}
       operationId: putApiGroupsById
       responses:
         '200':
@@ -251,11 +251,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/GroupDTO'
-  /api/groups/{id}/exists:
+  /groups/{id}/exists:
     get:
       tags:
       - Groups
-      summary: GET /api/groups/{id}/exists
+      summary: GET /groups/{id}/exists
       operationId: getApiGroupsByIdExists
       responses:
         '200':
@@ -276,11 +276,11 @@ paths:
         schema:
           type: integer
           format: int64
-  /api/lineup-members:
+  /lineup-members:
     get:
       tags:
       - Lineup Members
-      summary: GET /api/lineup-members
+      summary: GET /lineup-members
       operationId: getApiLineupMembers
       responses:
         '200':
@@ -297,7 +297,7 @@ paths:
     post:
       tags:
       - Lineup Members
-      summary: POST /api/lineup-members
+      summary: POST /lineup-members
       operationId: postApiLineupMembers
       responses:
         '200':
@@ -327,11 +327,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LineupMemberDTO'
-  /api/lineup-members/{id}:
+  /lineup-members/{id}:
     delete:
       tags:
       - Lineup Members
-      summary: DELETE /api/lineup-members/{id}
+      summary: DELETE /lineup-members/{id}
       operationId: deleteApiLineupMembersById
       responses:
         '200':
@@ -355,7 +355,7 @@ paths:
     get:
       tags:
       - Lineup Members
-      summary: GET /api/lineup-members/{id}
+      summary: GET /lineup-members/{id}
       operationId: getApiLineupMembersById
       responses:
         '200':
@@ -379,7 +379,7 @@ paths:
     patch:
       tags:
       - Lineup Members
-      summary: PATCH /api/lineup-members/{id}
+      summary: PATCH /lineup-members/{id}
       operationId: patchApiLineupMembersById
       responses:
         '200':
@@ -409,7 +409,7 @@ paths:
     put:
       tags:
       - Lineup Members
-      summary: PUT /api/lineup-members/{id}
+      summary: PUT /lineup-members/{id}
       operationId: putApiLineupMembersById
       responses:
         '200':
@@ -436,11 +436,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LineupMemberDTO'
-  /api/lineup-members/{id}/exists:
+  /lineup-members/{id}/exists:
     get:
       tags:
       - Lineup Members
-      summary: GET /api/lineup-members/{id}/exists
+      summary: GET /lineup-members/{id}/exists
       operationId: getApiLineupMembersByIdExists
       responses:
         '200':

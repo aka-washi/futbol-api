@@ -1,5 +1,68 @@
 [
   {
+    "name": "FIFA",
+    "displayName": "FIFA",
+    "type": "Federation",
+    "abbreviation": "FIFA",
+    "countryDisplayName": "Switzerland",
+    "foundedDate": "1904-05-21",
+    "description": "International Federation of Association Football"
+  },
+  {
+    "name": "CONCACAF",
+    "displayName": "CONCACAF",
+    "type": "Confederation",
+    "abbreviation": "CONCACAF",
+    "countryDisplayName": "United States",
+    "foundedDate": "1961-09-18",
+    "description": "Confederation of North, Central America and Caribbean Association Football"
+  },
+  {
+    "name": "CONMEBOL",
+    "displayName": "CONMEBOL",
+    "type": "Confederation",
+    "abbreviation": "CONMEBOL",
+    "countryDisplayName": "Uruguay",
+    "foundedDate": "1916-07-09",
+    "description": "South American Football Confederation"
+  },
+  {
+    "name": "CAF",
+    "displayName": "CAF",
+    "type": "Confederation",
+    "abbreviation": "CAF",
+    "countryDisplayName": "Egypt",
+    "foundedDate": "1957-02-08",
+    "description": "Confederation of African Football"
+  },
+  {
+    "name": "AFC",
+    "displayName": "AFC",
+    "type": "Confederation",
+    "abbreviation": "AFC",
+    "countryDisplayName": "Malaysia",
+    "foundedDate": "1954-05-08",
+    "description": "Asian Football Confederation"
+  },
+  {
+    "name": "OFC",
+    "displayName": "OFC",
+    "type": "Confederation",
+    "abbreviation": "OFC",
+    "countryDisplayName": "New Zealand",
+    "foundedDate": "1966-11-01",
+    "description": "Oceania Football Confederation"
+  },
+  {
+    "name": "UEFA",
+    "displayName": "UEFA",
+    "type": "Confederation",
+    "abbreviation": "UEFA",
+    "countryDisplayName": "Switzerland",
+    "foundedDate": "1954-06-15",
+    "description": "Union of European Football Associations"
+  },
+  {
     "name": "Federación Mexicana de Fútbol",
     "displayName": "FMF",
     "type": "Federation",
@@ -17,6 +80,16 @@
     "parentOrganizationDisplayName": "FMF",
     "foundedDate": "1943-01-01",
     "description": "Top division of Mexican football"
+  },
+  {
+    "name": "Liga MX Femenil",
+    "displayName": "Liga MX Femenil",
+    "type": "Governing Body",
+    "abbreviation": "LMXF",
+    "countryDisplayName": "Mexico",
+    "parentOrganizationDisplayName": "FMF",
+    "foundedDate": "2016-12-05",
+    "description": "Top division of Mexican women's football"
   },
   {
     "name": "Real Federación Española de Fútbol",
@@ -37,14 +110,15 @@
     "foundedDate": "1929-02-10",
     "description": "Spanish first division"
   },
-  {
-    "name": "UEFA",
-    "displayName": "UEFA",
-    "type": "Confederation",
-    "abbreviation": "UEFA",
-    "countryDisplayName": "Switzerland",
-    "foundedDate": "1954-06-15",
-    "description": "Union of European Football Associations"
+    {
+    "name": "Liga F",
+    "displayName": "Liga F",
+    "type": "Governing Body",
+    "abbreviation": "LF",
+    "countryDisplayName": "Spain",
+    "parentOrganizationDisplayName": "RFEF",
+    "foundedDate": "1988-01-01",
+    "description": "Top division of Spanish women's football"
   }
 ]
 

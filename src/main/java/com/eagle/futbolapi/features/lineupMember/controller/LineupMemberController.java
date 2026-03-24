@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/api/lineup-members")
+@RequestMapping("/lineup-members")
 public class LineupMemberController extends BaseCrudController<LineupMember, LineupMemberDto, LineupMemberService, LineupMemberMapper> {
 
   private static final String RESOURCE_NAME = "LineupMember";
