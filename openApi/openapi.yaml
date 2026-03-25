@@ -1,4 +1,4 @@
-openapi: '3.1.0'
+openapi: '3.2.0'
 info:
   version: '1.0.0'
   title: Futbol API
@@ -136,6 +136,18 @@ paths:
                 - type: object
                   properties:
                     data: *id001
+        '400':
+          description: Bad Request - invalid input (e.g. invalid teamGender)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '404':
+          description: Not Found - referenced season or team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
       requestBody:
         required: true
         content:
@@ -208,6 +220,18 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/GroupDTO'
+        '400':
+          description: Bad Request - invalid input (e.g. invalid teamGender)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '404':
+          description: Not Found - referenced season or team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
       parameters:
       - name: id
         in: path
@@ -238,6 +262,18 @@ paths:
                   properties:
                     data:
                       $ref: '#/components/schemas/GroupDTO'
+        '400':
+          description: Bad Request - invalid input (e.g. invalid teamGender)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '404':
+          description: Not Found - referenced season or team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
       parameters:
       - name: id
         in: path
@@ -5744,36 +5780,79 @@ components:
         empty:
           type: boolean
 
-    # Tournament Schemas
-    TournamentDTO:
+    # Season Team Schemas
+    SeasonTeamDTO:
       type: object
-      description: |
-        Tournament data transfer object. Either organizationId or organizationDisplayName must be provided.
       required:
-        - name
-        - displayName
-        - type
-      x-validation-rules:
-        - rule: atLeastOneRequired
-          fields: [organizationId, organizationDisplayName]
-          message: Either organizationId or organizationDisplayName must be provided
+        - seasonId
+        - joinedDate
+      # Either provide teamId OR provide both teamDisplayName and teamGender
+      oneOf:
+        - required: [teamId]
+        - required: [teamDisplayName, teamGender]
       properties:
         id:
           type: integer
           format: int64
           readOnly: true
-          description: Tournament unique identifier
+          description: Season team unique identifier
           example: 1
-        name:
+        createdAt:
           type: string
-          description: Tournament name (unique)
-          example: Liga MX
+          format: date-time
+          description: Creation timestamp
+        createdBy:
+          type: string
+          description: Creator username
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        updatedBy:
+          type: string
+          description: Last updater username
+        seasonId:
+          type: integer
+          format: int64
+          description: Season ID
+          example: 1
+        seasonDisplayName:
+          type: string
+          description: Season display name (alternative to `seasonId`)
+          example: "2025/2026"
+        teamId:
+          type: integer
+          format: int64
+          description: Team ID
+          example: 1
+        teamDisplayName:
+          type: string
+          description: Team display name — required with `teamGender` if `teamId` is not provided
+          example: "Manchester United"
           maxLength: 100
-        displayName:
+        teamGender:
           type: string
-          description: Tournament display name
-          example: Liga MX
-          maxLength: 150
+          description: >-
+            Team gender. Optional when providing `teamId`; required when resolving by
+            `teamDisplayName` to disambiguate teams (Allowed values: MALE, FEMALE).
+          example: MALE
+          enum:
+            - MALE
+            - FEMALE
+        joinedDate:
+          type: string
+          format: date
+          description: Date the team joined the season
+          example: '2025-08-01'
+        leftDate:
+          type: string
+          format: date
+          description: Date the team left the season (optional)
+          example: '2026-05-31'
+        isActive:
+          type: boolean
+          description: Whether the team is currently active in the season
+          example: true
         organizationId:
           type: integer
           format: int64
@@ -5804,6 +5883,56 @@ components:
         CUP: Cup/knockout tournament
         FRIENDLY: Friendly match series
         PLAYOFF: Playoff tournament
+
+    TournamentDTO:
+      type: object
+      required:
+        - displayName
+        - startDate
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Tournament unique identifier
+        name:
+          type: string
+          description: Tournament internal name
+          example: Liga MX
+        displayName:
+          type: string
+          description: Tournament display name
+          example: Liga MX
+        startDate:
+          type: string
+          format: date
+          description: Tournament start date
+          example: '2024-07-01'
+        endDate:
+          type: string
+          format: date
+          description: Tournament end date
+          example: '2025-05-31'
+        type:
+          $ref: '#/components/schemas/TournamentType'
+        active:
+          type: boolean
+          description: Whether the tournament is active
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        createdBy:
+          type: string
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedBy:
+          type: string
+          readOnly: true
 
     PageTournamentDTO:
       type: object
@@ -5931,33 +6060,6 @@ components:
           type: boolean
 
     # Season Team Schemas
-    SeasonTeamDTO:
-      type: object
-      required:
-        - seasonId
-        - teamId
-      properties:
-        id:
-          type: integer
-          format: int64
-          readOnly: true
-          description: Season team unique identifier
-          example: 1
-        seasonId:
-          type: integer
-          format: int64
-          description: Season ID
-          example: 1
-        teamId:
-          type: integer
-          format: int64
-          description: Team ID
-          example: 1
-        group:
-          type: string
-          description: Group assignment (for group stage competitions)
-          example: A
-          maxLength: 50
 
     PageSeasonTeamDTO:
       type: object

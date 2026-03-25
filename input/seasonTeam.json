@@ -2,36 +2,42 @@
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Club América",
+    "teamGender": "Male",
     "joinedDate": "2024-07-01",
     "isActive": true
   },
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Chivas Guadalajara",
+    "teamGender": "Male",
     "joinedDate": "2024-07-01",
     "isActive": true
   },
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Cruz Azul",
+    "teamGender": "Male",
     "joinedDate": "2024-07-01",
     "isActive": true
   },
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Tigres UANL",
+    "teamGender": "Male",
     "joinedDate": "2024-07-01",
     "isActive": true
   },
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Monterrey",
+    "teamGender": "Male",
     "joinedDate": "2024-07-01",
     "isActive": true
   },
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Club América Femenil",
+    "teamGender": "Female",
     "joinedDate": "2024-07-01",
     "leftDate": "2025-06-30",
     "isActive": false
@@ -39,6 +45,7 @@
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Chivas Guadalajara Femenil",
+    "teamGender": "Female",
     "joinedDate": "2024-07-01",
     "leftDate": "2025-06-30",
     "isActive": false
@@ -46,18 +53,21 @@
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Real Madrid",
+    "teamGender": "Male",
     "joinedDate": "2024-08-15",
     "isActive": true
   },
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "FC Barcelona",
+    "teamGender": "Male",
     "joinedDate": "2024-08-15",
     "isActive": true
   },
   {
     "seasonDisplayName": "2025-2026",
     "teamDisplayName": "Atlético Madrid",
+    "teamGender": "Male",
     "joinedDate": "2024-08-15",
     "isActive": true
   }

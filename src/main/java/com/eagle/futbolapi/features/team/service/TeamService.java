@@ -52,6 +52,15 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDto> {
     return repository.findByDisplayName(displayName);
   }
 
+  public Optional<Team> findByDisplayNameAndGender(String displayName, com.eagle.futbolapi.features.base.enums.Gender gender) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Team display name cannot be null or empty");
+    }
+    if (gender == null) {
+      throw new IllegalArgumentException("Gender cannot be null");
+    }
+    return repository.findByDisplayNameAndGender(displayName, gender);
+  }
 
   @Override
   protected boolean isDuplicate(@NotNull Team team) {
@@ -59,7 +68,6 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDto> {
 
     return isDuplicate(team, UniquenessStrategy.ANY);
   }
-
 
   @Override
   protected boolean isDuplicate(@NotNull Long id, @NotNull Team team) {

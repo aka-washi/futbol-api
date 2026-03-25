@@ -15,4 +15,6 @@ public interface TeamRepository extends BaseRepository<Team, Long> {
 
   Optional<Team> findByDisplayName(String displayName);
 
+  Optional<Team> findByDisplayNameAndGender(String displayName, com.eagle.futbolapi.features.base.enums.Gender gender);
+
 }
