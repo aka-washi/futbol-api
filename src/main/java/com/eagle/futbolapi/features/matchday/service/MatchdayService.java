@@ -76,7 +76,7 @@ public class MatchdayService extends BaseCrudService<Matchday, Long, MatchdayDto
   }
 
   @Override
-  protected boolean isDuplicate(Long id, @NotNull Matchday entity) {
+  protected boolean isDuplicate(@NotNull Long id, @NotNull Matchday entity) {
     Objects.requireNonNull(entity, "Matchday cannot be null");
     Objects.requireNonNull(id, "Matchday ID cannot be null");
 

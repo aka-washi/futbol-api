@@ -1,534 +1,59 @@
-openapi: '3.2.0'
+openapi: 3.0.3
 info:
-  version: '1.0.0'
   title: Futbol API
+  version: 1.0.0
   description: |
-    A comprehensive REST API for managing football (soccer) data including teams, countries, organizations, venues, and more.
-    
-    This API provides endpoints for managing football-related entities with full CRUD operations, advanced filtering, and pagination support.
+    REST API for managing football (soccer) data including teams, countries, organizations, venues, and more.
   contact:
     name: Eagle Team
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-
 servers:
   - url: http://localhost:8080/api/v1
     description: Local development server
   - url: https://api.example.com/api/v1
     description: Production server
-
 tags:
-- name: Groups
-  description: Operations related to groups
-- name: Lineup Members
-  description: Operations related to lineup members
-- name: Bootstrap
-  description: Bootstrap and seed-data operations
-- name: Competitions
-  description: Operations related to competitions
-- name: Countries
-  description: Operations related to countries
-- name: Lineups
-  description: Operations related to lineups
-- name: Match Events
-  description: Operations related to match events
-- name: Matchdays
-  description: Operations related to matchdays
-- name: Matches
-  description: Operations related to matches
-- name: Organizations
-  description: Operations related to organizations
-- name: Persons
-  description: Operations related to persons
-- name: Players
-  description: Operations related to players
-- name: Point Systems
-  description: Operations related to point systems
-- name: Season Teams
-  description: Operations related to season-team membership
-- name: Seasons
-  description: Operations related to seasons
-- name: Staff
-  description: Operations related to staff
-- name: Stage Formats
-  description: Operations related to stage formats
-- name: Stages
-  description: Operations related to stages
-- name: Standings
-  description: Operations related to standings
-- name: Teams
-  description: Operations related to teams
-- name: Tournament Seasons
-  description: Operations related to tournament seasons
-- name: Tournaments
-  description: Operations related to tournaments
-- name: Venues
-  description: Operations related to venues
-x-endpoint-order:
-  - /countries
-  - /organizations
-  - /pointSystems
-  - /venues
-  - /teams
-  - /persons
-  - /players
-  - /staff
-  - /stage-formats
-  - /tournaments
-  - /tournament-seasons
-  - /seasons
-  - /competitions
-  - /stages
-  - /groups
-  - /season-teams
-  - /registrations
-  - /matches
-  - /matchdays
-  - /match-events
-  - /lineups
-  - /lineup-members
-  - /standings
-  - /bootstrap
+  - name: Countries
+    description: Operations related to countries
+  - name: Teams
+    description: Operations related to teams
+  - name: Organizations
+    description: Operations related to organizations
+  - name: Venues
+    description: Operations related to venues
+  - name: Players
+    description: Operations related to players
+  - name: Competitions
+    description: Operations related to competitions
+  - name: Matches
+    description: Operations related to matches
+  - name: Matchdays
+    description: Operations related to matchdays
+  - name: Staff
+    description: Operations related to staff
+  - name: Groups
+    description: Operations related to groups
+  - name: Lineups
+    description: Operations related to lineups
+  - name: Lineup Members
+    description: Operations related to lineup members
+  - name: Point Systems
+    description: Operations related to point systems
+  - name: Seasons
+    description: Operations related to seasons
+  - name: Stage Formats
+    description: Operations related to stage formats
+  - name: Stages
+    description: Operations related to stages
+  - name: Standings
+    description: Operations related to standings
+  - name: Tournament Seasons
+    description: Operations related to tournament seasons
+  - name: Tournaments
+    description: Operations related to tournaments
 paths:
-  /groups:
-    get:
-      tags:
-      - Groups
-      summary: GET /groups
-      operationId: getApiGroups
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/PageGroupDTO'
-    post:
-      tags:
-      - Groups
-      summary: POST /groups
-      operationId: postApiGroups
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data: &id001
-                      $ref: '#/components/schemas/GroupDTO'
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data: *id001
-        '400':
-          description: Bad Request - invalid input (e.g. invalid teamGender)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'
-        '404':
-          description: Not Found - referenced season or team not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GroupDTO'
-  /groups/{id}:
-    delete:
-      tags:
-      - Groups
-      summary: DELETE /groups/{id}
-      operationId: deleteApiGroupsById
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/GroupDTO'
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-    get:
-      tags:
-      - Groups
-      summary: GET /groups/{id}
-      operationId: getApiGroupsById
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/GroupDTO'
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-    patch:
-      tags:
-      - Groups
-      summary: PATCH /groups/{id}
-      operationId: patchApiGroupsById
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/GroupDTO'
-        '400':
-          description: Bad Request - invalid input (e.g. invalid teamGender)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'
-        '404':
-          description: Not Found - referenced season or team not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GroupDTO'
-    put:
-      tags:
-      - Groups
-      summary: PUT /groups/{id}
-      operationId: putApiGroupsById
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/GroupDTO'
-        '400':
-          description: Bad Request - invalid input (e.g. invalid teamGender)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'
-        '404':
-          description: Not Found - referenced season or team not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GroupDTO'
-  /groups/{id}/exists:
-    get:
-      tags:
-      - Groups
-      summary: GET /groups/{id}/exists
-      operationId: getApiGroupsByIdExists
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      type: boolean
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-  /lineup-members:
-    get:
-      tags:
-      - Lineup Members
-      summary: GET /lineup-members
-      operationId: getApiLineupMembers
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/PageLineupMemberDTO'
-    post:
-      tags:
-      - Lineup Members
-      summary: POST /lineup-members
-      operationId: postApiLineupMembers
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data: &id002
-                      $ref: '#/components/schemas/LineupMemberDTO'
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data: *id002
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LineupMemberDTO'
-  /lineup-members/{id}:
-    delete:
-      tags:
-      - Lineup Members
-      summary: DELETE /lineup-members/{id}
-      operationId: deleteApiLineupMembersById
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/LineupMemberDTO'
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-    get:
-      tags:
-      - Lineup Members
-      summary: GET /lineup-members/{id}
-      operationId: getApiLineupMembersById
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/LineupMemberDTO'
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-    patch:
-      tags:
-      - Lineup Members
-      summary: PATCH /lineup-members/{id}
-      operationId: patchApiLineupMembersById
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/LineupMemberDTO'
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LineupMemberDTO'
-    put:
-      tags:
-      - Lineup Members
-      summary: PUT /lineup-members/{id}
-      operationId: putApiLineupMembersById
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      $ref: '#/components/schemas/LineupMemberDTO'
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LineupMemberDTO'
-  /lineup-members/{id}/exists:
-    get:
-      tags:
-      - Lineup Members
-      summary: GET /lineup-members/{id}/exists
-      operationId: getApiLineupMembersByIdExists
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/ApiResponse'
-                - type: object
-                  properties:
-                    data:
-                      type: boolean
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-  /bootstrap/health:
-    post:
-      tags:
-      - Bootstrap
-      summary: POST /bootstrap/health
-      operationId: postBootstrapHealth
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BootstrapHealthResponse'
-  /bootstrap/load:
-    post:
-      tags:
-      - Bootstrap
-      summary: POST /bootstrap/load
-      operationId: postBootstrapLoad
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BootstrapLoadResponse'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BootstrapRequestDTO'
   /bootstrap/load-all:
     post:
       tags:

@@ -14,8 +14,8 @@ import com.eagle.futbolapi.features.group.dto.GroupDto;
 import com.eagle.futbolapi.features.group.entity.Group;
 import com.eagle.futbolapi.features.group.mapper.GroupMapper;
 import com.eagle.futbolapi.features.group.repository.GroupRepository;
+import com.eagle.futbolapi.features.stage.service.StageService;
 import com.eagle.futbolapi.features.stage.entity.Stage;
-import com.eagle.futbolapi.features.stage.repository.StageRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,22 +28,25 @@ import lombok.extern.slf4j.Slf4j;
 @Validated
 public class GroupService extends BaseCrudService<Group, Long, GroupDto> {
 
-  private final StageRepository stageRepository;
+  private final StageService stageService;
 
   public GroupService(
       GroupRepository repository,
       GroupMapper mapper,
-      StageRepository stageRepository) {
+      StageService stageService) {
     super(repository, mapper);
-    this.stageRepository = stageRepository;
+    this.stageService = stageService;
   }
 
   @Override
-  protected void resolveRelationships(@NotNull GroupDto dto, @NotNull Group entity) {
+  protected void resolveRelationships(GroupDto dto, Group entity) {
     if (dto.getStageId() != null) {
-      Stage stage = stageRepository.findById(dto.getStageId())
-          .orElseThrow(() -> new IllegalArgumentException(
-              "Stage not found with id: " + dto.getStageId()));
+      Stage stage = stageService.getById(dto.getStageId())
+          .orElseThrow(() -> new com.eagle.futbolapi.features.base.exception.ResourceNotFoundException("Stage", "id", dto.getStageId()));
+      entity.setStage(stage);
+    } else if (dto.getStageDisplayName() != null && !dto.getStageDisplayName().trim().isEmpty()) {
+      Stage stage = stageService.findByDisplayName(dto.getStageDisplayName())
+          .orElseThrow(() -> new com.eagle.futbolapi.features.base.exception.ResourceNotFoundException("Stage", "displayName", dto.getStageDisplayName()));
       entity.setStage(stage);
     }
   }

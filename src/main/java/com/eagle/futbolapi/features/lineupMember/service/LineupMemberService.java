@@ -49,7 +49,7 @@ public class LineupMemberService extends BaseCrudService<LineupMember, Long, Lin
   }
 
   @Override
-  protected void resolveRelationships(@NotNull LineupMemberDto dto, @NotNull LineupMember entity) {
+  protected void resolveRelationships(LineupMemberDto dto, LineupMember entity) {
     if (dto.getLineupId() != null) {
       Lineup lineup = lineupRepository.findById(dto.getLineupId())
           .orElseThrow(() -> new IllegalArgumentException(

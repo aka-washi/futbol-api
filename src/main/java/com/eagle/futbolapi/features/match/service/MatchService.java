@@ -61,7 +61,7 @@ public class MatchService extends BaseCrudService<Match, Long, MatchDto> {
    * DTO.
    */
   @Override
-  protected void resolveRelationships(@NotNull MatchDto dto, @NotNull Match match) {
+  protected void resolveRelationships(MatchDto dto, Match match) {
     // Map Matchday from ID or display name
     if (dto.getMatchdayId() != null) {
       var matchday = matchdayService.getById(dto.getMatchdayId())
