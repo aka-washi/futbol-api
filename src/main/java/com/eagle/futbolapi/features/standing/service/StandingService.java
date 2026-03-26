@@ -13,12 +13,11 @@ import org.springframework.validation.annotation.Validated;
 
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
-import com.eagle.futbolapi.features.stage.repository.StageRepository;
+import com.eagle.futbolapi.features.stage.service.StageService;
 import com.eagle.futbolapi.features.standing.dto.StandingDto;
 import com.eagle.futbolapi.features.standing.entity.Standing;
 import com.eagle.futbolapi.features.standing.mapper.StandingMapper;
 import com.eagle.futbolapi.features.standing.repository.StandingRepository;
-import com.eagle.futbolapi.features.team.repository.TeamRepository;
 import com.eagle.futbolapi.features.team.service.TeamService;
 
 @Service
@@ -27,21 +26,18 @@ import com.eagle.futbolapi.features.team.service.TeamService;
 public class StandingService extends BaseCrudService<Standing, Long, StandingDto> {
 
   private final StandingRepository standingRepository;
-  private final StageRepository stageRepository;
-  private final TeamRepository teamRepository;
   private final TeamService teamService;
+  private final StageService stageService;
 
   public StandingService(
       StandingRepository standingRepository,
-      StageRepository stageRepository,
-      TeamRepository teamRepository,
       TeamService teamService,
+      StageService stageService,
       StandingMapper mapper) {
     super(standingRepository, mapper);
     this.standingRepository = standingRepository;
-    this.stageRepository = stageRepository;
-    this.teamRepository = teamRepository;
     this.teamService = teamService;
+    this.stageService = stageService;
   }
 
   public Page<Standing> getByStageIdOrderByPosition(Long stageId, Pageable pageable) {
@@ -66,16 +62,22 @@ public class StandingService extends BaseCrudService<Standing, Long, StandingDto
 
   @Override
   protected void resolveRelationships(StandingDto dto, Standing standing) {
-    // Map stage from ID
+    // Map stage from ID (preferred) or display name
     if (dto.getStageId() != null) {
-      var stage = stageRepository.findById(dto.getStageId())
+      var stage = stageService.getById(dto.getStageId())
           .orElseThrow(() -> new ResourceNotFoundException("Stage", "id", dto.getStageId()));
       standing.setStage(stage);
+    } else if (dto.getStageDisplayName() != null && !dto.getStageDisplayName().trim().isEmpty()) {
+      var stageOpt = stageService.findByDisplayName(dto.getStageDisplayName());
+      stageOpt.ifPresentOrElse(
+        standing::setStage,
+        () -> { throw new ResourceNotFoundException("Stage", "displayName", dto.getStageDisplayName()); }
+      );
     }
 
     // Map team from ID (preferred) or display name
     if (dto.getTeamId() != null) {
-      var team = teamRepository.findById(dto.getTeamId())
+      var team = teamService.getById(dto.getTeamId())
           .orElseThrow(() -> new ResourceNotFoundException("Team", "id", dto.getTeamId()));
       standing.setTeam(team);
     } else if (dto.getTeamDisplayName() != null && !dto.getTeamDisplayName().trim().isEmpty()) {

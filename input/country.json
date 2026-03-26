@@ -3,66 +3,119 @@
     "name": "United Mexican States",
     "code": "MX",
     "isoCode": "MEX",
-    "displayName": "Mexico"
+    "displayName": "Mexico",
+    "flagUrl": "https://flagcdn.com/mx.svg"
   },
   {
     "name": "Brazil",
     "code": "BR",
     "isoCode": "BRA",
-    "displayName": "Brazil"
+    "displayName": "Brazil",
+    "flagUrl": "https://flagcdn.com/br.svg"
   },
   {
     "name": "Spain",
     "code": "ES",
     "isoCode": "ESP",
-    "displayName": "Spain"
+    "displayName": "Spain",
+    "flagUrl": "https://flagcdn.com/es.svg"
   },
   {
     "name": "France",
     "code": "FR",
     "isoCode": "FRA",
-    "displayName": "France"
+    "displayName": "France",
+    "flagUrl": "https://flagcdn.com/fr.svg"
   },
   {
     "name": "Germany",
     "code": "DE",
     "isoCode": "DEU",
-    "displayName": "Germany"
+    "displayName": "Germany",
+    "flagUrl": "https://flagcdn.com/de.svg"
   },
   {
     "name": "Italy",
     "code": "IT",
     "isoCode": "ITA",
-    "displayName": "Italy"
+    "displayName": "Italy",
+    "flagUrl": "https://flagcdn.com/it.svg"
   },
   {
     "name": "England",
     "code": "GB",
     "isoCode": "GBR",
-    "displayName": "England"
+    "displayName": "England",
+    "flagUrl": "https://flagcdn.com/gb.svg"
   },
   {
     "name": "Portugal",
     "code": "PT",
     "isoCode": "PRT",
-    "displayName": "Portugal"
+    "displayName": "Portugal",
+    "flagUrl": "https://flagcdn.com/pt.svg"
   },
   {
     "name": "Netherlands",
     "code": "NL",
     "isoCode": "NLD",
-    "displayName": "Netherlands"
+    "displayName": "Netherlands",
+    "flagUrl": "https://flagcdn.com/nl.svg"
   },
   {
     "name": "Belgium",
     "code": "BE",
     "isoCode": "BEL",
-    "displayName": "Belgium"
+    "displayName": "Belgium",
+    "flagUrl": "https://flagcdn.com/be.svg"
   },
   {
     "name": "Switzerland",
     "code": "CH",
     "isoCode": "CHE",
-    "displayName": "Switzerland"
+    "displayName": "Switzerland",
+    "flagUrl": "https://flagcdn.com/ch.svg"
+  },
+  {
+    "name": "United States of America",
+    "code": "US",
+    "isoCode": "USA",
+    "displayName": "United States",
+    "flagUrl": "https://flagcdn.com/us.svg"
+  },
+  {
+    "name": "Uruguay",
+    "code": "UY",
+    "isoCode": "URY",
+    "displayName": "Uruguay",
+    "flagUrl": "https://flagcdn.com/uy.svg"
+  },
+  {
+    "name": "Egypt",
+    "code": "EG",
+    "isoCode": "EGY",
+    "displayName": "Egypt",
+    "flagUrl": "https://flagcdn.com/eg.svg"
+  },
+  {
+    "name": "Malaysia",
+    "code": "MY",
+    "isoCode": "MYS",
+    "displayName": "Malaysia",
+    "flagUrl": "https://flagcdn.com/my.svg"
+  },
+  {
+    "name": "New Zealand",
+    "code": "NZ",
+    "isoCode": "NZL",
+    "displayName": "New Zealand",
+    "flagUrl": "https://flagcdn.com/nz.svg"
+  },
+  {
+    "name": "Uzbekistan",
+    "code": "UZ",
+    "isoCode": "UZB",
+    "displayName": "Uzbekistan",
+    "flagUrl": "https://flagcdn.com/uz.svg"
   }
 ]

@@ -120,14 +120,22 @@ public class RegistrationService extends BaseCrudService<Registration, Long, Reg
     }
 
     // Player by id
-    if (dto.getPlayerId() != null) {
+    if (dto.getPlayerDisplayName() != null && !dto.getPlayerDisplayName().trim().isEmpty()) {
+      Player player = playerRepository.findByPersonDisplayName(dto.getPlayerDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Player", "displayName", dto.getPlayerDisplayName()));
+      entity.setPlayer(player);
+    } else if (dto.getPlayerId() != null) {
       Player player = playerRepository.findById(dto.getPlayerId())
           .orElseThrow(() -> new ResourceNotFoundException("Player", "id", dto.getPlayerId()));
       entity.setPlayer(player);
     }
 
     // Staff by id
-    if (dto.getStaffId() != null) {
+    if (dto.getStaffDisplayName() != null && !dto.getStaffDisplayName().trim().isEmpty()) {
+      Staff staff = staffRepository.findByPersonDisplayName(dto.getStaffDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Staff", "displayName", dto.getStaffDisplayName()));
+      entity.setStaff(staff);
+    } else if (dto.getStaffId() != null) {
       Staff staff = staffRepository.findById(dto.getStaffId())
           .orElseThrow(() -> new ResourceNotFoundException("Staff", "id", dto.getStaffId()));
       entity.setStaff(staff);

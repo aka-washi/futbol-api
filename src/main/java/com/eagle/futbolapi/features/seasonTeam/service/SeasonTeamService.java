@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.eagle.futbolapi.features.base.enums.Gender;
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
@@ -74,15 +75,31 @@ public class SeasonTeamService extends BaseCrudService<SeasonTeam, Long, SeasonT
       seasonTeam.setSeason(season);
     }
 
-    // Map team from display name or ID
-    if (dto.getTeamDisplayName() != null && !dto.getTeamDisplayName().trim().isEmpty()) {
-      var team = teamService.findByDisplayName(dto.getTeamDisplayName())
-          .orElseThrow(() -> new ResourceNotFoundException("Team", "displayName", dto.getTeamDisplayName()));
-      seasonTeam.setTeam(team);
-    } else if (dto.getTeamId() != null) {
+    // Map team: prefer ID (unique). Otherwise require displayName + gender.
+    boolean hasTeamId = dto.getTeamId() != null;
+    boolean hasTeamDisplay = dto.getTeamDisplayName() != null && !dto.getTeamDisplayName().trim().isEmpty();
+    boolean hasTeamGender = dto.getTeamGender() != null && !dto.getTeamGender().trim().isEmpty();
+
+    if (hasTeamId) {
       var team = teamService.getById(dto.getTeamId())
           .orElseThrow(() -> new ResourceNotFoundException("Team", "id", dto.getTeamId()));
       seasonTeam.setTeam(team);
+
+    } else if (hasTeamDisplay && hasTeamGender) {
+      Gender gender;
+      try {
+        gender = Gender.fromLabel(dto.getTeamGender());
+      } catch (IllegalArgumentException e) {
+        throw new IllegalArgumentException(
+            "Invalid teamGender value: '" + dto.getTeamGender() + "'. Allowed: MALE, FEMALE");
+      }
+      var team = teamService.findByDisplayNameAndGender(dto.getTeamDisplayName(), gender)
+          .orElseThrow(() -> new ResourceNotFoundException("Team", "displayName and gender",
+              dto.getTeamDisplayName() + "/" + dto.getTeamGender()));
+      seasonTeam.setTeam(team);
+
+    } else if (hasTeamDisplay && !hasTeamGender) {
+      throw new IllegalArgumentException("When resolving team by displayName, teamGender is required");
     }
   }
 }

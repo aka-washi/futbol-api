@@ -1,16 +1,44 @@
 [
   {
-    "name": "Group A",
-    "displayName": "Group A",
-    "stageDisplayName": "Liga MX Apertura 2024 - Regular Season",
+    "name": "Eastern 1",
+    "displayName": "Eastern 1",
+    "stageDisplayName": "Leagues Cup 2026 - Group Stage",
     "order": 1,
-    "numberOfTeams": 4
+    "numberOfTeams": 6
   },
   {
-    "name": "Group B",
-    "displayName": "Group B",
-    "stageDisplayName": "Liga MX Apertura 2024 - Regular Season",
+    "name": "Eastern 2",
+    "displayName": "Eastern 2",
+    "stageDisplayName": "Leagues Cup 2026 - Group Stage",
     "order": 2,
-    "numberOfTeams": 4
+    "numberOfTeams": 6
+  },
+  {
+    "name":"Eastern 3",
+    "displayName": "Eastern 3",
+    "stageDisplayName": "Leagues Cup 2026 - Group Stage",
+    "order": 3,
+    "numberOfTeams": 6
+  },
+  {
+    "name": "Western 1",
+    "displayName": "Western 1",
+    "stageDisplayName": "Leagues Cup 2026 - Group Stage",
+    "order": 4,
+    "numberOfTeams": 6
+  },
+  {
+    "name": "Western 2",
+    "displayName": "Western 2",
+    "stageDisplayName": "Leagues Cup 2026 - Group Stage",
+    "order": 5,
+    "numberOfTeams": 6
+  },
+  {
+    "name": "Western 3",
+    "displayName": "Western 3",
+    "stageDisplayName": "Leagues Cup 2026 - Group Stage",
+    "order": 6,
+    "numberOfTeams": 6
   }
 ]

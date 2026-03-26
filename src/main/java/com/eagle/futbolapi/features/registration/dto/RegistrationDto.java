@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @AtLeastOneNotNull.List({
-    @AtLeastOneNotNull(fields = { "playerId", "staffId" }, message = "Either playerId or staffId must be provided")
+    @AtLeastOneNotNull(fields = { "playerId", "playerDisplayName", "staffId", "staffDisplayName" }, message = "Either player or staff must be provided")
 })
 public class RegistrationDto {
 

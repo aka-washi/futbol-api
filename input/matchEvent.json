@@ -1,10 +1,9 @@
 [
   {
-    "displayName": "Goal - Cuauhtémoc Blanco 23'",
+    "displayName": "Goal - Scarlett Camberos 23'",
     "matchDisplayName": "Club América vs Chivas Guadalajara",
     "teamDisplayName": "Club América",
-    "playerPersonFirstName": "Cuauhtémoc",
-    "playerPersonLastName": "Blanco",
+    "playerDisplayName": "Scarlett Camberos",
     "type": "Goal",
     "period": "First Half",
     "minute": 23,
@@ -12,11 +11,10 @@
     "description": "Header from center of the box to bottom right corner. Assisted by cross from the right wing."
   },
   {
-    "displayName": "Goal - Cuauhtémoc Blanco 67'",
+    "displayName": "Goal - Scarlett Camberos 67'",
     "matchDisplayName": "Club América vs Chivas Guadalajara",
     "teamDisplayName": "Club América",
-    "playerPersonFirstName": "Cuauhtémoc",
-    "playerPersonLastName": "Blanco",
+    "playerDisplayName": "Scarlett Camberos",
     "type": "Goal",
     "period": "Second Half",
     "minute": 67,
@@ -24,11 +22,10 @@
     "description": "Right footed shot from outside the box to the top left corner."
   },
   {
-    "displayName": "Yellow Card - Cuauhtémoc Blanco 89'",
+    "displayName": "Yellow Card - Scarlett Camberos 89'",
     "matchDisplayName": "Club América vs Chivas Guadalajara",
     "teamDisplayName": "Club América",
-    "playerPersonFirstName": "Cuauhtémoc",
-    "playerPersonLastName": "Blanco",
+    "playerDisplayName": "Scarlett Camberos",
     "type": "Yellow Card",
     "period": "Second Half",
     "minute": 89,

@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.CompetitionStatus;
 import com.eagle.futbolapi.features.base.enums.CompetitionType;
@@ -53,15 +54,18 @@ public class Competition extends BaseEntity {
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tournament_season_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @UniqueField(fieldPath = "tournamentSeason.id")
   private TournamentSeason tournamentSeason;
 
   @NotBlank
   @Column(name = "cmp_display_name", nullable = false, length = 100)
+  @UniqueField
   private String displayName;
 
   @NotNull
   @Enumerated(EnumType.STRING)
   @Column(name = "cmp_type", nullable = false, length = 20)
+  @UniqueField
   private CompetitionType type;
 
   @NotNull

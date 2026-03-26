@@ -10,13 +10,23 @@
     "description": "Mexican top division professional league"
   },
   {
+    "organizationDisplayName": "Liga MX Femenil",
+    "name": "Liga MX Femenil",
+    "displayName": "Liga MX Femenil",
+    "type": "Domestic League",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Mexican women's top division professional league"
+  },
+  {
     "organizationDisplayName": "FMF",
     "name": "Copa MX",
     "displayName": "Copa MX",
     "type": "Domestic Cup",
     "ageCategory": "Professional",
     "level": 1,
-    "active": true,
+    "active": false,
     "description": "Mexican national cup competition"
   },
   {
@@ -30,6 +40,16 @@
     "description": "Premier European club competition"
   },
   {
+    "organizationDisplayName": "CONCACAF",
+    "name": "CONCACAF Champions League",
+    "displayName": "CONCACAF Champions League",
+    "type": "International Cup",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Premier North American club competition"
+  },
+  {
     "organizationDisplayName": "La Liga",
     "name": "La Liga",
     "displayName": "La Liga",
@@ -40,6 +60,16 @@
     "description": "Spanish top division"
   },
   {
+    "organizationDisplayName": "Liga F",
+    "name": "Liga F",
+    "displayName": "Liga F",
+    "type": "Domestic League",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Spanish women's top division"
+  },
+  {
     "organizationDisplayName": "FMF",
     "name": "Liga de Expansión MX",
     "displayName": "Liga de Expansión MX",
@@ -48,5 +78,15 @@
     "level": 2,
     "active": true,
     "description": "Mexican second division"
+  },
+  {
+    "organizationDisplayName": "CONCACAF",
+    "name": "Leagues Cup",
+    "displayName": "Leagues Cup",
+    "type": "International Cup",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Tournament featuring MLS and Liga MX teams"
   }
 ]

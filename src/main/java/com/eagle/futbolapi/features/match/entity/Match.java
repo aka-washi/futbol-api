@@ -38,7 +38,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @Accessors(chain = false)
 @Entity
-@Table(name = "[match]")
+@Table(name = "match")
 @AttributeOverrides({
     @AttributeOverride(name = "id", column = @Column(name = "mt_id")),
     @AttributeOverride(name = "createdAt", column = @Column(name = "mt_created_at", nullable = false, updatable = false)),

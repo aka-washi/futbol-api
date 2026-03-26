@@ -41,7 +41,14 @@ public interface MatchEventMapper extends BaseMapper<MatchEvent, MatchEventDto> 
   }
 
   default MatchEventType stringToMatchEventType(String type) {
-    return MatchEventType.fromLabel(type);
+    if (type == null)
+      return null;
+    for (MatchEventType t : MatchEventType.values()) {
+      if (t.getLabel().equalsIgnoreCase(type) || t.name().equalsIgnoreCase(type)) {
+        return t;
+      }
+    }
+    throw new IllegalArgumentException("Invalid match event type: " + type);
   }
 
   default String matchPeriodToString(MatchPeriod period) {
@@ -49,7 +56,14 @@ public interface MatchEventMapper extends BaseMapper<MatchEvent, MatchEventDto> 
   }
 
   default MatchPeriod stringToMatchPeriod(String period) {
-    return MatchPeriod.fromLabel(period);
+    if (period == null)
+      return null;
+    for (MatchPeriod p : MatchPeriod.values()) {
+      if (p.getLabel().equalsIgnoreCase(period) || p.name().equalsIgnoreCase(period)) {
+        return p;
+      }
+    }
+    throw new IllegalArgumentException("Invalid match period: " + period);
   }
 
 }

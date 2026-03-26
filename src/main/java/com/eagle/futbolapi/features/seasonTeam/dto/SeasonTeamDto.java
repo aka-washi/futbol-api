@@ -39,6 +39,8 @@ public class SeasonTeamDto {
   private Long teamId;
   private String teamDisplayName;
 
+  private String teamGender;
+
   @NotNull(message = "Joined date is required")
   private LocalDate joinedDate;
 

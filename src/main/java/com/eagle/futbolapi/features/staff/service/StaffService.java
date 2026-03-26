@@ -1,6 +1,7 @@
 package com.eagle.futbolapi.features.staff.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -29,14 +30,23 @@ import lombok.extern.slf4j.Slf4j;
 @Validated
 public class StaffService extends BaseCrudService<Staff, Long, StaffDto> {
 
+  private final StaffRepository repository;
   private final PersonService personService;
   private final TeamService teamService;
 
   protected StaffService(StaffRepository repository, StaffMapper mapper,
       PersonService personService, TeamService teamService) {
     super(repository, mapper);
+    this.repository = repository;
     this.personService = personService;
     this.teamService = teamService;
+  }
+
+    public Optional<Staff> findByPersonDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Person display name cannot be null or empty");
+    }
+    return repository.findByPersonDisplayName(displayName);
   }
 
   @Override

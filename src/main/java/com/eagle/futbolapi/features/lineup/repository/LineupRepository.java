@@ -17,4 +17,6 @@ public interface LineupRepository extends BaseRepository<Lineup, Long> {
 
   boolean existsByMatchIdAndTeamIdAndIdNot(Long matchId, Long teamId, Long id);
 
+  Optional<Lineup> findByDisplayName(String displayName);
+
 }
