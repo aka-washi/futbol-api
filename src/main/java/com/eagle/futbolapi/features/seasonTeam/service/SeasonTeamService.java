@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.eagle.futbolapi.features.base.enums.Gender;
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
@@ -17,7 +18,6 @@ import com.eagle.futbolapi.features.seasonTeam.entity.SeasonTeam;
 import com.eagle.futbolapi.features.seasonTeam.mapper.SeasonTeamMapper;
 import com.eagle.futbolapi.features.seasonTeam.repository.SeasonTeamRepository;
 import com.eagle.futbolapi.features.team.service.TeamService;
-import com.eagle.futbolapi.features.base.enums.Gender;
 
 import lombok.extern.slf4j.Slf4j;
 

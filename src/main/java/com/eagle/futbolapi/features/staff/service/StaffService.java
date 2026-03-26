@@ -13,7 +13,6 @@ import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.person.service.PersonService;
-import com.eagle.futbolapi.features.player.entity.Player;
 import com.eagle.futbolapi.features.staff.dto.StaffDto;
 import com.eagle.futbolapi.features.staff.entity.Staff;
 import com.eagle.futbolapi.features.staff.mapper.StaffMapper;
@@ -49,7 +48,7 @@ public class StaffService extends BaseCrudService<Staff, Long, StaffDto> {
     }
     return repository.findByPersonDisplayName(displayName);
   }
-  
+
   @Override
   protected boolean isDuplicate(@NotNull Staff staff) {
     Objects.requireNonNull(staff, "Staff cannot be null");

@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.eagle.futbolapi.features.base.repository.BaseRepository;
-import com.eagle.futbolapi.features.player.entity.Player;
 import com.eagle.futbolapi.features.staff.entity.Staff;
 
 /**

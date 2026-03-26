@@ -18,11 +18,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.CompetitionStatus;
 import com.eagle.futbolapi.features.base.enums.CompetitionType;
-
-import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.tournamentSeason.entity.TournamentSeason;
 
 import lombok.AllArgsConstructor;
