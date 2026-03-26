@@ -11,7 +11,9 @@ public enum StageFormatType {
   PLAY_IN("Play-In"),
   KNOCKOUT("Knockout"),
   GROUP_STAGE("Group Stage"),
-  ROUND_ROBIN("Round Robin");
+  ROUND_ROBIN("Round Robin"),
+  CROSS_LEAGUE("Cross-League"),
+  OTHER("Other");
 
   private final String label;
 

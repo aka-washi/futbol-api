@@ -48,5 +48,15 @@
     "status": "In Progress",
     "totalMatches": 380,
     "description": "Full season Spanish league"
+  },
+  {
+    "tournamentSeasonDisplayName": "Leagues Cup 2026",
+    "displayName": "Leagues Cup 2026",
+    "type": "Cup",
+    "startDate": "2026-08-04",
+    "endDate": "2026-08-15",
+    "status": "Not Started",
+    "totalMatches": 32,
+    "description": "Preseason tournament featuring MLS and Liga MX teams"
   }
 ]

@@ -38,5 +38,13 @@
     "numberOfTeams": 8,
     "hasHomeAndAway": true,
     "description": "Playoff format with home and away legs"
+  },
+  {
+    "displayName": "Regional Grouping",
+    "type": "Cross-League",
+    "pointSystemDisplayName": "No ties",
+    "numberOfTeams": 36,
+    "hasHomeAndAway": false,
+    "description": "Teams played three matches against teams from their set who were not from their league, with no ties allowed"
   }
 ]

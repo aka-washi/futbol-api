@@ -1,5 +1,14 @@
 [
   {
+    "displayName": "Leagues Cup 2026 - Group Stage",
+    "competitionDisplayName": "Leagues Cup 2026",
+    "stageFormatDisplayName": "Regional Grouping",
+    "order": 1,
+    "status": "Not Started",
+    "startDate": "2026-08-04",
+    "endDate": "2026-08-15"
+  },
+  {
     "displayName": "Liga MX Apertura 2025 - Regular Season",
     "competitionDisplayName": "Liga MX Apertura 2025",
     "stageFormatDisplayName": "Regular Season - Double Round Robin",
