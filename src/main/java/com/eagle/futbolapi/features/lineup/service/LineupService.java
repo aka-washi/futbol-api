@@ -2,6 +2,7 @@ package com.eagle.futbolapi.features.lineup.service;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -83,6 +84,13 @@ public class LineupService extends BaseCrudService<Lineup, Long, LineupDto> {
           "team.id", lineup.getTeam().getId()), id);
     }
     return false;
+  }
+
+  public Optional<Lineup> findByDisplayName(String displayName) {
+    if (displayName == null || displayName.isEmpty()) {
+      throw new IllegalArgumentException("Lineup display name cannot be null or empty");
+    }
+    return ((LineupRepository) repository).findByDisplayName(displayName);
   }
 
 }

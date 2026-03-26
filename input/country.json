@@ -33,7 +33,6 @@
     "isoCode": "DEU",
     "displayName": "Germany",
     "flagUrl": "https://flagcdn.com/de.svg"
-
   },
   {
     "name": "Italy",
@@ -41,7 +40,6 @@
     "isoCode": "ITA",
     "displayName": "Italy",
     "flagUrl": "https://flagcdn.com/it.svg"
-
   },
   {
     "name": "England",
@@ -56,7 +54,6 @@
     "isoCode": "PRT",
     "displayName": "Portugal",
     "flagUrl": "https://flagcdn.com/pt.svg"
-
   },
   {
     "name": "Netherlands",
@@ -78,7 +75,6 @@
     "isoCode": "CHE",
     "displayName": "Switzerland",
     "flagUrl": "https://flagcdn.com/ch.svg"
-
   },
   {
     "name": "United States of America",
@@ -114,5 +110,12 @@
     "isoCode": "NZL",
     "displayName": "New Zealand",
     "flagUrl": "https://flagcdn.com/nz.svg"
+  },
+  {
+    "name": "Uzbekistan",
+    "code": "UZ",
+    "isoCode": "UZB",
+    "displayName": "Uzbekistan",
+    "flagUrl": "https://flagcdn.com/uz.svg"
   }
 ]

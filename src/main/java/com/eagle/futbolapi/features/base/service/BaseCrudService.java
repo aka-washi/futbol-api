@@ -324,7 +324,7 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     if (id == null) {
       throw new IllegalArgumentException("ID cannot be null");
     }
-    if(!existsById(id)) {
+    if (!existsById(id)) {
       log.error("Failed to delete: Resource not found with id: {}", id);
       throw new ResourceNotFoundException("Resource not found with ID: " + id);
     }
@@ -516,7 +516,8 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
 
   /**
    * Hook for entity-specific validations before create.
-   * Services may override and throw IllegalArgumentException or a custom exception
+   * Services may override and throw IllegalArgumentException or a custom
+   * exception
    * to signal validation failures.
    */
   protected void validateForCreate(D dto, T entity) {
@@ -555,6 +556,7 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return switch (strategy) {
       case ALL -> existsByUniqueFields(uniqueFields);
       case ANY -> uniqueFields.entrySet().stream()
+          .filter(entry -> entry.getValue() != null)
           .anyMatch(entry -> existsByUniqueFields(Map.of(entry.getKey(), entry.getValue())));
     };
   }
@@ -574,6 +576,7 @@ public abstract class BaseCrudService<T extends BaseEntity, K, D> {
     return switch (strategy) {
       case ALL -> existsByUniqueFieldsAndNotId(uniqueFields, id);
       case ANY -> uniqueFields.entrySet().stream()
+          .filter(entry -> entry.getValue() != null)
           .anyMatch(entry -> existsByUniqueFieldsAndNotId(Map.of(entry.getKey(), entry.getValue()), id));
     };
   }

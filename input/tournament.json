@@ -78,5 +78,15 @@
     "level": 2,
     "active": true,
     "description": "Mexican second division"
+  },
+  {
+    "organizationDisplayName": "CONCACAF",
+    "name": "Leagues Cup",
+    "displayName": "Leagues Cup",
+    "type": "International Cup",
+    "ageCategory": "Professional",
+    "level": 1,
+    "active": true,
+    "description": "Tournament featuring MLS and Liga MX teams"
   }
 ]

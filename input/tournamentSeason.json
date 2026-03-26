@@ -58,5 +58,17 @@
     "hasPromotion": true,
     "numberOfTeams": 20,
     "description": "Spanish top division season 2025-2026"
+  },
+  {
+    "seasonDisplayName": "2026",
+    "tournamentDisplayName": "Leagues Cup",
+    "displayName": "Leagues Cup 2026",
+    "startDate": "2026-08-04",
+    "endDate": "2026-08-15",
+    "status": "Planned",
+    "hasRelegation": false,
+    "hasPromotion": false,
+    "numberOfTeams": 16,
+    "description": "Tournament cup featuring MLS and Liga MX teams"
   }
 ]

@@ -46,6 +46,10 @@ public class MatchEventService extends BaseCrudService<MatchEvent, Long, MatchEv
       var match = matchService.getById(dto.getMatchId())
           .orElseThrow(() -> new ResourceNotFoundException("Match", "id", dto.getMatchId()));
       matchEvent.setMatch(match);
+    } else if (dto.getMatchDisplayName() != null && !dto.getMatchDisplayName().trim().isEmpty()) {
+      var match = matchService.getMatchByDisplayName(dto.getMatchDisplayName())
+          .orElseThrow(() -> new ResourceNotFoundException("Match", "displayName", dto.getMatchDisplayName()));
+      matchEvent.setMatch(match);
     }
 
     // Map team from display name or ID
@@ -96,12 +100,12 @@ public class MatchEventService extends BaseCrudService<MatchEvent, Long, MatchEv
 
     // Map event type from string
     if (dto.getType() != null && !dto.getType().trim().isEmpty()) {
-      matchEvent.setType(MatchEventType.valueOf(dto.getType().toUpperCase()));
+      matchEvent.setType(MatchEventType.fromLabel(dto.getType()));
     }
 
     // Map period from string
     if (dto.getPeriod() != null && !dto.getPeriod().trim().isEmpty()) {
-      matchEvent.setPeriod(MatchPeriod.valueOf(dto.getPeriod().toUpperCase()));
+      matchEvent.setPeriod(MatchPeriod.fromLabel(dto.getPeriod()));
     }
   }
 
