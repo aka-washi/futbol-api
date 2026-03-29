@@ -3,10 +3,6 @@ package com.eagle.futbolapi.features.LeagueMembership.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.eagle.futbolapi.features.base.entity.BaseEntity;
-import com.eagle.futbolapi.features.base.enums.MembershipStatus;
-import com.eagle.futbolapi.features.organization.entity.Organization;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -18,6 +14,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.MembershipStatus;
+import com.eagle.futbolapi.features.organization.entity.Organization;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

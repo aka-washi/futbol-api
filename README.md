@@ -126,4 +126,3 @@ For questions or support, please contact the project maintainer.
 | person           | country                                        |
 | player           | person, team (currentTeam, optional)           |
 | staff            | person, team (currentTeam, optional)           |
-

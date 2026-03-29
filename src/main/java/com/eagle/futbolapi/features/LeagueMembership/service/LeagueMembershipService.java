@@ -2,6 +2,8 @@ package com.eagle.futbolapi.features.LeagueMembership.service;
 
 import java.util.Optional;
 
+import jakarta.validation.constraints.NotNull;
+
 import com.eagle.futbolapi.features.LeagueMembership.dto.LeagueMembershipDto;
 import com.eagle.futbolapi.features.LeagueMembership.entity.LeagueMembership;
 import com.eagle.futbolapi.features.LeagueMembership.mapper.LeagueMembershipMapper;
@@ -9,12 +11,10 @@ import com.eagle.futbolapi.features.LeagueMembership.repository.LeagueMembership
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.organization.entity.Organization;
 
-import jakarta.validation.constraints.NotNull;
-
 public class LeagueMembershipService extends BaseCrudService<LeagueMembership, Long, LeagueMembershipDto> {
 
   private final LeagueMembershipRepository repository;
-  
+
   public LeagueMembershipService(LeagueMembershipRepository repository, LeagueMembershipMapper mapper) {
     super(repository, mapper);
     this.repository = repository;

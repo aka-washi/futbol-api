@@ -1,17 +1,12 @@
 package com.eagle.futbolapi.features.competitionoutcome.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
-import com.eagle.futbolapi.features.competition.entity.Competition;
-import com.eagle.futbolapi.features.competition.repository.CompetitionRepository;
 import com.eagle.futbolapi.features.competitionoutcome.dto.CompetitionOutcomeDto;
 import com.eagle.futbolapi.features.competitionoutcome.entity.CompetitionOutcome;
 import com.eagle.futbolapi.features.competitionoutcome.mapper.CompetitionOutcomeMapper;
 import com.eagle.futbolapi.features.competitionoutcome.repository.CompetitionOutcomeRepository;
-
-import jakarta.validation.constraints.NotNull;
 
 public class CompetitionOutcomeService extends BaseCrudService<CompetitionOutcome, Long, CompetitionOutcomeDto> {
 

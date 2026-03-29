@@ -1,14 +1,12 @@
 package com.eagle.futbolapi.features.teambrand.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.teambrand.dto.TeamBrandDto;
 import com.eagle.futbolapi.features.teambrand.entity.TeamBrand;
 import com.eagle.futbolapi.features.teambrand.repository.TeamBrandRepository;
-
-import jakarta.validation.constraints.NotNull;
 
 public class TeamBrandService extends BaseCrudService<TeamBrand, Long, TeamBrandDto> {
 
