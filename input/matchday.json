@@ -1,42 +1,309 @@
 [
   {
-    "name": "Matchday 1",
-    "displayName": "Matchday 1",
-    "stageDisplayName": "Liga MX Apertura 2025 - Regular Season",
+    "name": "Jornada 1",
+    "displayName": "Apertura 2025 - Jornada 1",
+    "stageDisplayName": "Apertura 2025",
     "number": 1,
-    "startDate": "2025-07-05",
-    "endDate": "2025-07-07"
+    "status": "Completed",
+    "startDate": "2025-07-11",
+    "endDate": "2025-07-13"
   },
   {
-    "name": "Matchday 2",
-    "displayName": "Matchday 2",
-    "stageDisplayName": "Liga MX Apertura 2025 - Regular Season",
+    "name": "Jornada 2",
+    "displayName": "Apertura 2025 - Jornada 2",
+    "stageDisplayName": "Apertura 2025",
     "number": 2,
-    "startDate": "2025-07-12",
-    "endDate": "2025-07-14"
+    "status": "Completed",
+    "startDate": "2025-07-18",
+    "endDate": "2025-07-31"
   },
   {
-    "name": "Matchday 3",
-    "displayName": "Matchday 3",
-    "stageDisplayName": "Liga MX Apertura 2025 - Regular Season",
+    "name": "Jornada 3",
+    "displayName": "Apertura 2025 - Jornada 3",
+    "stageDisplayName": "Apertura 2025",
     "number": 3,
-    "startDate": "2025-07-19",
-    "endDate": "2025-07-21"
+    "status": "Completed",
+    "startDate": "2025-07-24",
+    "endDate": "2025-07-31"
   },
   {
-    "name": "Matchday 4",
-    "displayName": "Matchday 4",
-    "stageDisplayName": "Liga MX Apertura 2025 - Regular Season",
+    "name": "Jornada 4",
+    "displayName": "Apertura 2025 - Jornada 4",
+    "stageDisplayName": "Apertura 2025",
     "number": 4,
-    "startDate": "2025-07-26",
-    "endDate": "2025-07-28"
+    "status": "Completed",
+    "startDate": "2025-07-31",
+    "endDate": "2025-08-04"
   },
   {
-    "name": "Matchday 5",
-    "displayName": "Matchday 5",
-    "stageDisplayName": "Liga MX Apertura 2025 - Regular Season",
+    "name": "Jornada 5",
+    "displayName": "Apertura 2025 - Jornada 5",
+    "stageDisplayName": "Apertura 2025",
     "number": 5,
-    "startDate": "2025-08-02",
-    "endDate": "2025-08-04"
+    "status": "Completed",
+    "startDate": "2025-08-08",
+    "endDate": "2025-08-09"
+  },
+  {
+    "name": "Jornada 6",
+    "displayName": "Apertura 2025 - Jornada 6",
+    "stageDisplayName": "Apertura 2025",
+    "number": 6,
+    "status": "Completed",
+    "startDate": "2025-08-12",
+    "endDate": "2025-09-04"
+  },
+  {
+    "name": "Jornada 7",
+    "displayName": "Apertura 2025 - Jornada 7",
+    "stageDisplayName": "Apertura 2025",
+    "number": 7,
+    "status": "Completed",
+    "startDate": "2025-08-15",
+    "endDate": "2025-08-18"
+  },
+  {
+    "name": "Jornada 8",
+    "displayName": "Apertura 2025 - Jornada 8",
+    "stageDisplayName": "Apertura 2025",
+    "number": 8,
+    "status": "Completed",
+    "startDate": "2025-08-24",
+    "endDate": "2025-08-28"
+  },
+  {
+    "name": "Jornada 9",
+    "displayName": "Apertura 2025 - Jornada 9",
+    "stageDisplayName": "Apertura 2025",
+    "number": 9,
+    "status": "Completed",
+    "startDate": "2025-08-29",
+    "endDate": "2025-09-01"
+  },
+  {
+    "name": "Jornada 10",
+    "displayName": "Apertura 2025 - Jornada 10",
+    "stageDisplayName": "Apertura 2025",
+    "number": 10,
+    "status": "Completed",
+    "startDate": "2025-09-05",
+    "endDate": "2025-09-08"
+  },
+  {
+    "name": "Jornada 11",
+    "displayName": "Apertura 2025 - Jornada 11",
+    "stageDisplayName": "Apertura 2025",
+    "number": 11,
+    "status": "Completed",
+    "startDate": "2025-09-11",
+    "endDate": "2025-09-15"
+  },
+  {
+    "name": "Jornada 12",
+    "displayName": "Apertura 2025 - Jornada 12",
+    "stageDisplayName": "Apertura 2025",
+    "number": 12,
+    "status": "Completed",
+    "startDate": "2025-09-19",
+    "endDate": "2025-09-22"
+  },
+  {
+    "name": "Jornada 13",
+    "displayName": "Apertura 2025 - Jornada 13",
+    "stageDisplayName": "Apertura 2025",
+    "number": 13,
+    "status": "Completed",
+    "startDate": "2025-09-25",
+    "endDate": "2025-09-30"
+  },
+  {
+    "name": "Jornada 14",
+    "displayName": "Apertura 2025 - Jornada 14",
+    "stageDisplayName": "Apertura 2025",
+    "number": 14,
+    "status": "Completed",
+    "startDate": "2025-10-03",
+    "endDate": "2025-10-06"
+  },
+  {
+    "name": "Jornada 15",
+    "displayName": "Apertura 2025 - Jornada 15",
+    "stageDisplayName": "Apertura 2025",
+    "number": 15,
+    "status": "Completed",
+    "startDate": "2025-10-10",
+    "endDate": "2025-10-12"
+  },
+  {
+    "name": "Jornada 16",
+    "displayName": "Apertura 2025 - Jornada 16",
+    "stageDisplayName": "Apertura 2025",
+    "number": 16,
+    "status": "Completed",
+    "startDate": "2025-10-15",
+    "endDate": "2025-10-19"
+  },
+  {
+    "name": "Jornada 17",
+    "displayName": "Apertura 2025 - Jornada 17",
+    "stageDisplayName": "Apertura 2025",
+    "number": 17,
+    "status": "Completed",
+    "startDate": "2025-10-31",
+    "endDate": "2025-11-01"
+  },
+
+  {
+    "name": "Jornada 1",
+    "displayName": "Clausura 2026 - Jornada 1",
+    "stageDisplayName": "Clausura 2026",
+    "number": 1,
+    "status": "Completed",
+    "startDate": "2026-01-04",
+    "endDate": "2026-01-06"
+  },
+  {
+    "name": "Jornada 2",
+    "displayName": "Clausura 2026 - Jornada 2",
+    "stageDisplayName": "Clausura 2026",
+    "number": 2,
+    "status": "Completed",
+    "startDate": "2026-01-09",
+    "endDate": "2026-01-12"
+  },
+  {
+    "name": "Jornada 3",
+    "displayName": "Clausura 2026 - Jornada 3",
+    "stageDisplayName": "Clausura 2026",
+    "number": 3,
+    "status": "Completed",
+    "startDate": "2026-01-16",
+    "endDate": "2026-01-18"
+  },
+  {
+    "name": "Jornada 4",
+    "displayName": "Clausura 2026 - Jornada 4",
+    "stageDisplayName": "Clausura 2026",
+    "number": 4,
+    "status": "Completed",
+    "startDate": "2026-01-20",
+    "endDate": "2026-01-21"
+  },
+  {
+    "name": "Jornada 5",
+    "displayName": "Clausura 2026 - Jornada 5",
+    "stageDisplayName": "Clausura 2026",
+    "number": 5,
+    "status": "Completed",
+    "startDate": "2026-01-24",
+    "endDate": "2026-01-26"
+  },
+  {
+    "name": "Jornada 6",
+    "displayName": "Clausura 2026 - Jornada 6",
+    "stageDisplayName": "Clausura 2026",
+    "number": 6,
+    "status": "Completed",
+    "startDate": "2026-01-30",
+    "endDate": "2026-02-02"
+  },
+  {
+    "name": "Jornada 7",
+    "displayName": "Clausura 2026 - Jornada 7",
+    "stageDisplayName": "Clausura 2026",
+    "number": 7,
+    "status": "Completed",
+    "startDate": "2026-02-04",
+    "endDate": "2026-02-06"
+  },
+  {
+    "name": "Jornada 8",
+    "displayName": "Clausura 2026 - Jornada 8",
+    "stageDisplayName": "Clausura 2026",
+    "number": 8,
+    "status": "Completed",
+    "startDate": "2026-02-09",
+    "endDate": "2026-02-10"
+  },
+  {
+    "name": "Jornada 9",
+    "displayName": "Clausura 2026 - Jornada 9",
+    "stageDisplayName": "Clausura 2026",
+    "number": 9,
+    "status": "Completed",
+    "startDate": "2026-02-14",
+    "endDate": "2026-02-16"
+  },
+  {
+    "name": "Jornada 10",
+    "displayName": "Clausura 2026 - Jornada 10",
+    "stageDisplayName": "Clausura 2026",
+    "number": 10,
+    "status": "Completed",
+    "startDate": "2026-02-20",
+    "endDate": "2026-02-22"
+  },
+  {
+    "name": "Jornada 11",
+    "displayName": "Clausura 2026 - Jornada 11",
+    "stageDisplayName": "Clausura 2026",
+    "number": 11,
+    "status": "Completed",
+    "startDate": "2026-03-11",
+    "endDate": "2026-03-13"
+  },
+  {
+    "name": "Jornada 12",
+    "displayName": "Clausura 2026 - Jornada 12",
+    "stageDisplayName": "Clausura 2026",
+    "number": 12,
+    "status": "Completed",
+    "startDate": "2026-03-15",
+    "endDate": "2026-03-17"
+  },
+  {
+    "name": "Jornada 13",
+    "displayName": "Clausura 2026 - Jornada 13",
+    "stageDisplayName": "Clausura 2026",
+    "number": 13,
+    "status": "Completed",
+    "startDate": "2026-03-20",
+    "endDate": "2026-03-23"
+  },
+  {
+    "name": "Jornada 14",
+    "displayName": "Clausura 2026 - Jornada 14",
+    "stageDisplayName": "Clausura 2026",
+    "number": 14,
+    "status": "In Progress",
+    "startDate": "2026-03-25",
+    "endDate": "2026-03-29"
+  },
+  {
+    "name": "Jornada 15",
+    "displayName": "Clausura 2026 - Jornada 15",
+    "stageDisplayName": "Clausura 2026",
+    "number": 15,
+    "status": "Scheduled",
+    "startDate": "2026-03-31",
+    "endDate": "2026-04-02"
+  },
+  {
+    "name": "Jornada 16",
+    "displayName": "Clausura 2026 - Jornada 16",
+    "stageDisplayName": "Clausura 2026",
+    "number": 16,
+    "status": "Scheduled",
+    "startDate": "2026-04-04",
+    "endDate": "2026-04-05"
+  },
+  {
+    "name": "Jornada 17",
+    "displayName": "Clausura 2026 - Jornada 17",
+    "stageDisplayName": "Clausura 2026",
+    "number": 17,
+    "status": "Scheduled",
+    "startDate": "2026-04-24",
+    "endDate": "2026-04-25"
   }
 ]

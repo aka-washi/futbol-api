@@ -1,118 +1,2756 @@
 [
   {
-    "name": "Club América vs Chivas Guadalajara - Matchday 1",
-    "displayName": "Club América vs Chivas Guadalajara",
-    "matchdayDisplayName": "Matchday 1",
-    "homeTeamDisplayName": "Club América",
-    "awayTeamDisplayName": "Chivas Guadalajara",
-    "venueDisplayName": "Estadio Azteca",
-    "refereeDisplayName": "Pierluigi Collina",
-    "scheduledDate": "2024-07-05",
-    "kickoffTime": "2024-07-05T20:00:00",
-    "status": "Completed",
-    "homeScore": 2,
-    "awayScore": 1,
-    "homeHalfTimeScore": null,
-    "awayHalfTimeScore": null,
-    "extraTimeAllowed": false,
-    "penaltyShootoutAllowed": false,
-    "homeExtraTimeScore": null,
-    "awayExtraTimeScore": null,
-    "homePenaltyScore": null,
-    "awayPenaltyScore": null,
-    "attendance": 87523,
-    "weatherConditions": null,
-    "notes": null,
-    "createdAt": null,
-    "createdBy": null,
-    "updatedAt": null,
-    "updatedBy": null
+    "matchId": 1,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
   },
   {
-    "name": "Cruz Azul vs Monterrey - Matchday 1",
-    "displayName": "Cruz Azul vs Monterrey",
-    "matchdayDisplayName": "Matchday 1",
+    "matchId": 2,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 3,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 4,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 5,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 6,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 7,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio León",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 8,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 9,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2025-07-11T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 10,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 11,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 12,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 13,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 14,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 15,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 16,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 17,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio León",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 18,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2025-07-18T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 19,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 20,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 21,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 22,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 23,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 24,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 25,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 26,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 27,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio León",
+    "date": "2025-07-25T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 28,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 29,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 30,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 31,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 32,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 33,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 34,
+    "stageDisplayName": "Apertura 2025",
     "homeTeamDisplayName": "Cruz Azul",
     "awayTeamDisplayName": "Monterrey",
-    "venueDisplayName": "Estadio Azteca",
-    "refereeDisplayName": "Howard Webb",
-    "scheduledDate": "2024-07-06",
-    "kickoffTime": "2024-07-06T19:00:00",
-    "status": "Completed",
-    "homeScore": 1,
-    "awayScore": 1,
-    "homeHalfTimeScore": null,
-    "awayHalfTimeScore": null,
-    "extraTimeAllowed": false,
-    "penaltyShootoutAllowed": false,
-    "homeExtraTimeScore": null,
-    "awayExtraTimeScore": null,
-    "homePenaltyScore": null,
-    "awayPenaltyScore": null,
-    "attendance": 45632,
-    "weatherConditions": null,
-    "notes": null,
-    "createdAt": null,
-    "createdBy": null,
-    "updatedAt": null,
-    "updatedBy": null
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
   },
   {
-    "name": "Tigres UANL vs Club América - Matchday 2",
-    "displayName": "Tigres UANL vs Club América",
-    "matchdayDisplayName": "Matchday 2",
-    "homeTeamDisplayName": "Tigres UANL",
-    "awayTeamDisplayName": "Club América",
-    "venueDisplayName": "Estadio Azteca",
-    "refereeDisplayName": "Bibiana Steinhaus",
-    "scheduledDate": "2024-07-12",
-    "kickoffTime": "2024-07-12T21:00:00",
-    "status": "Completed",
-    "homeScore": 0,
-    "awayScore": 2,
-    "homeHalfTimeScore": null,
-    "awayHalfTimeScore": null,
-    "extraTimeAllowed": false,
-    "penaltyShootoutAllowed": false,
-    "homeExtraTimeScore": null,
-    "awayExtraTimeScore": null,
-    "homePenaltyScore": null,
-    "awayPenaltyScore": null,
-    "attendance": 42156,
-    "weatherConditions": null,
-    "notes": null,
-    "createdAt": null,
-    "createdBy": null,
-    "updatedAt": null,
-    "updatedBy": null
+    "matchId": 35,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
   },
   {
-    "name": "Chivas Guadalajara vs Cruz Azul - Matchday 2",
-    "displayName": "Chivas Guadalajara vs Cruz Azul",
-    "matchdayDisplayName": "Matchday 2",
-    "homeTeamDisplayName": "Chivas Guadalajara",
+    "matchId": 36,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2025-08-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 37,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 38,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 39,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 40,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 41,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 42,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 43,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 44,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 45,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2025-08-08T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 46,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 47,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 48,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 49,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 50,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 51,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 52,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 53,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 54,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2025-08-15T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 55,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 56,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 57,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 58,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 59,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 60,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 61,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 62,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 63,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlético San Luis",
     "awayTeamDisplayName": "Cruz Azul",
-    "venueDisplayName": "Estadio Azteca",
-    "refereeDisplayName": "Mark Clattenburg",
-    "scheduledDate": "2024-07-13",
-    "kickoffTime": "2024-07-13T18:00:00",
-    "status": "Completed",
-    "homeScore": 2,
-    "awayScore": 2,
-    "homeHalfTimeScore": null,
-    "awayHalfTimeScore": null,
-    "extraTimeAllowed": false,
-    "penaltyShootoutAllowed": false,
-    "homeExtraTimeScore": null,
-    "awayExtraTimeScore": null,
-    "homePenaltyScore": null,
-    "awayPenaltyScore": null,
-    "attendance": 48921,
-    "weatherConditions": null,
-    "notes": null,
-    "createdAt": null,
-    "createdBy": null,
-    "updatedAt": null,
-    "updatedBy": null
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2025-08-22T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 64,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 65,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 66,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 67,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 68,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 69,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 70,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 71,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 72,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2025-08-29T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 73,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 74,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 75,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 76,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 77,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 78,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 79,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 80,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 81,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2025-09-05T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 82,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 83,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 84,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 85,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 86,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 87,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 88,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 89,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 90,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2025-09-12T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 91,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 92,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 93,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 94,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 95,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 96,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 97,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 98,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 99,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2025-09-19T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 100,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 101,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 102,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 103,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 104,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 105,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 106,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 107,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 108,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2025-09-26T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 109,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 110,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio León",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 111,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 112,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 113,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 114,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 115,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 116,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 117,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2025-10-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 118,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 119,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 120,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio León",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 121,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 122,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 123,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 124,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 125,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 126,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2025-10-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 127,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 128,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 129,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 130,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio León",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 131,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 132,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 133,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 134,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 135,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2025-10-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 136,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 137,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 138,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 139,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 140,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio León",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 141,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 142,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 143,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 144,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2025-10-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 145,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 146,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 147,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 148,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 149,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 150,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio León",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 151,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 152,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 153,
+    "stageDisplayName": "Apertura 2025",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2025-10-31T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 154,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 155,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 156,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 157,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 158,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 159,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 160,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio León",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 161,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 162,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2026-01-09T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 163,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 164,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 165,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 166,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 167,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 168,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 169,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 170,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio León",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 171,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2026-01-16T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 172,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 173,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 174,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 175,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 176,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 177,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 178,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 179,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 180,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio León",
+    "date": "2026-01-23T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 181,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 182,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 183,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 184,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 185,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 186,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 187,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 188,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 189,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2026-01-30T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 190,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 191,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 192,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 193,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 194,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 195,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 196,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 197,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 198,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2026-02-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 199,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 200,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 201,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 202,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 203,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 204,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 205,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 206,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 207,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2026-02-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 208,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 209,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 210,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 211,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 212,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 213,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 214,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 215,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 216,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2026-02-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 217,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 218,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 219,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 220,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 221,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 222,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 223,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 224,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 225,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlas",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Jalisco",
+    "date": "2026-02-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 226,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Necaxa",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 227,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 228,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 229,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 230,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 231,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 232,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 233,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 234,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UNAM",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Olímpico Universitario",
+    "date": "2026-03-06T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 235,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Monterrey",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 236,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 237,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 238,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 239,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 240,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 241,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 242,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 243,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "UANL",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Universitario",
+    "date": "2026-03-13T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 244,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Mazatlán",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 245,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 246,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 247,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 248,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 249,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 250,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 251,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 252,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Toluca",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Nemesio Díez",
+    "date": "2026-03-20T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 253,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "León",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 254,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 255,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 256,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 257,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 258,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 259,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 260,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 261,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Tijuana",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Caliente",
+    "date": "2026-03-27T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 262,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Juárez",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 263,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio León",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 264,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 265,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 266,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 267,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 268,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 269,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 270,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Santos Laguna",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Corona",
+    "date": "2026-04-03T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 271,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Guadalajara",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 272,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 273,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio León",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 274,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 275,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 276,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 277,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 278,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 279,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Querétaro",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Corregidora",
+    "date": "2026-04-10T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 280,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Cruz Azul",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 281,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 282,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 283,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio León",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 284,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 285,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 286,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 287,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 288,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Puebla",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Cuauhtémoc",
+    "date": "2026-04-17T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 289,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Atlético San Luis",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 290,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 291,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 292,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 293,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio León",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 294,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 295,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 296,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 297,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Pachuca",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio Hidalgo",
+    "date": "2026-04-24T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 298,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "América",
+    "awayTeamDisplayName": "Atlas",
+    "venueDisplayName": "Estadio Ciudad de los Deportes",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 299,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Atlético San Luis",
+    "awayTeamDisplayName": "UNAM",
+    "venueDisplayName": "Estadio Libertad Financiera",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 300,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Cruz Azul",
+    "awayTeamDisplayName": "UANL",
+    "venueDisplayName": "Estadio Centenario",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 301,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Guadalajara",
+    "awayTeamDisplayName": "Toluca",
+    "venueDisplayName": "Estadio Akron",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 302,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Juárez",
+    "awayTeamDisplayName": "Tijuana",
+    "venueDisplayName": "Estadio Olímpico Benito Juárez",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 303,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "León",
+    "awayTeamDisplayName": "Santos Laguna",
+    "venueDisplayName": "Estadio León",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 304,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Mazatlán",
+    "awayTeamDisplayName": "Querétaro",
+    "venueDisplayName": "Estadio El Encanto",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 305,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Monterrey",
+    "awayTeamDisplayName": "Puebla",
+    "venueDisplayName": "Estadio BBVA",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
+  },
+  {
+    "matchId": 306,
+    "stageDisplayName": "Clausura 2026",
+    "homeTeamDisplayName": "Necaxa",
+    "awayTeamDisplayName": "Pachuca",
+    "venueDisplayName": "Estadio Victoria",
+    "date": "2026-05-01T19:00:00",
+    "status": "Scheduled"
   }
 ]

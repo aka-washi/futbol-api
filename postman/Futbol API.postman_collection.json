@@ -1,0 +1,538 @@
+{
+  "info": {
+    "_postman_id": "475b9adc-5cd0-4ced-80ab-12f7246e6c1a",
+    "name": "Futbol API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "1879809"
+  },
+  "item": [
+    {
+      "name": "country",
+      "item": [
+        {
+          "name": "country",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/countries",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "countries"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "country",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"United Mexican States\",\n  \"code\": \"MX\",\n  \"isoCode\": \"MEX\",\n  \"displayName\": \"Mexico\",\n  \"flagUrl\": \"https://flagcdn.com/mx.svg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/countries",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "countries"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "country",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"United Mexican States\",\n  \"code\": \"MX\",\n  \"isoCode\": \"MEX\",\n  \"displayName\": \"México\",\n  \"flagUrl\": \"https://flagcdn.com/mx.svg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/countries/{{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "countries",
+                "{{id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "country",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"United Mexican States\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/countries/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "countries",
+                "{id}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "country",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/countries/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "countries",
+                "{id}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "competition",
+      "item": [
+        {
+          "name": "competition",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/competitions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "competitions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "competition",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tournamentSeasonDisplayName\": \"Leagues Cup 2026\",\n  \"displayName\": \"Leagues Cup 2026\",\n  \"type\": \"Cup\",\n  \"startDate\": \"2026-08-04\",\n  \"endDate\": \"2026-08-15\",\n  \"status\": \"Planned\",\n  \"totalMatches\": 32,\n  \"description\": \"Preseason tournament featuring MLS and Liga MX teams\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/competitions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "competitions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "competition",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tournamentSeasonDisplayName\": \"Leagues Cup 2026\",\n  \"displayName\": \"Leagues Cup 2026\",\n  \"type\": \"Cup\",\n  \"startDate\": \"2026-08-04\",\n  \"endDate\": \"2026-08-15\",\n  \"status\": \"Planned\",\n  \"totalMatches\": 32,\n  \"description\": \"Preseason tournament featuring MLS and Liga MX teams\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/competitions/{{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "competitions",
+                "{{id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "competition",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Planned\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/competitions/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "competitions",
+                "{id}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "competition",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/competitions/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "competitions",
+                "{id}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "organization",
+      "item": [
+        {
+          "name": "organization",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/organizations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "organizations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "organization",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Real Federación Española de Fútbol\",\n  \"displayName\": \"RFEF\",\n  \"type\": \"Federation\",\n  \"abbreviation\": \"RFEF\",\n  \"countryDisplayName\": \"Spain\",\n  \"foundedDate\": \"1909-09-29\",\n  \"description\": \"Royal Spanish Football Federation\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/organizations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "organizations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "organization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Real Federación Española de Fútbol\",\n    \"displayName\": \"RFEF\",\n    \"type\": \"Federation\",\n    \"abbreviation\": \"RFEF\",\n    \"countryDisplayName\": \"Spain\",\n    \"foundedDate\": \"1909-09-29\",\n    \"description\": \"Royal Spanish Football Federation\"\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/organizations/{{id}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "organizations",
+                "{{id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "organization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Federation\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/organizations/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "organizations",
+                "{id}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "organization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"id\", 1);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/organizations/{id}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "organizations",
+                "{id}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}

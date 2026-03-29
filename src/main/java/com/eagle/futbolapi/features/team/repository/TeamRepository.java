@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.eagle.futbolapi.features.base.enums.Gender;
 import com.eagle.futbolapi.features.base.repository.BaseRepository;
 import com.eagle.futbolapi.features.team.entity.Team;
 
@@ -15,6 +16,6 @@ public interface TeamRepository extends BaseRepository<Team, Long> {
 
   Optional<Team> findByDisplayName(String displayName);
 
-  Optional<Team> findByDisplayNameAndGender(String displayName, com.eagle.futbolapi.features.base.enums.Gender gender);
+  Optional<Team> findByDisplayNameAndGender(String displayName, Gender gender);
 
 }

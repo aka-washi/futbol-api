@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Standard 3-1-0",
+    "displayName": "Standard 3-1-0",
+    "description": "Standard point system: 3 points for win, 1 for draw, 0 for loss",
+    "pointsForWin": 3,
+    "pointsForDraw": 1,
+    "pointsForLoss": 0
+  },
+  {
+    "name": "Classic 2-1-0",
+    "displayName": "Classic 2-1-0",
+    "description": "Classic point system: 2 points for win, 1 for draw, 0 for loss",
+    "pointsForWin": 2,
+    "pointsForDraw": 1,
+    "pointsForLoss": 0
+  },
+  {
+    "name": "Knockout Only",
+    "displayName": "Knockout Only",
+    "description": "No points awarded - knockout format",
+    "pointsForWin": 0,
+    "pointsForDraw": 0,
+    "pointsForLoss": 0
+  },
+  {
+    "name": "No ties",
+    "displayName": "No ties",
+    "description": "3 points for win, 1 for draw, 0 for loss, plus 1 bonus point for winning on penalties in a drawn match",
+    "pointsForWin": 3,
+    "pointsForDraw": 1,
+    "pointsForLoss": 0,
+    "pointsForWinOnPenalties": 1,
+    "pointsForLossOnPenalties": 0
+  }
+]

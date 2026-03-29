@@ -1,0 +1,82 @@
+[
+{
+  "person": { "firstName": "Itzel", "lastName": "González", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Goalkeeper", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Renata", "lastName": "Masciarelli", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Goalkeeper", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Kimberly", "lastName": "Rodríguez", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Karen", "lastName": "Luna", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Andrea", "lastName": "Pereira", "gender": "Female", "birthCountryDisplayName": "Spain", "nationalityCountryDisplayName": "Spain" },
+  "position": "Defender", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Sabrina", "lastName": "Enciso", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Mónica", "lastName": "Rodríguez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Kiana", "lastName": "Palacios", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Forward", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Sarah", "lastName": "Luebbert", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "United States" },
+  "position": "Forward", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Katty", "lastName": "Martínez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Forward", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Alison", "lastName": "González", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Forward", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Andrea", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Aylin", "lastName": "Aviléz", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Karen", "lastName": "López", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Scarlett", "lastName": "Camberos", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Montserrat", "lastName": "Hernández", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Andrea", "lastName": "Pérez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Selene", "lastName": "Valera", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Jana", "lastName": "Gutiérrez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Club América"
+},
+{
+  "person": { "firstName": "Nati", "lastName": "Mauleón", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Club América"
+}
+]

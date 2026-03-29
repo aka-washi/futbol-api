@@ -1,0 +1,11 @@
+[
+{"person": { "firstName": "Andrea", "lastName": "Martínez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Querétaro"},
+{"person": { "firstName": "María", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Querétaro"},
+{"person": { "firstName": "Daniela", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Querétaro"},
+{"person": { "firstName": "Gabriela", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Querétaro"},
+{"person": { "firstName": "Paola", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Querétaro"},
+{"person": { "firstName": "Daniela", "lastName": "Flores", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Querétaro"},
+{"person": { "firstName": "María", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Querétaro"},
+{"person": { "firstName": "Brenda", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Querétaro"},
+{"person": { "firstName": "Paola", "lastName": "Urbieta", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Querétaro"}
+]

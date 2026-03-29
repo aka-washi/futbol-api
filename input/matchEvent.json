@@ -1,35 +1,11 @@
 [
   {
-    "displayName": "Goal - Scarlett Camberos 23'",
-    "matchDisplayName": "Club América vs Chivas Guadalajara",
-    "teamDisplayName": "Club América",
-    "playerDisplayName": "Scarlett Camberos",
-    "type": "Goal",
-    "period": "First Half",
+    "eventId": 1,
+    "matchId": 1,
     "minute": 23,
-    "extraMinute": 0,
-    "description": "Header from center of the box to bottom right corner. Assisted by cross from the right wing."
-  },
-  {
-    "displayName": "Goal - Scarlett Camberos 67'",
-    "matchDisplayName": "Club América vs Chivas Guadalajara",
-    "teamDisplayName": "Club América",
-    "playerDisplayName": "Scarlett Camberos",
     "type": "Goal",
-    "period": "Second Half",
-    "minute": 67,
-    "extraMinute": 0,
-    "description": "Right footed shot from outside the box to the top left corner."
-  },
-  {
-    "displayName": "Yellow Card - Scarlett Camberos 89'",
-    "matchDisplayName": "Club América vs Chivas Guadalajara",
-    "teamDisplayName": "Club América",
-    "playerDisplayName": "Scarlett Camberos",
-    "type": "Yellow Card",
-    "period": "Second Half",
-    "minute": 89,
-    "extraMinute": 2,
-    "description": "Unsporting behavior - time wasting"
+    "playerDisplayName": "Katty Martínez",
+    "teamDisplayName": "América",
+    "description": "Katty Martínez scores with a right-footed shot from inside the box."
   }
 ]

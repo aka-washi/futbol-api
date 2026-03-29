@@ -1,0 +1,10 @@
+[
+{"person": { "firstName": "Esthefanny", "lastName": "Barreras", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Pachuca"},
+{"person": { "firstName": "Paola", "lastName": "Manrique", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Pachuca"},
+{"person": { "firstName": "Karen", "lastName": "Díaz", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Pachuca"},
+{"person": { "firstName": "Mónica", "lastName": "Ocampo", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Pachuca"},
+{"person": { "firstName": "Viridiana", "lastName": "Salazar", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Pachuca"},
+{"person": { "firstName": "Jenni", "lastName": "Hermoso", "gender": "Female", "birthCountryDisplayName": "Spain", "nationalityCountryDisplayName": "Spain" }, "position": "Forward", "active": true, "teamDisplayName": "Pachuca"},
+{"person": { "firstName": "Lizbeth", "lastName": "Ángeles", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Pachuca"},
+{"person": { "firstName": "Karla", "lastName": "Nieto", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Pachuca"}
+]

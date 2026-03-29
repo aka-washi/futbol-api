@@ -1,0 +1,11 @@
+[
+{"person": { "firstName": "Nicole", "lastName": "Castañeda", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Santos Laguna"},
+{"person": { "firstName": "Paola", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Santos Laguna"},
+{"person": { "firstName": "Andrea", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Santos Laguna"},
+{"person": { "firstName": "María", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Santos Laguna"},
+{"person": { "firstName": "Gabriela", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Santos Laguna"},
+{"person": { "firstName": "Daniela", "lastName": "Flores", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Santos Laguna"},
+{"person": { "firstName": "María", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Santos Laguna"},
+{"person": { "firstName": "Brenda", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Santos Laguna"},
+{"person": { "firstName": "Paola", "lastName": "Urbieta", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Santos Laguna"}
+]

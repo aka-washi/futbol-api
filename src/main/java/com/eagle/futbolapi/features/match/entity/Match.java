@@ -40,11 +40,11 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "match")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "mt_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "mt_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "mt_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "mt_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "mt_updated_by", length = 100))
+    @AttributeOverride(name = "id", column = @Column(name = "mtc_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "mtc_created_at", nullable = false, updatable = false)),
+    @AttributeOverride(name = "createdBy", column = @Column(name = "mtc_created_by", length = 100, updatable = false)),
+    @AttributeOverride(name = "updatedAt", column = @Column(name = "mtc_updated_at")),
+    @AttributeOverride(name = "updatedBy", column = @Column(name = "mtc_updated_by", length = 100))
 })
 @SuperBuilder
 @NoArgsConstructor
@@ -52,11 +52,11 @@ import lombok.experimental.SuperBuilder;
 public class Match extends BaseEntity {
 
   @NotBlank
-  @Column(name = "mt_name", nullable = false)
+  @Column(name = "mtc_name", nullable = false)
   private String name;
 
   @NotBlank
-  @Column(name = "mt_display_name", length = 100, nullable = false)
+  @Column(name = "mtc_display_name", length = 100, nullable = false)
   private String displayName;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -79,60 +79,60 @@ public class Match extends BaseEntity {
   private Venue venue;
 
   @NotNull
-  @Column(name = "mt_scheduled_date", nullable = false)
+  @Column(name = "mtc_scheduled_date", nullable = false)
   private LocalDate scheduledDate;
 
-  @Column(name = "mt_kickoff_time")
+  @Column(name = "mtc_kickoff_time")
   private LocalDateTime kickoffTime;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "mt_status", nullable = false, length = 50)
+  @Column(name = "mtc_status", nullable = false, length = 50)
   @Builder.Default
   private MatchStatus status = MatchStatus.SCHEDULED;
 
-  @Column(name = "mt_home_score")
+  @Column(name = "mtc_home_score")
   private Integer homeScore;
 
-  @Column(name = "mt_away_score")
+  @Column(name = "mtc_away_score")
   private Integer awayScore;
 
-  @Column(name = "mt_home_halftime_score")
+  @Column(name = "mtc_home_halftime_score")
   private Integer homeHalfTimeScore;
 
-  @Column(name = "mt_away_halftime_score")
+  @Column(name = "mtc_away_halftime_score")
   private Integer awayHalfTimeScore;
 
   @Builder.Default
-  @Column(name = "mt_extra_time_allowed", nullable = false)
+  @Column(name = "mtc_extra_time_allowed", nullable = false)
   private Boolean extraTimeAllowed = false;
 
   @Builder.Default
-  @Column(name = "mt_penalty_shootout_allowed", nullable = false)
+  @Column(name = "mtc_penalty_shootout_allowed", nullable = false)
   private Boolean penaltyShootoutAllowed = false;
 
-  @Column(name = "mt_home_extratime_score")
+  @Column(name = "mtc_home_extratime_score")
   private Integer homeExtraTimeScore;
 
-  @Column(name = "mt_away_extratime_score")
+  @Column(name = "mtc_away_extratime_score")
   private Integer awayExtraTimeScore;
 
-  @Column(name = "mt_home_penalty_score")
+  @Column(name = "mtc_home_penalty_score")
   private Integer homePenaltyScore;
 
-  @Column(name = "mt_away_penalty_score")
+  @Column(name = "mtc_away_penalty_score")
   private Integer awayPenaltyScore;
 
-  @Column(name = "mt_attendance")
+  @Column(name = "mtc_attendance")
   private Integer attendance;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "referee_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Person referee;
 
-  @Column(name = "mt_weather_conditions")
+  @Column(name = "mtc_weather_conditions")
   private String weatherConditions;
 
-  @Column(name = "mt_notes", columnDefinition = "TEXT")
+  @Column(name = "mtc_notes", columnDefinition = "TEXT")
   private String notes;
 
   @Override

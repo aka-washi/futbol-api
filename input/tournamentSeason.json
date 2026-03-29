@@ -1,74 +1,10 @@
 [
   {
-    "seasonDisplayName": "2025-2026",
-    "tournamentDisplayName": "Liga MX",
-    "displayName": "Liga MX 2025-2026",
-    "startDate": "2025-07-01",
-    "endDate": "2026-06-30",
-    "status": "In Progress",
-    "hasRelegation": true,
-    "hasPromotion": true,
-    "numberOfTeams": 18,
-    "description": "Mexican top division season 2025-2026"
-  },
-  {
-    "seasonDisplayName": "2024-2025",
-    "tournamentDisplayName": "Liga MX",
-    "displayName": "Liga MX 2024-2025",
-    "startDate": "2024-07-01",
-    "endDate": "2025-06-30",
-    "status": "Completed",
-    "hasRelegation": true,
-    "hasPromotion": true,
-    "numberOfTeams": 18,
-    "description": "Mexican top division season 2024-2025"
-  },
-  {
-    "seasonDisplayName": "2025-2026",
-    "tournamentDisplayName": "UEFA Champions League",
-    "displayName": "UEFA Champions League 2025-2026",
-    "startDate": "2025-09-01",
+    "tournamentDisplayName": "Liga MX Femenil",
+    "seasonDisplayName": "2025-26 Liga MX Femenil",
+    "startDate": "2025-07-11",
     "endDate": "2026-05-31",
-    "status": "In Progress",
-    "hasRelegation": false,
-    "hasPromotion": false,
-    "numberOfTeams": 32,
-    "description": "Europe's premier club competition"
-  },
-  {
-    "seasonDisplayName": "2025-2026",
-    "tournamentDisplayName": "CONCACAF Champions League",
-    "displayName": "CONCACAF Champions League 2025-2026",
-    "startDate": "2025-02-01",
-    "endDate": "2025-11-30",
-    "status": "In Progress",
-    "hasRelegation": false,
-    "hasPromotion": false,
-    "numberOfTeams": 16,
-    "description": "Top club competition in North America, Central America, and the Caribbean"
-  },
-  {
-    "seasonDisplayName": "2025-2026",
-    "tournamentDisplayName": "La Liga",
-    "displayName": "La Liga 2025-2026",
-    "startDate": "2025-08-15",
-    "endDate": "2026-05-25",
-    "status": "In Progress",
-    "hasRelegation": true,
-    "hasPromotion": true,
-    "numberOfTeams": 20,
-    "description": "Spanish top division season 2025-2026"
-  },
-  {
-    "seasonDisplayName": "2026",
-    "tournamentDisplayName": "Leagues Cup",
-    "displayName": "Leagues Cup 2026",
-    "startDate": "2026-08-04",
-    "endDate": "2026-08-15",
-    "status": "Planned",
-    "hasRelegation": false,
-    "hasPromotion": false,
-    "numberOfTeams": 16,
-    "description": "Tournament cup featuring MLS and Liga MX teams"
+    "active": true,
+    "description": "Ninth season of Liga MX Femenil, split into Apertura 2025 and Clausura 2026."
   }
 ]

@@ -62,14 +62,15 @@ public class Team extends BaseEntity {
   @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Organization organization;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "country_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Country country;
+
   @Column(name = "tem_name", nullable = false)
   private String name;
 
   @Column(name = "tem_display_name", nullable = false, length = 100)
   private String displayName;
-
-  @Column(name = "tem_abbreviation", length = 10)
-  private String abbreviation;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "tem_gender", nullable = false, length = 10)
@@ -84,24 +85,8 @@ public class Team extends BaseEntity {
   private LocalDate founded;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "country_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-  private Country country;
-
-  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Venue venue;
-
-  @Column(name = "tem_logo")
-  private String logo;
-
-  @Column(name = "tem_primary_color", length = 20)
-  private String primaryColor;
-
-  @Column(name = "tem_secondary_color", length = 20)
-  private String secondaryColor;
-
-  @Column(name = "tem_website", length = 100)
-  private String website;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "tem_status", length = 20)
@@ -110,18 +95,14 @@ public class Team extends BaseEntity {
   @Override
   public int hashCode() {
     return Objects.hash(
+        organization,
+        country,
         name,
         displayName,
-        abbreviation,
         gender,
         ageCategory,
         founded,
-        country,
         venue,
-        logo,
-        primaryColor,
-        secondaryColor,
-        website,
         status);
   }
 
@@ -132,18 +113,14 @@ public class Team extends BaseEntity {
     if (!(obj instanceof Team))
       return false;
     Team other = (Team) obj;
-    return Objects.equals(name, other.name)
+    return Objects.equals(organization, other.organization)
+        && Objects.equals(country, other.country)
+        && Objects.equals(name, other.name)
         && Objects.equals(displayName, other.displayName)
-        && Objects.equals(abbreviation, other.abbreviation)
         && Objects.equals(gender, other.gender)
         && Objects.equals(ageCategory, other.ageCategory)
         && Objects.equals(founded, other.founded)
-        && Objects.equals(country, other.country)
         && Objects.equals(venue, other.venue)
-        && Objects.equals(logo, other.logo)
-        && Objects.equals(primaryColor, other.primaryColor)
-        && Objects.equals(secondaryColor, other.secondaryColor)
-        && Objects.equals(website, other.website)
         && Objects.equals(status, other.status);
   }
 }

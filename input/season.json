@@ -1,26 +1,11 @@
 [
   {
-    "name": "2021-2022",
-    "displayName": "2021-2022"
-  },
-  {
-    "name": "2022-2023",
-    "displayName": "2022-2023"
-  },
-  {
-    "name": "2023-2024",
-    "displayName": "2023-2024"
-  },
-  {
-    "name": "2024-2025",
-    "displayName": "2024-2025"
-  },
-  {
-    "name": "2025-2026",
-    "displayName": "2025-2026"
-  },
-  {
-    "name": "2026",
-    "displayName": "2026"
+    "name": "2025-26 Liga MX Femenil Season",
+    "displayName": "2025-26 Liga MX Femenil",
+    "tournamentDisplayName": "Liga MX Femenil",
+    "startDate": "2025-07-11",
+    "endDate": "2026-05-31",
+    "active": true,
+    "description": "Ninth season of Liga MX Femenil, split into Apertura 2025 and Clausura 2026."
   }
 ]

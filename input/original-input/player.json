@@ -1,0 +1,103 @@
+[
+  {
+    "person": {
+      "firstName": "Cuauhtémoc",
+      "lastName": "Blanco",
+      "birthDate": "1973-01-17",
+      "gender": "Male",
+      "birthPlace": "Mexico City",
+      "birthCountryDisplayName": "Mexico",
+      "nationalityCountryDisplayName": "Mexico",
+      "height": 1.78,
+      "weight": 82
+    },
+    "position": "Forward",
+    "preferredFoot": "Right",
+    "active": false
+  },
+  {
+    "person": {
+      "firstName": "Cristiano",
+      "lastName": "Ronaldo",
+      "birthDate": "1985-02-05",
+      "gender": "Male",
+      "birthPlace": "Funchal",
+      "birthCountryDisplayName": "Portugal",
+      "nationalityCountryDisplayName": "Portugal",
+      "height": 1.87,
+      "weight": 84
+    },
+    "position": "Forward",
+    "preferredFoot": "Right",
+    "active": true
+  },
+  {
+    "person": {
+      "firstName": "Alvaro",
+      "lastName": "Fidalgo",
+      "birthDate": "1993-03-10",
+      "gender": "Male",
+      "birthPlace": "Madrid",
+      "birthCountryDisplayName": "Spain",
+      "nationalityCountryDisplayName": "Spain",
+      "height": 1.82,
+      "weight": 76
+    },
+    "position": "Midfielder",
+    "preferredFoot": "Right",
+    "active": true
+  },
+  {
+    "person": {
+      "firstName": "Annie",
+      "middleName": "Lee",
+      "lastName": "Karich",
+      "gender": "Female",
+      "birthDate": "2003-10-26",
+      "birthPlace": "California, United States",
+      "birthCountryDisplayName": "United States",
+      "nationalityCountryDisplayName": "United States",
+      "height": 1.70,
+      "weight": 60
+    },
+    "position": "Midfielder",
+    "preferredFoot": "Right",
+    "active": true
+  },
+  {
+    "person": {
+      "firstName": "Scarlett",
+      "middleName": "Nafer",
+      "lastName": "Camberos",
+      "secondLastName": "Becerra",
+      "displayName": "Scarlett Camberos",
+      "gender": "Female",
+      "birthDate": "2000-11-20",
+      "birthPlace": "California, United States",
+      "birthCountryDisplayName": "United States",
+      "nationalityCountryDisplayName": "Mexico",
+      "height": 1.70,
+      "weight": 60
+    },
+    "position": "Midfielder",
+    "preferredFoot": "Right",
+    "active": true
+  },
+  {
+    "person": {
+      "firstName": "Sarah",
+      "middleName": "Jacquelyn",
+      "lastName": "Luebbert",
+      "gender": "Female",
+      "birthDate": "1997-12-16",
+      "birthPlace": "Missouri, United States",
+      "birthCountryDisplayName": "United States",
+      "nationalityCountryDisplayName": "United States",
+      "height": 1.70,
+      "weight": 58
+    },
+    "position": "Midfielder",
+    "preferredFoot": "Right",
+    "active": true
+  }
+]

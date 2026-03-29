@@ -1,0 +1,72 @@
+[
+  {
+    "displayName": "Club América - Regular Season",
+    "stageDisplayName": "Liga MX Clausura 2026",
+    "teamDisplayName": "Club América",
+    "position": 1,
+    "played": 17,
+    "won": 11,
+    "drawn": 4,
+    "lost": 2,
+    "goalsFor": 32,
+    "goalsAgainst": 15,
+    "goalDifference": 17,
+    "points": 37
+  },
+  {
+    "displayName": "Cruz Azul - Regular Season",
+    "stageDisplayName": "Liga MX Clausura 2026",
+    "teamDisplayName": "Cruz Azul",
+    "position": 2,
+    "played": 17,
+    "won": 10,
+    "drawn": 5,
+    "lost": 2,
+    "goalsFor": 28,
+    "goalsAgainst": 14,
+    "goalDifference": 14,
+    "points": 35
+  },
+  {
+    "displayName": "Tigres UANL - Regular Season",
+    "stageDisplayName": "Liga MX Clausura 2026",
+    "teamDisplayName": "Tigres UANL",
+    "position": 3,
+    "played": 17,
+    "won": 9,
+    "drawn": 6,
+    "lost": 2,
+    "goalsFor": 26,
+    "goalsAgainst": 13,
+    "goalDifference": 13,
+    "points": 33
+  },
+  {
+    "displayName": "Monterrey - Regular Season",
+    "stageDisplayName": "Liga MX Clausura 2026",
+    "teamDisplayName": "Monterrey",
+    "position": 4,
+    "played": 17,
+    "won": 8,
+    "drawn": 7,
+    "lost": 2,
+    "goalsFor": 24,
+    "goalsAgainst": 12,
+    "goalDifference": 12,
+    "points": 31
+  },
+  {
+    "displayName": "Chivas Guadalajara - Regular Season",
+    "stageDisplayName": "Liga MX Clausura 2026",
+    "teamDisplayName": "Chivas Guadalajara",
+    "position": 5,
+    "played": 17,
+    "won": 7,
+    "drawn": 6,
+    "lost": 4,
+    "goalsFor": 22,
+    "goalsAgainst": 18,
+    "goalDifference": 4,
+    "points": 27
+  }
+]

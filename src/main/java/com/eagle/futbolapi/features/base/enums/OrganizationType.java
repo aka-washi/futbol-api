@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 public enum OrganizationType {
   CLUB("Club"),
+  LEAGUE("League"),
   FEDERATION("Federation"),
   CONFEDERATION("Confederation"),
   GOVERNING_BODY("Governing Body");
@@ -26,9 +27,9 @@ public enum OrganizationType {
     if (label == null) {
       return null;
     }
-    for (OrganizationType e : OrganizationType.values()) {
-      if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
-        return e;
+    for (OrganizationType type : OrganizationType.values()) {
+      if (type.label.equalsIgnoreCase(label) || type.name().equalsIgnoreCase(label)) {
+        return type;
       }
     }
     throw new IllegalArgumentException("Unknown OrganizationType: " + label);
