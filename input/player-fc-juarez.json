@@ -1,0 +1,14 @@
+[
+// FC Juárez Femenil
+{"person": { "firstName": "Stefani", "lastName": "Jiménez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "Gabriela", "lastName": "Álvarez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "Paola", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "Gabriela", "lastName": "Álvarez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "María", "lastName": "Flores", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "Daniela", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "Gabriela", "lastName": "Álvarez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "María", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "Daniela", "lastName": "Flores", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "Gabriela", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "FC Juárez"},
+{"person": { "firstName": "María", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "FC Juárez"}
+]

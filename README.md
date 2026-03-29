@@ -115,3 +115,15 @@ If you encounter an error like "Multiple identity columns specified for table", 
 ## Contact
 
 For questions or support, please contact the project maintainer.
+
+## Entity Dependency Table
+
+| Entity           | Depends On                                     |
+|------------------|------------------------------------------------|
+| country          | (none)                                         |
+| organization     | country, parent_organization (optional)        |
+| venue            | country                                        |
+| person           | country                                        |
+| player           | person, team (currentTeam, optional)           |
+| staff            | person, team (currentTeam, optional)           |
+

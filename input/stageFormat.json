@@ -1,0 +1,17 @@
+[
+  {
+    "displayName": "Regular Season - Double Round Robin",
+    "type": "Regular Season",
+    "pointSystemDisplayName": "Standard 3-1-0",
+    "numberOfTeams": 18,
+    "hasHomeAndAway": true,
+    "description": "Standard double round-robin format where each team plays every other team twice"
+  },
+  {
+    "displayName": "Liguilla - Knockout Stage",
+    "type": "Knockout",
+    "numberOfTeams": 8,
+    "hasHomeAndAway": true,
+    "description": "Playoff stage for top 8 teams, home and away legs"
+  }
+]

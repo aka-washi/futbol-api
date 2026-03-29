@@ -1,0 +1,11 @@
+[
+{"person": { "firstName": "Itzel", "lastName": "González", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Tijuana"},
+{"person": { "firstName": "Paola", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Tijuana"},
+{"person": { "firstName": "Andrea", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Tijuana"},
+{"person": { "firstName": "María", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Tijuana"},
+{"person": { "firstName": "Gabriela", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Tijuana"},
+{"person": { "firstName": "Daniela", "lastName": "Flores", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Tijuana"},
+{"person": { "firstName": "María", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Tijuana"},
+{"person": { "firstName": "Brenda", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Tijuana"},
+{"person": { "firstName": "Paola", "lastName": "Urbieta", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Tijuana"}
+]

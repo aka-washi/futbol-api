@@ -1,0 +1,19 @@
+name,displayName,city,countryDisplayName,capacity,address,surface,opened,active
+Estadio Ciudad de los Deportes,Estadio Ciudad de los Deportes,Mexico City,Mexico,33000,"Calzada de Tlalpan 3465, Santa Ursula Coapa, Mexico City",Grass,1946-10-06,true
+Estadio Jalisco,Estadio Jalisco,Guadalajara,Mexico,55110,"Calle 7 Colinas 1772, Guadalajara",Grass,1960-01-31,true
+Estadio Libertad Financiera,Estadio Libertad Financiera,San Luis Potosí,Mexico,25111,"Av. Libertad 123, San Luis Potosí",Grass,2002-08-25,true
+Estadio Centenario,Estadio Centenario,Cuernavaca,Mexico,9670,"Av. Universidad 1001, Cuernavaca",Grass,1969-03-17,true
+Estadio Akron,Estadio Akron,Guadalajara,Mexico,46232,"Av. Circuito JVC 2800, Zapopan",Grass,2010-07-30,true
+Estadio Olímpico Benito Juárez,Estadio Olímpico Benito Juárez,Ciudad Juárez,Mexico,19703,"Av. Heroico Colegio Militar S/N, Ciudad Juárez",Grass,1981-05-12,true
+Estadio León,Estadio León,León,Mexico,31297,"Blvd. Adolfo López Mateos 1810, León",Grass,1967-03-01,true
+Estadio El Encanto,Estadio El Encanto,Mazatlán,Mexico,25000,"Av. Munich 401, Mazatlán",Grass,2020-07-27,true
+Estadio BBVA,Estadio BBVA,Monterrey,Mexico,51348,"Av. Pablo Livas 2011, Guadalupe",Grass,2015-08-02,true
+Estadio Victoria,Estadio Victoria,Aguascalientes,Mexico,23851,"Av. Universidad 1001, Aguascalientes",Grass,2003-07-29,true
+Estadio Hidalgo,Estadio Hidalgo,Pachuca,Mexico,27512,"Blvd. Felipe Ángeles S/N, Pachuca",Grass,1993-02-14,true
+Estadio Cuauhtémoc,Estadio Cuauhtémoc,Puebla,Mexico,51726,"Calle 24 Sur 2401, Puebla",Grass,1968-10-06,true
+Estadio Corregidora,Estadio Corregidora,Querétaro,Mexico,33162,"Av. de las Torres S/N, Querétaro",Grass,1985-02-05,true
+Estadio Corona,Estadio Corona,Torreón,Mexico,29237,"Blvd. Territorio Santos Modelo 1, Torreón",Grass,2009-11-11,true
+Estadio Caliente,Estadio Caliente,Tijuana,Mexico,27333,"Blvd. Agua Caliente 12027, Tijuana",Artificial,2007-11-11,true
+Estadio Nemesio Díez,Estadio Nemesio Díez,Toluca,Mexico,31000,"Av. Constituyentes Pte. 1000, Toluca",Grass,1954-08-08,true
+Estadio Universitario,Estadio Universitario,San Nicolás de los Garza,Mexico,41886,"Av. Universidad S/N, San Nicolás de los Garza",Grass,1967-05-30,true
+Estadio Olímpico Universitario,Estadio Olímpico Universitario,Mexico City,Mexico,48297,"Av. Insurgentes Sur S/N, Mexico City",Grass,1952-11-20,true

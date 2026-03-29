@@ -1,0 +1,14 @@
+[
+{"person": { "firstName": "Blanca", "lastName": "Félix", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Celeste", "lastName": "Espino", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Goalkeeper", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Michelle", "lastName": "González", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Carolina", "lastName": "Jaramillo", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Casandra", "lastName": "Montero", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Joseline", "lastName": "Montoya", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Alicia", "lastName": "Cervantes", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Adriana", "lastName": "Iturbide", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Norma", "lastName": "Palafox", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Forward", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Susan", "lastName": "Bejarano", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Kinberly", "lastName": "Guzmán", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Defender", "active": true, "teamDisplayName": "Guadalajara"},
+{"person": { "firstName": "Isabella", "lastName": "Gutiérrez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" }, "position": "Midfielder", "active": true, "teamDisplayName": "Guadalajara"}
+]

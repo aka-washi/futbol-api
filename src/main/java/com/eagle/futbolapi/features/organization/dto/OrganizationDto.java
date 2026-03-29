@@ -20,11 +20,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrganizationDto {
+  
   private Long id;
   private LocalDateTime createdAt;
   private String createdBy;
   private LocalDateTime updatedAt;
   private String updatedBy;
+
   @NotBlank(message = "Organization name is required")
   @Size(min = 2, max = 100, message = "Organization name must be between 2 and 100 characters")
   private String name;
@@ -49,4 +51,6 @@ public class OrganizationDto {
   private String headquarters;
   @Size(max = 1000, message = "Description cannot exceed 1000 characters")
   private String description;
+  private LocalDate startDate;
+  private LocalDate endDate;
 }

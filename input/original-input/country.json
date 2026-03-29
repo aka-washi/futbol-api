@@ -118,4 +118,33 @@
     "displayName": "Uzbekistan",
     "flagUrl": "https://flagcdn.com/uz.svg"
   }
+  ,
+  {
+    "name": "Argentine Republic",
+    "code": "AR",
+    "isoCode": "ARG",
+    "displayName": "Argentina",
+    "flagUrl": "https://flagcdn.com/ar.svg"
+  },
+  {
+    "name": "Republic of El Salvador",
+    "code": "SV",
+    "isoCode": "SLV",
+    "displayName": "El Salvador",
+    "flagUrl": "https://flagcdn.com/sv.svg"
+  },
+  {
+    "name": "Commonwealth of Australia",
+    "code": "AU",
+    "isoCode": "AUS",
+    "displayName": "Australia",
+    "flagUrl": "https://flagcdn.com/au.svg"
+  },
+  {
+    "name": "Federal Republic of Nigeria",
+    "code": "NG",
+    "isoCode": "NGA",
+    "displayName": "Nigeria",
+    "flagUrl": "https://flagcdn.com/ng.svg"
+  }
 ]

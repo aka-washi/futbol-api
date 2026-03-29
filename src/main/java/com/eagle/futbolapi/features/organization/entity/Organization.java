@@ -86,6 +86,12 @@ public class Organization extends BaseEntity {
   @Column(name = "org_description", length = 500)
   private String description;
 
+  @Column(name = "org_start_date")
+  private LocalDate startDate;
+  @Column(name = "org_end_date")
+  private LocalDate endDate;
+
+
   @Override
   public int hashCode() {
     return Objects.hash(
@@ -99,7 +105,9 @@ public class Organization extends BaseEntity {
         logo,
         website,
         headquarters,
-        description);
+        description,
+        startDate,
+        endDate);
   }
 
   @Override
@@ -119,7 +127,9 @@ public class Organization extends BaseEntity {
         && Objects.equals(logo, other.logo)
         && Objects.equals(website, other.website)
         && Objects.equals(headquarters, other.headquarters)
-        && Objects.equals(description, other.description);
+        && Objects.equals(description, other.description)
+        && Objects.equals(startDate, other.startDate)
+        && Objects.equals(endDate, other.endDate);
   }
 
 }

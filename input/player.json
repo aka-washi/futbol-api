@@ -1,0 +1,218 @@
+[
+{
+  "person": { "firstName": "Karol", "lastName": "Contreras", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Goalkeeper", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Dirce", "lastName": "Delgado", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Laila", "lastName": "Saravia", "gender": "Female", "birthCountryDisplayName": "El Salvador", "nationalityCountryDisplayName": "El Salvador" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Iliana", "lastName": "Jasso", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "United States" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Elena", "lastName": "Sainz", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Victoria", "lastName": "Acevedo", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Karen", "lastName": "Flores", "gender": "Female", "birthCountryDisplayName": "Ecuador", "nationalityCountryDisplayName": "Ecuador" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Sanjuana", "lastName": "Muñóz", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Brenda", "lastName": "Cerén", "gender": "Female", "birthCountryDisplayName": "El Salvador", "nationalityCountryDisplayName": "El Salvador" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Camila", "lastName": "Vázquez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Goalkeeper", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Maritza", "lastName": "Maldonado", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Renata", "lastName": "Huerta", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Noemí", "lastName": "Villalobos", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Leslye", "lastName": "Hernández", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Ashley", "lastName": "López", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "United States" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Akane", "lastName": "Lara", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Jaquelín", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Juliet", "lastName": "Nalukenge", "gender": "Female", "birthCountryDisplayName": "Uganda", "nationalityCountryDisplayName": "Uganda" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Vanessa", "lastName": "Penuna", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "United States" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Alondra", "lastName": "Cardona", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Daniela", "lastName": "Meza", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Mayela", "lastName": "Peregrina", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlas"
+},
+{
+  "person": { "firstName": "Nithzaye", "lastName": "Aguilar", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlas"
+},
+
+// Atlético San Luis Femenil
+{
+  "person": { "firstName": "Valeria", "lastName": "Zárate", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Goalkeeper", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Anapaola", "lastName": "González", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Ghislane", "lastName": "López", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "United States" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Karen", "lastName": "Cano", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Citlali", "lastName": "Hernández", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Viridiana", "lastName": "López", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Fernanda", "lastName": "Sánchez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Enyerliannys", "lastName": "Higuera", "gender": "Female", "birthCountryDisplayName": "Venezuela", "nationalityCountryDisplayName": "Venezuela" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Silvana", "lastName": "González", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Isabel", "lastName": "Kasis", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Alexa", "lastName": "Herrera", "gender": "Female", "birthCountryDisplayName": "Costa Rica", "nationalityCountryDisplayName": "Costa Rica" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Aurora", "lastName": "Suárez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Mía", "lastName": "Flores", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Izabelle", "lastName": "Hernández", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "United States" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Alejandra", "lastName": "Martínez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Becky", "lastName": "Contreras", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "United States" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Judith", "lastName": "Castillo", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Farlyn", "lastName": "Caicedo", "gender": "Female", "birthCountryDisplayName": "Colombia", "nationalityCountryDisplayName": "Colombia" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Karla", "lastName": "García", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Amina", "lastName": "Bello", "gender": "Female", "birthCountryDisplayName": "Nigeria", "nationalityCountryDisplayName": "Nigeria" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Michelle", "lastName": "Gutiérrez", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Dayra", "lastName": "Bustos", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Goalkeeper", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Kimberlin", "lastName": "Galicia", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Frida", "lastName": "Vargas", "gender": "Female", "birthCountryDisplayName": "United States", "nationalityCountryDisplayName": "United States" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Aidinn", "lastName": "López", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Elaily", "lastName": "Hernández", "gender": "Female", "birthCountryDisplayName": "El Salvador", "nationalityCountryDisplayName": "El Salvador" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Sandra", "lastName": "Arévalo", "gender": "Female", "birthCountryDisplayName": "Peru", "nationalityCountryDisplayName": "Peru" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Chiara", "lastName": "Singarella", "gender": "Female", "birthCountryDisplayName": "Argentina", "nationalityCountryDisplayName": "Argentina" },
+  "position": "Forward", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Alejandra", "lastName": "Caldera", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Midfielder", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+{
+  "person": { "firstName": "Amalia", "lastName": "González", "gender": "Female", "birthCountryDisplayName": "Mexico", "nationalityCountryDisplayName": "Mexico" },
+  "position": "Defender", "active": true, "teamDisplayName": "Atlético San Luis"
+},
+
+// ...continue with Cruz Azul, FC Juárez, León, Mazatlán, Necaxa, Pachuca, Puebla, Querétaro, Santos Laguna, Tijuana, Toluca, UNAM (Pumas) in the same format...
+]

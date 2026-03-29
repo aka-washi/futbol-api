@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Standard 3-1-0",
+    "displayName": "Standard 3-1-0",
+    "description": "Standard point system: 3 points for win, 1 for draw, 0 for loss",
+    "pointsForWin": 3,
+    "pointsForDraw": 1,
+    "pointsForLoss": 0
+  }
+]

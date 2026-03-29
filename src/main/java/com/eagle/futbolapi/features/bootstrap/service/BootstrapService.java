@@ -42,8 +42,8 @@ import com.eagle.futbolapi.features.registration.dto.RegistrationDto;
 import com.eagle.futbolapi.features.registration.service.RegistrationService;
 import com.eagle.futbolapi.features.season.dto.SeasonDto;
 import com.eagle.futbolapi.features.season.service.SeasonService;
-import com.eagle.futbolapi.features.seasonTeam.dto.SeasonTeamDto;
-import com.eagle.futbolapi.features.seasonTeam.service.SeasonTeamService;
+import com.eagle.futbolapi.features.seasonParticipation.dto.SeasonParticipationDto;
+import com.eagle.futbolapi.features.seasonParticipation.service.SeasonParticipationService;
 import com.eagle.futbolapi.features.staff.dto.StaffDto;
 import com.eagle.futbolapi.features.staff.service.StaffService;
 import com.eagle.futbolapi.features.stage.dto.StageDto;
@@ -90,7 +90,7 @@ public class BootstrapService {
   private final StageFormatService stageFormatService;
   private final TournamentSeasonService tournamentSeasonService;
   private final CompetitionService competitionService;
-  private final SeasonTeamService seasonTeamService;
+  private final SeasonParticipationService seasonTeamService;
   private final StageService stageService;
   private final VenueService venueService;
   private final GroupService groupService;
@@ -337,7 +337,7 @@ public class BootstrapService {
         return loadEntities(dataArray, CompetitionDto.class, competitionService::create, "Competition");
       case "seasonteam":
       case "season-team":
-        return loadEntities(dataArray, SeasonTeamDto.class, seasonTeamService::create, "SeasonTeam");
+        return loadEntities(dataArray, SeasonParticipationDto.class, seasonTeamService::create, "SeasonTeam");
       case "stage":
         return loadEntities(dataArray, StageDto.class, stageService::create, "Stage");
       case "group":
