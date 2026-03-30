@@ -20,6 +20,8 @@ CSV_DIR="/workspaces/futbol-api/input/csv"
 # Map entity to DTO file (add more as needed)
 declare -A ENTITY_DTO_MAP=(
   [team]="team/dto/TeamDto.java"
+  [teambrand]="teambrand/dto/TeamBrandDto.java"
+  [teamvenue]="teamvenue/dto/TeamVenueDto.java"
   [person]="person/dto/PersonDto.java"
   [player]="player/dto/PlayerDto.java"
   [staff]="staff/dto/StaffDto.java"
@@ -29,6 +31,7 @@ declare -A ENTITY_DTO_MAP=(
   [organization]="organization/dto/OrganizationDto.java"
   [venue]="venue/dto/VenueDto.java"
   [competition]="competition/dto/CompetitionDto.java"
+  [competitionoutcome]="competitionOutcome/dto/CompetitionOutcomeDto.java"
   [season_team]="seasonTeam/dto/SeasonTeamDto.java"
   [standing]="standing/dto/StandingDto.java"
   [registration]="registration/dto/RegistrationDto.java"

@@ -58,9 +58,6 @@ public class TeamDto {
   @NotNull(message = "Founded date is required")
   private LocalDate founded;
 
-  private Long venueId;
-  private String venueDisplayName;
-
   private String status;
 
 }

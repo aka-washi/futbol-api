@@ -1,19 +1,37 @@
-organizationDisplayName,name,displayName,abbreviation,gender,ageCategory,countryDisplayName,venueDisplayName,founded,logo,primaryColor,secondaryColor,website,status
-,Club América Femenil,América,AME,,,Mexico,Estadio Ciudad de los Deportes,2016-12-05,,,#FDD835,#0D47A1,
-,Atlas Femenil,Atlas,ATL,,,Mexico,Estadio Jalisco,2017-04-19,,,,,
-,Atlético San Luis Femenil,Atlético San Luis,ASL,,,Mexico,Estadio Libertad Financiera,2019-07-01,,,#CE3524,#FFFFFF,
-,Cruz Azul Femenil,Cruz Azul,CAZ,,,Mexico,Estadio Centenario,2017-07-01,,,,,
-,Guadalajara Femenil,Guadalajara,GUA,,,Mexico,Estadio Akron,2017-05-03,,,#E53935,#FFFFFF,
-,FC Juárez Femenil,Juárez,JUA,,,Mexico,Estadio Olímpico Benito Juárez,2019-07-01,,,,,
-,León Femenil,León,LEO,,,Mexico,Estadio León,2017-07-01,,,,,
-,Mazatlán Femenil,Mazatlán,MAZ,,,Mexico,Estadio El Encanto,2020-06-02,,,,,
-,Monterrey Femenil,Monterrey,MON,,,Mexico,Estadio BBVA,2017-07-03,,,#0D47A1,#FFFFFF,
-,Necaxa Femenil,Necaxa,NEC,,,Mexico,Estadio Victoria,2017-07-01,,,,,
-,Pachuca Femenil,Pachuca,PAC,,,Mexico,Estadio Hidalgo,2017-07-01,,,,,
-,Puebla Femenil,Puebla,PUE,,,Mexico,Estadio Cuauhtémoc,2018-07-01,,,,,
-,Querétaro Femenil,Querétaro,QUE,,,Mexico,Estadio Corregidora,2017-07-01,,,,,
-,Santos Laguna Femenil,Santos Laguna,SAN,,,Mexico,Estadio Corona,2017-07-01,,,,,
-,Tijuana Femenil,Tijuana,TIJ,,,Mexico,Estadio Caliente,2017-07-01,,,,,
-,Toluca Femenil,Toluca,TOL,,,Mexico,Estadio Nemesio Díez,2017-07-01,,,,,
-,Tigres UANL Femenil,UANL,UNL,,,Mexico,Estadio Universitario,2016-12-05,,,#FDD835,#0D47A1,
-,UNAM Femenil,UNAM,UNM,,,Mexico,Estadio Olímpico Universitario,2017-07-01,,,,,
+organizationDisplayName,countryDisplayName,name,displayName,gender,ageCategory,founded,status
+Club América,Mexico,Club América Femenil,América,Female,Professional,2016-12-05,Active
+Club América,Mexico,Club América Femenil,América,Male,Professional,,Active
+Atlas,Mexico,Atlas Femenil,Atlas,Female,Professional,2016-12-05,Active
+Atlas,Mexico,Atlas Femenil,Atlas,Male,Professional,,Active
+San Luis,Mexico,Atlético San Luis Femenil,Atlético San Luis,Female,Professional,2019-05-27,Active
+San Luis,Mexico,Atlético San Luis Femenil,Atlético San Luis,Male,Professional,,Active
+Cruz Azul,Mexico,Cruz Azul Femenil,Cruz Azul,Female,Professional,2016-12-05,Active
+Cruz Azul,Mexico,Cruz Azul Femenil,Cruz Azul,Male,Professional,,Active
+Guadalajara,Mexico,Guadalajara Femenil,Guadalajara,Female,Professional,2016-12-05,Active
+Guadalajara,Mexico,Guadalajara Femenil,Guadalajara,Male,Professional,,Active
+Juárez,Mexico,FC Juárez Femenil,Juárez,Female,Professional,2019-06-11,Active
+Juárez,Mexico,FC Juárez Femenil,Juárez,Male,Professional,,Active
+León,Mexico,León Femenil,León,Female,Professional,2016-12-05,Active
+León,Mexico,León Femenil,León,Male,Professional,,Active
+Mazatlán,Mexico,Mazatlán Femenil,Mazatlán,Female,Professional,2020-06-02,Active
+Mazatlán,Mexico,Mazatlán Femenil,Mazatlán,Male,Professional,,Active
+Monterrey,Mexico,Monterrey Femenil,Monterrey,Female,Professional,2016-12-05,Active
+Monterrey,Mexico,Monterrey Femenil,Monterrey,Male,Professional,,Active
+Necaxa,Mexico,Necaxa Femenil,Necaxa,Female,Professional,2016-12-05,Active
+Necaxa,Mexico,Necaxa Femenil,Necaxa,Male,Professional,,Active
+Pachuca,Mexico,Pachuca Femenil,Pachuca,Female,Professional,2016-12-05,Active
+Pachuca,Mexico,Pachuca Femenil,Pachuca,Male,Professional,,Active
+Puebla,Mexico,Puebla Femenil,Puebla,Female,Professional,2018-05-16,Active
+Puebla,Mexico,Puebla Femenil,Puebla,Male,Professional,,Active
+Querétaro,Mexico,Querétaro Femenil,Querétaro,Female,Professional,2016-12-05,Active
+Querétaro,Mexico,Querétaro Femenil,Querétaro,Male,Professional,,Active
+Santos,Mexico,Santos Laguna Femenil,Santos Laguna,Female,Professional,2016-12-05,Active
+Santos,Mexico,Santos Laguna Femenil,Santos Laguna,Male,Professional,,Active
+Tijuana,Mexico,Tijuana Femenil,Tijuana,Female,Professional,2016-12-05,Active
+Tijuana,Mexico,Tijuana Femenil,Tijuana,Male,Professional,,Active
+Toluca,Mexico,Toluca Femenil,Toluca,Female,Professional,2016-12-05,Active
+Toluca,Mexico,Toluca Femenil,Toluca,Male,Professional,,Active
+Tigres,Mexico,Tigres UANL Femenil,UANL,Female,Professional,2016-12-05,Active
+Tigres,Mexico,Tigres UANL Femenil,UANL,Male,Professional,,Active
+UNAM,Mexico,UNAM Femenil,UNAM,Female,Professional,2016-12-05,Active
+UNAM,Mexico,UNAM Femenil,UNAM,Male,Professional,,Active

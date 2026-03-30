@@ -84,10 +84,6 @@ public class Team extends BaseEntity {
   @Column(name = "tem_founded", nullable = false)
   private LocalDate founded;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-  private Venue venue;
-
   @Enumerated(EnumType.STRING)
   @Column(name = "tem_status", length = 20)
   private TeamStatus status;
@@ -102,7 +98,6 @@ public class Team extends BaseEntity {
         gender,
         ageCategory,
         founded,
-        venue,
         status);
   }
 
@@ -120,7 +115,6 @@ public class Team extends BaseEntity {
         && Objects.equals(gender, other.gender)
         && Objects.equals(ageCategory, other.ageCategory)
         && Objects.equals(founded, other.founded)
-        && Objects.equals(venue, other.venue)
         && Objects.equals(status, other.status);
   }
 }

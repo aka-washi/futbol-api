@@ -17,22 +17,17 @@ import com.eagle.futbolapi.features.team.entity.Team;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface TeamMapper extends BaseMapper<Team, TeamDto> {
 
-
   @Mapping(target = "organizationId", source = "organization.id")
   @Mapping(target = "organizationDisplayName", source = "organization.displayName")
   @Mapping(target = "countryId", source = "country.id")
   @Mapping(target = "countryDisplayName", source = "country.displayName")
-  @Mapping(target = "venueId", source = "venue.id")
-  @Mapping(target = "venueDisplayName", source = "venue.displayName")
   @Mapping(target = "gender", expression = "java(genderToString(team.getGender()))")
   @Mapping(target = "ageCategory", expression = "java(ageCategoryToString(team.getAgeCategory()))")
   @Mapping(target = "status", expression = "java(teamStatusToString(team.getStatus()))")
   TeamDto toDto(Team team);
 
-
   @Mapping(target = "organization", ignore = true)
   @Mapping(target = "country", ignore = true)
-  @Mapping(target = "venue", ignore = true)
   @Mapping(target = "gender", expression = "java(stringToGender(teamDto.getGender()))")
   @Mapping(target = "ageCategory", expression = "java(stringToAgeCategory(teamDto.getAgeCategory()))")
   @Mapping(target = "status", expression = "java(stringToTeamStatus(teamDto.getStatus()))")

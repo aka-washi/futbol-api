@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.eagle.futbolapi.features.base.enums.Gender;
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
@@ -34,15 +35,13 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDto> {
   private final TeamRepository repository;
   private final OrganizationService organizationService;
   private final CountryService countryService;
-  private final VenueService venueService;
 
   protected TeamService(TeamRepository repository, TeamMapper mapper,
-      OrganizationService organizationService, CountryService countryService, VenueService venueService) {
+      OrganizationService organizationService, CountryService countryService) {
     super(repository, mapper);
     this.repository = repository;
     this.organizationService = organizationService;
     this.countryService = countryService;
-    this.venueService = venueService;
   }
 
   public Optional<Team> findByDisplayName(String displayName) {
@@ -52,7 +51,7 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDto> {
     return repository.findByDisplayName(displayName);
   }
 
-  public Optional<Team> findByDisplayNameAndGender(String displayName, com.eagle.futbolapi.features.base.enums.Gender gender) {
+  public Optional<Team> findByDisplayNameAndGender(String displayName, Gender gender) {
     if (displayName == null || displayName.isEmpty()) {
       throw new IllegalArgumentException("Team display name cannot be null or empty");
     }
@@ -106,17 +105,6 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDto> {
       var country = countryService.getById(dto.getCountryId())
           .orElseThrow(() -> new ResourceNotFoundException("Country", "id", dto.getCountryId()));
       team.setCountry(country);
-    }
-
-    // Map venue from display name or ID (optional relationship)
-    if (dto.getVenueDisplayName() != null && !dto.getVenueDisplayName().trim().isEmpty()) {
-      var venue = venueService.findByDisplayName(dto.getVenueDisplayName())
-          .orElseThrow(() -> new ResourceNotFoundException("Venue", "displayName", dto.getVenueDisplayName()));
-      team.setVenue(venue);
-    } else if (dto.getVenueId() != null) {
-      var venue = venueService.getById(dto.getVenueId())
-          .orElseThrow(() -> new ResourceNotFoundException("Venue", "id", dto.getVenueId()));
-      team.setVenue(venue);
     }
   }
 
