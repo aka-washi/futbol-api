@@ -37,7 +37,7 @@ public class OrganizationTransitionDto {
   private Long toOrganizationId;
   private String toOrganizationDisplayName;
 
-  private String type;
+  private String transitionType;
   private LocalDate effectiveDate;
 
 }

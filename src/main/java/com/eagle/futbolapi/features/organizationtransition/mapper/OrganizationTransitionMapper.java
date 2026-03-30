@@ -20,20 +20,20 @@ public interface OrganizationTransitionMapper extends BaseMapper<OrganizationTra
   @Mapping(target = "fromOrganizationDisplayName", source = "fromOrganization.displayName")
   @Mapping(target = "toOrganizationId", source = "toOrganization.id")
   @Mapping(target = "toOrganizationDisplayName", source = "toOrganization.displayName")
-  @Mapping(target = "type", expression = "java(transitionTypeToString(organizationTransition.getTransitionType()))")
+  @Mapping(target = "transitionType", expression = "java(transitionTypeToString(organizationTransition.getTransitionType()))")
   OrganizationTransitionDto toDto(OrganizationTransition organizationTransition);
 
   @Mapping(target = "fromOrganization", ignore = true)
   @Mapping(target = "toOrganization", ignore = true)
-  @Mapping(target = "type", expression = "java(stringToTransitionType(organizationTransitionDto.getType()))")
+  @Mapping(target = "transitionType", expression = "java(stringToTransitionType(organizationTransitionDto.getTransitionType()))")
   OrganizationTransition toEntity(OrganizationTransitionDto organizationTransitionDto);
 
-  default String transitionTypeToString(TransitionType type) {
-    return type != null ? type.getLabel() : null;
+  default String transitionTypeToString(TransitionType transitionType) {
+    return transitionType != null ? transitionType.getLabel() : null;
   }
 
-  default TransitionType stringToTransitionType(String type) {
-    return TransitionType.fromLabel(type);
+  default TransitionType stringToTransitionType(String transitionType) {
+    return TransitionType.fromLabel(transitionType);
   }
 
 }
