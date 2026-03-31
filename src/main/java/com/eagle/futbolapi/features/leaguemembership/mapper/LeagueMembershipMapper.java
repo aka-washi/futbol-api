@@ -1,11 +1,11 @@
-package com.eagle.futbolapi.features.LeagueMembership.mapper;
+package com.eagle.futbolapi.features.leaguemembership.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
-import com.eagle.futbolapi.features.LeagueMembership.dto.LeagueMembershipDto;
-import com.eagle.futbolapi.features.LeagueMembership.entity.LeagueMembership;
+import com.eagle.futbolapi.features.leaguemembership.dto.LeagueMembershipDto;
+import com.eagle.futbolapi.features.leaguemembership.entity.LeagueMembership;
 import com.eagle.futbolapi.features.base.enums.MembershipStatus;
 import com.eagle.futbolapi.features.base.mapper.BaseMapper;
 

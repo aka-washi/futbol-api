@@ -13,6 +13,8 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.annotation.UniqueField;
@@ -47,16 +49,17 @@ public class OrganizationTransition extends BaseEntity {
   @NotNull
   @UniqueField(fieldPath = "fromOrganization.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "ogt_from_organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Organization fromOrganization;
   @NotNull
   @UniqueField(fieldPath = "toOrganization.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "ogt_to_organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Organization toOrganization;
 
   @UniqueField
-  @Column(name = "ogt_type")
+  @Enumerated(EnumType.STRING)
+  @Column(name = "ogt_type", length = 50)
   private TransitionType transitionType;
 
   @UniqueField

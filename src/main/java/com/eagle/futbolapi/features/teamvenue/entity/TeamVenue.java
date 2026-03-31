@@ -1,6 +1,8 @@
 package com.eagle.futbolapi.features.teamvenue.entity;
 
 import java.time.LocalDate;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -50,8 +52,14 @@ public class TeamVenue extends BaseEntity {
   @JoinColumn(name = "tmv_venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Venue venue;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tmv_designation", length = 50)
   private VenueDesignation designation;
+
+  @Column(name = "tmv_start_date")
   private LocalDate startDate;
+
+  @Column(name = "tmv_end_date")
   private LocalDate endDate;
 
 }

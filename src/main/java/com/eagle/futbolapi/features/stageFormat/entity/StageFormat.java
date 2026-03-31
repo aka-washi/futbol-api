@@ -90,7 +90,7 @@ public class StageFormat extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof StageFormat))
       return false;
     StageFormat other = (StageFormat) obj;
     return Objects.equals(displayName, other.displayName)

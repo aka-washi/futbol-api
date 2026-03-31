@@ -1,14 +1,14 @@
-package com.eagle.futbolapi.features.LeagueMembership.service;
+package com.eagle.futbolapi.features.leaguemembership.service;
 
 import java.util.Objects;
 import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
-import com.eagle.futbolapi.features.LeagueMembership.dto.LeagueMembershipDto;
-import com.eagle.futbolapi.features.LeagueMembership.entity.LeagueMembership;
-import com.eagle.futbolapi.features.LeagueMembership.mapper.LeagueMembershipMapper;
-import com.eagle.futbolapi.features.LeagueMembership.repository.LeagueMembershipRepository;
+import com.eagle.futbolapi.features.leaguemembership.dto.LeagueMembershipDto;
+import com.eagle.futbolapi.features.leaguemembership.entity.LeagueMembership;
+import com.eagle.futbolapi.features.leaguemembership.mapper.LeagueMembershipMapper;
+import com.eagle.futbolapi.features.leaguemembership.repository.LeagueMembershipRepository;
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;

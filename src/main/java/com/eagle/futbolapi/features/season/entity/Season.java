@@ -56,7 +56,7 @@ public class Season extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Season))
       return false;
     Season other = (Season) obj;
     return Objects.equals(name, other.name)

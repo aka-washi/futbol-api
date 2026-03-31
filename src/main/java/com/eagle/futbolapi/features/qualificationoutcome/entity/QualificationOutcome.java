@@ -3,6 +3,8 @@ package com.eagle.futbolapi.features.qualificationoutcome.entity;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -62,6 +64,8 @@ public class QualificationOutcome extends BaseEntity {
 
   @NotNull
   @UniqueField
+  @Enumerated(EnumType.STRING)
+  @Column(name = "qfo_qualification_type", length = 50)
   private QualificationType qualificationType;
 
 }

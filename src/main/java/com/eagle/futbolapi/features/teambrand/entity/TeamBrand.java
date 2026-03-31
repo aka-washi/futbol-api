@@ -1,5 +1,6 @@
 package com.eagle.futbolapi.features.teambrand.entity;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -54,7 +55,7 @@ public class TeamBrand extends BaseEntity {
   @Column(name = "tbr_display_name", length = 50)
   private String displayName;
   @ElementCollection
-  @CollectionTable(name = "team_nicknames", joinColumns = @JoinColumn(name = "_tbr_team_brand_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)))
+  @CollectionTable(name = "team_nicknames", joinColumns = @JoinColumn(name = "tbr_team_brand_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)))
   @Column(name = "tbr_nickname", length = 100)
   private Set<String> nicknames;
   @Column(name = "tbr_abbreviation", length = 10)
@@ -68,9 +69,9 @@ public class TeamBrand extends BaseEntity {
   @Column(name = "tbr_website_url", length = 255)
   private String websiteUrl;
   @Column(name = "tbr_start_date")
-  private String startDate;
+  private LocalDate startDate;
   @Column(name = "tbr_end_date")
-  private String endDate;
+  private LocalDate endDate;
 
   @Override
   public int hashCode() {

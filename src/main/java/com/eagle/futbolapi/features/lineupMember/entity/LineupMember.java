@@ -82,7 +82,7 @@ public class LineupMember extends BaseEntity {
 
   @Column(name = "lm_captain", nullable = false)
   @Builder.Default
-  private boolean captain = false;
+  private Boolean captain = false;
 
   @Column(name = "lm_order_num")
   private Integer orderNum;

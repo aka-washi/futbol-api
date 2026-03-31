@@ -114,7 +114,7 @@ public class Organization extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Organization))
       return false;
     Organization other = (Organization) obj;
     return Objects.equals(name, other.name)

@@ -1,4 +1,4 @@
-package com.eagle.futbolapi.features.LeagueMembership.dto;
+package com.eagle.futbolapi.features.leaguemembership.dto;
 
 import java.time.LocalDateTime;
 

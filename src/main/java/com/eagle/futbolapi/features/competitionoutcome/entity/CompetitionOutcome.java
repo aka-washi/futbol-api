@@ -3,6 +3,8 @@ package com.eagle.futbolapi.features.competitionoutcome.entity;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -64,6 +66,7 @@ public class CompetitionOutcome extends BaseEntity {
   @Column(name = "cpo_points")
   private Integer points;
   @UniqueField
+  @Enumerated(EnumType.STRING)
   @Column(name = "cpo_result_type", length = 50)
   private OutcomeType outcomeType;
   @Column(name = "cpo_notes", length = 500)

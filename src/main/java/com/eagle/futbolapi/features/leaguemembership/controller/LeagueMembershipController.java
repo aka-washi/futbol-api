@@ -1,9 +1,9 @@
-package com.eagle.futbolapi.features.LeagueMembership.controller;
+package com.eagle.futbolapi.features.leaguemembership.controller;
 
-import com.eagle.futbolapi.features.LeagueMembership.dto.LeagueMembershipDto;
-import com.eagle.futbolapi.features.LeagueMembership.entity.LeagueMembership;
-import com.eagle.futbolapi.features.LeagueMembership.mapper.LeagueMembershipMapper;
-import com.eagle.futbolapi.features.LeagueMembership.service.LeagueMembershipService;
+import com.eagle.futbolapi.features.leaguemembership.dto.LeagueMembershipDto;
+import com.eagle.futbolapi.features.leaguemembership.entity.LeagueMembership;
+import com.eagle.futbolapi.features.leaguemembership.mapper.LeagueMembershipMapper;
+import com.eagle.futbolapi.features.leaguemembership.service.LeagueMembershipService;
 import com.eagle.futbolapi.features.base.controller.BaseCrudController;
 
 public class LeagueMembershipController

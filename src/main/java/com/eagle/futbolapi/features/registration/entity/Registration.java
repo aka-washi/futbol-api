@@ -91,7 +91,7 @@ public class Registration extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Registration))
       return false;
     Registration other = (Registration) obj;
     return Objects.equals(competition, other.competition)

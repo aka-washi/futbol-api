@@ -88,7 +88,7 @@ public class Stage extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Stage))
       return false;
     Stage other = (Stage) obj;
     return Objects.equals(displayName, other.displayName)

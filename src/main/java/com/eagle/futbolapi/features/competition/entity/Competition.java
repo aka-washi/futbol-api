@@ -96,7 +96,7 @@ public class Competition extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Competition))
       return false;
     Competition other = (Competition) obj;
     return Objects.equals(displayName, other.displayName)

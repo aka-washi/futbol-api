@@ -105,7 +105,7 @@ public class TournamentSeason extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof TournamentSeason))
       return false;
     TournamentSeason other = (TournamentSeason) obj;
     return Objects.equals(season, other.season)

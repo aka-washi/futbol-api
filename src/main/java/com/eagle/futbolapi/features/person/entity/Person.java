@@ -241,7 +241,7 @@ public class Person extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Person))
       return false;
     Person other = (Person) obj;
     return Objects.equals(uniqueRegKey, other.uniqueRegKey)
