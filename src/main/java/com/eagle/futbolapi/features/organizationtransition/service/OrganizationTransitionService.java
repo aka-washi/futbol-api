@@ -73,29 +73,32 @@ public class OrganizationTransitionService extends BaseCrudService<OrganizationT
   @Override
   protected void resolveRelationships(OrganizationTransitionDto dto, OrganizationTransition organizationTransition) {
     // Map fromOrganization from display name or ID
-    if (dto.getFromOrganizationDisplayName() != null && !dto.getFromOrganizationDisplayName().trim().isEmpty()) {
-      var organization = organizationService.findByDisplayName(dto.getFromOrganizationDisplayName())
+    String fromOrganizationDisplayName = dto.getFromOrganizationDisplayName();
+    Long fromOrganizationId = dto.getFromOrganizationId();
+    if (fromOrganizationDisplayName != null && !fromOrganizationDisplayName.trim().isEmpty()) {
+      var organization = organizationService.findByDisplayName(fromOrganizationDisplayName)
           .orElseThrow(() -> new ResourceNotFoundException("Organization", "displayName",
-              dto.getFromOrganizationDisplayName()));
+              fromOrganizationDisplayName));
       organizationTransition.setFromOrganization(organization);
-    } else if (dto.getFromOrganizationId() != null) {
-      var organization = organizationService.getById(dto.getFromOrganizationId())
-          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", dto.getFromOrganizationId()));
+    } else if (fromOrganizationId != null) {
+      var organization = organizationService.getById(fromOrganizationId)
+          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", fromOrganizationId));
       organizationTransition.setFromOrganization(organization);
     }
 
     // Map toOrganization from display name or ID
-    if (dto.getToOrganizationDisplayName() != null && !dto.getToOrganizationDisplayName().trim().isEmpty()) {
-      var organization = organizationService.findByDisplayName(dto.getToOrganizationDisplayName())
+    String toOrganizationDisplayName = dto.getToOrganizationDisplayName();
+    Long toOrganizationId = dto.getToOrganizationId();
+    if (toOrganizationDisplayName != null && !toOrganizationDisplayName.trim().isEmpty()) {
+      var organization = organizationService.findByDisplayName(toOrganizationDisplayName)
           .orElseThrow(() -> new ResourceNotFoundException("Organization", "displayName",
-              dto.getToOrganizationDisplayName()));
+              toOrganizationDisplayName));
       organizationTransition.setToOrganization(organization);
-    } else if (dto.getToOrganizationId() != null) {
-      var organization = organizationService.getById(dto.getToOrganizationId())
-          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", dto.getToOrganizationId()));
+    } else if (toOrganizationId != null) {
+      var organization = organizationService.getById(toOrganizationId)
+          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", toOrganizationId));
       organizationTransition.setToOrganization(organization);
     }
-
 
   }
 

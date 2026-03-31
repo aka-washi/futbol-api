@@ -24,7 +24,6 @@ import com.eagle.futbolapi.features.base.enums.Gender;
 import com.eagle.futbolapi.features.base.enums.TeamStatus;
 import com.eagle.futbolapi.features.country.entity.Country;
 import com.eagle.futbolapi.features.organization.entity.Organization;
-import com.eagle.futbolapi.features.venue.entity.Venue;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -59,7 +58,7 @@ public class Team extends BaseEntity {
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "tem_organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Organization organization;
 
   @ManyToOne(fetch = FetchType.LAZY)

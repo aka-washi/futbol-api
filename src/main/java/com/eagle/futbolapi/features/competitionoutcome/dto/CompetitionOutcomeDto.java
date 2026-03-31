@@ -16,8 +16,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@AtLeastOneNotNull(fields = { "competitionId",
-    "competitionDisplayName" }, message = "Either competitionId or competitionDisplayName must be provided")
+@AtLeastOneNotNull.List({
+    @AtLeastOneNotNull(fields = { "competitionId",
+        "competitionDisplayName" }, message = "Either competitionId or competitionDisplayName must be provided"),
+    @AtLeastOneNotNull(fields = { "teamId",
+        "teamDisplayName" }, message = "Either teamId or teamDisplayName must be provided")
+})
 public class CompetitionOutcomeDto {
 
   private Long id;
@@ -28,5 +32,13 @@ public class CompetitionOutcomeDto {
 
   private Long competitionId;
   private String competitionDisplayName;
+
+  private Long teamId;
+  private String teamDisplayName;
+
+  private Integer finalPosition;
+  private Integer points;
+  private String outcomeType;
+  private String notes;
 
 }

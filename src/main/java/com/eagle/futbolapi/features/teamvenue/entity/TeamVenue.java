@@ -2,11 +2,6 @@ package com.eagle.futbolapi.features.teamvenue.entity;
 
 import java.time.LocalDate;
 
-import com.eagle.futbolapi.features.base.entity.BaseEntity;
-import com.eagle.futbolapi.features.base.enums.VenueDesignation;
-import com.eagle.futbolapi.features.team.entity.Team;
-import com.eagle.futbolapi.features.venue.entity.Venue;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -17,6 +12,12 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import com.eagle.futbolapi.features.base.entity.BaseEntity;
+import com.eagle.futbolapi.features.base.enums.VenueDesignation;
+import com.eagle.futbolapi.features.team.entity.Team;
+import com.eagle.futbolapi.features.venue.entity.Venue;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

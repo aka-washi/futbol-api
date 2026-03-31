@@ -19,7 +19,6 @@ import com.eagle.futbolapi.features.team.dto.TeamDto;
 import com.eagle.futbolapi.features.team.entity.Team;
 import com.eagle.futbolapi.features.team.mapper.TeamMapper;
 import com.eagle.futbolapi.features.team.repository.TeamRepository;
-import com.eagle.futbolapi.features.venue.service.VenueService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -85,25 +84,29 @@ public class TeamService extends BaseCrudService<Team, Long, TeamDto> {
   @Override
   protected void resolveRelationships(TeamDto dto, Team team) {
     // Map organization from display name or ID
-    if (dto.getOrganizationDisplayName() != null && !dto.getOrganizationDisplayName().trim().isEmpty()) {
-      var organization = organizationService.findByDisplayName(dto.getOrganizationDisplayName())
+    String organizationDisplayName = dto.getOrganizationDisplayName();
+    Long organizationId = dto.getOrganizationId();
+    if (organizationDisplayName != null && !organizationDisplayName.trim().isEmpty()) {
+      var organization = organizationService.findByDisplayName(organizationDisplayName)
           .orElseThrow(() -> new ResourceNotFoundException("Organization", "displayName",
-              dto.getOrganizationDisplayName()));
+              organizationDisplayName));
       team.setOrganization(organization);
-    } else if (dto.getOrganizationId() != null) {
-      var organization = organizationService.getById(dto.getOrganizationId())
-          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", dto.getOrganizationId()));
+    } else if (organizationId != null) {
+      var organization = organizationService.getById(organizationId)
+          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", organizationId));
       team.setOrganization(organization);
     }
 
     // Map country from display name or ID
-    if (dto.getCountryDisplayName() != null && !dto.getCountryDisplayName().trim().isEmpty()) {
-      var country = countryService.findByDisplayName(dto.getCountryDisplayName())
-          .orElseThrow(() -> new ResourceNotFoundException("Country", "displayName", dto.getCountryDisplayName()));
+    String countryDisplayName = dto.getCountryDisplayName();
+    Long countryId = dto.getCountryId();
+    if (countryDisplayName != null && !countryDisplayName.trim().isEmpty()) {
+      var country = countryService.findByDisplayName(countryDisplayName)
+          .orElseThrow(() -> new ResourceNotFoundException("Country", "displayName", countryDisplayName));
       team.setCountry(country);
-    } else if (dto.getCountryId() != null) {
-      var country = countryService.getById(dto.getCountryId())
-          .orElseThrow(() -> new ResourceNotFoundException("Country", "id", dto.getCountryId()));
+    } else if (countryId != null) {
+      var country = countryService.getById(countryId)
+          .orElseThrow(() -> new ResourceNotFoundException("Country", "id", countryId));
       team.setCountry(country);
     }
   }

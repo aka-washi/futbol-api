@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
+import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.MembershipStatus;
 import com.eagle.futbolapi.features.organization.entity.Organization;
@@ -44,14 +45,17 @@ import lombok.experimental.SuperBuilder;
 public class LeagueMembership extends BaseEntity {
 
   @NotNull
+  @UniqueField(fieldPath = "league.id")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "lmp_league_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Organization league;
   @NotNull
+  @UniqueField(fieldPath = "member.id")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "lmp_member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Organization member;
   @NotNull
+  @UniqueField
   @Column(name = "lmp_membership_status", nullable = false)
   private MembershipStatus membershipStatus;
   @Column(name = "lmp_join_date", nullable = false)

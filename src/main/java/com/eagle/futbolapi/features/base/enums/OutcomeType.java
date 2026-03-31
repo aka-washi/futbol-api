@@ -2,22 +2,19 @@ package com.eagle.futbolapi.features.base.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-/**
- * Enum defining the type of competition result.
- */
-public enum CompetitionResultType {
+public enum OutcomeType {
   CHAMPION("Champion"),
   RUNNER_UP("Runner Up"),
   THIRD_PLACE("Third Place"),
-  TOP_SCORER("Top Scorer"),
-  BEST_PLAYER("Best Player"),
-  BEST_GOALKEEPER("Best Goalkeeper"),
+  PROMOTED("Promoted"),
   RELEGATED("Relegated"),
-  PROMOTED("Promoted");
+  QUALIFIED("Qualified"),
+  ELIMINATED("Eliminated"),
+  NONE("None");
 
   private final String label;
 
-  CompetitionResultType(String label) {
+  OutcomeType(String label) {
     this.label = label;
   }
 
@@ -26,15 +23,15 @@ public enum CompetitionResultType {
   }
 
   @JsonCreator
-  public static CompetitionResultType fromLabel(String label) {
+  public static OutcomeType fromLabel(String label) {
     if (label == null) {
       return null;
     }
-    for (CompetitionResultType e : CompetitionResultType.values()) {
+    for (OutcomeType e : OutcomeType.values()) {
       if (e.label.equalsIgnoreCase(label) || e.name().equalsIgnoreCase(label)) {
         return e;
       }
     }
-    throw new IllegalArgumentException("Unknown CompetitionResultType: " + label);
+    throw new IllegalArgumentException("Unknown OutcomeType: " + label);
   }
 }
