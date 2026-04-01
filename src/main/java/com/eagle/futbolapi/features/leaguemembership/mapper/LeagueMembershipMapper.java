@@ -17,11 +17,17 @@ public interface LeagueMembershipMapper extends BaseMapper<LeagueMembership, Lea
   @Mapping(target = "memberId", source = "member.id")
   @Mapping(target = "memberDisplayName", source = "member.displayName")
   @Mapping(target = "membershipStatus", expression = "java(membershipStatusToString(leagueMembership.getMembershipStatus()))")
+  @Mapping(target = "startSeasonId", source = "startSeason.id")
+  @Mapping(target = "startSeasonDisplayName", source = "startSeason.displayName")
+  @Mapping(target = "endSeasonId", source = "endSeason.id")
+  @Mapping(target = "endSeasonDisplayName", source = "endSeason.displayName")
   LeagueMembershipDto toDto(LeagueMembership leagueMembership);
 
   @Mapping(target = "league", ignore = true)
   @Mapping(target = "member", ignore = true)
   @Mapping(target = "membershipStatus", expression = "java(stringToMembershipStatus(leagueMembershipDto.getMembershipStatus()))")
+  @Mapping(target = "startSeason", ignore = true)
+  @Mapping(target = "endSeason", ignore = true)
   LeagueMembership toEntity(LeagueMembershipDto leagueMembershipDto);
 
   default String membershipStatusToString(MembershipStatus status) {

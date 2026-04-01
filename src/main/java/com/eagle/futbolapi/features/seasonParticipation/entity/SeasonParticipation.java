@@ -28,7 +28,7 @@ import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
 /**
- * Entity class representing a Season Team in the football database.
+ * Entity class representing a Season Participation in the football database.
  */
 @Getter
 @Setter
@@ -62,20 +62,11 @@ public class SeasonParticipation extends BaseEntity {
   @JoinColumn(name = "team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Team team;
 
-  @NotNull
-  @Column(name = "stm_joined_date", nullable = false)
-  private LocalDate joinedDate;
-
-  @Column(name = "stm_left_date")
-  private LocalDate leftDate;
-
   @Override
   public int hashCode() {
     return Objects.hash(
         season,
-        team,
-        joinedDate,
-        leftDate);
+        team);
   }
 
   @Override
@@ -86,8 +77,6 @@ public class SeasonParticipation extends BaseEntity {
       return false;
     SeasonParticipation other = (SeasonParticipation) obj;
     return Objects.equals(season, other.season)
-        && Objects.equals(team, other.team)
-        && Objects.equals(joinedDate, other.joinedDate)
-        && Objects.equals(leftDate, other.leftDate);
+        && Objects.equals(team, other.team);
   }
 }

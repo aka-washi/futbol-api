@@ -2,8 +2,9 @@ name,displayName,type,abbreviation,countryDisplayName,founded,parentOrganization
 International Federation of Association Football,FIFA,Governing Body,FIFA,,1904-05-21,,,https://www.fifa.com,"Zurich, Switzerland",International Federation of Association Football
 "Confederation of North, Central America and Caribbean Association Football",CONCACAF,Confederation,CONCACAF,,1961-09-18,FIFA,,https://concacaf.com/,"Florida, United States","Confederation of North, Central America and Caribbean Association Football"
 Mexican Football Federation,Federación Mexicana,Federation,FMF,Mexico,1927-08-23,CONCACAF,,www.fmf.mx,"Toluca, Mexico",
-Liga MX Femenil,Liga MX Femenil,League,MXF,Mexico,2016-12-06,Federación Mexicana,,http://www.ligafemenil.mx/,"Toluca, Mexico",
-Club de Fútbol América S.A. de C.V.,Club América,Club,AME,Mexico,1916-10-12,Federación Mexicana,,https://www.clubamerica.com.mx/,Ciudad de México,
+Liga BBVA MX Femenil,Liga MX Femenil,League,MXF,Mexico,2016-12-06,Federación Mexicana,,http://www.ligafemenil.mx/,"Toluca, Mexico",
+Liga BBVA MX,Liga MX,League,LMX,Mexico,1943-10-17,Federación Mexicana,,http://www.ligamx.net/,"Toluca, Mexico",
+Club de Fútbol América S.A. de C.V.,América,Club,AME,Mexico,1916-10-12,Federación Mexicana,,https://www.clubamerica.com.mx/,Ciudad de México,
 Atlas F.C.,Atlas,Club,ATL,Mexico,1916-08-15,Federación Mexicana,,https://www.atlasfc.com.mx/,"Guadalajara, Jalisco",
 Atlético de San Luis,San Luis,Club,ASL,Mexico,2013-05-28,Federación Mexicana,,http://atleticodesanluis.mx/,"San Luis Potosí, San Luis Potosí",
 Club de Futbol Cruz Azul S.A. de C.V.,Cruz Azul,Club,CAZ,Mexico,1927-05-22,Federación Mexicana,,http://cfcruzazul.com/,Ciudad de México,

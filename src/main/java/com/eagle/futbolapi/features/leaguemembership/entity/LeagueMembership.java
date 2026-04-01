@@ -19,6 +19,7 @@ import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.MembershipStatus;
 import com.eagle.futbolapi.features.organization.entity.Organization;
+import com.eagle.futbolapi.features.season.entity.Season;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,19 +50,26 @@ public class LeagueMembership extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "lmp_league_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Organization league;
+
   @NotNull
   @UniqueField(fieldPath = "member.id")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "lmp_member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Organization member;
+
   @NotNull
   @UniqueField
   @Column(name = "lmp_membership_status", nullable = false)
   private MembershipStatus membershipStatus;
-  @Column(name = "lmp_join_date", nullable = false)
-  private LocalDate joinDate;
-  @Column(name = "lmp_left_date")
-  private LocalDate leftDate;
+
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "lmp_start_season_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Season startSeason;
+  
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "lmp_left_season_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Season endSeason;
 
   @Override
   public int hashCode() {
@@ -69,8 +77,8 @@ public class LeagueMembership extends BaseEntity {
         league,
         member,
         membershipStatus,
-        joinDate,
-        leftDate);
+        startSeason,
+        endSeason);
   }
 
   @Override
@@ -83,7 +91,7 @@ public class LeagueMembership extends BaseEntity {
     return Objects.equals(league, other.league)
         && Objects.equals(member, other.member)
         && Objects.equals(membershipStatus, other.membershipStatus)
-        && Objects.equals(joinDate, other.joinDate)
-        && Objects.equals(leftDate, other.leftDate);
+        && Objects.equals(startSeason, other.startSeason)
+        && Objects.equals(endSeason, other.endSeason);
   }
 }

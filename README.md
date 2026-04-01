@@ -121,8 +121,31 @@ For questions or support, please contact the project maintainer.
 | Entity           | Depends On                                     |
 |------------------|------------------------------------------------|
 | country          | (none)                                         |
-| organization     | country, parent_organization (optional)        |
-| venue            | country                                        |
-| person           | country                                        |
-| player           | person, team (currentTeam, optional)           |
-| staff            | person, team (currentTeam, optional)           |
+| point_system     | (none)                                         |
+| season           | (none)                                         |
+| organization     | country (optional), organization (parent, optional) |
+| person           | country (birth_country, optional), country (nationality, optional) |
+| stage_format     | point_system (optional)                        |
+| venue            | country (optional)                             |
+| league_membership | organization (league), organization (member)  |
+| organization_transition | organization (from), organization (to)   |
+| team             | organization, country                          |
+| tournament       | organization, tournament (relegation_to, optional) |
+| player           | person, team (current_team, optional)          |
+| season_participation | season, team                               |
+| staff            | person, team (current_team, optional)          |
+| team_brand       | team                                           |
+| team_venue       | team, venue                                    |
+| tournament_season | season, tournament                            |
+| competition      | tournament_season                              |
+| competition_outcome | competition, team                           |
+| qualification_outcome | competition (source), competition (target), team |
+| registration     | competition, team, player (optional), staff (optional) |
+| stage            | competition, stage_format (optional)           |
+| group            | stage                                          |
+| matchday         | stage                                          |
+| standing         | stage, team                                    |
+| match            | matchday, team (home_team), team (away_team), venue (optional), person (referee, optional) |
+| lineup           | match, team                                    |
+| match_event      | match, team, player, player (assist_player, optional), player (substitute_player, optional) |
+| lineup_member    | lineup, player (optional), staff (optional)    |

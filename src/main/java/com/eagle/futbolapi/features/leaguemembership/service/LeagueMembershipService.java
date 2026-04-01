@@ -14,16 +14,19 @@ import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
 import com.eagle.futbolapi.features.base.service.BaseCrudService;
 import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.organization.service.OrganizationService;
+import com.eagle.futbolapi.features.season.service.SeasonService;
 
 public class LeagueMembershipService extends BaseCrudService<LeagueMembership, Long, LeagueMembershipDto> {
 
   private final LeagueMembershipRepository repository;
   private final OrganizationService organizationService;
+  private final SeasonService seasonService;
 
   public LeagueMembershipService(LeagueMembershipRepository repository, LeagueMembershipMapper mapper,
-      OrganizationService organizationService) {
+      OrganizationService organizationService, SeasonService seasonService) {
     super(repository, mapper);
     this.repository = repository;
+    this.seasonService = seasonService;
     this.organizationService = organizationService;
   }
 
@@ -59,6 +62,32 @@ public class LeagueMembershipService extends BaseCrudService<LeagueMembership, L
       leagueMembership.setMember(organizationService.findByDisplayName(memberDisplayName)
           .orElseThrow(() -> new ResourceNotFoundException("Member", "displayName", memberDisplayName)));
     }
+
+    // Resolve Start Season by ID or display name using SeasonService
+    String startSeasonDisplayName = dto.getStartSeasonDisplayName();
+    Long startSeasonId = dto.getStartSeasonId();
+    if (startSeasonDisplayName != null && !startSeasonDisplayName.trim().isEmpty()) {
+      leagueMembership.setStartSeason(seasonService.findByDisplayName(startSeasonDisplayName)
+          .orElseThrow(() -> new ResourceNotFoundException("Start Season", "displayName", startSeasonDisplayName)));
+    } else if (startSeasonId != null) {
+      leagueMembership.setStartSeason(seasonService.getById(startSeasonId)
+          .orElseThrow(() -> new ResourceNotFoundException("Start Season", "id", startSeasonId)));
+    }
+
+    // Resolve End Season by ID or display name using SeasonService
+    String endSeasonDisplayName = dto.getEndSeasonDisplayName();
+    Long endSeasonId = dto.getEndSeasonId();
+    if (endSeasonDisplayName != null && !endSeasonDisplayName.trim().isEmpty()) {
+      leagueMembership.setEndSeason(seasonService.getById(endSeasonId)
+          .orElseThrow(() -> new ResourceNotFoundException("End Season", "id", endSeasonId)));
+    } else if (endSeasonDisplayName != null && !endSeasonDisplayName.trim().isEmpty()) {
+      leagueMembership.setEndSeason(seasonService.findByDisplayName(endSeasonDisplayName)
+          .orElseThrow(() -> new ResourceNotFoundException("End Season", "displayName", endSeasonDisplayName)));
+    } else if (endSeasonId != null) {
+      leagueMembership.setEndSeason(seasonService.getById(endSeasonId)
+          .orElseThrow(() -> new ResourceNotFoundException("End Season", "id", endSeasonId)));
+    }
+
   }
 
   @Override

@@ -1,5 +1,6 @@
 name,displayName,city,countryDisplayName,capacity,address,surface,opened,active
-Estadio Ciudad de los Deportes,Estadio Ciudad de los Deportes,Mexico City,Mexico,33000,"Calzada de Tlalpan 3465, Santa Ursula Coapa, Mexico City",Grass,1946-10-06,true
+Estadio Azteca,Estadio Banorte,Mexico City,Mexico,87523,"Calzada de Tlalpan 3665, Santa Ursula Coapa, Mexico City",GrassMaster,1966-05-26,true
+Estadio Ciudad de los Deportes,Estadio Ciudad de los Deportes,Mexico City,Mexico,33000,"Calle Indiana 225, 03710 Mexico City, Mexico City",Grass,1946-10-06,true
 Estadio Jalisco,Estadio Jalisco,Guadalajara,Mexico,55110,"Calle 7 Colinas 1772, Guadalajara",Grass,1960-01-31,true
 Estadio Libertad Financiera,Estadio Libertad Financiera,San Luis Potosí,Mexico,25111,"Av. Libertad 123, San Luis Potosí",Grass,2002-08-25,true
 Estadio Centenario,Estadio Centenario,Cuernavaca,Mexico,9670,"Av. Universidad 1001, Cuernavaca",Grass,1969-03-17,true

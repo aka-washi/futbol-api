@@ -33,9 +33,15 @@ public class LeagueMembershipDto {
 
   private Long leagueId;
   private String leagueDisplayName;
+
   private Long memberId;
   private String memberDisplayName;
+
   private String membershipStatus;
-  private LocalDateTime joinDate;
-  private LocalDateTime leftDate;
+
+  private long startSeasonId;
+  private String startSeasonDisplayName;
+  
+  private long endSeasonId;
+  private String endSeasonDisplayName;
 }
