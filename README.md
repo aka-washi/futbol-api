@@ -132,7 +132,6 @@ For questions or support, please contact the project maintainer.
 | team             | organization, country                          |
 | tournament       | organization, tournament (relegation_to, optional) |
 | player           | person, team (current_team, optional)          |
-| season_participation | season, team                               |
 | staff            | person, team (current_team, optional)          |
 | team_brand       | team                                           |
 | team_venue       | team, venue                                    |

@@ -42,8 +42,6 @@ import com.eagle.futbolapi.features.registration.dto.RegistrationDto;
 import com.eagle.futbolapi.features.registration.service.RegistrationService;
 import com.eagle.futbolapi.features.season.dto.SeasonDto;
 import com.eagle.futbolapi.features.season.service.SeasonService;
-import com.eagle.futbolapi.features.seasonParticipation.dto.SeasonParticipationDto;
-import com.eagle.futbolapi.features.seasonParticipation.service.SeasonParticipationService;
 import com.eagle.futbolapi.features.staff.dto.StaffDto;
 import com.eagle.futbolapi.features.staff.service.StaffService;
 import com.eagle.futbolapi.features.stage.dto.StageDto;
@@ -90,7 +88,6 @@ public class BootstrapService {
   private final StageFormatService stageFormatService;
   private final TournamentSeasonService tournamentSeasonService;
   private final CompetitionService competitionService;
-  private final SeasonParticipationService seasonTeamService;
   private final StageService stageService;
   private final VenueService venueService;
   private final GroupService groupService;
@@ -159,7 +156,6 @@ public class BootstrapService {
         "tournamentseason",  // Depends on tournament, season
         "competition",       // Depends on tournamentSeason
         "registration",      // Depends on person, team, tournament, competition
-        "seasonteam",        // Depends on season, team
         "stage",             // Depends on competition, stageFormat (optional)
         "group",             // Depends on stage
         "matchday",          // Depends on stage
@@ -269,7 +265,6 @@ public class BootstrapService {
     String[][] replacements = {
         {"stageformat", "stageFormat"},
         {"tournamentseason", "tournamentSeason"},
-        {"seasonteam", "seasonTeam"},
         {"pointsystem", "pointSystem"},
         {"matchday", "matchDay"},
         {"lineupmember", "lineupMember"},
@@ -335,9 +330,6 @@ public class BootstrapService {
         return loadEntities(dataArray, TournamentSeasonDto.class, tournamentSeasonService::create, "TournamentSeason");
       case "competition":
         return loadEntities(dataArray, CompetitionDto.class, competitionService::create, "Competition");
-      case "seasonteam":
-      case "season-team":
-        return loadEntities(dataArray, SeasonParticipationDto.class, seasonTeamService::create, "SeasonTeam");
       case "stage":
         return loadEntities(dataArray, StageDto.class, stageService::create, "Stage");
       case "group":

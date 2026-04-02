@@ -10,7 +10,6 @@
 #   ./generate-csv-from-dto.sh team
 #
 # Available entities:
-#   team, player, staff, country, season, pointsystem, organization, venue, competition, season_team, standing, registration, stage, tournament, tournament_season, match, matchday, matchevent, group, lineup, lineup_member, stage_format
 
 # Directory containing DTOs (update if needed)
 DTO_DIR="/workspaces/futbol-api/src/main/java/com/eagle/futbolapi/features"
@@ -33,7 +32,6 @@ declare -A ENTITY_DTO_MAP=(
   [venue]="venue/dto/VenueDto.java"
   [competition]="competition/dto/CompetitionDto.java"
   [competitionoutcome]="competitionOutcome/dto/CompetitionOutcomeDto.java"
-  [seasonteam]="seasonTeam/dto/SeasonTeamDto.java"
   [standing]="standing/dto/StandingDto.java"
   [registration]="registration/dto/RegistrationDto.java"
   [stage]="stage/dto/StageDto.java"
