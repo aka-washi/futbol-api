@@ -41,7 +41,7 @@ public class LeagueMembershipDto {
 
   private long startSeasonId;
   private String startSeasonDisplayName;
-  
+
   private long endSeasonId;
   private String endSeasonDisplayName;
 }

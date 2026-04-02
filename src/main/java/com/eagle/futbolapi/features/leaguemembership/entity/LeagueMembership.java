@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.leaguemembership.entity;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
@@ -66,7 +65,7 @@ public class LeagueMembership extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "lmp_start_season_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Season startSeason;
-  
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "lmp_left_season_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Season endSeason;
