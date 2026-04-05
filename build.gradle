@@ -32,7 +32,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    implementation 'net.bytebuddy:byte-buddy-agent:1.18.7'
+    implementation 'net.bytebuddy:byte-buddy-agent:1.18.8'
 
     // Database drivers
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
