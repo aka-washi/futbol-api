@@ -3,12 +3,10 @@ package com.eagle.futbolapi.features.competitionoutcome.entity;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -50,13 +48,13 @@ public class CompetitionOutcome extends BaseEntity {
   @NotNull
   @UniqueField(fieldPath = "competition.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "cpo_competition_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "cpo_competition_id", nullable = false)
   private Competition competition;
 
   @NotNull
   @UniqueField(fieldPath = "team.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "cpo_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "cpo_team_id", nullable = false)
   private Team team;
 
   @UniqueField

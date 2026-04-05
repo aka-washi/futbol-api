@@ -3,6 +3,10 @@ package com.eagle.futbolapi.features.leaguemembership.service;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
+
 import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
@@ -16,6 +20,9 @@ import com.eagle.futbolapi.features.organization.entity.Organization;
 import com.eagle.futbolapi.features.organization.service.OrganizationService;
 import com.eagle.futbolapi.features.season.service.SeasonService;
 
+@Service
+@Transactional
+@Validated
 public class LeagueMembershipService extends BaseCrudService<LeagueMembership, Long, LeagueMembershipDto> {
 
   private final LeagueMembershipRepository repository;
@@ -78,9 +85,6 @@ public class LeagueMembershipService extends BaseCrudService<LeagueMembership, L
     String endSeasonDisplayName = dto.getEndSeasonDisplayName();
     Long endSeasonId = dto.getEndSeasonId();
     if (endSeasonDisplayName != null && !endSeasonDisplayName.trim().isEmpty()) {
-      leagueMembership.setEndSeason(seasonService.getById(endSeasonId)
-          .orElseThrow(() -> new ResourceNotFoundException("End Season", "id", endSeasonId)));
-    } else if (endSeasonDisplayName != null && !endSeasonDisplayName.trim().isEmpty()) {
       leagueMembership.setEndSeason(seasonService.findByDisplayName(endSeasonDisplayName)
           .orElseThrow(() -> new ResourceNotFoundException("End Season", "displayName", endSeasonDisplayName)));
     } else if (endSeasonId != null) {

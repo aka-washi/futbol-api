@@ -5,12 +5,10 @@ import java.time.LocalDate;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -45,11 +43,11 @@ import lombok.experimental.SuperBuilder;
 public class TeamVenue extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tmv_team_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "tmv_team_id")
   private Team team;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tmv_venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "tmv_venue_id")
   private Venue venue;
 
   @Enumerated(EnumType.STRING)

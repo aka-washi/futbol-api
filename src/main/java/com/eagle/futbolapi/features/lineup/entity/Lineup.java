@@ -5,10 +5,8 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -35,11 +33,11 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "lineup")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "lu_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "lu_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "lu_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "lu_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "lu_updated_by", length = 100))
+    @AttributeOverride(name = "id", column = @Column(name = "lup_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "lup_created_at", nullable = false, updatable = false)),
+    @AttributeOverride(name = "createdBy", column = @Column(name = "lup_created_by", length = 100, updatable = false)),
+    @AttributeOverride(name = "updatedAt", column = @Column(name = "lup_updated_at")),
+    @AttributeOverride(name = "updatedBy", column = @Column(name = "lup_updated_by", length = 100))
 })
 @SuperBuilder
 @NoArgsConstructor
@@ -47,20 +45,20 @@ import lombok.experimental.SuperBuilder;
 public class Lineup extends BaseEntity {
 
   @NotBlank
-  @Column(name = "lu_display_name", nullable = false, length = 100)
+  @Column(name = "lup_display_name", nullable = false, length = 100)
   private String displayName;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "match_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lup_match_id", nullable = false)
   @NotNull
   private Match match;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lup_team_id", nullable = false)
   @NotNull
   private Team team;
 
-  @Column(name = "lu_formation", length = 50)
+  @Column(name = "lup_formation", length = 50)
   private String formation;
 
   @Override

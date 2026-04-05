@@ -5,12 +5,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -40,11 +38,11 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "lineup_member")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "lm_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "lm_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "lm_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "lm_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "lm_updated_by", length = 100))
+    @AttributeOverride(name = "id", column = @Column(name = "lmb_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "lmb_created_at", nullable = false, updatable = false)),
+    @AttributeOverride(name = "createdBy", column = @Column(name = "lmb_created_by", length = 100, updatable = false)),
+    @AttributeOverride(name = "updatedAt", column = @Column(name = "lmb_updated_at")),
+    @AttributeOverride(name = "updatedBy", column = @Column(name = "lmb_updated_by", length = 100))
 })
 @SuperBuilder
 @NoArgsConstructor
@@ -52,39 +50,39 @@ import lombok.experimental.SuperBuilder;
 public class LineupMember extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "lineup_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lmb_lineup_id", nullable = false)
   @NotNull
   private Lineup lineup;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "lm_person_type", nullable = false, length = 20)
+  @Column(name = "lmb_person_type", nullable = false, length = 20)
   @NotNull
   private PersonType personType;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "player_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lmb_player_id")
   private Player player;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "staff_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lmb_staff_id")
   private Staff staff;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "lm_role_type", nullable = false, length = 30)
+  @Column(name = "lmb_role_type", nullable = false, length = 30)
   @NotNull
   private LineupMemberRoleType roleType;
 
-  @Column(name = "lm_position", length = 50)
+  @Column(name = "lmb_position", length = 50)
   private String position;
 
-  @Column(name = "lm_jersey_number")
+  @Column(name = "lmb_jersey_number")
   private Integer jerseyNumber;
 
-  @Column(name = "lm_captain", nullable = false)
+  @Column(name = "lmb_captain", nullable = false)
   @Builder.Default
   private Boolean captain = false;
 
-  @Column(name = "lm_order_num")
+  @Column(name = "lmb_order_num")
   private Integer orderNum;
 
   @Override

@@ -8,11 +8,9 @@ import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -47,7 +45,7 @@ public class TeamBrand extends BaseEntity {
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tbr_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "tbr_team_id", nullable = false)
   private Team team;
 
   @Column(name = "tbr_name", length = 100)
@@ -55,7 +53,7 @@ public class TeamBrand extends BaseEntity {
   @Column(name = "tbr_display_name", length = 50)
   private String displayName;
   @ElementCollection
-  @CollectionTable(name = "team_nicknames", joinColumns = @JoinColumn(name = "tbr_team_brand_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)))
+  @CollectionTable(name = "team_nicknames", joinColumns = @JoinColumn(name = "tbr_team_brand_id"))
   @Column(name = "tbr_nickname", length = 100)
   private Set<String> nicknames;
   @Column(name = "tbr_abbreviation", length = 10)

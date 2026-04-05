@@ -5,12 +5,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -50,7 +48,7 @@ public class Staff extends BaseEntity {
   @NotNull
   @UniqueField
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "person_id", nullable = false, unique = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "stf_person_id", nullable = false, unique = true)
   private Person person;
 
   @NotNull
@@ -59,7 +57,7 @@ public class Staff extends BaseEntity {
   private StaffRole role;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "team_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "stf_team_id")
   private Team currentTeam;
 
   @lombok.Builder.Default

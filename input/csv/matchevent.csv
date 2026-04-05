@@ -1,1 +1,1 @@
-id,matchId,matchDisplayName,teamId,teamDisplayName,playerId,playerDisplayName,assistPlayerId,assistPlayerDisplayName,substitutePlayerId,substitutePlayerDisplayName,type,period,minute,extraMinute,description,videoUrl,createdAt,createdBy,updatedAt,updatedBy
+matchDisplayName,teamDisplayName,playerDisplayName,assistPlayerDisplayName,substitutePlayerDisplayName,type,period,minute,extraMinute,description,videoUrl

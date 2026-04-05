@@ -2,6 +2,10 @@ package com.eagle.futbolapi.features.teambrand.service;
 
 import java.util.Objects;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
+
 import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
@@ -13,6 +17,9 @@ import com.eagle.futbolapi.features.teambrand.dto.TeamBrandDto;
 import com.eagle.futbolapi.features.teambrand.entity.TeamBrand;
 import com.eagle.futbolapi.features.teambrand.repository.TeamBrandRepository;
 
+@Service
+@Transactional
+@Validated
 public class TeamBrandService extends BaseCrudService<TeamBrand, Long, TeamBrandDto> {
 
   private final TeamBrandRepository repository;

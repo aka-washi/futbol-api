@@ -6,10 +6,8 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -55,7 +53,7 @@ public class Venue extends BaseEntity {
 
   @UniqueField
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "country_id", nullable = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "ven_country_id", nullable = true)
   private Country country;
 
   @Column(name = "ven_capacity")

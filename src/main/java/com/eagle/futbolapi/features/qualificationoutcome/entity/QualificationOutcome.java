@@ -3,12 +3,10 @@ package com.eagle.futbolapi.features.qualificationoutcome.entity;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -47,19 +45,19 @@ public class QualificationOutcome extends BaseEntity {
   @NotNull
   @UniqueField(fieldPath = "sourceCompetition.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "qfo_source_competition_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "qfo_source_competition_id", nullable = false)
   private Competition sourceCompetition;
 
   @NotNull
   @UniqueField(fieldPath = "targetCompetition.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "qfo_target_competition_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "qfo_target_competition_id", nullable = false)
   private Competition targetCompetition;
 
   @NotNull
   @UniqueField(fieldPath = "team.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "qfo_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "qfo_team_id", nullable = false)
   private Team team;
 
   @NotNull

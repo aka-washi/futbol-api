@@ -7,12 +7,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -60,22 +58,22 @@ public class Match extends BaseEntity {
   private String displayName;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "matchday_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mtc_matchday_id", nullable = false)
   @NotNull
   private Matchday matchday;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "home_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mtc_home_team_id", nullable = false)
   @NotNull
   private Team homeTeam;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "away_team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mtc_away_team_id", nullable = false)
   @NotNull
   private Team awayTeam;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "venue_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mtc_venue_id")
   private Venue venue;
 
   @NotNull
@@ -126,7 +124,7 @@ public class Match extends BaseEntity {
   private Integer attendance;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "referee_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mtc_referee_id")
   private Person referee;
 
   @Column(name = "mtc_weather_conditions")

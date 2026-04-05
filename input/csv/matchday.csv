@@ -1,1 +1,1 @@
-id,stageId,stageDisplayName,number,name,displayName,startDate,endDate,status,createdAt,createdBy,updatedAt,updatedBy
+stageDisplayName,number,name,displayName,startDate,endDate,status

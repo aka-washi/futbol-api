@@ -1,7 +1,6 @@
 package com.eagle.futbolapi.features.organizationtransition.service;
 
 import java.util.Objects;
-import java.util.Optional;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -37,13 +36,6 @@ public class OrganizationTransitionService extends BaseCrudService<OrganizationT
     super(repository, mapper);
     this.repository = repository;
     this.organizationService = organizationService;
-  }
-
-  public Optional<OrganizationTransition> findByDisplayName(String displayName) {
-    if (displayName == null || displayName.isEmpty()) {
-      throw new IllegalArgumentException("OrganizationTransition display name cannot be null or empty");
-    }
-    return repository.findByDisplayName(displayName);
   }
 
   @Override

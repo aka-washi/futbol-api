@@ -2,6 +2,10 @@ package com.eagle.futbolapi.features.competitionoutcome.service;
 
 import java.util.Objects;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
+
 import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
@@ -14,12 +18,15 @@ import com.eagle.futbolapi.features.competitionoutcome.mapper.CompetitionOutcome
 import com.eagle.futbolapi.features.competitionoutcome.repository.CompetitionOutcomeRepository;
 import com.eagle.futbolapi.features.team.service.TeamService;
 
+@Service
+@Transactional
+@Validated
 public class CompetitionOutcomeService extends BaseCrudService<CompetitionOutcome, Long, CompetitionOutcomeDto> {
 
   private final CompetitionService competitionService;
   private final TeamService teamService;
 
-  protected CompetitionOutcomeService(CompetitionOutcomeRepository repository,
+  public CompetitionOutcomeService(CompetitionOutcomeRepository repository,
       CompetitionOutcomeMapper mapper, CompetitionService competitionService, TeamService teamService) {
     super(repository, mapper);
     this.competitionService = competitionService;

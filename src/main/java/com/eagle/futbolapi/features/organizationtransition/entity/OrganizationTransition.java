@@ -6,12 +6,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -49,12 +47,12 @@ public class OrganizationTransition extends BaseEntity {
   @NotNull
   @UniqueField(fieldPath = "fromOrganization.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ogt_from_organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "ogt_from_organization_id", nullable = false)
   private Organization fromOrganization;
   @NotNull
   @UniqueField(fieldPath = "toOrganization.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ogt_to_organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "ogt_to_organization_id", nullable = false)
   private Organization toOrganization;
 
   @UniqueField

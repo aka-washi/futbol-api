@@ -5,10 +5,8 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -47,13 +45,13 @@ public class LeagueMembership extends BaseEntity {
   @NotNull
   @UniqueField(fieldPath = "league.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "lmp_league_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lmp_league_id", nullable = false)
   private Organization league;
 
   @NotNull
   @UniqueField(fieldPath = "member.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "lmp_member_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lmp_member_id", nullable = false)
   private Organization member;
 
   @NotNull
@@ -63,11 +61,11 @@ public class LeagueMembership extends BaseEntity {
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "lmp_start_season_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lmp_start_season_id", nullable = false)
   private Season startSeason;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "lmp_left_season_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "lmp_left_season_id")
   private Season endSeason;
 
   @Override

@@ -6,12 +6,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -40,8 +38,8 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "tournament_season", uniqueConstraints = {
     @UniqueConstraint(name = "uk_tournament_season_natural", columnNames = {
-        "tournament_id",
-        "season_id"
+        "tsn_tournament_id",
+        "tsn_season_id"
     })
 })
 @AttributeOverrides({
@@ -58,12 +56,12 @@ public class TournamentSeason extends BaseEntity {
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "season_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "tsn_season_id", nullable = false)
   private Season season;
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tournament_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "tsn_tournament_id", nullable = false)
   private Tournament tournament;
 
   @NotBlank

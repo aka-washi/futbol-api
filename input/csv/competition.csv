@@ -1,1 +1,1 @@
-id,createdAt,createdBy,updatedAt,updatedBy,tournamentSeasonId,tournamentSeasonDisplayName,displayName,type,startDate,endDate,status,totalMatches,description
+tournamentSeasonDisplayName,displayName,type,startDate,endDate,status,totalMatches,description
