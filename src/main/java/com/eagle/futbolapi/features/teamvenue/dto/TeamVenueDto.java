@@ -3,10 +3,11 @@ package com.eagle.futbolapi.features.teamvenue.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotNull;
+
 import com.eagle.futbolapi.features.base.enums.VenueDesignation;
 import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,5 +47,5 @@ public class TeamVenueDto {
   private LocalDate startDate;
   @NotNull(message = "End date is required")
   private LocalDate endDate;
-  
+
 }

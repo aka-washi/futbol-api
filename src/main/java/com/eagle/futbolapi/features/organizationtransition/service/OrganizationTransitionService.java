@@ -28,13 +28,11 @@ import lombok.extern.slf4j.Slf4j;
 @Validated
 public class OrganizationTransitionService extends BaseCrudService<OrganizationTransition, Long, OrganizationTransitionDto> {
 
-  private final OrganizationTransitionRepository repository;
   private final OrganizationService organizationService;
 
   protected OrganizationTransitionService(OrganizationTransitionRepository repository, OrganizationTransitionMapper mapper,
       OrganizationService organizationService) {
     super(repository, mapper);
-    this.repository = repository;
     this.organizationService = organizationService;
   }
 

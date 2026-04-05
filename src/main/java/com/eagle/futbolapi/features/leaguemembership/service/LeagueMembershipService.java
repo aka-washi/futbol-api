@@ -3,11 +3,11 @@ package com.eagle.futbolapi.features.leaguemembership.service;
 import java.util.Objects;
 import java.util.Optional;
 
+import jakarta.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-
-import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.enums.UniquenessStrategy;
 import com.eagle.futbolapi.features.base.exception.ResourceNotFoundException;
