@@ -68,25 +68,29 @@ public class OrganizationService extends BaseCrudService<Organization, Long, Org
   @Override
   protected void resolveRelationships(OrganizationDto dto, Organization organization) {
     // Map country from display name or ID
-    if (dto.getCountryDisplayName() != null && !dto.getCountryDisplayName().trim().isEmpty()) {
-      var country = countryService.findByDisplayName(dto.getCountryDisplayName())
-          .orElseThrow(() -> new ResourceNotFoundException("Country", "displayName", dto.getCountryDisplayName()));
+    String countryDisplayName = dto.getCountryDisplayName();
+    Long countryId = dto.getCountryId();
+    if (countryDisplayName != null && !countryDisplayName.trim().isEmpty()) {
+      var country = countryService.findByDisplayName(countryDisplayName)
+          .orElseThrow(() -> new ResourceNotFoundException("Country", "displayName", countryDisplayName));
       organization.setCountry(country);
-    } else if (dto.getCountryId() != null) {
-      var country = countryService.getById(dto.getCountryId())
-          .orElseThrow(() -> new ResourceNotFoundException("Country", "id", dto.getCountryId()));
+    } else if (countryId != null) {
+      var country = countryService.getById(countryId)
+          .orElseThrow(() -> new ResourceNotFoundException("Country", "id", countryId));
       organization.setCountry(country);
     }
 
     // Map parent organization from display name or ID
-    if (dto.getParentOrganizationDisplayName() != null) {
-      var parent = findByDisplayName(dto.getParentOrganizationDisplayName())
+    String parentOrganizationDisplayName = dto.getParentOrganizationDisplayName();
+    Long parentOrganizationId = dto.getParentOrganizationId();
+    if (parentOrganizationDisplayName != null && !parentOrganizationDisplayName.trim().isEmpty()) {
+      var parent = findByDisplayName(parentOrganizationDisplayName)
           .orElseThrow(() -> new ResourceNotFoundException("Organization", "displayName",
-              dto.getParentOrganizationDisplayName()));
+              parentOrganizationDisplayName));
       organization.setParentOrganization(parent);
-    } else if (dto.getParentOrganizationId() != null) {
-      var parent = getById(dto.getParentOrganizationId())
-          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", dto.getParentOrganizationId()));
+    } else if (parentOrganizationId != null) {
+      var parent = getById(parentOrganizationId)
+          .orElseThrow(() -> new ResourceNotFoundException("Organization", "id", parentOrganizationId));
       organization.setParentOrganization(parent);
     }
   }

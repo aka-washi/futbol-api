@@ -7,12 +7,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
@@ -96,11 +94,11 @@ public class Person extends BaseEntity {
   private String birthPlace;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "per_birth_country_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "per_birth_country_id")
   private Country birthCountry;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "per_nationality_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "per_nationality_id")
   private Country nationality;
 
   @Column(name = "per_height", precision = 5, scale = 2)
@@ -241,7 +239,7 @@ public class Person extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Person))
       return false;
     Person other = (Person) obj;
     return Objects.equals(uniqueRegKey, other.uniqueRegKey)

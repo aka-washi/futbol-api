@@ -6,12 +6,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -53,7 +51,7 @@ public class Competition extends BaseEntity {
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tournament_season_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "cmp_tournament_season_id", nullable = false)
   @UniqueField(fieldPath = "tournamentSeason.id")
   private TournamentSeason tournamentSeason;
 
@@ -96,7 +94,7 @@ public class Competition extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Competition))
       return false;
     Competition other = (Competition) obj;
     return Objects.equals(displayName, other.displayName)

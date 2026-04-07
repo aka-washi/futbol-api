@@ -5,12 +5,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -36,11 +34,11 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "match_event")
 @AttributeOverrides({
-    @AttributeOverride(name = "id", column = @Column(name = "me_id")),
-    @AttributeOverride(name = "createdAt", column = @Column(name = "me_created_at", nullable = false, updatable = false)),
-    @AttributeOverride(name = "createdBy", column = @Column(name = "me_created_by", length = 100, updatable = false)),
-    @AttributeOverride(name = "updatedAt", column = @Column(name = "me_updated_at")),
-    @AttributeOverride(name = "updatedBy", column = @Column(name = "me_updated_by", length = 100))
+    @AttributeOverride(name = "id", column = @Column(name = "mev_id")),
+    @AttributeOverride(name = "createdAt", column = @Column(name = "mev_created_at", nullable = false, updatable = false)),
+    @AttributeOverride(name = "createdBy", column = @Column(name = "mev_created_by", length = 100, updatable = false)),
+    @AttributeOverride(name = "updatedAt", column = @Column(name = "mev_updated_at")),
+    @AttributeOverride(name = "updatedBy", column = @Column(name = "mev_updated_by", length = 100))
 })
 @SuperBuilder
 @NoArgsConstructor
@@ -48,48 +46,48 @@ import lombok.experimental.SuperBuilder;
 public class MatchEvent extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "match_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mev_match_id", nullable = false)
   @NotNull
   private Match match;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mev_team_id", nullable = false)
   @NotNull
   private Team team;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "player_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mev_player_id", nullable = false)
   @NotNull
   private Player player;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "me_type", nullable = false, length = 50)
+  @Column(name = "mev_type", nullable = false, length = 50)
   @NotNull
   private MatchEventType type;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "me_period", nullable = false, length = 50)
+  @Column(name = "mev_period", nullable = false, length = 50)
   @NotNull
   private MatchPeriod period;
 
-  @Column(name = "me_minute", nullable = false)
+  @Column(name = "mev_minute", nullable = false)
   private Integer minute;
 
-  @Column(name = "me_extra_minute")
+  @Column(name = "mev_extra_minute")
   private Integer extraMinute; // Injury time
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "assist_player_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mev_assist_player_id")
   private Player assistPlayer; // For goals
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "substitute_player_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "mev_substitute_player_id")
   private Player substitutePlayer; // For substitutions (player coming in)
 
-  @Column(name = "me_description", columnDefinition = "TEXT")
+  @Column(name = "mev_description", columnDefinition = "TEXT")
   private String description;
 
-  @Column(name = "me_video_url")
+  @Column(name = "mev_video_url")
   private String videoUrl;
 
   @Override

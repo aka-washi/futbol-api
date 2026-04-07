@@ -1,1 +1,1 @@
-id,createdAt,createdBy,updatedAt,updatedBy,displayName,competitionId,competitionDisplayName,stageFormatId,stageFormatDisplayName,order,status,startDate,endDate
+displayName,competitionDisplayName,stageFormatDisplayName,order,status,startDate,endDate

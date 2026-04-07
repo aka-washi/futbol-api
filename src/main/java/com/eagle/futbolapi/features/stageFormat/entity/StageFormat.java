@@ -5,12 +5,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -60,7 +58,7 @@ public class StageFormat extends BaseEntity {
   private StageFormatType type;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "point_system_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "sgf_point_system_id")
   private PointSystem pointSystem;
 
   @Column(name = "sgf_number_of_teams")
@@ -90,7 +88,7 @@ public class StageFormat extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof StageFormat))
       return false;
     StageFormat other = (StageFormat) obj;
     return Objects.equals(displayName, other.displayName)

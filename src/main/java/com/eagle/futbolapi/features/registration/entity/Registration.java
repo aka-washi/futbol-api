@@ -6,13 +6,12 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -33,7 +32,11 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @Accessors(chain = false)
 @Entity
-@Table(name = "registration")
+@Table(name = "registration", uniqueConstraints = {
+    @UniqueConstraint(name = "uk_registration_jersey", columnNames = {
+        "reg_competition_id", "reg_team_id", "reg_jersey_number"
+    })
+})
 @AttributeOverrides({
     @AttributeOverride(name = "id", column = @Column(name = "reg_id")),
     @AttributeOverride(name = "createdAt", column = @Column(name = "reg_created_at", nullable = false, updatable = false)),
@@ -52,20 +55,20 @@ public class Registration extends BaseEntity {
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "competition_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "reg_competition_id", nullable = false)
   private Competition competition;
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "team_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "reg_team_id", nullable = false)
   private Team team;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "player_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "reg_player_id")
   private Player player;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "staff_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "reg_staff_id")
   private Staff staff;
 
   @Column(name = "reg_jersey_number")
@@ -91,7 +94,7 @@ public class Registration extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Registration))
       return false;
     Registration other = (Registration) obj;
     return Objects.equals(competition, other.competition)

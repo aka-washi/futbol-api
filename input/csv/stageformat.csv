@@ -1,0 +1,5 @@
+displayName,type,pointSystemDisplayName,numberOfTeams,numberOfGroups,teamsPerGroup,hasHomeAndAway,teamsQualifyingForNextStage,description
+Regular Season - Round Robin,Regular Season,Standard 3-1-0,18,,,false,8,Standard round-robin format where each team plays every other team only once
+Liguilla - Quaterfinals,Knockout,,8,,,true,4,"Playoff stage for top 8 teams, home and away legs"
+Liguilla - Semifinals,,,4,,,true,2,Semifinals playoffs
+Liguilla – final,,,2,,,true,,Championship matches

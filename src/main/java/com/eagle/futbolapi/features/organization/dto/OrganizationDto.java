@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrganizationDto {
-  
+
   private Long id;
   private LocalDateTime createdAt;
   private String createdBy;

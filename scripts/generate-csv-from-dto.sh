@@ -10,7 +10,6 @@
 #   ./generate-csv-from-dto.sh team
 #
 # Available entities:
-#   team, player, staff, country, season, pointsystem, organization, venue, competition, season_team, standing, registration, stage, tournament, tournament_season, match, matchday, matchevent, group, lineup, lineup_member, stage_format
 
 # Directory containing DTOs (update if needed)
 DTO_DIR="/workspaces/futbol-api/src/main/java/com/eagle/futbolapi/features"
@@ -19,29 +18,35 @@ CSV_DIR="/workspaces/futbol-api/input/csv"
 
 # Map entity to DTO file (add more as needed)
 declare -A ENTITY_DTO_MAP=(
-  [team]="team/dto/TeamDto.java"
-  [person]="person/dto/PersonDto.java"
-  [player]="player/dto/PlayerDto.java"
-  [staff]="staff/dto/StaffDto.java"
-  [country]="country/dto/CountryDto.java"
-  [season]="season/dto/SeasonDto.java"
-  [pointsystem]="pointsystem/dto/PointSystemDto.java"
-  [organization]="organization/dto/OrganizationDto.java"
-  [venue]="venue/dto/VenueDto.java"
   [competition]="competition/dto/CompetitionDto.java"
-  [season_team]="seasonTeam/dto/SeasonTeamDto.java"
-  [standing]="standing/dto/StandingDto.java"
-  [registration]="registration/dto/RegistrationDto.java"
-  [stage]="stage/dto/StageDto.java"
-  [tournament]="tournament/dto/TournamentDto.java"
-  [tournament_season]="tournamentSeason/dto/TournamentSeasonDto.java"
+  [competitionoutcome]="competitionoutcome/dto/CompetitionOutcomeDto.java"
+  [country]="country/dto/CountryDto.java"
+  [group]="group/dto/GroupDto.java"
+  [leaguemembership]="leaguemembership/dto/LeagueMembershipDto.java"
+  [lineup]="lineup/dto/LineupDto.java"
+  [lineupmember]="lineupMember/dto/LineupMemberDto.java"
   [match]="match/dto/MatchDto.java"
   [matchday]="matchday/dto/MatchdayDto.java"
   [matchevent]="matchevent/dto/MatchEventDto.java"
-  [group]="group/dto/GroupDto.java"
-  [lineup]="lineup/dto/LineupDto.java"
-  [lineup_member]="lineupMember/dto/LineupMemberDto.java"
-  [stage_format]="stageFormat/dto/StageFormatDto.java"
+  [organization]="organization/dto/OrganizationDto.java"
+  [organizationtransition]="organizationtransition/dto/OrganizationTransitionDto.java"
+  [person]="person/dto/PersonDto.java"
+  [player]="player/dto/PlayerDto.java"
+  [pointsystem]="pointsystem/dto/PointSystemDto.java"
+  [qualificationoutcome]="qualificationoutcome/dto/QualificationOutcomeDto.java"
+  [registration]="registration/dto/RegistrationDto.java"
+  [season]="season/dto/SeasonDto.java"
+  [seasonparticipation]="seasonParticipation/dto/SeasonParticipationDto.java"
+  [staff]="staff/dto/StaffDto.java"
+  [stage]="stage/dto/StageDto.java"
+  [stageformat]="stageFormat/dto/StageFormatDto.java"
+  [standing]="standing/dto/StandingDto.java"
+  [team]="team/dto/TeamDto.java"
+  [teambrand]="teambrand/dto/TeamBrandDto.java"
+  [teamvenue]="teamvenue/dto/TeamVenueDto.java"
+  [tournament]="tournament/dto/TournamentDto.java"
+  [tournamentseason]="tournamentSeason/dto/TournamentSeasonDto.java"
+  [venue]="venue/dto/VenueDto.java"
 )
 
 
@@ -56,10 +61,10 @@ if [[ $# -ge 1 ]]; then
     exit 1
   fi
   if [[ -f "$dto_path" ]]; then
-    fields=$(grep -Eo 'private [^;]+;' "$dto_path" | sed -E 's/private [^ ]+ ([a-zA-Z0-9_]+);/\1/' | grep -v '^$' | grep -v -E '^(id|createdAt|createdBy|updatedAt|updatedBy)$' | tr '\n' ',')
+    fields=$(grep -Eo 'private [^;]+;' "$dto_path" | sed -E 's/private [^ ]+ ([a-zA-Z0-9_]+);/\1/' | grep -v '^$' | grep -v -E '^(id|createdAt|createdBy|updatedAt|updatedBy)$' | grep -v -E 'Id$' | tr '\n' ',')
     fields=${fields%,}
     echo "$fields" > "$csv_path"
-    echo "Generated $csv_path with fields: $fields (base fields excluded)"
+    echo "Generated $csv_path with fields: $fields (base fields and Id references excluded)"
   else
     echo "DTO not found for $entity: $dto_path"
     exit 1
@@ -69,10 +74,10 @@ else
     dto_path="$DTO_DIR/${ENTITY_DTO_MAP[$entity]}"
     csv_path="$CSV_DIR/${entity}.csv"
     if [[ -f "$dto_path" ]]; then
-      fields=$(grep -Eo 'private [^;]+;' "$dto_path" | sed -E 's/private [^ ]+ ([a-zA-Z0-9_]+);/\1/' | grep -v '^$' | grep -v -E '^(id|createdAt|createdBy|updatedAt|updatedBy)$' | tr '\n' ',')
+      fields=$(grep -Eo 'private [^;]+;' "$dto_path" | sed -E 's/private [^ ]+ ([a-zA-Z0-9_]+);/\1/' | grep -v '^$' | grep -v -E '^(id|createdAt|createdBy|updatedAt|updatedBy)$' | grep -v -E 'Id$' | tr '\n' ',')
       fields=${fields%,}
       echo "$fields" > "$csv_path"
-      echo "Generated $csv_path with fields: $fields (base fields excluded)"
+      echo "Generated $csv_path with fields: $fields (base fields and Id references excluded)"
     else
       echo "DTO not found for $entity: $dto_path"
     fi

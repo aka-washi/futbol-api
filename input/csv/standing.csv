@@ -1,1 +1,1 @@
-id,stageId,stageDisplayName,teamId,teamDisplayName,position,played,won,drawn,lost,goalsFor,goalsAgainst,goalDifference,points,form,homeWon,homeDrawn,homeLost,awayWon,awayDrawn,awayLost,notes,createdAt,createdBy,updatedAt,updatedBy
+stageDisplayName,teamDisplayName,position,played,won,drawn,lost,goalsFor,goalsAgainst,goalDifference,points,form,homeWon,homeDrawn,homeLost,awayWon,awayDrawn,awayLost,notes

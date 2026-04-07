@@ -5,12 +5,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -51,7 +49,7 @@ public class Tournament extends BaseEntity {
 
   @UniqueField(fieldPath = "organization.id")
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "organization_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "trn_organization_id", nullable = false)
   @NotNull
   private Organization organization;
 
@@ -81,7 +79,7 @@ public class Tournament extends BaseEntity {
   private Integer level; // 1 = First Division, 2 = Second Division, etc.
 
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "relegation_to_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "trn_relegation_to_id")
   private Tournament relegationTo;
 
   @Column(name = "trn_description", columnDefinition = "TEXT")

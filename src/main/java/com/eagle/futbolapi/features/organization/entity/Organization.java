@@ -6,12 +6,10 @@ import java.util.Objects;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -66,14 +64,14 @@ public class Organization extends BaseEntity {
   private String abbreviation;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "country_id", nullable = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "org_country_id", nullable = true)
   private Country country;
 
   @Column(name = "org_founded")
   private LocalDate founded;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "parent_organization_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  @JoinColumn(name = "org_parent_organization_id")
   private Organization parentOrganization;
 
   @Column(name = "org_logo")
@@ -114,7 +112,7 @@ public class Organization extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof Organization))
       return false;
     Organization other = (Organization) obj;
     return Objects.equals(name, other.name)

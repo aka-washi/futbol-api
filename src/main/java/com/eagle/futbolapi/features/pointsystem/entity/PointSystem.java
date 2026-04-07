@@ -81,7 +81,7 @@ public class PointSystem extends BaseEntity {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null || getClass() != obj.getClass())
+    if (!(obj instanceof PointSystem))
       return false;
     PointSystem other = (PointSystem) obj;
     return Objects.equals(name, other.name)

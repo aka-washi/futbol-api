@@ -1,9 +1,6 @@
 package com.eagle.futbolapi.features.seasonParticipation.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import jakarta.validation.constraints.NotNull;
 
 import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
 
@@ -12,9 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Data Transfer Object for SeasonTeam entities.
- */
 @Data
 @Builder
 @NoArgsConstructor
@@ -38,12 +32,5 @@ public class SeasonParticipationDto {
 
   private Long teamId;
   private String teamDisplayName;
-
-  private String teamGender;
-
-  @NotNull(message = "Joined date is required")
-  private LocalDate joinedDate;
-
-  private LocalDate leftDate;
 
 }
