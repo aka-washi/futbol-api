@@ -1,1 +1,47 @@
 firstName,middleName,lastName,secondLastName,displayName,gender,email,birthDate,birthPlace,birthCountryDisplayName,nationalityCountryDisplayName,height,weight,photoUrl,position,preferredFoot,currentTeamDisplayName,active
+Henry,,Martín,,Henry Martín,Male,,1992-11-18,Mérida,Mexico,Mexico,177,74,,Forward,Right,América,true
+Aldo,,Rocha,,Aldo Rocha,Male,,1993-04-29,Morelia,Mexico,Mexico,174,70,,Midfielder,Right,Atlas,true
+Javier,,Güémez,,Javier Güémez,Male,,1990-03-01,,Mexico,Mexico,178,74,,Midfielder,Right,Atlético San Luis,true
+Érik,,Lira,,Érik Lira,Male,,2000-01-22,Mexico City,Mexico,Mexico,178,73,,Midfielder,Left,Cruz Azul,true
+Javier,,Hernández,,Javier Hernández,Male,,1988-06-01,Guadalajara,Mexico,Mexico,175,73,,Forward,Right,Guadalajara,true
+Sebastián,,Jurado,,Sebastián Jurado,Male,,1997-09-24,Veracruz,Mexico,Mexico,186,80,,Goalkeeper,Right,Juárez,true
+Jaine,,Barreiro,,Jaine Barreiro,Male,,1997-08-10,,Colombia,Colombia,180,76,,Midfielder,Right,León,true
+Jefferson,,Intriago,,Jefferson Intriago,Male,,1992-03-19,,Ecuador,Ecuador,178,76,,Midfielder,Left,Mazatlán,true
+Sergio,,Canales,,Sergio Canales,Male,,1991-02-16,Santander,Spain,Spain,176,70,,Midfielder,Left,Monterrey,true
+Alexis,,Peña,,Alexis Peña,Male,,1994-08-02,,Mexico,Mexico,185,78,,Defender,Right,Necaxa,true
+Gustavo,,Cabral,,Gustavo Cabral,Male,,1985-10-14,,Argentina,Argentina,182,78,,Defender,Right,Pachuca,true
+Diego,,de Buen,,Diego de Buen,Male,,1994-04-14,,Mexico,Mexico,177,72,,Midfielder,Right,Puebla,true
+Kevin,,Escamilla,,Kevin Escamilla,Male,,1992-10-12,,Mexico,Mexico,175,70,,Forward,Right,Querétaro,true
+Carlos,,Acevedo,,Carlos Acevedo,Male,,1996-04-19,Chihuahua,Mexico,Mexico,186,80,,Goalkeeper,Right,Santos Laguna,true
+Christian,,Rivera,,Christian Rivera,Male,,1997-07-15,,Mexico,Mexico,175,70,,Midfielder,Right,Tijuana,true
+Alexis,,Vega,,Alexis Vega,Male,,1997-08-25,Tepic,Mexico,Mexico,175,73,,Forward,Left,Toluca,true
+Fernando,,Gorriarán,,Fernando Gorriarán,Male,,1994-10-27,,Uruguay,Uruguay,172,67,,Midfielder,Right,UANL,true
+Keylor,,Navas,,Keylor Navas,Male,,1986-12-15,San Isidro de El General,Costa Rica,Costa Rica,185,78,,Goalkeeper,Right,UNAM,true
+Paulinho,,,Bóia,Paulinho,Male,,1996-09-15,,Brazil,Brazil,181,78,,Forward,Right,Toluca,true
+Armando,,González,,Armando González,Male,,2000-10-02,,Mexico,Mexico,178,72,,Forward,Right,Guadalajara,true
+João Pedro,,,de Oliveira,João Pedro,Male,,1994-08-09,,Brazil,Brazil,182,77,,Forward,Right,Atlético San Luis,true
+Germán,,Berterame,,Germán Berterame,Male,,1996-11-26,Buenos Aires,Argentina,Argentina,183,78,,Forward,Right,Monterrey,true
+Kevin,,Castañeda,,Kevin Castañeda,Male,,1999-03-12,,Mexico,Mexico,175,70,,Forward,Right,Tijuana,true
+Juninho,,,,Juninho,Male,,1997-02-15,,Brazil,Brazil,176,72,,Forward,Left,UNAM,true
+Charlyn,,Corral,,Charlyn Corral,Female,,1991-07-09,Mexico City,Mexico,Mexico,162,55,,Forward,Right,Pachuca Femenil,true
+Aerial,,Chavarin,,Aerial Chavarin,Female,,2000-05-15,,United States,United States,168,60,,Forward,Right,Cruz Azul Femenil,true
+Montserrat,,Saldivar,,Montserrat Saldivar,Female,,1996-08-03,,Mexico,Mexico,165,58,,Forward,Right,América Femenil,true
+Jennifer,,Hermoso,,Jennifer Hermoso,Female,,1990-04-09,Madrid,Spain,Spain,170,60,,Forward,Right,UANL Femenil,true
+Diana,,Ordóñez,,Diana Ordóñez,Female,,2000-11-24,,Mexico,Mexico,168,60,,Forward,Right,UANL Femenil,true
+Stephanie,,Ribeiro,,Stephanie Ribeiro,Female,,1993-01-12,,Portugal,Portugal,170,62,,Forward,Left,UNAM Femenil,true
+Eugénie,,Le Sommer,,Eugénie Le Sommer,Female,,1989-05-18,Grasse,France,France,165,55,,Forward,Left,Toluca Femenil,true
+Kiana,,Palacios,,Kiana Palacios,Female,,1996-12-08,Hermosillo,Mexico,Mexico,165,57,,Forward,Right,América Femenil,true
+Brenda,,Cerén,,Brenda Cerén,Female,,1993-01-31,,El Salvador,El Salvador,161,55,,Forward,Right,Atlas Femenil,true
+Alicia,,Cervantes,,Alicia Cervantes,Female,,1993-12-16,Guadalajara,Mexico,Mexico,163,56,,Forward,Right,Guadalajara Femenil,true
+Irene,,Guerrero,,Irene Guerrero,Female,,1995-10-25,Huelva,Spain,Spain,168,58,,Forward,Right,América Femenil,true
+Scarlett,,Camberos,,Scarlett Camberos,Female,,1998-06-16,,Mexico,Mexico,165,57,,Forward,Right,América Femenil,true
+Uchenna,,Kanu,,Uchenna Kanu,Female,,1996-12-16,,Nigeria,Nigeria,168,62,,Forward,Right,Cruz Azul Femenil,true
+Lucía,,García,,Lucía García,Female,,1998-01-09,,Spain,Spain,166,58,,Forward,Right,Monterrey Femenil,true
+Angelina,,Hix,,Angelina Hix,Female,,2001-03-20,,United States,United States,170,62,,Forward,Right,UNAM Femenil,true
+Christina,,Burkenroad,,Christina Burkenroad,Female,,1996-05-03,,Mexico,Mexico,170,63,,Forward,Right,Monterrey Femenil,true
+Emily,,Gielnik,,Emily Gielnik,Female,,1992-08-24,Melbourne,Australia,Australia,168,62,,Forward,Right,Monterrey Femenil,true
+Jheniffer,,,de Souza,Jheniffer,Female,,1997-02-04,,Brazil,Brazil,172,65,,Forward,Right,UANL Femenil,true
+Thembi,,Kgatlana,,Thembi Kgatlana,Female,,1996-05-02,Mohlakeng,South Africa,South Africa,163,55,,Forward,Right,UANL Femenil,true
+Amandine,,Henry,,Amandine Henry,Female,,1989-09-28,Lille,France,France,170,60,,Midfielder,Right,Toluca Femenil,true
+Nina,,Nicosia,,Nina Nicosia,Female,,1999-02-15,,Argentina,Argentina,168,60,,Forward,Right,Pachuca Femenil,true
+Kader,,Hançar,,Kader Hançar,Female,,1999-06-15,,Turkey,Turkey,166,58,,Forward,Right,Tijuana Femenil,true

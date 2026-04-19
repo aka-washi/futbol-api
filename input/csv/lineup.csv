@@ -1,1 +1,5 @@
-displayName,matchDisplayName,teamDisplayName,formation
+matchHomeTeamDisplayName,matchAwayTeamDisplayName,matchDate,teamDisplayName,formation,type
+Toluca,UANL,2025-12-14,Toluca,4-3-3,Starting
+Toluca,UANL,2025-12-14,UANL,4-2-3-1,Starting
+UANL,América,2025-11-23,UANL,4-3-3,Starting
+UANL,América,2025-11-23,América,4-4-2,Starting

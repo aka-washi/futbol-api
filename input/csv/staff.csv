@@ -1,1 +1,37 @@
 firstName,middleName,lastName,secondLastName,displayName,gender,email,birthDate,birthPlace,birthCountryDisplayName,nationalityCountryDisplayName,height,weight,photoUrl,role,currentTeamDisplayName,active
+André,,Jardine,,André Jardine,Male,,1979-07-14,São Paulo,Brazil,Brazil,,,,Head Coach,América,true
+Diego,,Cocca,,Diego Cocca,Male,,1969-09-01,Buenos Aires,Argentina,Argentina,,,,Head Coach,Atlas,true
+Raúl,,Chabrand,,Raúl Chabrand,Male,,,,Mexico,Mexico,,,,Head Coach (interim),Atlético San Luis,true
+Nicolás,,Larcamón,,Nicolás Larcamón,Male,,1982-01-27,,Argentina,Argentina,,,,Head Coach,Cruz Azul,true
+Gabriel,,Milito,,Gabriel Milito,Male,,1980-09-07,Bernal,Argentina,Argentina,,,,Head Coach,Guadalajara,true
+Pedro,,Caixinha,,Pedro Caixinha,Male,,1970-06-01,,Portugal,Portugal,,,,Head Coach,Juárez,true
+Javier,,Gandolfi,,Javier Gandolfi,Male,,,,Argentina,Argentina,,,,Head Coach,León,true
+Sergio,,Bueno,,Sergio Bueno,Male,,,,Mexico,Mexico,,,,Head Coach,Mazatlán,true
+Nicolás,,Sánchez,,Nicolás Sánchez,Male,,1988-03-14,Buenos Aires,Argentina,Argentina,,,,Head Coach (interim),Monterrey,true
+Martín,,Varini,,Martín Varini,Male,,,,Uruguay,Uruguay,,,,Head Coach,Necaxa,true
+Esteban,,Solari,,Esteban Solari,Male,,,,Argentina,Argentina,,,,Head Coach,Pachuca,true
+Albert,,Espigares,,Albert Espigares,Male,,,,Spain,Spain,,,,Head Coach,Puebla,true
+Esteban,,González,,Esteban González,Male,,,,Chile,Chile,,,,Head Coach,Querétaro,true
+Omar,,Tapia,,Omar Tapia,Male,,,,Mexico,Mexico,,,,Head Coach (interim),Santos Laguna,true
+Sebastián,,Abreu,,Sebastián Abreu,Male,,1976-10-17,Minas,Argentina,Argentina,,,,Head Coach,Tijuana,true
+Antonio,,Mohamed,,Antonio Mohamed,Male,,1970-01-02,,Argentina,Argentina,,,,Head Coach,Toluca,true
+Guido,,Pizarro,,Guido Pizarro,Male,,1990-06-04,,Argentina,Argentina,,,,Head Coach,UANL,true
+Efraín,,Juárez,,Efraín Juárez,Male,,1988-02-22,Mexico City,Mexico,Mexico,,,,Head Coach,UNAM,true
+Ángel,,Villacampa,,Ángel Villacampa,Male,,,,Spain,Spain,,,,Head Coach,América Femenil,true
+Juan Pablo,,Alfaro,,Juan Pablo Alfaro,Male,,,,Mexico,Mexico,,,,Head Coach,Atlas Femenil,true
+Ignacio,,Quintana,,Ignacio Quintana,Male,,,,Mexico,Mexico,,,,Head Coach,Atlético San Luis Femenil,true
+Israel,,del Real,,Israel del Real,Male,,,,Mexico,Mexico,,,,Head Coach (interim),Cruz Azul Femenil,true
+Antonio,,Contreras,,Antonio Contreras,Male,,,,Spain,Spain,,,,Head Coach,Guadalajara Femenil,true
+Óscar,,Fernández,,Óscar Fernández,Male,,,,Spain,Spain,,,,Head Coach,Juárez Femenil,true
+Alejandro,,Corona,,Alejandro Corona,Male,,,,Mexico,Mexico,,,,Head Coach,León Femenil,true
+Nicolás,,Morales,,Nicolás Morales,Male,,,,Mexico,Mexico,,,,Head Coach,Mazatlán Femenil,true
+Amandine,,Miquel,,Amandine Miquel,Female,,,,France,France,,,,Head Coach,Monterrey Femenil,true
+Christian,,Astorga,,Christian Astorga,Male,,,,Mexico,Mexico,,,,Head Coach,Necaxa Femenil,true
+Oscar Fernando,,Torres,,Oscar Fernando Torres,Male,,,,Mexico,Mexico,,,,Head Coach,Pachuca Femenil,true
+Carlos Adrián,,Morales,,Carlos Adrián Morales,Male,,,,Mexico,Mexico,,,,Head Coach,Puebla Femenil,true
+Édgar,,Mejía,,Édgar Mejía,Male,,,,Mexico,Mexico,,,,Head Coach,Querétaro Femenil,true
+Jhonathan,,Lazcano,,Jhonathan Lazcano,Male,,,,Mexico,Mexico,,,,Head Coach,Santos Laguna Femenil,true
+Fernando,,Samayoa,,Fernando Samayoa,Male,,,,Mexico,Mexico,,,,Head Coach,Tijuana Femenil,true
+Patrice,,Lair,,Patrice Lair,Male,,,,France,France,,,,Head Coach,Toluca Femenil,true
+Pedro,,Martínez Losa,,Pedro Martínez Losa,Male,,,,Spain,Spain,,,,Head Coach,UANL Femenil,true
+Roberto,,Medina,,Roberto Medina,Male,,,,Mexico,Mexico,,,,Head Coach,UNAM Femenil,true

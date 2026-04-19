@@ -1,1 +1,4 @@
-sourceCompetitionDisplayName,targetCompetitionDisplayName,teamDisplayName,qualificationType
+competitionDisplayName,teamDisplayName,qualificationType,targetCompetition,remarks
+Apertura 2025,Toluca,Qualified,2025 Campeón de Campeones,Apertura 2025 Champion
+Apertura 2025,Toluca,Qualified,2025-26 Leagues Cup,Liga MX representative
+Apertura 2025 Femenil,UANL,Qualified,2026-27 CONCACAF W Champions Cup,Apertura 2025 Femenil Champion

@@ -1,1 +1,9 @@
-competitionDisplayName,teamDisplayName,finalPosition,points,outcomeType,notes
+competitionDisplayName,teamDisplayName,outcomeType,position,remarks
+Apertura 2025,Toluca,Champion,1,12th Liga MX title - Won 9-8 on penalties vs UANL after 2-2 aggregate
+Apertura 2025,UANL,Runner-up,2,Lost final to Toluca on penalties 8-9 after 2-2 aggregate
+Apertura 2025,Monterrey,Semifinalist,3,Eliminated by Toluca in semifinals on seeding (3-3 agg)
+Apertura 2025,Cruz Azul,Semifinalist,4,Eliminated by UANL in semifinals on seeding (2-2 agg)
+Apertura 2025 Femenil,UANL,Champion,1,7th Liga MX Femenil title - Won 4-3 on aggregate vs América
+Apertura 2025 Femenil,América,Runner-up,2,Lost final 3-4 on aggregate to UANL
+Apertura 2025 Femenil,Cruz Azul,Semifinalist,3,Eliminated by UANL 2-3 on aggregate
+Apertura 2025 Femenil,Guadalajara,Semifinalist,4,Eliminated by América 0-4 on aggregate

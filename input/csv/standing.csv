@@ -1,1 +1,73 @@
-stageDisplayName,teamDisplayName,position,played,won,drawn,lost,goalsFor,goalsAgainst,goalDifference,points,form,homeWon,homeDrawn,homeLost,awayWon,awayDrawn,awayLost,notes
+stageDisplayName,teamDisplayName,position,played,won,drawn,lost,goalsFor,goalsAgainst,goalDifference,points,form,qualified,eliminated,remarks
+Apertura 2025 Regular Season,Toluca,1,17,11,4,2,43,18,25,37,,true,false,Champion
+Apertura 2025 Regular Season,UANL,2,17,10,6,1,35,16,19,36,,true,false,Runner-up
+Apertura 2025 Regular Season,Cruz Azul,3,17,10,5,2,32,20,12,35,,true,false,
+Apertura 2025 Regular Season,América,4,17,10,4,3,33,18,15,34,,true,false,
+Apertura 2025 Regular Season,Monterrey,5,17,9,4,4,33,29,4,31,,true,false,
+Apertura 2025 Regular Season,Guadalajara,6,17,9,2,6,29,22,7,29,,true,false,
+Apertura 2025 Regular Season,Tijuana,7,17,6,6,5,29,23,6,24,,true,false,Play-in
+Apertura 2025 Regular Season,Juárez,8,17,6,5,6,27,28,-1,23,,true,false,Play-in
+Apertura 2025 Regular Season,Pachuca,9,17,6,4,7,21,21,0,22,,false,true,Eliminated in Play-in
+Apertura 2025 Regular Season,UNAM,10,17,5,6,6,24,25,-1,21,,false,true,Eliminated in Play-in
+Apertura 2025 Regular Season,Santos Laguna,11,17,6,2,9,22,28,-6,20,,false,true,
+Apertura 2025 Regular Season,Querétaro,12,17,6,2,9,19,29,-10,20,,false,true,
+Apertura 2025 Regular Season,Necaxa,13,17,4,5,8,24,32,-8,17,,false,true,
+Apertura 2025 Regular Season,Atlas,14,17,4,5,8,24,35,-11,17,,false,true,
+Apertura 2025 Regular Season,Atlético San Luis,15,17,5,1,11,25,29,-4,16,,false,true,
+Apertura 2025 Regular Season,Mazatlán,16,17,2,8,7,20,29,-9,14,,false,true,
+Apertura 2025 Regular Season,León,17,17,3,4,10,14,31,-17,13,,false,true,
+Apertura 2025 Regular Season,Puebla,18,17,3,3,11,21,42,-21,12,,false,true,
+Clausura 2026 Regular Season,Guadalajara,1,15,11,1,3,33,17,16,34,,true,false,Qualified
+Clausura 2026 Regular Season,Pachuca,2,15,9,4,2,24,14,10,31,,true,false,Qualified
+Clausura 2026 Regular Season,UNAM,3,15,8,6,1,28,15,13,30,,true,false,Qualified
+Clausura 2026 Regular Season,Cruz Azul,4,15,8,5,2,26,16,10,29,,true,false,Qualified
+Clausura 2026 Regular Season,Toluca,5,14,7,6,1,20,9,11,27,,true,false,Qualified
+Clausura 2026 Regular Season,UANL,6,15,6,3,6,23,17,6,21,,false,false,
+Clausura 2026 Regular Season,América,7,14,5,4,5,15,13,2,19,,false,false,
+Clausura 2026 Regular Season,Tijuana,8,15,4,7,4,17,17,0,19,,false,false,
+Clausura 2026 Regular Season,Atlas,9,14,5,4,5,14,18,-4,19,,false,false,
+Clausura 2026 Regular Season,León,10,14,6,1,7,16,24,-8,19,,false,false,
+Clausura 2026 Regular Season,Necaxa,11,15,5,2,8,18,21,-3,17,,false,false,
+Clausura 2026 Regular Season,Juárez,12,14,4,4,6,21,24,-3,16,,false,false,
+Clausura 2026 Regular Season,Querétaro,13,15,3,7,5,14,19,-5,16,,false,false,
+Clausura 2026 Regular Season,Monterrey,14,15,4,3,8,20,20,0,15,,false,false,
+Clausura 2026 Regular Season,Atlético San Luis,15,15,4,3,8,21,25,-4,15,,false,false,
+Clausura 2026 Regular Season,Puebla,16,15,3,4,8,11,22,-11,13,,false,false,
+Clausura 2026 Regular Season,Mazatlán,17,15,3,3,9,17,29,-12,12,,false,true,Eliminated
+Clausura 2026 Regular Season,Santos Laguna,18,14,2,3,9,17,35,-18,9,,false,true,Eliminated
+Apertura 2025 Femenil Regular Season,UANL,1,17,13,3,1,60,11,49,42,,true,false,Champion
+Apertura 2025 Femenil Regular Season,Pachuca,2,17,13,3,1,60,20,40,42,,true,false,
+Apertura 2025 Femenil Regular Season,América,3,17,12,2,3,56,22,34,38,,true,false,Runner-up
+Apertura 2025 Femenil Regular Season,Toluca,4,17,10,5,2,35,17,18,35,,true,false,
+Apertura 2025 Femenil Regular Season,Guadalajara,5,17,10,3,4,29,17,12,33,,true,false,
+Apertura 2025 Femenil Regular Season,Monterrey,6,17,10,2,5,38,24,14,32,,true,false,
+Apertura 2025 Femenil Regular Season,Cruz Azul,7,17,8,4,5,42,27,15,28,,true,false,
+Apertura 2025 Femenil Regular Season,Juárez,8,17,7,6,4,24,17,7,27,,true,false,
+Apertura 2025 Femenil Regular Season,León,9,17,8,3,6,32,33,-1,27,,false,true,
+Apertura 2025 Femenil Regular Season,Atlético San Luis,10,17,7,4,6,24,27,-3,25,,false,true,
+Apertura 2025 Femenil Regular Season,UNAM,11,17,7,2,8,35,32,3,23,,false,true,
+Apertura 2025 Femenil Regular Season,Atlas,12,17,6,4,7,28,33,-5,22,,false,true,
+Apertura 2025 Femenil Regular Season,Tijuana,13,17,4,3,10,19,33,-14,15,,false,true,
+Apertura 2025 Femenil Regular Season,Querétaro,14,17,3,4,10,17,50,-33,13,,false,true,
+Apertura 2025 Femenil Regular Season,Santos Laguna,15,17,3,3,11,19,40,-21,12,,false,true,
+Apertura 2025 Femenil Regular Season,Necaxa,16,17,2,2,13,9,40,-31,8,,false,true,
+Apertura 2025 Femenil Regular Season,Puebla,17,17,1,3,13,8,43,-35,6,,false,true,
+Apertura 2025 Femenil Regular Season,Mazatlán,18,17,0,2,15,9,58,-49,2,,false,true,
+Clausura 2026 Femenil Regular Season,Monterrey,1,16,12,4,0,39,5,34,40,,true,false,Qualified
+Clausura 2026 Femenil Regular Season,América,2,16,12,3,1,41,11,30,39,,true,false,Qualified
+Clausura 2026 Femenil Regular Season,Pachuca,3,16,11,3,2,44,12,32,36,,true,false,Qualified
+Clausura 2026 Femenil Regular Season,UANL,4,16,10,4,2,38,13,25,34,,true,false,Qualified
+Clausura 2026 Femenil Regular Season,Guadalajara,5,15,9,5,1,25,11,14,32,,true,false,Qualified
+Clausura 2026 Femenil Regular Season,Toluca,6,16,10,2,4,37,25,12,32,,true,false,Qualified
+Clausura 2026 Femenil Regular Season,Cruz Azul,7,16,9,3,4,37,18,19,30,,true,false,Qualified
+Clausura 2026 Femenil Regular Season,Juárez,8,15,7,4,4,24,16,8,25,,false,false,
+Clausura 2026 Femenil Regular Season,Tijuana,9,16,7,4,5,29,23,6,25,,false,false,
+Clausura 2026 Femenil Regular Season,UNAM,10,16,6,3,7,22,28,-6,21,,false,true,Eliminated
+Clausura 2026 Femenil Regular Season,Mazatlán,11,16,5,3,8,19,25,-6,18,,false,true,Eliminated
+Clausura 2026 Femenil Regular Season,Atlético San Luis,12,16,5,3,8,18,31,-13,18,,false,true,Eliminated
+Clausura 2026 Femenil Regular Season,León,13,16,4,4,8,31,33,-2,16,,false,true,Eliminated
+Clausura 2026 Femenil Regular Season,Atlas,14,16,3,3,10,21,38,-17,12,,false,true,Eliminated
+Clausura 2026 Femenil Regular Season,Puebla,15,16,2,2,12,8,44,-36,8,,false,true,Eliminated
+Clausura 2026 Femenil Regular Season,Santos Laguna,16,16,1,3,12,11,29,-18,6,,false,true,Eliminated
+Clausura 2026 Femenil Regular Season,Querétaro,17,16,1,2,13,11,43,-32,5,,false,true,Eliminated
+Clausura 2026 Femenil Regular Season,Necaxa,18,16,1,1,14,9,59,-50,4,,false,true,Eliminated

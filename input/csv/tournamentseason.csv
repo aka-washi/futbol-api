@@ -1,1 +1,5 @@
 seasonDisplayName,tournamentDisplayName,displayName,startDate,endDate,status,hasRelegation,hasPromotion,numberOfTeams,description
+2025-26,Liga MX,Liga MX Apertura 2025,2025-07-11,2025-12-14,Completed,false,false,18,Liga MX Apertura 2025 - Toluca won their 12th title defeating UANL 9-8 on penalties
+2025-26,Liga MX,Liga MX Clausura 2026,2026-01-09,2026-05-25,In Progress,false,false,18,Liga MX Clausura 2026 - No play-in round due to 2026 FIFA World Cup schedule
+2025-26,Liga MX Femenil,Liga MX Femenil Apertura 2025,2025-07-11,2025-11-23,Completed,false,false,18,Liga MX Femenil Apertura 2025 - UANL won their 7th title defeating América 4-3 on aggregate
+2025-26,Liga MX Femenil,Liga MX Femenil Clausura 2026,2026-01-04,2026-05-19,In Progress,false,false,18,Liga MX Femenil Clausura 2026 regular season and playoffs

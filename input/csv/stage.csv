@@ -1,1 +1,18 @@
 displayName,competitionDisplayName,stageFormatDisplayName,order,status,startDate,endDate
+Apertura 2025 Regular Season,Apertura 2025,Regular Season - Round Robin,1,Completed,2025-07-11,2025-11-01
+Apertura 2025 Play-In,Apertura 2025,Liguilla - Quaterfinals,2,Completed,2025-11-13,2025-11-16
+Apertura 2025 Quarterfinals,Apertura 2025,Liguilla - Quaterfinals,3,Completed,2025-11-20,2025-11-23
+Apertura 2025 Semifinals,Apertura 2025,Liguilla - Semifinals,4,Completed,2025-11-27,2025-12-01
+Apertura 2025 Final,Apertura 2025,Liguilla – final,5,Completed,2025-12-11,2025-12-14
+Clausura 2026 Regular Season,Clausura 2026,Regular Season - Round Robin,1,In Progress,2026-01-09,2026-04-25
+Clausura 2026 Quarterfinals,Clausura 2026,Liguilla - Quaterfinals,2,Scheduled,2026-05-06,2026-05-10
+Clausura 2026 Semifinals,Clausura 2026,Liguilla - Semifinals,3,Scheduled,2026-05-13,2026-05-17
+Clausura 2026 Final,Clausura 2026,Liguilla – final,4,Scheduled,2026-05-21,2026-05-25
+Apertura 2025 Femenil Regular Season,Apertura 2025 Femenil,Regular Season - Round Robin,1,Completed,2025-07-11,2025-11-01
+Apertura 2025 Femenil Quarterfinals,Apertura 2025 Femenil,Liguilla - Quaterfinals,2,Completed,2025-11-05,2025-11-09
+Apertura 2025 Femenil Semifinals,Apertura 2025 Femenil,Liguilla - Semifinals,3,Completed,2025-11-13,2025-11-16
+Apertura 2025 Femenil Final,Apertura 2025 Femenil,Liguilla – final,4,Completed,2025-11-20,2025-11-23
+Clausura 2026 Femenil Regular Season,Clausura 2026 Femenil,Regular Season - Round Robin,1,In Progress,2026-01-04,2026-04-19
+Clausura 2026 Femenil Quarterfinals,Clausura 2026 Femenil,Liguilla - Quaterfinals,2,Scheduled,2026-04-22,2026-04-26
+Clausura 2026 Femenil Semifinals,Clausura 2026 Femenil,Liguilla - Semifinals,3,Scheduled,2026-05-03,2026-05-06
+Clausura 2026 Femenil Final,Clausura 2026 Femenil,Liguilla – final,4,Scheduled,2026-05-10,2026-05-19

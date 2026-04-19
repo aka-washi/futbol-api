@@ -1,1 +1,43 @@
-matchDisplayName,teamDisplayName,playerDisplayName,assistPlayerDisplayName,substitutePlayerDisplayName,type,period,minute,extraMinute,description,videoUrl
+matchHomeTeamDisplayName,matchAwayTeamDisplayName,matchDate,playerDisplayName,teamDisplayName,eventType,minute,description
+UANL,Toluca,2025-12-11,,UANL,Goal,46,Ángel Correa opens scoring in Liga MX Final 1st leg
+Toluca,UANL,2025-12-14,,Toluca,Goal,14,Gorriarán scores for UANL away in Final 2nd leg
+Toluca,UANL,2025-12-14,,Toluca,Goal,40,Helinho equalizes for Toluca
+Toluca,UANL,2025-12-14,Paulinho,Toluca,Goal,52,Paulinho puts Toluca ahead - match goes to ET then penalties 9-8 Toluca wins
+Juárez,UANL,2025-11-06,,UANL,Goal,23,Mayor scores for UANL in Femenil QF 1st leg
+Cruz Azul,Pachuca,2025-11-05,Aerial Chavarin,Cruz Azul,Goal,10,Chavarin opens scoring in Femenil QF
+Cruz Azul,Pachuca,2025-11-05,Charlyn Corral,Pachuca,Goal,14,Corral equalizes for Pachuca
+Cruz Azul,Pachuca,2025-11-05,Charlyn Corral,Pachuca,Goal,31,Corral gives Pachuca the lead
+Pachuca,Cruz Azul,2025-11-08,,Cruz Azul,Goal,39,Martínez scores - Cruz Azul begins 5-0 rout in 2nd leg
+Pachuca,Cruz Azul,2025-11-08,,Cruz Azul,Goal,51,Rodríguez adds second for Cruz Azul
+Pachuca,Cruz Azul,2025-11-08,,Cruz Azul,Goal,59,Blackwood scores third for Cruz Azul
+Pachuca,Cruz Azul,2025-11-08,,Cruz Azul,Goal,83,Calderón scores fourth for Cruz Azul
+Pachuca,Cruz Azul,2025-11-08,Aerial Chavarin,Cruz Azul,Goal,90,Chavarin seals 6-2 aggregate win for Cruz Azul
+Monterrey,América,2025-11-06,,Monterrey,Goal,90,Seoposenwe equalizes late for Monterrey in Femenil QF
+Monterrey,América,2025-11-06,Irene Guerrero,América,Goal,40,Guerrero gives América away lead
+América,Monterrey,2025-11-09,Scarlett Camberos,América,Goal,27,Camberos opens scoring in 2nd leg rout
+América,Monterrey,2025-11-09,Kiana Palacios,América,Goal,40,Palacios doubles América lead
+América,Monterrey,2025-11-09,,América,Goal,45,Vilamala scores third for América
+América,Monterrey,2025-11-09,,América,Goal,65,Vilamala makes it 4-0
+América,Monterrey,2025-11-09,,América,Goal,88,Cabanillas completes 6-1 aggregate rout
+Guadalajara,Toluca,2025-11-06,Alicia Cervantes,Guadalajara,Goal,15,Cervantes opens scoring in Femenil QF
+Guadalajara,Toluca,2025-11-06,,Toluca,Goal,52,Robert equalizes for Toluca
+Guadalajara,Toluca,2025-11-06,Alicia Cervantes,Guadalajara,Goal,65,Cervantes scores again
+Guadalajara,Toluca,2025-11-06,,Toluca,Goal,86,Robert equalizes again for Toluca
+Toluca,Guadalajara,2025-11-09,Alicia Cervantes,Guadalajara,Goal,34,Cervantes gives Guadalajara the lead in 2nd leg
+Toluca,Guadalajara,2025-11-09,Alicia Cervantes,Guadalajara,Goal,82,Cervantes seals 4-2 aggregate win
+Cruz Azul,UANL,2025-11-13,,Cruz Azul,Goal,74,García equalizes for Cruz Azul in SF 1st leg
+Cruz Azul,UANL,2025-11-13,,UANL,Goal,45,Olivieri gives UANL the lead in Femenil SF
+UANL,Cruz Azul,2025-11-16,Jennifer Hermoso,UANL,Goal,16,Hermoso penalty gives UANL the lead in SF 2nd leg
+UANL,Cruz Azul,2025-11-16,Diana Ordóñez,UANL,Goal,64,Ordóñez doubles UANL lead
+UANL,Cruz Azul,2025-11-16,,Cruz Azul,Goal,89,Blackwood penalty - late consolation for Cruz Azul
+Guadalajara,América,2025-11-13,Scarlett Camberos,América,Goal,2,Camberos gives América early lead in SF
+Guadalajara,América,2025-11-13,,América,Goal,57,Kimberly Rodríguez doubles América lead
+América,Guadalajara,2025-11-16,,América,Goal,32,Hernández scores in SF 2nd leg
+América,Guadalajara,2025-11-16,Irene Guerrero,América,Goal,56,Guerrero seals 4-0 aggregate win for América
+América,UANL,2025-11-20,Irene Guerrero,América,Goal,17,Guerrero opens scoring in Femenil Final 1st leg
+América,UANL,2025-11-20,Scarlett Camberos,América,Goal,21,Camberos makes it 2-0 for América
+América,UANL,2025-11-20,,América,Goal,44,Luebbert makes it 3-0 for América before halftime
+América,UANL,2025-11-20,,UANL,Goal,62,Mayor starts UANL comeback
+América,UANL,2025-11-20,Thembi Kgatlana,UANL,Goal,76,Kgatlana brings UANL within one
+América,UANL,2025-11-20,Jheniffer,UANL,Goal,83,Jheniffer completes dramatic 3-3 comeback
+UANL,América,2025-11-23,Diana Ordóñez,UANL,Goal,20,Ordóñez scores the winner - UANL claims 7th Femenil title 4-3 on aggregate

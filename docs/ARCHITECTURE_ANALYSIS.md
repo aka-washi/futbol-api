@@ -300,7 +300,7 @@ Inherits **six** endpoints from `BaseCrudController`:
 | `Standing` | `standing` | `sd_` | Live league table entry for a team within a `Stage`. Tracks all statistical columns (played, won, drawn, lost, goals, form, home/away splits). |
 | `LeagueMembership` | `league_memberships` | `lmp_` | Records a team's membership of a league (organization) for a period bounded by start and end seasons, with a membership status. |
 | `OrganizationTransition` | `organization_transition` | `ogt_` | Documents legal transitions between organizations (merger, rebrand, dissolution, promotion). Tracks from/to organizations, type, and effective date. |
-| `SeasonParticipation` | *(unimplemented)* | — | Intended to record which teams participated in a given season. Currently empty placeholder. |
+| `SeasonParticipation` | `season_participation` | `spt_` | Records which teams participated in a given season. References `Season` and `Team`. |
 
 ---
 
@@ -315,36 +315,36 @@ Legend: ✅ Present & correct · ⚠️ Present but flawed · ❌ Missing/empty
 | `base` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Foundation — also provides annotation/, enums/, exception/, util/, validation/ |
 | `bootstrap` | — | ✅ | — | — | ✅ | ✅ | Intentionally operational-only; no entity layer needed |
 | `competition` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
-| `competitionoutcome` | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | Service & Controller missing `@Service` / `@RestController` / `@RequestMapping` — not Spring beans |
+| `competitionoutcome` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `country` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `group` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
-| `leaguemembership` | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | ⚠️ | All three layers missing Spring stereotype annotations; also has `endSeason` logic bug |
+| `leaguemembership` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `lineup` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `lineupMember` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Service injects repositories directly (not services) — acceptable pattern deviation |
 | `match` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `matchday` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
-| `matchevent` | ✅ | ✅ | ✅ | ⚠️ | ✅ | ✅ | Repository extends `JpaRepository` directly — misses `JpaSpecificationExecutor` |
+| `matchevent` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `organization` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
-| `organizationtransition` | ✅ | ✅ | ✅ | ⚠️ | ✅ | ✅ | Repository has `findByDisplayName` but entity has no `displayName` field |
+| `organizationtransition` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `person` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** — notable `findOrCreate` pattern |
 | `player` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `pointsystem` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
-| `qualificationoutcome` | ✅ | ✅ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | **Unimplemented stubs** — mapper, repository, service, controller are empty class/interface bodies |
+| `qualificationoutcome` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `registration` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** — richest custom validation |
 | `season` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
-| `seasonParticipation` | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | **Entirely empty** — 6 empty folders, no files at all |
+| `seasonParticipation` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `staff` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `stage` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `stageFormat` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `standing` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** — richest repository |
 | `team` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
-| `teambrand` | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | ❌ | Repository & Service missing `@Repository`/`@Service`; controller folder exists but is empty |
-| `teamvenue` | ✅ | ⚠️ | ❌ | ❌ | ❌ | ❌ | Only entity + DTO; DTO has wrong validation annotations (references non-existent fields) |
+| `teambrand` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
+| `teamvenue` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `tournament` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `tournamentSeason` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 | `venue` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **Complete** |
 
-**Summary**: 17 features fully complete · 4 features partially implemented with bugs · 3 features incomplete stubs · 1 feature entirely empty.
+**Summary**: 25 features fully complete.
 
 ---
 
@@ -356,81 +356,11 @@ Issues are classified by severity.
 
 ### CRITICAL — Will cause runtime failures
 
-#### C-1 · `seasonParticipation` — Fully empty feature
-All 6 subfolders exist but contain zero files. The feature has no implementation whatsoever.
-
-**Missing**: `SeasonParticipation` entity, `SeasonParticipationDto`, `SeasonParticipationMapper`, `SeasonParticipationRepository`, `SeasonParticipationService`, `SeasonParticipationController`.
-
----
-
-#### C-2 · `qualificationoutcome` — All implementation is empty stubs
-The folder structure and DTO are present, but:
-- `QualificationOutcomeController` — empty class body, no `@RestController`, no `@RequestMapping`
-- `QualificationOutcomeService` — empty class body, no `@Service`
-- `QualificationOutcomeRepository` — empty interface, does not extend `BaseRepository` or `JpaRepository`
-- `QualificationOutcomeMapper` — empty interface, does not extend `BaseMapper`
-
-None of these are Spring-managed beans. The endpoint does not exist.
-
----
-
-#### C-3 · `competitionoutcome` — Missing Spring stereotype annotations
-`CompetitionOutcomeController` lacks `@RestController` and `@RequestMapping`.
-`CompetitionOutcomeService` lacks `@Service`.
-
-Neither will be registered as Spring beans. The competition outcome endpoints are unreachable.
-
----
-
-#### C-4 · `leaguemembership` — Missing Spring stereotype annotations on all operational layers
-`LeagueMembershipController` lacks `@RestController` and `@RequestMapping`.
-`LeagueMembershipService` lacks `@Service`.
-`LeagueMembershipRepository` lacks `@Repository`.
-
-Additionally, `resolveRelationships()` in the service has a logic bug: the `endSeason` resolution block checks `endSeasonDisplayName != null` twice instead of checking `endSeasonId != null` on one branch. This means the `endSeason` can never be set by ID alone.
-
----
-
-#### C-5 · `teambrand` — Controller missing, Spring annotations missing
-`teambrand/controller/` is an empty folder — no controller file was ever created.
-`TeamBrandRepository` lacks `@Repository`.
-`TeamBrandService` lacks `@Service`.
-
-The team brand endpoints are completely absent.
-
----
-
-#### C-6 · `teamvenue` — Only entity and DTO exist
-`teamvenue/` contains only `entity/TeamVenue.java` and `dto/TeamVenueDto.java`. No mapper, repository, service, or controller.
-
-Additionally, `TeamVenueDto` is annotated with `@AtLeastOneNotNull(fields = {"organizationId", "organizationDisplayName"})` and `@AtLeastOneNotNull(fields = {"countryId", "countryDisplayName"})`, yet the `TeamVenue` entity has **no `organization` or `country` fields** — it only has `team` and `venue`. These validations reference non-existent fields and will either fail silently or throw at runtime.
-
-**Missing**: `TeamVenueMapper`, `TeamVenueRepository`, `TeamVenueService`, `TeamVenueController`.
-Also needed: fix `TeamVenueDto` to replace wrong `@AtLeastOneNotNull` annotations with correct `teamId`/`teamDisplayName` and `venueId`/`venueDisplayName` pairs.
+*No critical issues remaining. All previously documented critical issues (C-1 through C-6) have been resolved.*
 
 ---
 
 ### HIGH — Incorrect behavior or standard divergence
-
-#### H-1 · `matchevent/MatchEventRepository` — Wrong base interface
-```java
-// Current (wrong)
-public interface MatchEventRepository extends JpaRepository<MatchEvent, Long>
-
-// Required
-public interface MatchEventRepository extends BaseRepository<MatchEvent, Long>
-```
-`BaseRepository` extends both `JpaRepository` and `JpaSpecificationExecutor`. `BaseCrudService` relies on `JpaSpecificationExecutor` for Specification-based uniqueness detection. Without it, the duplicate check for match events will throw `ClassCastException` or `UnsupportedOperationException` at runtime.
-
----
-
-#### H-2 · `organizationtransition/OrganizationTransitionRepository` — Phantom query method
-```java
-Optional<OrganizationTransition> findByDisplayName(String displayName);
-```
-`OrganizationTransition` has no `displayName` field. Spring Data JPA will throw `PropertyReferenceException` at application startup, preventing the context from loading.
-
----
 
 #### H-3 · `registration` — Jersey uniqueness not DB-enforced
 Jersey number uniqueness per competition+team is enforced only inside `validateForCreate()`. There is no `@UniqueConstraint` on the `registration` table. Under concurrent writes, two registrations with the same jersey number could be inserted simultaneously.
