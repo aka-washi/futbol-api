@@ -20,11 +20,14 @@ public interface OrganizationTransitionMapper extends BaseMapper<OrganizationTra
   @Mapping(target = "fromOrganizationDisplayName", source = "fromOrganization.displayName")
   @Mapping(target = "toOrganizationId", source = "toOrganization.id")
   @Mapping(target = "toOrganizationDisplayName", source = "toOrganization.displayName")
+  @Mapping(target = "effectiveSeasonId", source = "effectiveSeason.id")
+  @Mapping(target = "effectiveSeasonDisplayName", source = "effectiveSeason.displayName")
   @Mapping(target = "transitionType", expression = "java(transitionTypeToString(organizationTransition.getTransitionType()))")
   OrganizationTransitionDto toDto(OrganizationTransition organizationTransition);
 
   @Mapping(target = "fromOrganization", ignore = true)
   @Mapping(target = "toOrganization", ignore = true)
+  @Mapping(target = "effectiveSeason", ignore = true)
   @Mapping(target = "transitionType", expression = "java(stringToTransitionType(organizationTransitionDto.getTransitionType()))")
   OrganizationTransition toEntity(OrganizationTransitionDto organizationTransitionDto);
 
@@ -35,5 +38,4 @@ public interface OrganizationTransitionMapper extends BaseMapper<OrganizationTra
   default TransitionType stringToTransitionType(String transitionType) {
     return TransitionType.fromLabel(transitionType);
   }
-
 }

@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.organizationtransition.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.eagle.futbolapi.features.base.validation.AtLeastOneNotNull;
@@ -37,7 +36,9 @@ public class OrganizationTransitionDto {
   private Long toOrganizationId;
   private String toOrganizationDisplayName;
 
+  private Long effectiveSeasonId;
+  private String effectiveSeasonDisplayName;
+
   private String transitionType;
-  private LocalDate effectiveDate;
 
 }

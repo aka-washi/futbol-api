@@ -1,6 +1,5 @@
 package com.eagle.futbolapi.features.organizationtransition.entity;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 import jakarta.persistence.AttributeOverride;
@@ -19,6 +18,7 @@ import com.eagle.futbolapi.features.base.annotation.UniqueField;
 import com.eagle.futbolapi.features.base.entity.BaseEntity;
 import com.eagle.futbolapi.features.base.enums.TransitionType;
 import com.eagle.futbolapi.features.organization.entity.Organization;
+import com.eagle.futbolapi.features.season.entity.Season;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,24 +49,27 @@ public class OrganizationTransition extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "ogt_from_organization_id", nullable = false)
   private Organization fromOrganization;
+
   @NotNull
   @UniqueField(fieldPath = "toOrganization.id")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "ogt_to_organization_id", nullable = false)
   private Organization toOrganization;
 
+  @NotNull
+  @UniqueField(fieldPath = "effectiveSeason.id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "ogt_season_id", nullable = false)
+  private Season effectiveSeason;
+
   @UniqueField
   @Enumerated(EnumType.STRING)
   @Column(name = "ogt_type", length = 50)
   private TransitionType transitionType;
 
-  @UniqueField
-  @Column(name = "ogt_effective_date")
-  private LocalDate effectiveDate;
-
   @Override
   public int hashCode() {
-    return Objects.hash(fromOrganization, toOrganization, transitionType, effectiveDate);
+    return Objects.hash(fromOrganization, toOrganization, transitionType, effectiveSeason);
   }
 
   @Override
@@ -79,6 +82,6 @@ public class OrganizationTransition extends BaseEntity {
     return Objects.equals(fromOrganization, other.fromOrganization)
         && Objects.equals(toOrganization, other.toOrganization)
         && Objects.equals(transitionType, other.transitionType)
-        && Objects.equals(effectiveDate, other.effectiveDate);
+        && Objects.equals(effectiveSeason, other.effectiveSeason);
   }
 }

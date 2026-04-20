@@ -16,6 +16,7 @@ import com.eagle.futbolapi.features.organizationtransition.dto.OrganizationTrans
 import com.eagle.futbolapi.features.organizationtransition.entity.OrganizationTransition;
 import com.eagle.futbolapi.features.organizationtransition.mapper.OrganizationTransitionMapper;
 import com.eagle.futbolapi.features.organizationtransition.repository.OrganizationTransitionRepository;
+import com.eagle.futbolapi.features.season.service.SeasonService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,11 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 public class OrganizationTransitionService extends BaseCrudService<OrganizationTransition, Long, OrganizationTransitionDto> {
 
   private final OrganizationService organizationService;
+  private final SeasonService seasonService;
 
   protected OrganizationTransitionService(OrganizationTransitionRepository repository, OrganizationTransitionMapper mapper,
-      OrganizationService organizationService) {
+      OrganizationService organizationService, SeasonService seasonService) {
     super(repository, mapper);
     this.organizationService = organizationService;
+    this.seasonService = seasonService;
   }
 
   @Override
@@ -90,6 +93,19 @@ public class OrganizationTransitionService extends BaseCrudService<OrganizationT
       organizationTransition.setToOrganization(organization);
     }
 
-  }
+    // Map effectiveSeason from display name or ID
+    String effectiveSeasonDisplayName = dto.getEffectiveSeasonDisplayName();
+    Long effectiveSeasonId = dto.getEffectiveSeasonId();
+    if (effectiveSeasonDisplayName != null && !effectiveSeasonDisplayName.trim().isEmpty()) {
+      var season = seasonService.findByDisplayName(effectiveSeasonDisplayName)
+          .orElseThrow(() -> new ResourceNotFoundException("Season", "displayName",
+              effectiveSeasonDisplayName));
+      organizationTransition.setEffectiveSeason(season);
+    } else if (effectiveSeasonId != null) {
+      var season = seasonService.getById(effectiveSeasonId)
+          .orElseThrow(() -> new ResourceNotFoundException("Season", "id", effectiveSeasonId));
+      organizationTransition.setEffectiveSeason(season);
+    }
 
+  }
 }
