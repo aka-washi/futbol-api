@@ -6,6 +6,6 @@
     "--network", "futbol-network"
   ],
   "forwardPorts": [8080],
-  "initializeCommand": ".devcontainer/setup-network.sh",
+  "initializeCommand": "node .devcontainer/setup-network.js",
   "postCreateCommand": "echo 'Dev container is ready for development!'"
 }
