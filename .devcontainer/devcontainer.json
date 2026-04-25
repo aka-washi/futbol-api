@@ -6,6 +6,6 @@
     "--network", "futbol-network"
   ],
   "forwardPorts": [8080],
-  "initializeCommand": "node .devcontainer/setup-network.js",
+  "initializeCommand": "docker network inspect futbol-network || docker network create --driver bridge futbol-network",
   "postCreateCommand": "echo 'Dev container is ready for development!'"
 }
